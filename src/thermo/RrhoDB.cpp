@@ -119,9 +119,9 @@ public:
         delete [] mp_lnqtmw;
         delete [] mp_hform;
         delete [] mp_indices;
-        delete [] mp_rot_data;
-        delete [] mp_nvib;
-        delete [] mp_vib_temps;
+//        delete [] mp_rot_data;
+//        delete [] mp_nvib;
+//        delete [] mp_vib_temps;
         
         delete [] m_elec_data.p_nelec;
         delete [] m_elec_data.p_levels;
@@ -595,32 +595,32 @@ protected:
         LOOP(mp_hform[i] = rrhos[i].formationEnthalpy() / RU)
 
         // Store the molecule's rotational energy parameters
-        mp_rot_data = new RotData [m_nm];
-        LOOP_MOLECULES(
-            const ParticleRRHO& rrho = rrhos[j];
-            int linear = rrho.linearity();
-            mp_rot_data[i].linearity  = linear / 2.0;
-            mp_rot_data[i].ln_omega_t = 
-                std::log(rrho.rotationalTemperature()) + 2.0 / linear *
-                std::log(rrho.stericFactor());
-        )
+ //       mp_rot_data = new RotData [m_nm];
+ //       LOOP_MOLECULES(
+ //           const ParticleRRHO& rrho = rrhos[j];
+ //           int linear = rrho.linearity();
+ //           mp_rot_data[i].linearity  = linear / 2.0;
+ //           mp_rot_data[i].ln_omega_t = 
+ //               std::log(rrho.rotationalTemperature()) + 2.0 / linear *
+ //                std::log(rrho.stericFactor());
+ //       )
         
         // Store the vibrational temperatures of all the molecules in a compact
         // form
-        mp_nvib = new int [m_nm];
-        int nvib = 0;
-        LOOP_MOLECULES(
-            mp_nvib[i] = rrhos[j].nVibrationalLevels();
-            nvib += mp_nvib[i];
-        )
+//        mp_nvib = new int [m_nm];
+//        int nvib = 0;
+//        LOOP_MOLECULES(
+//            mp_nvib[i] = rrhos[j].nVibrationalLevels();
+//            nvib += mp_nvib[i];
+//        )
         
-        mp_vib_temps = new double [nvib];
-        int itemp = 0;
-        LOOP_MOLECULES(
-            const ParticleRRHO& rrho = rrhos[j];
-            for (int k = 0; k < mp_nvib[i]; ++k, itemp++)
-                mp_vib_temps[itemp] = rrho.vibrationalEnergy(k);
-        )
+//        mp_vib_temps = new double [nvib];
+//        int itemp = 0;
+//        LOOP_MOLECULES(
+//            const ParticleRRHO& rrho = rrhos[j];
+//            for (int k = 0; k < mp_nvib[i]; ++k, itemp++)
+//                mp_vib_temps[itemp] = rrho.vibrationalEnergy(k);
+//        )
         
         // Finally store the electronic energy levels in a compact form like the
         // vibrational energy levels
@@ -658,10 +658,10 @@ protected:
         // state temperature to the species enthalpies
         mp_part_sst = new double [m_ns];
         double Tss = standardTemperature();
-        hT(Tss, Tss, mp_part_sst, Eq());
-        hR(Tss, mp_part_sst, PlusEq());
-        hV(Tss, mp_part_sst, PlusEq());
-        hE(Tss, mp_part_sst, PlusEq());
+//        hT(Tss, Tss, mp_part_sst, Eq());
+//        hR(Tss, mp_part_sst, PlusEq());
+//        hV(Tss, mp_part_sst, PlusEq());
+//        hE(Tss, mp_part_sst, PlusEq());
     }
 
 private:
