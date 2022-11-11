@@ -1,0 +1,90 @@
+location: N_10bin.xml
+11 species containing 1 elements
+55 reactions
+
+Species info:
+-------------
+   #  Name    N          Mw    Charge       Phase     Hf(298)
+                     [g/mol]                          [kJ/mol]
+Gas Species (11):
+   1: Nbin    1     14.0067         0         gas      478.64
+   2: N2_0    2     28.0134         0         gas       25.62
+   3: N2_1    2     28.0134         0         gas       77.43
+   4: N2_2    2     28.0134         0         gas      150.13
+   5: N2_3    2     28.0134         0         gas      240.00
+   6: N2_4    2     28.0134         0         gas      344.20
+   7: N2_5    2     28.0134         0         gas      460.41
+   8: N2_6    2     28.0134         0         gas      588.58
+   9: N2_7    2     28.0134         0         gas      727.74
+  10: N2_8    2     28.0134         0         gas      879.91
+  11: N2_9    2     28.0134         0         gas     1091.33
+
+Default elemental composition:
+------------------------------
+   N  :     1
+
+Reaction info:
+--------------
+Type ID Key
+   6: heavy particle impact dissociation
+  18: heavy particle impact excitation/deexcitation
+
+Reactions
+   #: Formula                   Type  Rate Law     A (m,s,mol)      n    Ta (K)
+   1: N2_0+Nbin=Nbin+Nbin+Nbin  6     Arrhenius:     7.782e+03   0.82  102906.3
+   2: N2_1+Nbin=Nbin+Nbin+Nbin  6     Arrhenius:     4.260e+03   0.90   88002.2
+   3: N2_2+Nbin=Nbin+Nbin+Nbin  6     Arrhenius:     2.684e+02   1.19   72161.1
+   4: N2_3+Nbin=Nbin+Nbin+Nbin  6     Arrhenius:     6.852e+01   1.33   56094.9
+   5: N2_4+Nbin=Nbin+Nbin+Nbin  6     Arrhenius:     5.991e+01   1.37   39966.5
+   6: N2_5+Nbin=Nbin+Nbin+Nbin  6     Arrhenius:     2.733e+02   1.26   23778.6
+   7: N2_6+Nbin=Nbin+Nbin+Nbin  6     Arrhenius:     1.046e+05   0.76    7195.3
+   8: N2_7+Nbin=Nbin+Nbin+Nbin  6     Arrhenius:     1.541e+05   0.76       0.0
+   9: N2_8+Nbin=Nbin+Nbin+Nbin  6     Arrhenius:     1.505e+05   0.76       0.0
+  10: N2_9+Nbin=Nbin+Nbin+Nbin  6     Arrhenius:     6.680e+05   0.65       0.0
+  11: N2_0+Nbin=N2_1+Nbin       18    Arrhenius:     5.063e+08  -0.02   14904.1
+  12: N2_0+Nbin=N2_2+Nbin       18    Arrhenius:     7.682e+05   0.52   30745.2
+  13: N2_0+Nbin=N2_3+Nbin       18    Arrhenius:     3.533e+05   0.60   46811.4
+  14: N2_0+Nbin=N2_4+Nbin       18    Arrhenius:     9.402e+05   0.51   62939.8
+  15: N2_0+Nbin=N2_5+Nbin       18    Arrhenius:     2.472e+06   0.42   79127.8
+  16: N2_0+Nbin=N2_6+Nbin       18    Arrhenius:     1.517e+07   0.25   95711.1
+  17: N2_0+Nbin=N2_7+Nbin       18    Arrhenius:     1.454e+07   0.19  111346.4
+  18: N2_0+Nbin=N2_8+Nbin       18    Arrhenius:     1.493e+06   0.23  131439.6
+  19: N2_0+Nbin=N2_9+Nbin       18    Arrhenius:     5.488e-01   1.35  149780.5
+  20: N2_1+Nbin=N2_2+Nbin       18    Arrhenius:     2.320e+08   0.04   15841.1
+  21: N2_1+Nbin=N2_3+Nbin       18    Arrhenius:     8.198e+05   0.52   31907.3
+  22: N2_1+Nbin=N2_4+Nbin       18    Arrhenius:     9.549e+05   0.50   48035.7
+  23: N2_1+Nbin=N2_5+Nbin       18    Arrhenius:     2.519e+06   0.41   64223.6
+  24: N2_1+Nbin=N2_6+Nbin       18    Arrhenius:     8.951e+06   0.30   80806.9
+  25: N2_1+Nbin=N2_7+Nbin       18    Arrhenius:     1.503e+07   0.21   96442.3
+  26: N2_1+Nbin=N2_8+Nbin       18    Arrhenius:     5.718e+06   0.18  116535.5
+  27: N2_1+Nbin=N2_9+Nbin       18    Arrhenius:     2.408e+04   0.45  134876.4
+  28: N2_2+Nbin=N2_3+Nbin       18    Arrhenius:     1.444e+08   0.09   16066.2
+  29: N2_2+Nbin=N2_4+Nbin       18    Arrhenius:     1.302e+06   0.48   32194.6
+  30: N2_2+Nbin=N2_5+Nbin       18    Arrhenius:     3.169e+06   0.40   48382.6
+  31: N2_2+Nbin=N2_6+Nbin       18    Arrhenius:     1.008e+07   0.29   64965.8
+  32: N2_2+Nbin=N2_7+Nbin       18    Arrhenius:     1.373e+07   0.23   80601.2
+  33: N2_2+Nbin=N2_8+Nbin       18    Arrhenius:     2.440e+07   0.09  100694.4
+  34: N2_2+Nbin=N2_9+Nbin       18    Arrhenius:     1.754e+05   0.36  119035.3
+  35: N2_3+Nbin=N2_4+Nbin       18    Arrhenius:     1.095e+08   0.11   16128.4
+  36: N2_3+Nbin=N2_5+Nbin       18    Arrhenius:     4.089e+06   0.38   32316.3
+  37: N2_3+Nbin=N2_6+Nbin       18    Arrhenius:     1.329e+07   0.27   48899.6
+  38: N2_3+Nbin=N2_7+Nbin       18    Arrhenius:     1.751e+07   0.22   64535.0
+  39: N2_3+Nbin=N2_8+Nbin       18    Arrhenius:     3.366e+06   0.29   84628.2
+  40: N2_3+Nbin=N2_9+Nbin       18    Arrhenius:     1.180e+06   0.26  102969.1
+  41: N2_4+Nbin=N2_5+Nbin       18    Arrhenius:     1.597e+08   0.08   16187.9
+  42: N2_4+Nbin=N2_6+Nbin       18    Arrhenius:     3.192e+07   0.20   32771.2
+  43: N2_4+Nbin=N2_7+Nbin       18    Arrhenius:     4.453e+07   0.15   48406.6
+  44: N2_4+Nbin=N2_8+Nbin       18    Arrhenius:     1.813e+07   0.15   68499.8
+  45: N2_4+Nbin=N2_9+Nbin       18    Arrhenius:     4.723e+06   0.16   86840.7
+  46: N2_5+Nbin=N2_6+Nbin       18    Arrhenius:     3.829e+08   0.01   16583.3
+  47: N2_5+Nbin=N2_7+Nbin       18    Arrhenius:     1.761e+08   0.04   32218.6
+  48: N2_5+Nbin=N2_8+Nbin       18    Arrhenius:     8.774e+07   0.02   52311.8
+  49: N2_5+Nbin=N2_9+Nbin       18    Arrhenius:     1.559e+07   0.07   70652.8
+  50: N2_6+Nbin=N2_7+Nbin       18    Arrhenius:     1.424e+09  -0.13   15635.3
+  51: N2_6+Nbin=N2_8+Nbin       18    Arrhenius:     1.947e+08  -0.05   35728.5
+  52: N2_6+Nbin=N2_9+Nbin       18    Arrhenius:     6.815e+07  -0.07   54069.4
+  53: N2_7+Nbin=N2_8+Nbin       18    Arrhenius:     2.034e+07   0.18   20093.2
+  54: N2_7+Nbin=N2_9+Nbin       18    Arrhenius:     2.904e+06   0.21   38434.1
+  55: N2_8+Nbin=N2_9+Nbin       18    Arrhenius:     5.409e+06   0.21   18340.9
+
+checkmix succeeded.

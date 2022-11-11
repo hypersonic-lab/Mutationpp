@@ -5,7 +5,7 @@
  */
 
 /*
- * Copyright 2014-2020 von Karman Institute for Fluid Dynamics (VKI)
+ * Copyright 2014 von Karman Institute for Fluid Dynamics (VKI)
  *
  * This file is part of MUlticomponent Thermodynamic And Transport
  * properties for IONized gases in C++ (Mutation++) software package.
@@ -107,7 +107,7 @@ public:
     RrhoDB(int arg)
         : ThermoDB(298.15, 101325.0), m_ns(0), m_na(0), m_nm(0),
           m_has_electron(false),
-          m_use_tables(true),
+          m_use_tables(false),
           m_last_bfacs_T(0.0)
     { }
     
@@ -119,9 +119,9 @@ public:
         delete [] mp_lnqtmw;
         delete [] mp_hform;
         delete [] mp_indices;
-//        delete [] mp_rot_data;
-//        delete [] mp_nvib;
-//        delete [] mp_vib_temps;
+//!        delete [] mp_rot_data;
+//!        delete [] mp_nvib;
+//!        delete [] mp_vib_temps;
         
         delete [] m_elec_data.p_nelec;
         delete [] m_elec_data.p_levels;
@@ -529,6 +529,8 @@ protected:
         
         // Load the RRHO models for each of the needed species
         IO::XmlDocument species_doc(databaseFileName("species.xml", "thermo"));
+        // IO::XmlDocument species_doc(
+        //     getEnvironmentVariable("MPP_DATA_DIRECTORY")+"/thermo/species.xml");
         
         vector<ParticleRRHO> rrhos;
         map<std::string, const ParticleRRHO*> to_expand;
@@ -595,32 +597,32 @@ protected:
         LOOP(mp_hform[i] = rrhos[i].formationEnthalpy() / RU)
 
         // Store the molecule's rotational energy parameters
- //       mp_rot_data = new RotData [m_nm];
- //       LOOP_MOLECULES(
- //           const ParticleRRHO& rrho = rrhos[j];
- //           int linear = rrho.linearity();
- //           mp_rot_data[i].linearity  = linear / 2.0;
- //           mp_rot_data[i].ln_omega_t = 
- //               std::log(rrho.rotationalTemperature()) + 2.0 / linear *
- //                std::log(rrho.stericFactor());
- //       )
+//!        mp_rot_data = new RotData [m_nm];
+//!       LOOP_MOLECULES(
+//!           const ParticleRRHO& rrho = rrhos[j];
+//!           int linear = rrho.linearity();
+//!           mp_rot_data[i].linearity  = linear / 2.0;
+//!           mp_rot_data[i].ln_omega_t = 
+//!               std::log(rrho.rotationalTemperature()) + 2.0 / linear *
+//!               std::log(rrho.stericFactor());
+//!       )
         
         // Store the vibrational temperatures of all the molecules in a compact
         // form
-//        mp_nvib = new int [m_nm];
-//        int nvib = 0;
-//        LOOP_MOLECULES(
-//            mp_nvib[i] = rrhos[j].nVibrationalLevels();
-//            nvib += mp_nvib[i];
-//        )
+//!       mp_nvib = new int [m_nm];
+//!       int nvib = 0;
+//!      LOOP_MOLECULES(
+//!           mp_nvib[i] = rrhos[j].nVibrationalLevels();
+//!           nvib += mp_nvib[i];
+//!       )
         
-//        mp_vib_temps = new double [nvib];
-//        int itemp = 0;
-//        LOOP_MOLECULES(
-//            const ParticleRRHO& rrho = rrhos[j];
-//            for (int k = 0; k < mp_nvib[i]; ++k, itemp++)
-//                mp_vib_temps[itemp] = rrho.vibrationalEnergy(k);
-//        )
+//!       mp_vib_temps = new double [nvib];
+//!       int itemp = 0;
+//!       LOOP_MOLECULES(
+//!           const ParticleRRHO& rrho = rrhos[j];
+//!           for (int k = 0; k < mp_nvib[i]; ++k, itemp++)
+//!               mp_vib_temps[itemp] = rrho.vibrationalEnergy(k);
+//!       )
         
         // Finally store the electronic energy levels in a compact form like the
         // vibrational energy levels
@@ -658,10 +660,13 @@ protected:
         // state temperature to the species enthalpies
         mp_part_sst = new double [m_ns];
         double Tss = standardTemperature();
-//        hT(Tss, Tss, mp_part_sst, Eq());
-//        hR(Tss, mp_part_sst, PlusEq());
-//        hV(Tss, mp_part_sst, PlusEq());
-//        hE(Tss, mp_part_sst, PlusEq());
+        for (int i=0; i<m_ns; i++){
+            mp_part_sst[i] = 0.0;
+        }
+        //! hT(Tss, Tss, mp_part_sst, Eq());
+        //! hR(Tss, mp_part_sst, PlusEq());
+        //! hV(Tss, mp_part_sst, PlusEq());
+        //! hE(Tss, mp_part_sst, PlusEq());
     }
 
 private:
@@ -695,7 +700,7 @@ private:
     void cpR(double* const cp, const OP& op) {
         op(cp[0], 0.0);
         LOOP_ATOMS(op(cp[j], 0.0));
-        LOOP_MOLECULES(op(cp[j], mp_rot_data[i].linearity));
+        LOOP_MOLECULES(op(cp[j], 0.0));
     }
 
     /**
@@ -707,17 +712,18 @@ private:
         double sum, fac1, fac2;
         op(cp[0], 0.0);
         LOOP_ATOMS(op(cp[j], 0.0));
-        LOOP_MOLECULES(
-            sum = 0.0;
-            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++) {
-                fac1 = mp_vib_temps[ilevel] / Tv;
-                fac2 = std::exp(fac1);
-                fac1 *= fac1*fac2;
-                fac2 -= 1.0;
-                sum += fac1/(fac2*fac2);
-            }
-            op(cp[j], sum);
-        )
+        LOOP_MOLECULES(op(cp[j],0.0));
+//!        LOOP_MOLECULES(
+//!            sum = 0.0;
+//!            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++) {
+//!                fac1 = mp_vib_temps[ilevel] / Tv;
+//!                fac2 = std::exp(fac1);
+//!                fac1 *= fac1*fac2;
+//!                fac2 -= 1.0;
+//!                sum += fac1/(fac2*fac2);
+//!            }
+//!            op(cp[j], sum);
+//!        )
     }
 
     /**
@@ -756,7 +762,7 @@ private:
      */
     template <typename OP>
     void hR(double T, double* const h, const OP& op) {
-        LOOP_MOLECULES(op(h[j], mp_rot_data[i].linearity * T))
+//!        LOOP_MOLECULES(op(h[j], mp_rot_data[i].linearity * T))
     }
     
     /**
@@ -764,19 +770,15 @@ private:
      */
     template <typename OP>
     void hV(double T, double* const h, const OP& op) {
-        if (T < 10.0) {
-            LOOP_MOLECULES(op(h[j], 0.0));
-        } else {
-            int ilevel = 0;
-            double sum;
-            LOOP_MOLECULES(
-                sum = 0.0;
-                for (int k = 0; k < mp_nvib[i]; ++k, ilevel++)
-                    sum += mp_vib_temps[ilevel] /
-                        (std::exp(mp_vib_temps[ilevel] / T) - 1.0);
-                op(h[j], sum);
-            )
-        }
+//!        int ilevel = 0;
+//!        double sum;
+//!        LOOP_MOLECULES(
+//!            sum = 0.0;
+//!            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++)
+//!               sum += mp_vib_temps[ilevel] / 
+//!                     (std::exp(mp_vib_temps[ilevel] / T) - 1.0);
+//!            op(h[j], sum);
+//!        )
     }
     
     /**
@@ -803,7 +805,7 @@ private:
      */
     template <typename OP>
     void hF(double* const h, const OP& op) {
-        LOOP(op(h[i], mp_hform[i] - mp_part_sst[i]))
+        LOOP(op(h[i], mp_hform[i] - mp_part_sst[i]));
     }
     
     /**
@@ -824,10 +826,10 @@ private:
     template <typename OP>
     void sR(double T, double* const s, const OP& op) {
         const double onelnT = 1.0 + std::log(T);
-        LOOP_MOLECULES(
-            op(s[j], mp_rot_data[i].linearity * (onelnT - 
-                mp_rot_data[i].ln_omega_t));
-        )
+//!        LOOP_MOLECULES(
+//!            op(s[j], mp_rot_data[i].linearity * (onelnT - 
+//!                mp_rot_data[i].ln_omega_t));
+//!        )
     }
     
     /**
@@ -837,15 +839,15 @@ private:
     void sV(double T, double* const s, const OP& op) {
         int ilevel = 0;
         double fac, sum1, sum2;
-        LOOP_MOLECULES(
-            sum1 = sum2 = 0.0;
-            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++) {
-                fac  =  std::exp(mp_vib_temps[ilevel] / T);
-                sum1 += mp_vib_temps[ilevel] / (fac - 1.0);
-                sum2 += std::log(1.0 - 1.0 / fac);
-            }
-            op(s[j], (sum1 / T - sum2));
-        )
+//!        LOOP_MOLECULES(
+//!            sum1 = sum2 = 0.0;
+//!            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++) {
+//!                fac  =  std::exp(mp_vib_temps[ilevel] / T);
+//!                sum1 += mp_vib_temps[ilevel] / (fac - 1.0);
+//!                sum2 += std::log(1.0 - 1.0 / fac);
+//!            }
+//!            op(s[j], (sum1 / T - sum2));
+//!        )
     }
     
     /**
@@ -905,5 +907,3 @@ Utilities::Config::ObjectProvider<RrhoDB, ThermoDB> rrhoDB("RRHO");
 
     } // namespace Thermodynamics
 } // namespace Mutation
-
-
