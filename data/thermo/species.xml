@@ -2046,7 +2046,7 @@
 				<level degeneracy="1" energy="68152.7" />
 				<level degeneracy="2" energy="69283.0" />
 				<level degeneracy="2" energy="72097.6" />
-				<!-- removed to match old mutation library
+				<!-- removed to match old mutation library -->
 				<level degeneracy="5" energy="77600.0" />
 				<level degeneracy="1" energy="85200.0" />
 				<level degeneracy="6" energy="86800.0" />
@@ -2054,7 +2054,6 @@
 				<level degeneracy="10" energy="93000.0" />
 				<level degeneracy="6" energy="97603.0" />
 				<level degeneracy="6" energy="104600.0" />
-				 -->
 			</electronic_levels>
 			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
 				0.0
@@ -2184,10 +2183,9 @@
 			<electronic_levels units="1/cm">
 				<level degeneracy="4" energy="0.0" />
 				<level degeneracy="8" energy="38000.0" />
-				<!-- Comment out to match old mutation library
+				<!-- Comment out to match old mutation library -->
 				<level degeneracy="2" energy="43906.0" />
 				<level degeneracy="4" energy="45868.0" />
-			    -->
 			</electronic_levels>
 			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
 				91089
@@ -2444,5 +2442,31 @@
 			</formation_enthalpy>
 		</thermodynamics>
 	</species>
+
+	<!--Xenon-->
+	<species name="Xe">
+		<stoichiometry> Xe:  1 </stoichiometry>
+		<thermodynamics type="RRHO">
+			<electronic_levels units="1/cm">
+				<level degeneracy="1" energy="0.0"/>
+				<level degeneracy="5" energy="67067.55951703247"/>
+				<level degeneracy="3" energy="68045.10551218168"/>
+				<level degeneracy="1" energy="76196.16147503485"/>
+				<level degeneracy="3" energy="77184.99925560658"/>
+				<level degeneracy="3" energy="77268.88109017386"/>
+				<level degeneracy="5" energy="78119.7977773706"/>
+				<level degeneracy="7" energy="78402.89896903509"/>
+				<level degeneracy="3" energy="78956.19645473837"/>
+				<level degeneracy="5" energy="79211.87473894819"/>
+				<level degeneracy="1" energy="80119.25035325749"/>
+				<level degeneracy="3" energy="88379.19138982777"/>
+				<level degeneracy="5" energy="89162.35736448942"/>
+				<level degeneracy="3" energy="89278.501443121"/>
+				<level degeneracy="1" energy="89860.02839238055"/>
+			</electronic_levels>
+			<formation_enthalpy P="1 atm" T="298 K" units="J/mol"> 0 </formation_enthalpy>
+		</thermodynamics>
+	</species>
+
  
 </specieslist>

@@ -1,0 +1,12 @@
+<mixture mechanism="abba_mech_with_molecules" use_transport="true">
+
+    <species>
+        e- N+ O+ NO+(*) N2+(*) O2+(*) N(*) O(*) NO(*) N2(*) O2(*)
+    </species>
+
+    <element_compositions default="abba_with_molecules">
+       <composition name="abba_with_molecules"> O: 0.20, N: 0.80 </composition>
+    </element_compositions>
+
+</mixture>
+
