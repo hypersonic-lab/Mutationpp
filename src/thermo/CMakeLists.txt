@@ -30,15 +30,16 @@ add_sources(mutation++
     Nasa9Polynomial.cpp
     Nasa7DB.cpp
     Nasa9DB.cpp
+    NN2BinsDB.cpp
     ParticleRRHO.cpp
     RrhoDB.cpp
+    STSDB.cpp
     Species.cpp
     SpeciesListDescriptor.cpp
     SpeciesNameFSM.cpp
     Thermodynamics.cpp
     ThermoDB.cpp
 )
-
 
 add_headers(mutation++
     Composition.h
