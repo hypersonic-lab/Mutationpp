@@ -1,0 +1,11 @@
+<mixture mechanism="argon_Kapper_mech" thermo_db="RRHO">
+
+    <species>
+        e- Ar+(*) Ar(*)
+    </species>
+
+    <element_compositions default="argon_Kapper">
+        <composition name="argon_Kapper"> Ar: 1, e-: 0 </composition>
+    </element_compositions>
+    
+</mixture>
