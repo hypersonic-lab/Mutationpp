@@ -102,6 +102,10 @@ public:
         double* const hf)
     {
         // Given Ts calculate h, ht, hr, hv, hel, hf
+        h[0] = 1.; // m_vh[0]*Th + m_vhf[0];
+        h[1] = 1.; // m_vh[1]*Th + m_vhf[1];
+        h[2] = 1.; // m_vh[2]*Th + m_vhf[2];
+
         // Note: Check if NULL
     }
 
@@ -152,7 +156,22 @@ protected:
      */
     virtual void loadAvailableSpecies(std::list<Species>& species)
     {
-        // Find the species in the species.xml database. Not needed.
+        IO::XmlDocument species_doc(databaseFileName("species_sts.xml", "thermo"));
+        IO::XmlElement::const_iterator species_iter = species_doc.root().begin();
+
+        for ( ; species_iter != species_doc.root().end(); ++species_iter) {
+            // Add the species to the list
+            species.push_back(*species_iter);
+        }
+
+        // // @todo: 1/18/2023
+        // // Find the species in the species.xml database. Not needed.
+
+        // // @debug
+        // for (const auto& sp : species) {
+        //     std::cout << "Species name = " << sp.name() << std::endl;
+        // }
+        // double in; std::cin >> in;
     }
 
     /**
@@ -160,11 +179,83 @@ protected:
      */
     virtual void loadThermodynamicData()
     {
+        const int ns = 3;
+        m_vh.resize(ns);
+        m_vhf.resize(ns);
+
+        m_vh[0] = 0.; // Atomic oxygen
+        m_vh[1] = 7.87380953594E+02;
+        m_vh[2] = 1.4E+03;
+        // m_vh[3] = 7.87380953594E+02;
+
+        m_vhf[0] = 0.; // Atomic oxygen
+        m_vhf[1] = 7.87380953594E+02;
+        m_vhf[2] = 1.0+02;
+        // m_vh[3] = 7.87380953594E+02;
+
+        // @todo: 1/18/2023
         // Load the necessary thermodynamic data
     }
 
 private:
     // Store here only the necessary data for calculating species thermodynamics
+    std::vector<double> m_vh {};
+    std::vector<double> m_vhf {};
+
+
+    //     spnm  spwt(g/mol) ih  ie
+    //   O2   32.0000     2   0
+    //  h0sp (kJ/mol)
+    //   0.0
+    //  factr(homogeneous)
+    //   0.5d0
+    //  dissociation energy (cm-1)
+    //   41280.0
+    //  spectral data
+    //   1 ! number of electronic excited states
+    //   n  state     Te        re      g  dzero     we        wexe     weye
+    //      weze       be       alphae     de         betae    spn-orb lambda spin
+    //   1  X3SIGg-   0.00      1.2075  3  41280.00  1580.193  11.9808  4.747E-02
+    //     -1.273E-03  1.43768  1.593E-02  4.839E-06  0.000E+00 -8.400E-03  0  3
+    // 36
+    //    0   222   7.87380953594E+02
+    //    1   218   2.34376026609E+03
+    //    2   213   3.87656829159E+03
+    //    3   209   5.38602874609E+03
+    //    4   205   6.87233479359E+03
+    //    5   200   8.33564904609E+03
+    //    6   196   9.77610356359E+03
+    //    7   192   1.11937998541E+04
+    //    8   188   1.25888088736E+04
+    //    9   183   1.39611710261E+04
+    //   10   179   1.53108961636E+04
+    //   11   175   1.66379635861E+04
+    //   12   170   1.79423220416E+04
+    //   13   166   1.92238897261E+04
+    //   14   162   2.04825542836E+04
+    //   15   157   2.17181728061E+04
+    //   16   153   2.29305718336E+04
+    //   17   148   2.41195473541E+04
+    //   18   143   2.52848648036E+04
+    //   19   138   2.64262590661E+04
+    //   20   134   2.75434344736E+04
+    //   21   129   2.86360648061E+04
+    //   22   124   2.97037932916E+04
+    //   23   118   3.07462326061E+04
+    //   24   113   3.17629648736E+04
+    //   25   108   3.27535416661E+04
+    //   26   102   3.37174840036E+04
+    //   27   96    3.46542823541E+04
+    //   28   90    3.55633966336E+04
+    //   29   84    3.64442562061E+04
+    //   30   77    3.72962598836E+04
+    //   31   70    3.81187759261E+04
+    //   32   63    3.89111420416E+04
+    //   33   55    3.96726653861E+04
+    //   34   45    4.04026225636E+04
+    //   35   34    4.11002596261E+04
+    //   36   19    4.17647920736E+04
+
 
 }; // class STSDB
 

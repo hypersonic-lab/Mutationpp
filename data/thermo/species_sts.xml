@@ -1,0 +1,30 @@
+<specieslist>
+	<!-- Oxygen -->
+	<species name="O">
+		<stoichiometry>
+			O: 1
+		</stoichiometry>
+	</species>
+
+	<!-- Oxygen diatomic -->
+	<species name="O2_0">
+		<stoichiometry>
+			O: 2
+		</stoichiometry>
+	</species>
+
+	<!-- Oxygen diatomic -->
+	<species name="O2_1">
+		<stoichiometry>
+			O: 2
+		</stoichiometry>
+	</species>
+
+	<!-- Oxygen diatomic -->
+	<species name="O2_3">
+		<stoichiometry>
+			O: 2
+		</stoichiometry>
+	</species>
+
+</specieslist>

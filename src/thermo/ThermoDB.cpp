@@ -55,15 +55,15 @@ bool ThermoDB::load(const SpeciesListDescriptor& descriptor)
     // species and elements are cleared
     m_species.clear();
     m_elements.clear();
-    
+
     // Load all possible species from the concrete database type
     std::list<Species> species_list;
     loadAvailableSpecies(species_list);
-    
+
     // Check for duplicate species in the database
     std::list<Species>::iterator iter1 = species_list.begin();
     std::list<Species>::iterator iter2;
-    
+
     while (iter1 != species_list.end()) {
         (iter2 = iter1)++;
         while (iter2 != species_list.end()) {
