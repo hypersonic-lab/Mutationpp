@@ -102,9 +102,42 @@ public:
         double* const hf)
     {
         // Given Ts calculate h, ht, hr, hv, hel, hf
-        h[0] = 1.; // m_vh[0]*Th + m_vhf[0];
-        h[1] = 1.; // m_vh[1]*Th + m_vhf[1];
-        h[2] = 1.; // m_vh[2]*Th + m_vhf[2];
+    //    h[0] = 2.5 + m_vhf[0];
+    //    h[1] = m_vh[1]*Th + m_vhf[1];
+    //    h[2] = m_vh[2]*Th + m_vhf[2];
+
+        // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
+        ht[0] = 2.5; // Is this non-dimensional too? Taking in work flow too. Otherwise it would be 1.5.
+        ht[1] = 2.5; 
+        ht[2] = 2.5;
+
+        // Rotation. Assuming fulling active rotational mode
+        hr[0] = 0.0;
+        hr[1] = 1.0;
+        hr[2] = 1.0;
+
+        // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
+        hv[0] = 0.0;
+        hv[1] = 1.0; // 7.87380953594E+02 * 1.42879 / (exp(7.87380953594E+02 * 1.42879 / Th) - 1.0) / Th;
+        hv[2] = 1.0; //2.34376026609E+03 * 1.42879 / (exp(2.34376026609E+03 * 1.42879 / Th) - 1.0) / Th;
+
+        // Electronic. For now setting as zero
+        hel[0] = 0.0;
+        hel[1] = 0.0;
+        hel[2] = 0.0;
+
+        h[0] = ht[0] + hr[0] + hv[0] + hel[0] + m_vhf[0];
+        h[1] = ht[1] + hr[1] + hv[1] + hel[1] + m_vhf[1];
+        h[2] = ht[2] + hr[2] + hv[2] + hel[2] + m_vhf[2]; 
+
+
+        //h[0] = 0.0; // m_vh[0]*Th + m_vhf[0];
+        //h[1] = 1.0; // m_vh[1]*Th + m_vhf[1];
+        //h[2] = 1.0; // m_vh[2]*Th + m_vhf[2];
+
+      //  hf[0] = 1.;
+      //  hf[1] = 2.;
+      //  hf[2] = 3.;
 
         // Note: Check if NULL
     }
@@ -188,7 +221,8 @@ protected:
         m_vh[2] = 1.4E+03;
         // m_vh[3] = 7.87380953594E+02;
 
-        m_vhf[0] = 0.; // Atomic oxygen
+        // I think these are enthlapy of formation
+        m_vhf[0] = 100.59; // Atomic oxygen
         m_vhf[1] = 7.87380953594E+02;
         m_vhf[2] = 1.0+02;
         // m_vh[3] = 7.87380953594E+02;
