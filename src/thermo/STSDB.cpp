@@ -145,7 +145,7 @@ public:
         // etc...
 
         // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
-        if (hr != NULL) {
+        if (hv != NULL) {
             hv[0] = 0.0;
             hv[1] = 1.0; // 7.87380953594E+02 * 1.42879 / (exp(7.87380953594E+02 * 1.42879 / Th) - 1.0) / Th;
             hv[2] = 1.0; //2.34376026609E+03 * 1.42879 / (exp(2.34376026609E+03 * 1.42879 / Th) - 1.0) / Th;
