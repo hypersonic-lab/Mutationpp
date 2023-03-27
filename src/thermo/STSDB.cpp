@@ -210,7 +210,7 @@ public:
 
         // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
         // Will need to upload masses of each species
-        if (ht != NULL) {
+        if (st != NULL) {
             st[0] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. 
             st[1] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
             st[2] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
@@ -225,7 +225,7 @@ public:
         }
 
         // Rotation. Assuming fulling active rotational mode
-        if (hr != NULL) {
+        if (sr != NULL) {
             sr[0] = 0.0;
             sr[1] = 1.0 + log((0.5 * Th / 2.1) / N ) + 1.0; // Eq. 3.78 of Boyd. Need to define N or substitute 
             sr[2] = 1.0 + log((0.5 * Th / 2.1) / N ) + 1.0; // Eq. 3.78 of Boyd. Need to define N or substitute 
@@ -235,14 +235,14 @@ public:
             s[2] += sr[2];
         } else {
             s[0] += 0.0;
-            s[1] += 1.0;
-            s[2] += 1.0;
+            s[1] += 1.0 + log((0.5 * Th / 2.1) / N ) + 1.0; 
+            s[2] += 1.0 + log((0.5 * Th / 2.1) / N ) + 1.0;
         }
 
         // etc...
 
         // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
-        if (hv != NULL) {
+        if (sv != NULL) {
             sv[0] = 0.0;
             sv[1] = 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th; // Eq. 3.78 of Boyd. Need to define N or substitute 
             sv[2] =  1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
@@ -281,6 +281,68 @@ public:
     {
         // Given Ts calculate g, gt, gr, gv, gel
         // Note: Check if NULL
+
+                   // Following similar approach as enthalpy
+            // Setting to zero
+        g[0] = 0.;
+        g[1] = 0.;
+        g[2] = 0.;
+
+        // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
+        // Will need to upload masses of each species
+        if (gt != NULL) {
+            for (int i = 0; i < ns; i++){
+                gt[i] += ht[i] - Th * st[i]; // G = H - TS
+            }
+
+            for (int i = 0; i < ns; i++){
+                g[i] += gt[i];
+            } // Is there a way to combine this with previous loop?
+  
+        } else {
+            for (int i = 0; i < ns; i++){
+                gt[i] += ht[i] - Th * st[i]; // G = H - TS
+            }
+        }
+
+        if (gr != NULL) {
+            for (int i = 0; i < ns; i++){
+                gr[i] += hr[i] - Th * sr[i]; // G = H - TS
+            }
+
+            for (int i = 0; i < ns; i++){
+                g[i] += gr[i];
+            } // Is there a way to combine this with previous loop?
+  
+        } else {
+            for (int i = 0; i < ns; i++){
+                gr[i] += hr[i] - Th * sr[i]; // G = H - TS
+            }
+        }
+
+        if (gv != NULL) {
+            for (int i = 0; i < ns; i++){
+                gv[i] += hv[i] - Th * st[i]; // G = H - TS
+            }
+
+            for (int i = 0; i < ns; i++){
+                g[i] += gv[i];
+            } // Is there a way to combine this with previous loop?
+  
+        } else {
+            for (int i = 0; i < ns; i++){
+                gv[i] += hv[i] - Th * sv[i]; // G = H - TS
+            }
+        }
+        // Electronic. For now setting as zero
+        // sel[0] = 0.0;
+        // sel[1] = 0.0;
+        // sel[2] = 0.0;
+
+        //h[0] += m_vhf[0];
+        //h[1] += m_vhf[1];
+        // h[2] += m_vhf[2];
+    }
 
     }
 
