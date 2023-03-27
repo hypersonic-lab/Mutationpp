@@ -146,16 +146,16 @@ public:
         // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
         if (hv != NULL) {
             hv[0] = 0.0;
-            hv[1] = 1.0; // 7.87380953594E+02 * 1.42879 / (exp(7.87380953594E+02 * 1.42879 / Th) - 1.0) / Th;
-            hv[2] = 1.0; //2.34376026609E+03 * 1.42879 / (exp(2.34376026609E+03 * 1.42879 / Th) - 1.0) / Th;
+            hv[1] = 7.87380953594E+02 * 1.42879 / (exp(7.87380953594E+02 * 1.42879 / Th) - 1.0) / Th;
+            hv[2] = 2.34376026609E+03 * 1.42879 / (exp(2.34376026609E+03 * 1.42879 / Th) - 1.0) / Th;
 
             h[0] += hv[0];
             h[1] += hv[1];
             h[2] += hv[2];
         } else {
             h[0] += 0.0;
-            h[1] += 1.0; // 7.87380953594E+02 * 1.42879 / (exp(7.87380953594E+02 * 1.42879 / Th) - 1.0) / Th;
-            h[2] += 1.0; //2.34376026609E+03 * 1.42879 / (exp(2.34376026609E+03 * 1.42879 / Th) - 1.0) / Th;
+            h[1] += 7.87380953594E+02 * 1.42879 / (exp(7.87380953594E+02 * 1.42879 / Th) - 1.0) / Th;
+            h[2] += 2.34376026609E+03 * 1.42879 / (exp(2.34376026609E+03 * 1.42879 / Th) - 1.0) / Th;
         }
 
         // Electronic. For now setting as zero
@@ -201,6 +201,69 @@ public:
     {
         // Given Ts calculate s, st, sr, sv, sel
         // Note: Check if NULL
+
+            // Following similar approach as enthalpy
+            // Setting to zero
+        s[0] = 0.;
+        s[1] = 0.;
+        s[2] = 0.;
+
+        // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
+        // Will need to upload masses of each species
+        if (ht != NULL) {
+            st[0] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. 
+            st[1] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+            st[2] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+
+            s[0] += st[0];
+            s[1] += st[1];
+            s[2] += st[2];
+        } else {
+            s[0] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. 
+            s[1] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+            s[2] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+        }
+
+        // Rotation. Assuming fulling active rotational mode
+        if (hr != NULL) {
+            sr[0] = 0.0;
+            sr[1] = 1.0 + log((0.5 * Th / 2.1) / N ) + 1.0; // Eq. 3.78 of Boyd. Need to define N or substitute 
+            sr[2] = 1.0 + log((0.5 * Th / 2.1) / N ) + 1.0; // Eq. 3.78 of Boyd. Need to define N or substitute 
+
+            s[0] += sr[0];
+            s[1] += sr[1];
+            s[2] += sr[2];
+        } else {
+            s[0] += 0.0;
+            s[1] += 1.0;
+            s[2] += 1.0;
+        }
+
+        // etc...
+
+        // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
+        if (hv != NULL) {
+            sv[0] = 0.0;
+            sv[1] = 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th; // Eq. 3.78 of Boyd. Need to define N or substitute 
+            sv[2] =  1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
+
+            s[0] += sv[0];
+            s[1] += sv[1];
+            s[2] += sv[2];
+        } else {
+            s[0] += 0.0;
+            s[1] += 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th;
+            s[2] += 1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
+        }
+
+        // Electronic. For now setting as zero
+        // sel[0] = 0.0;
+        // sel[1] = 0.0;
+        // sel[2] = 0.0;
+
+        //h[0] += m_vhf[0];
+        //h[1] += m_vhf[1];
+        // h[2] += m_vhf[2];
     }
 
     /**
@@ -218,6 +281,7 @@ public:
     {
         // Given Ts calculate g, gt, gr, gv, gel
         // Note: Check if NULL
+
     }
 
 protected:
