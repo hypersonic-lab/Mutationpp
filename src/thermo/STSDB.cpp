@@ -77,29 +77,88 @@ public:
     void cp(
         double Th, double Te, double Tr, double Tv, double Tel,
         double* const cp, double* const cpt, double* const cpr,
-        double* const cpv, double* const cpel) {}
-
-    /**
-     * Computes the unitless species enthalpy \f$ h_i/R_U T_h\f$ of each
-     * species in thermal nonequilibrium, which is non-dimensionalized by the
-     * heavy particle translational temperature.
-     *
-     * @param Th  - heavy particle translational temperature
-     * @param Te  - free electron temperature
-     * @param Tr  - mixture rotational temperature
-     * @param Tv  - mixture vibrational temperature
-     * @param Tel - mixture electronic temperature
-     * @param h   - on return, the array of species non-dimensional enthalpies
-     * @param ht  - if not NULL, the array of species translational enthalpies
-     * @param hr  - if not NULL, the array of species rotational enthalpies
-     * @param hv  - if not NULL, the array of species vibrational enthalpies
-     * @param hel - if not NULL, the array of species electronic enthalpies
-     * @param hf  - if not NULL, the array of the species formation enthalpies
-     */
+            double* const cpv, double* const cpel) {
+        
+        /**
+         * Computes the unitless species enthalpy \f$ h_i/R_U T_h\f$ of each
+         * species in thermal nonequilibrium, which is non-dimensionalized by the
+         * heavy particle translational temperature.
+         *
+         * @param Th  - heavy particle translational temperature
+         * @param Te  - free electron temperature
+         * @param Tr  - mixture rotational temperature
+         * @param Tv  - mixture vibrational temperature
+         * @param Tel - mixture electronic temperature
+         * @param h   - on return, the array of species non-dimensional enthalpies
+         * @param ht  - if not NULL, the array of species translational enthalpies
+         * @param hr  - if not NULL, the array of species rotational enthalpies
+         * @param hv  - if not NULL, the array of species vibrational enthalpies
+         * @param hel - if not NULL, the array of species electronic enthalpies
+         * @param hf  - if not NULL, the array of the species formation enthalpies
+         */
+        
+        // Setting to zero
+        cp[0] = 0.;
+        cp[1] = 0.;
+        cp[2] = 0.;
+        
+        // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
+        if (cpt != NULL) {
+            cpt[0] += 2.5; // Cv = 3/2 R; Cp = Cv + R
+            cpt[1] += 2.5;
+            cpt[2] += 2.5;
+            
+            cp[0] += cpt[0];
+            cp[1] += cpt[1];
+            cp[2] += cpt[2];
+        } else {
+            cp[0] += 2.5;
+            cp[1] += 2.5;
+            cp[2] += 2.5;
+        }
+        
+        // Rotation. Assuming fulling active rotational mode
+        if (cpr != NULL) {
+            cpr[0] = 0.0;
+            cpr[1] = 2.0; // Cv = R; Cp = Cv + R
+            cpr[2] = 2.0;
+            
+            cp[0] += cpr[0];
+            cp[1] += cpr[1];
+            cp[2] += cpr[2];
+        } else {
+            cp[0] += 0.0;
+            cp[1] += 2.0;
+            cp[2] += 2.0;
+        }
+        
+        // etc...
+        
+        // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
+        if (cpv != NULL) {
+            cpv[0] = 0.0; // Setting as zero for now. Need to think
+            cpv[1] = 0.0;
+            cpv[2] = 0.0;
+            
+            cpv[0] += cpv[0];
+            cpv[1] += cpv[1];
+            cpv[2] += cpv[2];
+        } else {
+            cpv[0] += 0.0;
+            cpv[1] += 0.0;
+            cpv[2] += 0.0;
+        }
+        
+        // Electronic. For now setting as zero
+        // cpel[0] = 0.0;
+        // cpel[1] = 0.0;
+        // cpel[2] = 0.0;
+    }
+    
     void enthalpy(
-        double Th, double Te, double Tr, double Tv, double Tel, double* const h,
-        double* const ht, double* const hr, double* const hv, double* const hel,
-        double* const hf)
+        double Th, double Te, double Tr, double Tv, double Tel,
+        double* const h, double* const ht, double* const hr,
+        double* const hv, double* const hel, double* const hf)
     {
         // Given Ts calculate h, ht, hr, hv, hel, hf
     //    h[0] = 2.5 + m_vhf[0];
@@ -146,16 +205,18 @@ public:
         // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
         if (hv != NULL) {
             hv[0] = 0.0;
-            hv[1] = 1.0; // 7.87380953594E+02 * 1.42879 / (exp(7.87380953594E+02 * 1.42879 / Th) - 1.0) / Th;
-            hv[2] = 1.0; //2.34376026609E+03 * 1.42879 / (exp(2.34376026609E+03 * 1.42879 / Th) - 1.0) / Th;
+           // hv[1] = 7.87380953594E+02 * 1.42879 / (exp(7.87380953594E+02 * 1.42879 / Th) - 1.0) / Th;
+           // hv[2] = 2.34376026609E+03 * 1.42879 / (exp(2.34376026609E+03 * 1.42879 / Th) - 1.0) / Th;
+            hv[1] = 7.87380953594E+02 * 1.42879 / Th * exp(-7.87380953594E+02 * 1.42879 / Th); // See KMH notes
+            hv[2] = 2.34376026609E+03 * 1.42879 / Th * exp(-2.34376026609E+03 * 1.42879 / Th);
 
             h[0] += hv[0];
             h[1] += hv[1];
             h[2] += hv[2];
         } else {
             h[0] += 0.0;
-            h[1] += 1.0; // 7.87380953594E+02 * 1.42879 / (exp(7.87380953594E+02 * 1.42879 / Th) - 1.0) / Th;
-            h[2] += 1.0; //2.34376026609E+03 * 1.42879 / (exp(2.34376026609E+03 * 1.42879 / Th) - 1.0) / Th;
+            h[1] += 7.87380953594E+02 * 1.42879 / Th * exp(-7.87380953594E+02 * 1.42879 / Th);
+            h[2] += 2.34376026609E+03 * 1.42879 / Th * exp(-2.34376026609E+03 * 1.42879 / Th);
         }
 
         // Electronic. For now setting as zero
@@ -197,10 +258,78 @@ public:
     void entropy(
         double Th, double Te, double Tr, double Tv, double Tel, double P,
         double* const s, double* const st, double* const sr, double* const sv,
-        double* const sel)
+        double* const sel)//, double* const hr)
     {
         // Given Ts calculate s, st, sr, sv, sel
         // Note: Check if NULL
+        // Following similar approach as enthalpy
+        // Setting to zero
+    s[0] = 0.;
+    s[1] = 0.;
+    s[2] = 0.;
+        
+        // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
+        // Will need to upload masses of each species
+        if (st != NULL) {
+            st[0] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd.
+            st[1] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+            st[2] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+
+            s[0] += st[0];
+            s[1] += st[1];
+            s[2] += st[2];
+        } else {
+            s[0] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd.
+            s[1] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+            s[2] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+        }
+        
+        // Rotation. Assuming fulling active rotational mode
+        if (sr != NULL) {
+            sr[0] = 0.0;
+            // sr[1] = 1.0 + log((0.5 * Th / 2.1) / N ) + 1.0; // Eq. 3.78 of Boyd. Need to define N or substitute
+            // sr[2] = 1.0 + log((0.5 * Th / 2.1) / N ) + 1.0; // Eq. 3.78 of Boyd. Need to define N or substitute
+            sr[1] = hr[1]/Th + log(0.5 * Th / 2.1); // From slide 20 of Magin, need to check units
+            sr[2] = hr[2]/Th + log(0.5 * Th / 2.1);
+
+            s[0] += sr[0];
+            s[1] += sr[1];
+            s[2] += sr[2];
+        } else {
+            s[0] += 0.0;
+            s[1] += hr[1]/Th + log(0.5 * Th / 2.1); // From Magin above
+            s[2] += hr[2]/Th + log(0.5 * Th / 2.1);
+        }
+        
+        // etc...
+
+        // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
+        if (sv != NULL) {
+            sv[0] = 0.0;
+            // sv[1] = 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th; // Eq. 3.78 of Boyd. Need to define N or substitute
+            // sv[2] =  1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
+            sv[1] = 0.0; // Setting to 0 based on discussion with George
+            sv[2] = 0.0; //
+
+            s[0] += sv[0];
+            s[1] += sv[1];
+            s[2] += sv[2];
+        } else {
+            s[0] += 0.0;
+            // s[1] += 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th;
+            // s[2] += 1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
+            s[1] += 0.0;
+            s[2] += 0.0;
+        }
+
+        // Electronic. For now setting as zero
+        // sel[0] = 0.0;
+        // sel[1] = 0.0;
+        // sel[2] = 0.0;
+
+        //h[0] += m_vhf[0];
+        //h[1] += m_vhf[1];
+        // h[2] += m_vhf[2];
     }
 
     /**
@@ -218,6 +347,67 @@ public:
     {
         // Given Ts calculate g, gt, gr, gv, gel
         // Note: Check if NULL
+
+                   // Following similar approach as enthalpy
+            // Setting to zero
+        g[0] = 0.;
+        g[1] = 0.;
+        g[2] = 0.;
+
+        // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
+        // Will need to upload masses of each species
+        if (gt != NULL) {
+            for (int i = 0; i < 3; i++){
+                gt[i] += ht[i] - Th * st[i]; // G = H - TS
+            }
+
+            for (int i = 0; i < 3; i++){
+                g[i] += gt[i];
+            } // Is there a way to combine this with previous loop?
+  
+        } else {
+            for (int i = 0; i < 3; i++){
+                gt[i] += ht[i] - Th * st[i]; // G = H - TS
+            }
+        }
+
+        if (gr != NULL) {
+            for (int i = 0; i < 3; i++){
+                gr[i] += hr[i] - Th * sr[i]; // G = H - TS
+            }
+
+            for (int i = 0; i < 3; i++){
+                g[i] += gr[i];
+            } // Is there a way to combine this with previous loop?
+  
+        } else {
+            for (int i = 0; i < 3; i++){
+                gr[i] += hr[i] - Th * sr[i]; // G = H - TS
+            }
+        }
+
+        if (gv != NULL) {
+            for (int i = 0; i < 3; i++){
+                gv[i] += hv[i] - Th * st[i]; // G = H - TS
+            }
+
+            for (int i = 0; i < 3; i++){
+                g[i] += gv[i];
+            } // Is there a way to combine this with previous loop?
+  
+        } else {
+            for (int i = 0; i < 3; i++){
+                gv[i] += hv[i] - Th * sv[i]; // G = H - TS
+            }
+        }
+        // Electronic. For now setting as zero
+        // sel[0] = 0.0;
+        // sel[1] = 0.0;
+        // sel[2] = 0.0;
+
+        //h[0] += m_vhf[0];
+        //h[1] += m_vhf[1];
+        // h[2] += m_vhf[2];
     }
 
 protected:
@@ -272,6 +462,12 @@ private:
     // Store here only the necessary data for calculating species thermodynamics
     std::vector<double> m_vh {};
     std::vector<double> m_vhf {};
+    std::vector<double> hv {}; //should this be in private??
+    std::vector<double> ht {}; //should this be in private??
+    std::vector<double> hr {}; //should this be in private??
+    std::vector<double> sv {}; //should this be in private??
+    std::vector<double> st {}; //should this be in private??
+    std::vector<double> sr {}; //should this be in private??
 
 
     //     spnm  spwt(g/mol) ih  ie
