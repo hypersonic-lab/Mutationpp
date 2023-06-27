@@ -153,13 +153,9 @@ void ThermoDB::cv(
 
 //==============================================================================
 
-void ThermoDB::cpv(double Th, double Te, double Tr, double Tv,
-                   double Tel, double* const cv, double* const cvt,
-                   double* const cvr, double* const cvv,
-                   double* const cvel)
+void ThermoDB::cpv(double T, double* const p_cp)
 {
-    cp(Th, Te, Tr, Tv, Tel, cv, cvt, cvr, cvv, cvel);
-//    throw NotImplementedError("ThermoDB::cpv()");
+    throw NotImplementedError("ThermoDB::cpv()");
 }
 
 //==============================================================================
@@ -168,6 +164,21 @@ void ThermoDB::cpel(double T, double* const p_cp)
 {
     throw NotImplementedError("ThermoDB::cpel()");
 }
+
+//==============================================================================
+
+void ThermoDB::hv(double T, double* const p_h)
+{
+    throw NotImplementedError("ThermoDB::hv()");
+}
+
+//==============================================================================
+
+void ThermoDB::hel(double T, double* const p_h)
+{
+    throw NotImplementedError("ThermoDB::hel()");
+}
+
 //==============================================================================
 
 void ThermoDB::cpint(double T, double* const p_cp) {
@@ -175,123 +186,6 @@ void ThermoDB::cpint(double T, double* const p_cp) {
     Map<ArrayXd>(p_cp, m_species.size()) -= 2.5;
 }
 
-    //==============================================================================
-
-//    void ThermoDB::cpint(double T, double* const p_cp) {
-//        cp(T, T, T, T, T, p_cp);
-//        Map<ArrayXd>(p_cp, m_species.size()) -= 2.5;
-//    }
-//==============================================================================
-
-void ThermoDB::hv(double Th, double Te, double Tr, double Tv, double Tel,
-                  double* const h, double* const ht, double* const hr,
-                  double* const hv, double* const hel, double* const hf) //Unsure of necessary constants
-{
-    enthalpy(Th,Te,Tr,Tv,Tel,h,ht,hr,hv,hel,hf);
-//    throw NotImplementedError("ThermoDB::hv()");
-}
-
-    //==============================================================================
-// ***Probably reundant given pointers***, though ht may need to be called...
-    void ThermoDB::ht(double Th, double Te, double Tr, double Tv, double Tel,
-                      double* const h, double* const ht, double* const hr,
-                      double* const hv, double* const hel, double* const hf)
-    {
-        enthalpy(Th,Te,Tr,Tv,Tel,h,ht,hr,hv,hel,hf);
-    //    throw NotImplementedError("ThermoDB::ht()");
-    }
-    
-    //==============================================================================
-// ***Probably reundant given pointers***, though hr may need to be called...
-    void ThermoDB::hr(double Th, double Te, double Tr, double Tv, double Tel,
-                      double* const h, double* const ht, double* const hr,
-                      double* const hv, double* const hel, double* const hf)
-    {
-        enthalpy(Th,Te,Tr,Tv,Tel,h,ht,hr,hv,hel,hf);
-    //    throw NotImplementedError("ThermoDB::hr()");
-    }
-//==============================================================================
-
-void ThermoDB::hel(double Tel, double* const p_hel)
-{
-    throw NotImplementedError("ThermoDB::hel()");
-}
-
-//==============================================================================
-
-void ThermoDB::sv(double Th, double Te, double Tr, double Tv, double Tel, double P,
-                  double* const s, double* const st, double* const sr, double* const sv,
-                  double* const sel) //Unsure of function calls here within M++
-{
-    entropy(Th,Te,Tr,Tv,Tel,P,s,st,sr,sv,sel);//, double* const hr)
-//    throw NotImplementedError("ThermoDB::sv()");
-}
-
-    //==============================================================================
-// ***Probably reundant given pointers***, though ht may need to be called...
-void ThermoDB::st(double Th, double Te, double Tr, double Tv, double Tel, double P,
-                  double* const s, double* const st, double* const sr, double* const sv,
-                  double* const sel) //Unsure of function calls here within M++
-{
-    entropy(Th,Te,Tr,Tv,Tel,P,s,st,sr,sv,sel);//, double* const hr)
-//    throw NotImplementedError("ThermoDB::st()");
-}
-
-    //==============================================================================
-// ***Probably reundant given pointers***, though ht may need to be called...
-void ThermoDB::sr(double Th, double Te, double Tr, double Tv, double Tel, double P,
-                  double* const s, double* const st, double* const sr, double* const sv,
-                  double* const sel) //Unsure of function calls here within M++
-{
-    entropy(Th,Te,Tr,Tv,Tel,P,s,st,sr,sv,sel);//, double* const hr)
-//    throw NotImplementedError("ThermoDB::sr()");
-}
-//==============================================================================
-
-void ThermoDB::sel(double Tel, double* const p_hel) //Unsure of function calls here within M++
-{
-    throw NotImplementedError("ThermoDB::sel()");
-}
-
-
-//==============================================================================
-
-void ThermoDB::gv(double Th, double Te, double Tr, double Tv, double Tel, double P,
-                  double* const g, double* const gt, double* const gr, double* const gv,
-                  double* const gel) //Unsure of function calls here within M++
-{
-    gibbs(Th,Te,Tr,Tv,Tel,P,g,gt,gr,gv,gel);
-//    throw NotImplementedError("ThermoDB::gv()");
-}
-
-    //==============================================================================
-// ***Probably reundant given pointers***, though ht may need to be called...
-void ThermoDB::gt(double Th, double Te, double Tr, double Tv, double Tel, double P,
-                  double* const g, double* const gt, double* const gr, double* const gv,
-                  double* const gel) //Unsure of function calls here within M++
-{
-    gibbs(Th,Te,Tr,Tv,Tel,P,g,gt,gr,gv,gel);
-//    throw NotImplementedError("ThermoDB::gt()");
-}
-
-    //==============================================================================
-// ***Probably reundant given pointers***, though ht may need to be called...
-void ThermoDB::gr(double Th, double Te, double Tr, double Tv, double Tel, double P,
-                  double* const g, double* const gt, double* const gr, double* const gv,
-                  double* const gel) //Unsure of function calls here within M++
-{
-    gibbs(Th,Te,Tr,Tv,Tel,P,g,gt,gr,gv,gel);
-//    throw NotImplementedError("ThermoDB::gr()");
-}
-//==============================================================================
-
-void ThermoDB::gel(double Tel, double* const p_hel) //Unsure of function calls here within M++
-{
-    throw NotImplementedError("ThermoDB::gel()");
-}
-
-    
-    
 //==============================================================================
 
     } // namespace Thermodynamics

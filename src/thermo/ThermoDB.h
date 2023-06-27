@@ -145,10 +145,7 @@ public:
      * Computes the species vibrational specific heats at the given temperature
      * nondimensionalized by the universal gas constant.
      */
-    virtual void cpv(double Th, double Te, double Tr, double Tv,
-                     double Tel, double* const cv, double* const cvt,
-                     double* const cvr, double* const cvv,
-                     double* const cvel);
+    virtual void cpv(double Tv, double* const p_cpv);
 
     /**
      * Returns the species electronic specific heats at the given temperature
@@ -203,21 +200,12 @@ public:
      * Returns the species vibrational enthalpy at the given temperature
      * nondimensionalized by the universal gas constant times the temperature.
      */
-//    virtual void hv(double Tv, double* const p_hv);
-    virtual void hv(double Th, double Te, double Tr, double Tv, double Tel,double* const h, double* const ht, double* const hr,
-        double* const hv, double* const hel, double* const hf);
-    
-    virtual void ht(double Th, double Te, double Tr, double Tv, double Tel,double* const h, double* const ht, double* const hr,
-        double* const hv, double* const hel, double* const hf);
-    
-    virtual void hr(double Th, double Te, double Tr, double Tv, double Tel,double* const h, double* const ht, double* const hr,
-        double* const hv, double* const hel, double* const hf);
+    virtual void hv(double Tv, double* const p_hv);
 
     /**
      * Returns the species electronic enthalpy at the given temperature
      * nondimensionalized by the universal gas constant times the temperature.
      */
-//    virtual void hel(double Tel, double* const p_hel);
     virtual void hel(double Tel, double* const p_hel);
 
     /**
@@ -238,25 +226,9 @@ public:
      */    
     virtual void entropy(
         double Th, double Te, double Tr, double Tv, double Tel, double P,
-        double* const s, double* const st, double* const sr,
-        double* const sv, double* const sel) = 0;
+        double* const s, double* const st, double* const sr, double* const sv, 
+        double* const sel) = 0;
     
-    virtual void sv(double Th, double Te, double Tr, double Tv,
-                    double Tel, double P, double* const s,
-                    double* const st, double* const sr, double* const sv,
-                    double* const sel);
-    
-    virtual void st(double Th, double Te, double Tr, double Tv,
-                    double Tel, double P, double* const s,
-                    double* const st, double* const sr, double* const sv,
-                    double* const sel);
-    
-    virtual void sr(double Th, double Te, double Tr, double Tv,
-                    double Tel, double P, double* const s,
-                    double* const st, double* const sr, double* const sv,
-                    double* const sel);
-    
-    virtual void sel(double Tel, double* const p_hel);
     /**
      * Computes the unitless Gibbs free energy of each species i, 
      * \f$G_i / R_u T_h\f$ where \f$G_i\f$ is non-dimensionalized by the heavy
@@ -278,23 +250,6 @@ public:
         double Th, double Te, double Tr, double Tv, double Tel, double P,
         double* const g, double* const gt, double* const gr, double* const gv,
         double* const gel) = 0;
-    
-    virtual void gv(double Th, double Te, double Tr, double Tv,
-                    double Tel, double P, double* const g,
-                    double* const gt, double* const gr, double* const gv,
-                    double* const gel);
-    
-    virtual void gt(double Th, double Te, double Tr, double Tv,
-                    double Tel, double P, double* const g,
-                    double* const gt, double* const gr, double* const gv,
-                    double* const gel);
-    
-    virtual void gr(double Th, double Te, double Tr, double Tv,
-                    double Tel, double P, double* const g,
-                    double* const gt, double* const gr, double* const gv,
-                    double* const gel);
-    
-    virtual void gel(double Tel, double* const p_hel);
     
 protected:
 
