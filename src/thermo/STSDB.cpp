@@ -55,7 +55,7 @@ class STSDB : public ThermoDB
 {
 public:
 
-    STSDB(int arg) : ThermoDB(298.15, 101325.0) {}
+    STSDB(int arg) : ThermoDB(298.15, 101325.0) {} //
 
     /**
      * Computes the unitless species specific heat at constant pressure
@@ -227,7 +227,7 @@ public:
            // hv[1] = 7.87380953594E+02 * 1.42879 / (exp(7.87380953594E+02 * 1.42879 / Th) - 1.0) / Th;
            // hv[2] = 2.34376026609E+03 * 1.42879 / (exp(2.34376026609E+03 * 1.42879 / Th) - 1.0) / Th;
             hv[1] = 7.87380953594E+02 * 1.42879 / Th * exp(-7.87380953594E+02 * 1.42879 / Th); // See KMH notes
-            hv[2] = 2.34376026609E+03 * 1.42879 / Th * exp(-2.34376026609E+03 * 1.42879 / Th);
+            hv[2] = 2.34376026609E+03 * 1.42879 / Th * exp(-2.34376026609E+03 * 1.42879 / Th); // Tv?
 
             h[0] += hv[0];
             h[1] += hv[1];
@@ -329,7 +329,7 @@ public:
             sv[0] = 0.0;
             // sv[1] = 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th; // Eq. 3.78 of Boyd. Need to define N or substitute
             // sv[2] =  1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
-            sv[1] = 0.0; // Setting to 0 based on discussion with George
+            sv[1] = 0.0; // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
             sv[2] = 0.0; //
 
             s[0] += sv[0];
@@ -409,7 +409,7 @@ public:
 
         if (gv != NULL) {
             for (int i = 0; i < 3; i++){
-                gv[i] += hv[i] - Th * st[i]; // G = H - TS
+                gv[i] += hv[i] - Th * st[i]; // G = H - TS // Tv?
             }
 
             for (int i = 0; i < 3; i++){
@@ -418,7 +418,7 @@ public:
   
         } else {
             for (int i = 0; i < 3; i++){
-                gv[i] += hv[i] - Th * sv[i]; // G = H - TS
+                gv[i] += hv[i] - Th * sv[i]; // G = H - TS // Tv?
             }
         }
         // Electronic. For now setting as zero
@@ -430,6 +430,8 @@ public:
         //h[1] += m_vhf[1];
         // h[2] += m_vhf[2];
     }
+    
+//Calculate enthalpy from Gibbs
 
 protected:
     /**
@@ -463,6 +465,7 @@ protected:
        // ns = 3;
         m_vh.resize(3);
         m_vhf.resize(3);
+        // Add ht, hr, hv...
 
         m_vh[0] = 0.; // Atomic oxygen
         m_vh[1] = 7.87380953594E+02;
@@ -483,7 +486,7 @@ private:
     // Store here only the necessary data for calculating species thermodynamics
     std::vector<double> m_vh {};
     std::vector<double> m_vhf {};
-    std::vector<double> hv {}; //should this be in private??
+    std::vector<double> hv {}; //should this be in private?? //m_ for private
     std::vector<double> ht {}; //should this be in private??
     std::vector<double> hr {}; //should this be in private??
     std::vector<double> sv {}; //should this be in private??
