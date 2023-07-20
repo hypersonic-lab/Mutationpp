@@ -38,6 +38,8 @@
 #include <cstdlib>
 #include <cmath>
 #include <cassert>
+#include <fstream>
+
 
 using namespace std;
 using namespace Mutation::Numerics;
@@ -51,6 +53,11 @@ namespace Mutation {
  * model for computing species thermodynamic properties.  See the individual
  * thermodynamic functions for specific descriptions of the model.
  */
+    
+/**** TODO: Figure out what states exist
+         Establish array in that form
+         Read in energy constants from file
+*/
 class STSDB : public ThermoDB
 {
 public:
@@ -98,55 +105,56 @@ public:
          */
 
         // Setting to zero
-     cp[0] = 0.;
-     cp[1] = 0.;
-     cp[2] = 0.;
+    for (int i = 0; i < m_ns; i++){
+        cp[i] = 0.;
+    }
 
      // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
      if (cpt != NULL) {
-         cpt[0] += 2.5; // Cv = 3/2 R; Cp = Cv + R
-         cpt[1] += 2.5;
-         cpt[2] += 2.5;
+         for (int i = 0; i < m_ns; i++){
+             cpt[i] += 2.5; // Cv = 3/2 R; Cp = Cv + R
+             cp[i] += cpt[i];
+         }
 
-         cp[0] += cpt[0];
-         cp[1] += cpt[1];
-         cp[2] += cpt[2];
      } else {
-         cp[0] += 2.5;
-         cp[1] += 2.5;
-         cp[2] += 2.5;
+         for (int i = 0; i < m_ns; i++){
+             cp[i] += 2.5;
+         }
      }
 
      // Rotation. Assuming fulling active rotational mode
      if (cpr != NULL) {
-         cpr[0] = 0.0;
-         cpr[1] = 2.0; // Cv = R; Cp = Cv + R
-         cpr[2] = 2.0;
+         for (int i = 0; i < m_ns; i++){
+             if (i == 0) {
+//                 cp[i] = 0.0; // Ground state
+//                 cp[i] += cpr[i];
+                 continue; } // Ground state
+             cpr[i] += 2.0; //iCv = R; Cp = Cv + R
+             cp[i] += cpr[i];
+         }
 
-         cp[0] += cpr[0];
-         cp[1] += cpr[1];
-         cp[2] += cpr[2];
      } else {
-         cp[0] += 0.0;
-         cp[1] += 2.0;
-         cp[2] += 2.0;
+         for (int i = 0; i < m_ns; i++){
+             if (i == 0) {
+//                 cp[i] = 0.0; // Ground state
+                 continue; } // Ground state
+             cp[i] += 2.0;
+         }
      }
 
      // etc...
 
      // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
      if (cpv != NULL) {
-         cpv[0] = 0.0; // Setting as zero for now. Need to think
-         cpv[1] = 0.0;
-         cpv[2] = 0.0;
+         for (int i = 0; i < m_ns; i++){
+             cpv[i] += 0.0; // Setting as zero for now. Need to think
+             cpv[i] += cpv[i];
+         }
 
-         cpv[0] += cpv[0];
-         cpv[1] += cpv[1];
-         cpv[2] += cpv[2];
      } else {
-         cpv[0] += 0.0;
-         cpv[1] += 0.0;
-         cpv[2] += 0.0;
+         for (int i = 0; i < m_ns; i++){
+             cpv[i] += 0.0;
+         }
      }
 
      // Electronic. For now setting as zero
@@ -180,62 +188,93 @@ public:
         double* const hv, double* const hel, double* const hf)
     {
         // Given Ts calculate h, ht, hr, hv, hel, hf
+        // Old equations, before generalize
     //    h[0] = 2.5 + m_vhf[0];
     //    h[1] = m_vh[1]*Th + m_vhf[1];
     //    h[2] = m_vh[2]*Th + m_vhf[2];
 
+        const int SIZE = 37;
+        double state[SIZE];
+        double blank[SIZE];
+        double energy[SIZE];
+        string inFileName = "../../data/thermo/oxygen_energy.txt";
+        ifstream inFile;
+        inFile.open(inFileName.c_str());
+        if (inFile.is_open())
+        {
+            for (int i = 0; i < SIZE; i++)
+            {
+                inFile >> state[i];
+                inFile >> blank[i];
+                inFile >> energy[i];
+            }
+
+            inFile.close(); // CLose input file
+        }
+        
+        
+        
+        
+        
         // Setting to zero
-        h[0] = 0.;
-        h[1] = 0.;
-        h[2] = 0.;
+        for (int i = 0; i < m_ns; i++){
+            h[i] = 0.;
+        }
 
         // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
         if (ht != NULL) {
-            ht[0] += 2.5; // Is this non-dimensional too? Taking in work flow too. Otherwise it would be 1.5.
-            ht[1] += 2.5;
-            ht[2] += 2.5;
+            for (int i = 0; i < m_ns; i++){
+                ht[i] += 2.5; // Is this non-dimensional too? Taking in work flow too. Otherwise it would be 1.5.
+                h[i] += ht[i];
+            }
 
-            h[0] += ht[0];
-            h[1] += ht[1];
-            h[2] += ht[2];
         } else {
-            h[0] += 2.5;
-            h[1] += 2.5;
-            h[2] += 2.5;
+            for (int i = 0; i < m_ns; i++){
+                h[i] += 2.5;
+            }
         }
 
         // Rotation. Assuming fulling active rotational mode
         if (hr != NULL) {
-            hr[0] = 0.0;
-            hr[1] = 1.0;
-            hr[2] = 1.0;
+            for (int i = 0; i < m_ns; i++){
+                if (i == 0) {
+//                    h[i] = 0.0; // Ground state
+//                    h[i] += hr[i];
+                    continue; }
+                hr[i] += 1.0;
+                h[i] += hr[i];
+            }
 
-            h[0] += hr[0];
-            h[1] += hr[1];
-            h[2] += hr[2];
         } else {
-            h[0] += 0.0;
-            h[1] += 1.0;
-            h[2] += 1.0;
+            for (int i = 0; i < m_ns; i++){
+                if (i == 0) {
+//                    h[i] = 0.0; // Ground state
+                    continue; }
+                h[i] += 1.0;
+            }
         }
 
         // etc...
 
         // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
         if (hv != NULL) {
-            hv[0] = 0.0;
-           // hv[1] = 7.87380953594E+02 * 1.42879 / (exp(7.87380953594E+02 * 1.42879 / Th) - 1.0) / Th;
-           // hv[2] = 2.34376026609E+03 * 1.42879 / (exp(2.34376026609E+03 * 1.42879 / Th) - 1.0) / Th;
-            hv[1] = 7.87380953594E+02 * 1.42879 / Th * exp(-7.87380953594E+02 * 1.42879 / Th); // See KMH notes
-            hv[2] = 2.34376026609E+03 * 1.42879 / Th * exp(-2.34376026609E+03 * 1.42879 / Th); // Tv?
+            for (int i = 0; i < m_ns; i++){
+                if (i == 0) {
+                    hv[i] = 0.0;
+//                    h[i] = 0.0; // Ground state
+                    continue; }
+                hv[i] = energy[i] * 1.42879 / Th * exp(-1*energy[i] * 1.42879 / Th); // See KMH notes
+                h[i] += hv[i];
+            }
 
-            h[0] += hv[0];
-            h[1] += hv[1];
-            h[2] += hv[2];
         } else {
-            h[0] += 0.0;
-            h[1] += 7.87380953594E+02 * 1.42879 / Th * exp(-7.87380953594E+02 * 1.42879 / Th);
-            h[2] += 2.34376026609E+03 * 1.42879 / Th * exp(-2.34376026609E+03 * 1.42879 / Th);
+            for (int i = 0; i < m_ns; i++){
+                if (i == 0) {
+                    h[i] = 0.0;
+//                    h[i] = 0.0; // Ground state
+                    continue; }
+                h[i] = energy[i] * 1.42879 / Th * exp(-1*energy[i] * 1.42879 / Th); // See KMH notes
+            }
         }
 
         // Electronic. For now setting as zero
@@ -243,10 +282,11 @@ public:
         // hel[1] = 0.0;
         // hel[2] = 0.0;
 
-        h[0] += m_vhf[0];
-        h[1] += m_vhf[1];
-        h[2] += m_vhf[2];
+        for (int i = 0; i < m_ns; i++){
+            h[i] += m_vhf[i];
+        }
 
+        // Old equations, before generalize
         // I think this below is already calculated above by the sums
         // h[0] = ht[0] + hr[0] + hv[0] + hel[0] + m_vhf[0];
         // h[1] = ht[1] + hr[1] + hv[1] + hel[1] + m_vhf[1];
@@ -285,62 +325,76 @@ public:
 
             // Following similar approach as enthalpy
             // Setting to zero
-        s[0] = 0.;
-        s[1] = 0.;
-        s[2] = 0.;
+        for (int i = 0; i < m_ns; i++){
+            s[i] = 0.;
+        }
+
 
         // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
         // Will need to upload masses of each species
         if (st != NULL) {
-            st[0] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd.
-            st[1] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
-            st[2] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+            for (int i = 0; i < m_ns; i++){
+                if (i == 0) {
+                    st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
+                    s[i] += st[i];
+                    continue; }
+                st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+                s[i] += st[i];
+            }
 
-            s[0] += st[0];
-            s[1] += st[1];
-            s[2] += st[2];
         } else {
-            s[0] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd.
-            s[1] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
-            s[2] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+            for (int i = 0; i < m_ns; i++){
+                if (i == 0) {
+                    s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
+                    s[i] += st[i];
+                    continue; }
+                s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+            }
         }
 
         // Rotation. Assuming fulling active rotational mode
         if (sr != NULL) {
-            sr[0] = 0.0;
+            for (int i = 0; i < m_ns; i++){
+                if (i == 0) {
+                    sr[i] = 0.0; // Ground state
+                    s[i] += sr[i];
+                    continue; }
+                sr[i] = hr[i]/Th + log(0.5 * Th / 2.1); // From slide 20 of Magin, need to check units
+                s[i] += sr[i];
+            }
+            
+            // Old equations, before generalize
             // sr[1] = 1.0 + log((0.5 * Th / 2.1) / N ) + 1.0; // Eq. 3.78 of Boyd. Need to define N or substitute
             // sr[2] = 1.0 + log((0.5 * Th / 2.1) / N ) + 1.0; // Eq. 3.78 of Boyd. Need to define N or substitute
-            sr[1] = hr[1]/Th + log(0.5 * Th / 2.1); // From slide 20 of Magin, need to check units
-            sr[2] = hr[2]/Th + log(0.5 * Th / 2.1);
 
-            s[0] += sr[0];
-            s[1] += sr[1];
-            s[2] += sr[2];
         } else {
-            s[0] += 0.0;
-            s[1] += hr[1]/Th + log(0.5 * Th / 2.1); // From Magin above
-            s[2] += hr[2]/Th + log(0.5 * Th / 2.1);
+            for (int i = 0; i < m_ns; i++){
+                if (i == 0) {
+                    s[i] += 0.0;
+                    continue; }
+                s[i] += hr[i]/Th + log(0.5 * Th / 2.1); // From Magin above;
+            }
+
         }
 
         // etc...
 
         // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
         if (sv != NULL) {
-            sv[0] = 0.0;
+            for (int i = 0; i < m_ns; i++){
+                sv[i] = 0.0; // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
+                s[i] += sv[i];
+            }
+            // Old equations, before generalize
             // sv[1] = 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th; // Eq. 3.78 of Boyd. Need to define N or substitute
             // sv[2] =  1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
-            sv[1] = 0.0; // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
-            sv[2] = 0.0; //
-
-            s[0] += sv[0];
-            s[1] += sv[1];
-            s[2] += sv[2];
         } else {
-            s[0] += 0.0;
+            for (int i = 0; i < m_ns; i++){
+                s[i] += 0.0;
+            }
+            // Old equations, before generalize
             // s[1] += 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th;
             // s[2] += 1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
-            s[1] += 0.0;
-            s[2] += 0.0;
         }
 
         // Electronic. For now setting as zero
@@ -371,53 +425,53 @@ public:
 
                    // Following similar approach as enthalpy
             // Setting to zero
-        g[0] = 0.;
-        g[1] = 0.;
-        g[2] = 0.;
+        for (int i = 0; i < m_ns; i++){
+            g[i] = 0.;
+        }
 
         // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
         // Will need to upload masses of each species
         if (gt != NULL) {
-            for (int i = 0; i < 3; i++){
+            for (int i = 0; i < m_ns; i++){
                 gt[i] += ht[i] - Th * st[i]; // G = H - TS
             }
 
-            for (int i = 0; i < 3; i++){
+            for (int i = 0; i < m_ns; i++){
                 g[i] += gt[i];
             } // Is there a way to combine this with previous loop?
   
         } else {
-            for (int i = 0; i < 3; i++){
+            for (int i = 0; i < m_ns; i++){
                 gt[i] += ht[i] - Th * st[i]; // G = H - TS
             }
         }
 
         if (gr != NULL) {
-            for (int i = 0; i < 3; i++){
+            for (int i = 0; i < m_ns; i++){
                 gr[i] += hr[i] - Th * sr[i]; // G = H - TS
             }
 
-            for (int i = 0; i < 3; i++){
+            for (int i = 0; i < m_ns; i++){
                 g[i] += gr[i];
             } // Is there a way to combine this with previous loop?
   
         } else {
-            for (int i = 0; i < 3; i++){
+            for (int i = 0; i < m_ns; i++){
                 gr[i] += hr[i] - Th * sr[i]; // G = H - TS
             }
         }
 
         if (gv != NULL) {
-            for (int i = 0; i < 3; i++){
+            for (int i = 0; i < m_ns; i++){
                 gv[i] += hv[i] - Th * st[i]; // G = H - TS // Tv?
             }
 
-            for (int i = 0; i < 3; i++){
+            for (int i = 0; i < m_ns; i++){
                 g[i] += gv[i];
             } // Is there a way to combine this with previous loop?
   
         } else {
-            for (int i = 0; i < 3; i++){
+            for (int i = 0; i < m_ns; i++){
                 gv[i] += hv[i] - Th * sv[i]; // G = H - TS // Tv?
             }
         }
@@ -462,9 +516,9 @@ protected:
      */
     virtual void loadThermodynamicData()
     {
-       // ns = 3;
-        m_vh.resize(3);
-        m_vhf.resize(3);
+//        m_ns = 3; // Number of energy states
+        m_vh.resize(m_ns);
+        m_vhf.resize(m_ns);
         // Add ht, hr, hv...
 
         m_vh[0] = 0.; // Atomic oxygen
@@ -484,6 +538,7 @@ protected:
 
 private:
     // Store here only the necessary data for calculating species thermodynamics
+    const int m_ns = 3; // need to see how to recognize number of states from M++
     std::vector<double> m_vh {};
     std::vector<double> m_vhf {};
     std::vector<double> hv {}; //should this be in private?? //m_ for private
