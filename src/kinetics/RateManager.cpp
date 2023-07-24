@@ -66,7 +66,16 @@ typedef RateLawGroup1T<Arrhenius, TSelector> ArrheniusT;
 typedef RateLawGroup1T<Arrhenius, TeSelector> ArrheniusTe;
 
 /// Arrhenius group evaluated at sqrt(T*Tv)
-typedef RateLawGroup1T<Arrhenius, ParkSelector> ArrheniusPark; 
+typedef RateLawGroup1T<Arrhenius, ParkSelector> ArrheniusPark;
+    
+/// MMT group evaluated at T
+typedef RateLawGroup1T<MMT, TSelector> MMT_T;
+
+/// MMT group evaluated at Te
+typedef RateLawGroup1T<MMT, TeSelector> MMT_TE;
+
+/// MMT group evaluated at sqrt(T*Tv)
+typedef RateLawGroup1T<MMT, ParkSelector> MMT_PARK;
 
 //==============================================================================
 
@@ -110,6 +119,48 @@ SELECT_RATE_LAWS(EXCITATION_E,               ArrheniusTe,   ArrheniusTe)
 
 #undef SELECT_RATE_LAWS
 
+
+/**
+ * Used to define which rate law groups the forward and reverse rate laws are
+ * evaluated in for a given ReactionType value.
+ */
+template <int Type>
+struct RateSelector {
+    typedef MMT_T ForwardGroup;
+    typedef MMT_T ReverseGroup;
+};
+
+#define SELECT_RATE_LAWS(__TYPE__,__FORWARD__,__REVERSE__)\
+template <> struct RateSelector<__TYPE__> {\
+    typedef __FORWARD__ ForwardGroup;\
+    typedef __REVERSE__ ReverseGroup;\
+};
+
+    // TODO: Should these be named differently?
+    
+// Default rate law groups for non (kf(T), kb(T)) reaction types
+SELECT_RATE_LAWS(ASSOCIATIVE_IONIZATION,     MMT_T,    MMT_TE)
+SELECT_RATE_LAWS(DISSOCIATIVE_RECOMBINATION, MMT_TE,   MMT_T)
+SELECT_RATE_LAWS(ASSOCIATIVE_DETACHMENT,     MMT_T,    MMT_TE)
+SELECT_RATE_LAWS(DISSOCIATIVE_ATTACHMENT,    MMT_TE,   MMT_T)
+SELECT_RATE_LAWS(DISSOCIATION_E,             MMT_TE,   MMT_TE)
+SELECT_RATE_LAWS(RECOMBINATION_E,            MMT_TE,   MMT_TE)
+SELECT_RATE_LAWS(DISSOCIATION_M,             MMT_PARK, MMT_T)
+SELECT_RATE_LAWS(RECOMBINATION_M,            MMT_T,    MMT_PARK)
+SELECT_RATE_LAWS(IONIZATION_E,               MMT_TE,   MMT_T)
+SELECT_RATE_LAWS(ION_RECOMBINATION_E,        MMT_T,    MMT_TE)
+SELECT_RATE_LAWS(IONIZATION_M,               MMT_T,    MMT_T)
+SELECT_RATE_LAWS(ION_RECOMBINATION_M,        MMT_T,    MMT_T)
+SELECT_RATE_LAWS(ELECTRONIC_ATTACHMENT_M,    MMT_TE,   MMT_T)
+SELECT_RATE_LAWS(ELECTRONIC_DETACHMENT_M,    MMT_T,    MMT_TE)
+SELECT_RATE_LAWS(ELECTRONIC_ATTACHMENT_E,    MMT_TE,   MMT_TE)
+SELECT_RATE_LAWS(ELECTRONIC_DETACHMENT_E,    MMT_TE,   MMT_TE)
+SELECT_RATE_LAWS(EXCHANGE,                   MMT_T,    MMT_T)
+SELECT_RATE_LAWS(EXCITATION_M,               MMT_T,    MMT_T)
+SELECT_RATE_LAWS(EXCITATION_E,               MMT_TE,   MMT_TE)
+
+#undef SELECT_RATE_LAWS
+    
 //==============================================================================
 
 RateManager::RateManager(size_t ns, const std::vector<Reaction>& reactions)
@@ -150,6 +201,14 @@ void RateManager::addReaction(const size_t rxn, const Reaction& reaction)
     
     // Arrhenius reactions
     if (typeid(*p_rate) == typeid(Arrhenius)) {
+        selectRate<MAX_REACTION_TYPES-1>(rxn, reaction);
+    } else {
+        throw InvalidInputError("rate law", typeid(*p_rate).name())
+            << "Rate law is not implemented in RateManager.";
+    }
+    
+    // MMT reactions
+    if (typeid(*p_rate) == typeid(MMT)) {
         selectRate<MAX_REACTION_TYPES-1>(rxn, reaction);
     } else {
         throw InvalidInputError("rate law", typeid(*p_rate).name())
