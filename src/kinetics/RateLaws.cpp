@@ -78,16 +78,16 @@ Arrhenius::Arrhenius(const XmlElement& node, const int order)
         sm_eunits = _default_eunits();
     
     // Load the temperature exponent (defaults to 0)
-	node.getAttribute("n", m_n, 0.0);
+    node.getAttribute("n", m_n, 0.0);
     
     // Load the pre-exponential factor (must be given)
-    node.getAttribute("A", m_lnA, 
+    node.getAttribute("A", m_lnA,
         "Arrhenius rate law must define coefficient A!");
     node.parseCheck(m_lnA > 0.0, "Pre-exponential factors must be positive > 0");
     
     // Convert to correct units based on the order of the reaction and
     // store the log value
-    Units A_units = 
+    Units A_units =
         (((sm_aunits[1]^3) / sm_aunits[0])^(order-1)) /
         (sm_aunits[2] * (sm_aunits[3]^m_n));
     m_lnA = std::log(A_units.convertToBase(m_lnA));
@@ -106,6 +106,116 @@ Arrhenius::Arrhenius(const XmlElement& node, const int order)
     }
 }
 
+    
+// MMT
+void MMT::setUnits(const XmlElement& node)
+{
+    assert( node.tag() == "mmt_units" );
+    // To edit
+    std::string a, e, au, u;
+    node.getAttribute("A", a);
+    node.getAttribute("T", t);
+    node.getAttribute("thetaV", tv);
+    node.getAttribute("U", u);
+    sm_aunits = Units::split(a);
+    sm_tunits = Units::split(t);
+    sm_tvunits = Units::split(tv);
+    sm_uunits = Units::split(u);
+}
+
+// C,Td,au,U*
+std::vector<Units> _default_aunits() {
+    std::vector<Units> units;
+    units.push_back("mol");
+    units.push_back("cm");
+    units.push_back("s");
+    units.push_back("K");
+    return units;
+}
+
+std::vector<Units> _default_tunits() {
+    std::vector<Units> units;
+    units.push_back("J");
+    units.push_back("mol");
+    units.push_back("K");
+    return units;
+}
+    
+std::vector<Units> _default_tvunits() {
+//    std::vector<Units> units;
+//    units.push_back("mol");
+//    units.push_back("m");
+//    units.push_back("s");
+    units.push_back("K");
+//    return units;
+}
+
+std::vector<Units> _default_uunits() {
+    std::vector<Units> units;
+//    units.push_back("J");
+//    units.push_back("mol");
+    units.push_back("K");
+    return units;
+}
+
+std::vector<Units> Arrhenius::sm_aunits = std::vector<Units>();
+std::vector<Units> Arrhenius::sm_tunits = std::vector<Units>();
+std::vector<Units> Arrhenius::sm_tvunits = std::vector<Units>();
+std::vector<Units> Arrhenius::sm_uunits = std::vector<Units>();
+
+MMT::MMT(const XmlElement& node, const int order)
+{
+    assert( node.tag() == "mmt" );
+    
+    if (sm_aunits.empty())
+        sm_aunits = _default_aunits();
+    if (sm_eunits.empty())
+        sm_eunits = _default_tunits();
+    if (sm_aunits.empty())
+        sm_aunits = _default_tvunits();
+    if (sm_eunits.empty())
+        sm_eunits = _default_uunits();
+    
+    // Load the temperature exponent (defaults to 0)
+    node.getAttribute("n", m_n, 0.0);
+    // Load aU (defaults to 0)
+    node.getAttribute("a", m_a, 0.0);
+    // Load U* (defaults to 0)
+    node.getAttribute("u", m_U_s, 0.0);
+    // Load Ttr (defaults to 0)
+    node.getAttribute("ttr", m_temp_Ttr, 0.0);
+    // Load Tv (defaults to 0)
+    node.getAttribute("tv", m_temp_Tv, 0.0);
+    
+    
+    // Load the pre-exponential factor (must be given)
+    node.getAttribute("A", m_lnA,
+        "Arrhenius rate law must define coefficient A!");
+    node.parseCheck(m_lnA > 0.0, "Pre-exponential factors must be positive > 0");
+    
+    // Convert to correct units based on the order of the reaction and
+    // store the log value
+    Units A_units =
+        (((sm_aunits[1]^3) / sm_aunits[0])^(order-1)) /
+        (sm_aunits[2] * (sm_aunits[3]^m_n));
+    m_lnA = std::log(A_units.convertToBase(m_lnA));
+    
+    // Load the characteristic temperature
+    if (node.hasAttribute("Ea")) {
+        node.getAttribute("Ea", m_temp);
+        // Convert to J/mol and divide by Ru to get characteristic temp
+        m_temp = (sm_eunits[0]/sm_eunits[1]).convertToBase(m_temp) / RU;
+    } else if (node.hasAttribute("T")) {
+        node.getAttribute("T", m_temp);
+        // Convert to K
+        m_temp = sm_eunits[2].convertToBase(m_temp);
+    } else {
+        node.parseError("Arrhenius rate law must define coefficient Ea or T!");
+    }
+}
+    
+    
+    
     } // namespace Kinetics
 } // namespace Mutation
 

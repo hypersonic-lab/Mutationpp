@@ -38,7 +38,7 @@ namespace Mutation {
     namespace Kinetics {
 
 /**
- * Abstract base class for all rate laws which allows owners such as class 
+ * Abstract base class for all rate laws which allows owners such as class
  * Reaction to store any rate law polymorphically.
  */
 class RateLaw
@@ -78,7 +78,7 @@ public:
         return (k*invT*(m_n + m_temp*invT));
     }
 
-    double A() const { 
+    double A() const {
         return std::exp(m_lnA);
     }
     
@@ -92,12 +92,112 @@ public:
     
 private:
 
-    static std::vector<Mutation::Utilities::Units> sm_aunits;    
+    static std::vector<Mutation::Utilities::Units> sm_aunits;
     static std::vector<Mutation::Utilities::Units> sm_eunits;
 
     double m_lnA;
     double m_n;
     double m_temp;
+};
+    
+/**
+ * Arrhenius rate law \f$ k_f(T) = A T^\eta exp(-E_a / (R_u T)) \f$.
+ */
+class MMT : public RateLaw
+{
+public:
+
+    static void setUnits(const Mutation::Utilities::IO::XmlElement& node);
+    
+    MMT(const Mutation::Utilities::IO::XmlElement& node, const int order);
+    
+    MMT(const MMT& to_copy)
+        : m_lnA(to_copy.m_lnA), m_n(to_copy.m_n), m_temp(to_copy.m_temp), m_temp(to_copy.m_a), m_temp(to_copy.m_U_s)
+    { }
+    
+    virtual ~MMT() { };
+    
+    MMT* clone() const {
+        return new MMT(*this);
+    }
+    
+    inline double getLnRate(const double lnT, const double invT) const {
+//         Possible log approximation Taylor Series?
+//        val1 = m_lnA + m_n * lnT - m_temp * invT;
+//        invT == 1/Ttr? if so, we can simplify division in U,TF,lnQTR
+        U = (m_temp_Ttr * m_U_s) / \
+                (m_temp_Ttr + m_a * m_U_s);
+        TF = -1 * (m_temp_Ttr * m_temp_Tv * U) \
+                / (m_temp_Ttr * m_temp_Tv - m_temp_Ttr * U
+                   + m_temp_Tv * U);
+        lnQTr = std::log(1 - std::exp(-m_temp/m_temp_Ttr)) - \
+                std::log(1 - std::exp(-m_theta_v/m_temp_Ttr));
+        lnQTF = std::log(1 - std::exp(-m_temp/TF)) - \
+                std::log(1 - std::exp(-m_theta_v/TF));
+        lnQTv = std::log(1 - std::exp(-m_temp/m_temp_Tv)) - \
+                std::log(1 - std::exp(-m_theta_v/m_temp_Tv));
+        lnQU =  std::log(1 - std::exp(m_temp/U)) - \
+                std::log(1 - std::exp(m_theta_v/U));
+//        lnZ = lnQTr + lnQTF - lnQTv - lnQU
+        return (m_lnA + m_n * lnT - m_temp * invT + lnQTr + lnQTF - lnQTv - lnQU);
+    }
+    
+    // Can I change function arguments?
+    inline double derivative(const double k, const double lnT, const double invT) const {
+        // k must be the rate value --> derivative with respect to T
+        // Jacobian? [d/dTtr, d/dTv] or just d/dTtr
+        //        invT == 1/Ttr? if so, we can simplify division in all variables
+        val1 = m_temp * (std::exp(m_temp/m_temp_Ttr) - 2) / (std::exp(m_temp/m_temp_Ttr) - 1)
+        val2 = m_n * m_temp_Ttr
+        val3 = m_theta_v / (std::exp(m_theta_v/m_temp_Ttr))
+        return (k*pow(invT,2)*(val1 + val2 + val3));
+    }
+
+    double A() const {
+        return std::exp(m_lnA);
+    }
+    
+    double n() const {
+        return m_n;
+    }
+    
+    double T() const {
+        return m_temp;
+    }
+    
+    double a() const {
+        return m_a;
+    }
+    
+    double U_s() const {
+        return m_U_s;
+    }
+    
+    double thetaV() const {
+        return m_theta_v;
+    }
+    
+    double Tv() const {
+        return m_temp_Tv;
+    }
+    
+    double Ttr() const {
+        return m_temp_Ttr;
+    }
+    
+private:
+
+    static std::vector<Mutation::Utilities::Units> sm_aunits;
+    static std::vector<Mutation::Utilities::Units> sm_eunits;
+
+    double m_lnA;
+    double m_n;
+    double m_temp; // TD?
+    double m_theta_v; // Maybe referenced from other part of M++?
+    double m_temp_Tv; // Maybe referenced from other part of M++?
+    double m_temp_Ttr; // Maybe referenced from other part of M++?
+    double m_a;
+    double m_U_s;
 };
 
 
