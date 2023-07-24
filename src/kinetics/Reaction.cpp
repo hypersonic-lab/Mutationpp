@@ -78,6 +78,8 @@ Reaction::Reaction(const IO::XmlElement& node, const class Thermodynamics& therm
     for ( ; iter != node.end(); ++iter) {
         if (iter->tag() == "arrhenius") {
             mp_rate = new Arrhenius(*iter, order());
+        else if (iter->tag() == "mmt") {
+            mp_rate = new MMT(*iter, order());
         } else if (iter->tag() == "M") {
             if (m_thirdbody) {
                 std::vector<std::string> tokens;
@@ -329,7 +331,7 @@ void Reaction::determineType(const class Thermodynamics& thermo)
               m_type = ION_RECOMBINATION_E;
            else if (m_inert)
               m_type = ION_RECOMBINATION_M;
-           else 
+           else
               m_type = DISSOCIATIVE_RECOMBINATION;
            
         } else {
@@ -337,7 +339,7 @@ void Reaction::determineType(const class Thermodynamics& thermo)
                m_type = ELECTRONIC_ATTACHMENT_E;
             else if (m_inert)
                m_type = ELECTRONIC_ATTACHMENT_M;
-            else 
+            else
                m_type = DISSOCIATIVE_ATTACHMENT;
         }
         
@@ -348,7 +350,7 @@ void Reaction::determineType(const class Thermodynamics& thermo)
                 m_type = ELECTRONIC_DETACHMENT_E;
             else if (m_inert)
                 m_type = ELECTRONIC_DETACHMENT_M;
-            else 
+            else
                 m_type = ASSOCIATIVE_DETACHMENT;
             
         } else {
@@ -356,7 +358,7 @@ void Reaction::determineType(const class Thermodynamics& thermo)
                 m_type = IONIZATION_E;
             else if (m_inert)
                 m_type = IONIZATION_M;
-            else 
+            else
                 m_type = ASSOCIATIVE_IONIZATION;
         }
         
@@ -366,13 +368,13 @@ void Reaction::determineType(const class Thermodynamics& thermo)
             if (m_inert_e)
                 m_type = RECOMBINATION_E;
             else
-                m_type = RECOMBINATION_M;   // including double recombination        
+                m_type = RECOMBINATION_M;   // including double recombination
                 
         } else if (nReactants() < nProducts()) {
             if (m_inert_e)
                 m_type = DISSOCIATION_E;
             else
-                m_type = DISSOCIATION_M;   // including double dissociation  
+                m_type = DISSOCIATION_M;   // including double dissociation
             
         } else {
             if (m_inert_e)
@@ -381,7 +383,7 @@ void Reaction::determineType(const class Thermodynamics& thermo)
                 m_type = EXCITATION_M;
             else
                 m_type = EXCHANGE;  // exchange of charge, atom, or both simultaneously
-        } 
+        }
     }
 }
 
