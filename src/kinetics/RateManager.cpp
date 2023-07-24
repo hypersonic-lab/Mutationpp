@@ -68,6 +68,7 @@ typedef RateLawGroup1T<Arrhenius, TeSelector> ArrheniusTe;
 /// Arrhenius group evaluated at sqrt(T*Tv)
 typedef RateLawGroup1T<Arrhenius, ParkSelector> ArrheniusPark;
     
+    //TODO: maybe need to create and use RateLawGroup2T in RateLawGroup.h
 /// MMT group evaluated at T
 typedef RateLawGroup1T<MMT, TSelector> MMT_T;
 
