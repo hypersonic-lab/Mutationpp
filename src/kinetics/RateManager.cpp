@@ -138,6 +138,7 @@ template <> struct RateSelector<__TYPE__> {\
 };
 
     // TODO: Should these be named differently?
+    // TODO: Possibly can remove half of these
     
 // Default rate law groups for non (kf(T), kb(T)) reaction types
 SELECT_RATE_LAWS(ASSOCIATIVE_IONIZATION,     MMT_T,    MMT_TE)

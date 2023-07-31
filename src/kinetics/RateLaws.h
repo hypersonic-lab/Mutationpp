@@ -121,35 +121,35 @@ public:
         return new MMT(*this);
     }
     
-    inline double getLnRate(const double lnT, const double invT) const {
+    inline double getLnRate(const double lnTtr, const double invTtr, const double invTv) const {
 //         Possible log approximation Taylor Series?
 //        val1 = m_lnA + m_n * lnT - m_temp * invT;
 //        invT == 1/Ttr? if so, we can simplify division in U,TF,lnQTR
-        U = (m_temp_Ttr * m_U_s) / \
-                (m_temp_Ttr + m_a * m_U_s);
-        TF = -1 * (m_temp_Ttr * m_temp_Tv * U) \
-                / (m_temp_Ttr * m_temp_Tv - m_temp_Ttr * U
-                   + m_temp_Tv * U);
-        lnQTr = std::log(1 - std::exp(-m_temp/m_temp_Ttr)) - \
-                std::log(1 - std::exp(-m_theta_v/m_temp_Ttr));
+        U = (1/invTtr * m_U_s) / \
+                (1/invTtr + m_a * m_U_s);
+        TF = -1 * (1/invTtr * 1/invTv * U) \
+                / (1/invTtr * 1/invTv - 1/invTtr * U
+                   + 1/invTtr * U);
+        lnQTr = std::log(1 - std::exp(-m_temp*invTtr)) - \
+                std::log(1 - std::exp(-m_theta_v*invTtr));
         lnQTF = std::log(1 - std::exp(-m_temp/TF)) - \
                 std::log(1 - std::exp(-m_theta_v/TF));
-        lnQTv = std::log(1 - std::exp(-m_temp/m_temp_Tv)) - \
-                std::log(1 - std::exp(-m_theta_v/m_temp_Tv));
+        lnQTv = std::log(1 - std::exp(-m_temp*invTv)) - \
+                std::log(1 - std::exp(-m_theta_v*invTv));
         lnQU =  std::log(1 - std::exp(m_temp/U)) - \
                 std::log(1 - std::exp(m_theta_v/U));
 //        lnZ = lnQTr + lnQTF - lnQTv - lnQU
-        return (m_lnA + m_n * lnT - m_temp * invT + lnQTr + lnQTF - lnQTv - lnQU);
+        return (m_lnA + m_n * lnTtr - m_temp * invT + lnQTr + lnQTF - lnQTv - lnQU);
     }
     
     // Can I change function arguments?
-    inline double derivative(const double k, const double lnT, const double invT) const {
+    inline double derivative(const double k, const double lnTtr, const double invTtr, const double invTv)) const {
         // k must be the rate value --> derivative with respect to T
         // Jacobian? [d/dTtr, d/dTv] or just d/dTtr
         //        invT == 1/Ttr? if so, we can simplify division in all variables
-        val1 = m_temp * (std::exp(m_temp/m_temp_Ttr) - 2) / (std::exp(m_temp/m_temp_Ttr) - 1)
-        val2 = m_n * m_temp_Ttr
-        val3 = m_theta_v / (std::exp(m_theta_v/m_temp_Ttr))
+        val1 = m_temp * (std::exp(m_temp*invTtr) - 2) / (std::exp(m_temp*invTtr) - 1)
+        val2 = m_n / invTtr
+        val3 = m_theta_v / (std::exp(m_theta_v*invTtr))
         return (k*pow(invT,2)*(val1 + val2 + val3));
     }
 
@@ -177,13 +177,6 @@ public:
         return m_theta_v;
     }
     
-    double Tv() const {
-        return m_temp_Tv;
-    }
-    
-    double Ttr() const {
-        return m_temp_Ttr;
-    }
     
 private:
 
@@ -194,8 +187,8 @@ private:
     double m_n;
     double m_temp; // TD?
     double m_theta_v; // Maybe referenced from other part of M++?
-    double m_temp_Tv; // Maybe referenced from other part of M++?
-    double m_temp_Ttr; // Maybe referenced from other part of M++?
+//    double m_temp_Tv; // Maybe referenced from other part of M++?
+//    double m_temp_Ttr; // Maybe referenced from other part of M++?
     double m_a;
     double m_U_s;
 };
