@@ -117,10 +117,12 @@ void MMT::setUnits(const XmlElement& node)
     node.getAttribute("T", t);
     node.getAttribute("thetaV", tv);
     node.getAttribute("U", u);
+    node.getAttribute("Tv", tempv); //Until we know how to access second temperature
     sm_aunits = Units::split(a);
     sm_tunits = Units::split(t);
     sm_tvunits = Units::split(tv);
     sm_uunits = Units::split(u);
+    sm_tempvunits = Units::split(tempv); //Until we know how to access second temperature
 }
 
 // C,Td,au,U*
@@ -157,12 +159,23 @@ std::vector<Units> _default_uunits() {
     units.push_back("K");
     return units;
 }
+    
+    std::vector<Units> _default_tempvunits() {
+    //    std::vector<Units> units;
+    //    units.push_back("mol");
+    //    units.push_back("m");
+    //    units.push_back("s");
+        units.push_back("K");
+    //    return units;
+    }
 
 std::vector<Units> Arrhenius::sm_aunits = std::vector<Units>();
 std::vector<Units> Arrhenius::sm_tunits = std::vector<Units>();
 std::vector<Units> Arrhenius::sm_tvunits = std::vector<Units>();
 std::vector<Units> Arrhenius::sm_uunits = std::vector<Units>();
-
+std::vector<Units> Arrhenius::sm_tempvunits = std::vector<Units>();
+    
+    
 MMT::MMT(const XmlElement& node, const int order)
 {
     assert( node.tag() == "mmt" );
@@ -171,21 +184,25 @@ MMT::MMT(const XmlElement& node, const int order)
         sm_aunits = _default_aunits();
     if (sm_eunits.empty())
         sm_eunits = _default_tunits();
-    if (sm_aunits.empty())
+    if (sm_tvunits.empty())
         sm_aunits = _default_tvunits();
-    if (sm_eunits.empty())
+    if (sm_uunits.empty())
         sm_eunits = _default_uunits();
+    if (sm_tempvunits.empty())
+        sm_eunits = _default_tempvunits();
     
     // Load the temperature exponent (defaults to 0)
     node.getAttribute("n", m_n, 0.0);
     // Load aU (defaults to 0)
-    node.getAttribute("a", m_a, 0.0);
+    node.getAttribute("aU", m_a, 0.0);
     // Load U* (defaults to 0)
-    node.getAttribute("u", m_U_s, 0.0);
-    // Load Ttr (defaults to 0)
-    node.getAttribute("ttr", m_temp_Ttr, 0.0);
+    node.getAttribute("U", m_U_s, 0.0);
+     Load Ttr (defaults to 0)
+//    node.getAttribute("ttr", m_temp_Ttr, 0.0);
     // Load Tv (defaults to 0)
-    node.getAttribute("tv", m_temp_Tv, 0.0);
+    node.getAttribute("Tv", m_Tv, 0.0);
+    // Load Tv (defaults to 0)
+    node.getAttribute("thetaV", m_theta_v, 0.0);
     
     
     // Load the pre-exponential factor (must be given)
