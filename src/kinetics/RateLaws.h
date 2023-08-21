@@ -112,7 +112,7 @@ public:
     MMT(const Mutation::Utilities::IO::XmlElement& node, const int order);
     
     MMT(const MMT& to_copy)
-        : m_lnA(to_copy.m_lnA), m_n(to_copy.m_n), m_temp(to_copy.m_temp), m_temp(to_copy.m_a), m_temp(to_copy.m_U_s)
+        : m_lnA(to_copy.m_lnA), m_n(to_copy.m_n), m_temp(to_copy.m_temp), m_a(to_copy.m_a), m_U_s(to_copy.m_U_s)
     { }
     
     virtual ~MMT() { };
@@ -125,21 +125,22 @@ public:
 //         Possible log approximation Taylor Series?
 //        val1 = m_lnA + m_n * lnT - m_temp * invT;
 //        invT == 1/Ttr? if so, we can simplify division in U,TF,lnQTR
-        U = (1/invTtr * m_U_s) / \
+        double m_invTv = 1./m_Tv;
+        double U = (1/invTtr * m_U_s) / \
                 (1/invTtr + m_a * m_U_s);
-        TF = -1 * (1/invTtr * 1/m_invTv * U) \
+        double TF = -1 * (1/invTtr * 1/m_invTv * U) \
                 / (1/invTtr * 1/m_invTv - 1/invTtr * U
                    + 1/invTtr * U);
-        lnQTr = std::log(1 - std::exp(-m_temp*invTtr)) - \
+        double lnQTr = std::log(1 - std::exp(-m_temp*invTtr)) - \
                 std::log(1 - std::exp(-m_theta_v*invTtr));
-        lnQTF = std::log(1 - std::exp(-m_temp/TF)) - \
+        double lnQTF = std::log(1 - std::exp(-m_temp/TF)) - \
                 std::log(1 - std::exp(-m_theta_v/TF));
-        lnQTv = std::log(1 - std::exp(-m_temp*m_invTv)) - \
+        double lnQTv = std::log(1 - std::exp(-m_temp*m_invTv)) - \
                 std::log(1 - std::exp(-m_theta_v*m_invTv));
-        lnQU =  std::log(1 - std::exp(m_temp/U)) - \
+        double lnQU =  std::log(1 - std::exp(m_temp/U)) - \
                 std::log(1 - std::exp(m_theta_v/U));
 //        lnZ = lnQTr + lnQTF - lnQTv - lnQU
-        return (m_lnA + m_n * lnTtr - m_temp * invT + lnQTr + lnQTF - lnQTv - lnQU);
+        return (m_lnA + m_n * lnTtr - m_temp * invTtr + lnQTr + lnQTF - lnQTv - lnQU);
     }
     
     // Can I change function arguments?
@@ -147,10 +148,10 @@ public:
         // k must be the rate value --> derivative with respect to T
         // Jacobian? [d/dTtr, d/dTv] or just d/dTtr
         //        invT == 1/Ttr? if so, we can simplify division in all variables
-        val1 = m_temp * (std::exp(m_temp*invTtr) - 2) / (std::exp(m_temp*invTtr) - 1)
-        val2 = m_n / invTtr
-        val3 = m_theta_v / (std::exp(m_theta_v*invTtr))
-        return (k*pow(invT,2)*(val1 + val2 + val3));
+        double val1 = m_temp * (std::exp(m_temp*invTtr) - 2) / (std::exp(m_temp*invTtr) - 1);
+        double val2 = m_n / invTtr;
+        double val3 = m_theta_v / (std::exp(m_theta_v*invTtr));
+        return (k*pow(invTtr,2)*(val1 + val2 + val3));
     }
 
     double A() const {
@@ -181,7 +182,10 @@ public:
 private:
 
     static std::vector<Mutation::Utilities::Units> sm_aunits;
-    static std::vector<Mutation::Utilities::Units> sm_eunits;
+    static std::vector<Mutation::Utilities::Units> sm_tunits;
+    static std::vector<Mutation::Utilities::Units> sm_tvunits;
+    static std::vector<Mutation::Utilities::Units> sm_uunits;
+    static std::vector<Mutation::Utilities::Units> sm_tempvunits;
 
     double m_lnA;
     double m_n;
@@ -191,7 +195,6 @@ private:
 //    double m_temp_Ttr; // Maybe referenced from other part of M++?
     double m_a;
     double m_U_s;
-    double m_invTv = 1./m_Tv;
 };
 
 
