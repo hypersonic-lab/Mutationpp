@@ -126,13 +126,13 @@ SELECT_RATE_LAWS(EXCITATION_E,               ArrheniusTe,   ArrheniusTe)
  * evaluated in for a given ReactionType value.
  */
 template <int Type>
-struct RateSelector {
+struct RateSelector_MMT {
     typedef MMT_T ForwardGroup;
     typedef MMT_T ReverseGroup;
 };
 
 #define SELECT_RATE_LAWS(__TYPE__,__FORWARD__,__REVERSE__)\
-template <> struct RateSelector<__TYPE__> {\
+template <> struct RateSelector_MMT<__TYPE__> {\
     typedef __FORWARD__ ForwardGroup;\
     typedef __REVERSE__ ReverseGroup;\
 };
