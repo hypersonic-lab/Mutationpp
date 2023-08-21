@@ -112,7 +112,7 @@ void MMT::setUnits(const XmlElement& node)
 {
     assert( node.tag() == "mmt_units" );
     // To edit
-    std::string a, e, au, u;
+    std::string a, t, tv, u, tempv;
     node.getAttribute("A", a);
     node.getAttribute("T", t);
     node.getAttribute("thetaV", tv);
@@ -126,14 +126,14 @@ void MMT::setUnits(const XmlElement& node)
 }
 
 // C,Td,au,U*
-std::vector<Units> _default_aunits() {
-    std::vector<Units> units;
-    units.push_back("mol");
-    units.push_back("cm");
-    units.push_back("s");
-    units.push_back("K");
-    return units;
-}
+//std::vector<Units> _default_aunits() {
+//    std::vector<Units> units;
+//    units.push_back("mol");
+//    units.push_back("cm");
+//    units.push_back("s");
+//    units.push_back("K");
+//    return units;
+//}
 
 std::vector<Units> _default_tunits() {
     std::vector<Units> units;
@@ -144,12 +144,12 @@ std::vector<Units> _default_tunits() {
 }
     
 std::vector<Units> _default_tvunits() {
-//    std::vector<Units> units;
+    std::vector<Units> units;
 //    units.push_back("mol");
 //    units.push_back("m");
 //    units.push_back("s");
     units.push_back("K");
-//    return units;
+    return units;
 }
 
 std::vector<Units> _default_uunits() {
@@ -161,19 +161,19 @@ std::vector<Units> _default_uunits() {
 }
     
     std::vector<Units> _default_tempvunits() {
-    //    std::vector<Units> units;
+        std::vector<Units> units;
     //    units.push_back("mol");
     //    units.push_back("m");
     //    units.push_back("s");
         units.push_back("K");
-    //    return units;
+        return units;
     }
 
-std::vector<Units> Arrhenius::sm_aunits = std::vector<Units>();
-std::vector<Units> Arrhenius::sm_tunits = std::vector<Units>();
-std::vector<Units> Arrhenius::sm_tvunits = std::vector<Units>();
-std::vector<Units> Arrhenius::sm_uunits = std::vector<Units>();
-std::vector<Units> Arrhenius::sm_tempvunits = std::vector<Units>();
+std::vector<Units> MMT::sm_aunits = std::vector<Units>();
+std::vector<Units> MMT::sm_tunits = std::vector<Units>();
+std::vector<Units> MMT::sm_tvunits = std::vector<Units>();
+std::vector<Units> MMT::sm_uunits = std::vector<Units>();
+std::vector<Units> MMT::sm_tempvunits = std::vector<Units>();
     
     
 MMT::MMT(const XmlElement& node, const int order)
@@ -182,14 +182,14 @@ MMT::MMT(const XmlElement& node, const int order)
     
     if (sm_aunits.empty())
         sm_aunits = _default_aunits();
-    if (sm_eunits.empty())
-        sm_eunits = _default_tunits();
+    if (sm_tunits.empty())
+        sm_tunits = _default_tunits();
     if (sm_tvunits.empty())
         sm_aunits = _default_tvunits();
     if (sm_uunits.empty())
-        sm_eunits = _default_uunits();
+        sm_uunits = _default_uunits();
     if (sm_tempvunits.empty())
-        sm_eunits = _default_tempvunits();
+        sm_tempvunits = _default_tempvunits();
     
     // Load the temperature exponent (defaults to 0)
     node.getAttribute("n", m_n, 0.0);
@@ -197,7 +197,7 @@ MMT::MMT(const XmlElement& node, const int order)
     node.getAttribute("aU", m_a, 0.0);
     // Load U* (defaults to 0)
     node.getAttribute("U", m_U_s, 0.0);
-     Load Ttr (defaults to 0)
+//     Load Ttr (defaults to 0)
 //    node.getAttribute("ttr", m_temp_Ttr, 0.0);
     // Load Tv (defaults to 0)
     node.getAttribute("Tv", m_Tv, 0.0);
@@ -221,11 +221,11 @@ MMT::MMT(const XmlElement& node, const int order)
     if (node.hasAttribute("Ea")) {
         node.getAttribute("Ea", m_temp);
         // Convert to J/mol and divide by Ru to get characteristic temp
-        m_temp = (sm_eunits[0]/sm_eunits[1]).convertToBase(m_temp) / RU;
+        m_temp = (sm_tunits[0]/sm_tunits[1]).convertToBase(m_temp) / RU;
     } else if (node.hasAttribute("T")) {
         node.getAttribute("T", m_temp);
         // Convert to K
-        m_temp = sm_eunits[2].convertToBase(m_temp);
+        m_temp = sm_tunits[2].convertToBase(m_temp);
     } else {
         node.parseError("Arrhenius rate law must define coefficient Ea or T!");
     }
