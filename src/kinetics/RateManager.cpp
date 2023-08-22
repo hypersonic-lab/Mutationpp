@@ -204,18 +204,20 @@ void RateManager::addReaction(const size_t rxn, const Reaction& reaction)
     // Arrhenius reactions
     if (typeid(*p_rate) == typeid(Arrhenius)) {
         selectRate<MAX_REACTION_TYPES-1>(rxn, reaction);
-    } else {
-        throw InvalidInputError("rate law", typeid(*p_rate).name())
-            << "Rate law is not implemented in RateManager.";
-    }
-    
-    // MMT reactions
-    if (typeid(*p_rate) == typeid(MMT)) {
+    } else if (typeid(*p_rate) == typeid(MMT)) {
         selectRate<MAX_REACTION_TYPES-1>(rxn, reaction);
     } else {
         throw InvalidInputError("rate law", typeid(*p_rate).name())
             << "Rate law is not implemented in RateManager.";
     }
+    
+//    // MMT reactions
+//    if (typeid(*p_rate) == typeid(MMT)) {
+//        selectRate<MAX_REACTION_TYPES-1>(rxn, reaction);
+//    } else {
+//        throw InvalidInputError("rate law", typeid(*p_rate).name())
+//            << "Rate law is not implemented in RateManager.";
+//    }
 }
 
 //==============================================================================
