@@ -3,7 +3,7 @@ Parametric Comparison of the Park and MMT Chemical Kinetics Models for Hypersoni
 
 Chaudhry, Boyd
 -->
-<mechanism name="air_MMT">
+<mechanism name="air5_MMT">
 
     <mmt_units A="mol,cm,s,K" E="kcal,mol,K" thetaV="K" U="K" Tv="K" />
 
