@@ -1,0 +1,24 @@
+<!-- Oxygen Dan extrapolation mapped model reaction mechanism, 2 states -->
+
+<mechanism name="O2sts">
+    
+    <arrhenius_units A="mol,cm,s,K" E="J,mol,K" />
+    
+    <!-- 01-->
+    <reaction formula="O2_0+O=O+O+O">
+        <arrhenius A="  1.290452e-06" n="  9.299364e-01" T="  5.975000e+04" />
+    </reaction>
+    
+    
+    <!-- 02-->
+    <reaction formula="O2_1+O=O+O+O">
+        <arrhenius A="  1.110747e-06" n="  8.927895e-01" T="  5.975000e+04" />
+    </reaction>
+    
+    
+    <!-- 03-->
+    <reaction formula="O2_0+O=O2_1+O">
+        <arrhenius A="  1.333229e-10" n="  -2.771977e-01" T="  6.342422e+03" />
+    </reaction>
+    
+</mechanism>

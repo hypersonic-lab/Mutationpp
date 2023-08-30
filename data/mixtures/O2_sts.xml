@@ -1,4 +1,4 @@
-<mixture mechanism="none" thermo_db="STS">
+<mixture mechanism="O2sts" thermo_db="STS">
     <species>
         O O2_0 O2_1
     </species>
