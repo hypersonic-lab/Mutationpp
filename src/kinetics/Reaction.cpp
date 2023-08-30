@@ -78,7 +78,7 @@ Reaction::Reaction(const IO::XmlElement& node, const class Thermodynamics& therm
     for ( ; iter != node.end(); ++iter) {
         if (iter->tag() == "arrhenius") {
             mp_rate = new Arrhenius(*iter, order());
-        } else if (iter->tag() == "mmt") {
+        } else if (iter->tag() == "MMT") {
             mp_rate = new MMT(*iter, order());
         } else if (iter->tag() == "M") {
             if (m_thirdbody) {
