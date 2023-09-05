@@ -83,6 +83,8 @@ Kinetics::Kinetics(
             addReaction(Reaction(*iter, thermo));
         else if (iter->tag() == "arrhenius_units")
             Arrhenius::setUnits(*iter);
+        else if (iter->tag() == "mmt_units")
+            MMT::setUnits(*iter);
     }
     
     // Setup the rate manager
