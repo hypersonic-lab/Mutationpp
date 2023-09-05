@@ -8,27 +8,27 @@ Chaudhry, Boyd
     <mmt_units A="mol,cm,s,K" E="kcal,mol,K" thetaV="K" U="K" Tv="K" />
 
     <reaction formula="N2+N2=2N+N2">
-        <MMT A="5.9725E-6" n="-0.7017" T="117529.0" thetaV="3411" aU="0.3868" U="254556.0" Tv="1000" />
+        <MMT A="5.9725E-6" n="-0.7017" T="117529.0" thetaV="3411.0" aU="0.3868" U="254556.0" Tv="1000.0" />
     </reaction>
 
     <reaction formula="N2+N=3N">
-        <MMT A="1.3271-6" n="-0.5625" T="113957.0" thetaV="3411" aU="0.3668" U="478708.0" Tv="1000" />
+        <MMT A="1.3271-6" n="-0.5625" T="113957.0" thetaV="3411.0" aU="0.3668" U="478708.0" Tv="1000.0" />
     </reaction>
 
     <reaction formula="N2+O2=2N+O2">
-        <MMT A="8.3724-5" n="-0.9991" T="116892.0" thetaV="3415" aU="0.3001" U="210253.0" Tv="1000" />
+        <MMT A="8.3724-5" n="-0.9991" T="116892.0" thetaV="3415.0" aU="0.3001" U="210253.0" Tv="1000.0" />
     </reaction>
 
     <reaction formula="O2+O2=2O+O2">
-        <MMT A="6.1327-6" n="-0.7695" T="60540.0" thetaV="2280" aU="0.3965" U="57343.0" Tv="1000" />
+        <MMT A="6.1327-6" n="-0.7695" T="60540.0" thetaV="2280.0" aU="0.3965" U="57343.0" Tv="1000.0" />
     </reaction>
 
     <reaction formula="O2+N=2O+N">
-        <MMT A="1.5295-6" n="-0.6541" T="60552.0" thetaV="2280" aU="0.3537" U="237290.0" Tv="1000" />
+        <MMT A="1.5295-6" n="-0.6541" T="60552.0" thetaV="2280.0" aU="0.3537" U="237290.0" Tv="1000.0" />
     </reaction>
     
     <reaction formula="O2+N2=2O+N2">
-        <MMT A="3.0410-9" n="-0.0223" T="59380.0" thetaV="2263" aU="0.3620" U="385466.0" Tv="1000" />
+        <MMT A="3.0410-9" n="-0.0223" T="59380.0" thetaV="2263.0" aU="0.3620" U="385466.0" Tv="1000.0" />
     </reaction>
 
 </mechanism>

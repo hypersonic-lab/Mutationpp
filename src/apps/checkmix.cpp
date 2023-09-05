@@ -328,6 +328,23 @@ void printMixtureInfo(const Mixture& mixture)
             cout.precision(1);
             cout << setw(10) << rate.T();
         }
+        
+        // Print out rate constants
+        if (dynamic_cast<const MMT*>(r.rateLaw()) != NULL) {
+            const MMT& rate =
+                dynamic_cast<const MMT&>(*(r.rateLaw()));
+            cout << setw(12) << "MMT: ";
+
+            cout.setf(std::ios::right, std::ios::adjustfield);
+            cout.setf(std::ios::scientific, std::ios::floatfield);
+            cout.precision(3);
+            cout << setw(12) << rate.A();
+            cout.setf(std::ios::fixed, std::ios::floatfield);
+            cout.precision(2);
+            cout << setw(7)  << rate.n();
+            cout.precision(1);
+            cout << setw(10) << rate.T();
+        }
 
         cout << endl;
 
