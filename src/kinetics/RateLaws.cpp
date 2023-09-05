@@ -126,14 +126,14 @@ void MMT::setUnits(const XmlElement& node)
 }
 
 // C,Td,au,U*
-//std::vector<Units> _default_aunits() {
-//    std::vector<Units> units;
-//    units.push_back("mol");
-//    units.push_back("cm");
-//    units.push_back("s");
-//    units.push_back("K");
-//    return units;
-//}
+std::vector<Units> _default_Aunits() {
+    std::vector<Units> units;
+    units.push_back("mol");
+    units.push_back("cm");
+    units.push_back("s");
+    units.push_back("K");
+    return units;
+}
 
 std::vector<Units> _default_tunits() {
     std::vector<Units> units;
@@ -160,14 +160,14 @@ std::vector<Units> _default_uunits() {
     return units;
 }
     
-    std::vector<Units> _default_tempvunits() {
-        std::vector<Units> units;
-    //    units.push_back("mol");
-    //    units.push_back("m");
-    //    units.push_back("s");
-        units.push_back("K");
-        return units;
-    }
+std::vector<Units> _default_tempvunits() {
+    std::vector<Units> units;
+//    units.push_back("mol");
+//    units.push_back("m");
+//    units.push_back("s");
+    units.push_back("K");
+    return units;
+}
 
 std::vector<Units> MMT::sm_aunits = std::vector<Units>();
 std::vector<Units> MMT::sm_tunits = std::vector<Units>();
@@ -178,10 +178,10 @@ std::vector<Units> MMT::sm_tempvunits = std::vector<Units>();
     
 MMT::MMT(const XmlElement& node, const int order)
 {
-    assert( node.tag() == "mmt" );
+    assert( node.tag() == "MMT" );
     
     if (sm_aunits.empty())
-        sm_aunits = _default_aunits();
+        sm_aunits = _default_Aunits();
     if (sm_tunits.empty())
         sm_tunits = _default_tunits();
     if (sm_tvunits.empty())

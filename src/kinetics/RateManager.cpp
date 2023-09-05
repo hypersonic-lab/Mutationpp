@@ -34,7 +34,7 @@
 
 namespace Mutation {
     namespace Kinetics {
-
+    
 //==============================================================================
     
 // Simple macro to create a temperature selector type
@@ -85,6 +85,8 @@ typedef RateLawGroup1T<MMT, ParkSelector> MMT_PARK;
  * evaluated in for a given ReactionType value.  The default is an Arrhenius
  * rate law with Tf = Tb = T.
  */
+
+
 template <int Type>
 struct RateSelector {
     typedef ArrheniusT ForwardGroup;
@@ -125,6 +127,8 @@ SELECT_RATE_LAWS(EXCITATION_E,               ArrheniusTe,   ArrheniusTe)
  * Used to define which rate law groups the forward and reverse rate laws are
  * evaluated in for a given ReactionType value.
  */
+    
+    //How does this work?
 template <int Type>
 struct RateSelector_MMT {
     typedef MMT_T ForwardGroup;
@@ -205,6 +209,8 @@ void RateManager::addReaction(const size_t rxn, const Reaction& reaction)
     if (typeid(*p_rate) == typeid(Arrhenius)) {
         selectRate<MAX_REACTION_TYPES-1>(rxn, reaction);
     } else if (typeid(*p_rate) == typeid(MMT)) {
+//        throw InvalidInputError("This is the problem", typeid(*p_rate).name())
+//            << "Rate law is not implemented in RateManager.";
         selectRate<MAX_REACTION_TYPES-1>(rxn, reaction);
     } else {
         throw InvalidInputError("rate law", typeid(*p_rate).name())
