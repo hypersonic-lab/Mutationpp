@@ -2450,7 +2450,7 @@
                  <stoichiometry>
                          N: 2
                  </stoichiometry>
-                 <thermodynamics type="RRHO">
+                 <thermodynamics type="STS">
                          <electronic_levels units="1/cm">
                                 <level degeneracy="   7767" energy="0.0" />
                          </electronic_levels>
@@ -2465,7 +2465,7 @@
                  <stoichiometry>
                          N: 2
                  </stoichiometry>
-                 <thermodynamics type="RRHO">
+                 <thermodynamics type="STS">
                          <electronic_levels units="1/cm">
                                 <level degeneracy="  36426" energy="0.0" />
                          </electronic_levels>
@@ -2480,7 +2480,7 @@
                  <stoichiometry>
                          N: 2
                  </stoichiometry>
-                 <thermodynamics type="RRHO">
+                 <thermodynamics type="STS">
                          <electronic_levels units="1/cm">
                                 <level degeneracy="  91239" energy="0.0" />
                          </electronic_levels>
@@ -2495,7 +2495,7 @@
                  <stoichiometry>
                          N: 2
                  </stoichiometry>
-                 <thermodynamics type="RRHO">
+                 <thermodynamics type="STS">
                          <electronic_levels units="1/cm">
                                 <level degeneracy=" 182634" energy="0.0" />
                          </electronic_levels>
@@ -2510,7 +2510,7 @@
                  <stoichiometry>
                          N: 2
                  </stoichiometry>
-                 <thermodynamics type="RRHO">
+                 <thermodynamics type="STS">
                          <electronic_levels units="1/cm">
                                 <level degeneracy=" 312789" energy="0.0" />
                          </electronic_levels>
@@ -2525,7 +2525,7 @@
                  <stoichiometry>
                          N: 2
                  </stoichiometry>
-                 <thermodynamics type="RRHO">
+                 <thermodynamics type="STS">
                          <electronic_levels units="1/cm">
                                 <level degeneracy=" 498210" energy="0.0" />
                          </electronic_levels>
@@ -2540,7 +2540,7 @@
                  <stoichiometry>
                          N: 2
                  </stoichiometry>
-                 <thermodynamics type="RRHO">
+                 <thermodynamics type="STS">
                          <electronic_levels units="1/cm">
                                 <level degeneracy=" 772773" energy="0.0" />
                          </electronic_levels>
@@ -2555,7 +2555,7 @@
                  <stoichiometry>
                          N: 2
                  </stoichiometry>
-                 <thermodynamics type="RRHO">
+                 <thermodynamics type="STS">
                          <electronic_levels units="1/cm">
                                 <level degeneracy="1176771" energy="0.0" />
                          </electronic_levels>
@@ -2570,7 +2570,7 @@
                  <stoichiometry>
                          N: 2
                  </stoichiometry>
-                 <thermodynamics type="RRHO">
+                 <thermodynamics type="STS">
                          <electronic_levels units="1/cm">
                                 <level degeneracy="2013810" energy="0.0" />
                          </electronic_levels>
@@ -2585,7 +2585,7 @@
                  <stoichiometry>
                          N: 2
                  </stoichiometry>
-                 <thermodynamics type="RRHO">
+                 <thermodynamics type="STS">
                          <electronic_levels units="1/cm">
                                 <level degeneracy="3109059" energy="0.0" />
                          </electronic_levels>
@@ -2600,7 +2600,7 @@
                  <stoichiometry>
                          N: 1
                  </stoichiometry>
-                 <thermodynamics type="RRHO">
+                 <thermodynamics type="STS">
                          <electronic_levels units="1/cm">
                              <level degeneracy="12" energy="0.0" />
                          </electronic_levels>
@@ -2609,8 +2609,55 @@
                          </formation_enthalpy>
                  </thermodynamics>
          </species>
+         
+         
+         <!-- Oxygen diatomic 0 bin 2-1 non Uniform, not definite numbers -->
+                 <species name="O2_0">
+                         <stoichiometry>
+                                 O: 2
+                         </stoichiometry>
+                         <thermodynamics type="STS">
+                                 <electronic_levels units="1/cm">
+                                        <level degeneracy="   7767" energy="0.0" />
+                                 </electronic_levels>
+                                 <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+                                           19425.13
+                                 </formation_enthalpy>
+                         </thermodynamics>
+                 </species>
 
+                 <!-- Oxygen diatomic 1 bin 9-1 non Uniform -->
+                 <species name="O2_1">
+                         <stoichiometry>
+                                 O: 2
+                         </stoichiometry>
+                         <thermodynamics type="STS">
+                                 <electronic_levels units="1/cm">
+                                        <level degeneracy="  36426" energy="0.0" />
+                                 </electronic_levels>
+                                 <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+                                           71231.59
+                                 </formation_enthalpy>
+                         </thermodynamics>
+                 </species>
 
+            
+                 <!-- Oxygen for bin model: 10bin -->
+                 <species name="Obin">
+                         <stoichiometry>
+                                 O: 1
+                         </stoichiometry>
+                         <thermodynamics type="STS">
+                                 <electronic_levels units="1/cm">
+                                     <level degeneracy="12" energy="0.0" />
+                                 </electronic_levels>
+                                 <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+                                         472440
+                                 </formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+         
+         
      <!--Xenon-->
      <species name="Xe">
          <stoichiometry> Xe:  1 </stoichiometry>
