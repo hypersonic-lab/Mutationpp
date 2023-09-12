@@ -62,7 +62,10 @@ class STSDB : public ThermoDB
 {
 public:
 
-    STSDB(int arg) : ThermoDB(298.15, 101325.0) {} //
+    STSDB(int arg) : ThermoDB(298.15, 101325.0),
+          m_has_electron(false),
+          m_use_tables(false),
+          m_last_bfacs_T(0.0) {} //
 
     /**
      * Computes the unitless species specific heat at constant pressure
@@ -493,7 +496,7 @@ protected:
      */
     virtual void loadAvailableSpecies(std::list<Species>& species)
     {
-        IO::XmlDocument species_doc(databaseFileName("species_sts.xml", "thermo"));
+        IO::XmlDocument species_doc(databaseFileName("species.xml", "thermo"));
         IO::XmlElement::const_iterator species_iter = species_doc.root().begin();
 
         for ( ; species_iter != species_doc.root().end(); ++species_iter) {
