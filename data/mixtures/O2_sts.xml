@@ -1,6 +1,6 @@
 <mixture mechanism="O2sts" thermo_db="STS">
     <species>
-        O O2_0 O2_1
+        Obin O2_0 O2_1
     </species>
 
     <element_compositions default="default">
