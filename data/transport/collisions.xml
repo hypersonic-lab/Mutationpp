@@ -182,6 +182,9 @@
         <species name="N2_7"    value="1.74"   ref="Wright2007"/>
         <species name="N2_8"    value="1.74"   ref="Wright2007"/>
         <species name="N2_9"    value="1.74"   ref="Wright2007"/>
+        <species name="Obin"    value="0.80"   ref="Wright2007"/>
+        <species name="O2_0"    value="1.58"   ref="Wright2007"/>
+        <species name="O2_1"    value="1.58"   ref="Wright2007"/>
     </dipole-polarizabilities>
 
     <!-- Effective electrons participating in polarization -->
@@ -245,6 +248,9 @@
         <species name="N2_7" value="7.60" />
         <species name="N2_8" value="7.60" />
         <species name="N2_9" value="7.60" />
+        <species name="Obin" value="4.7" />
+        <species name="O2_0" value="9.33" />
+        <species name="O2_1" value="9.33" />
     </effective-electrons>
 
     <!-- Explicitly defined collision pairs -->
