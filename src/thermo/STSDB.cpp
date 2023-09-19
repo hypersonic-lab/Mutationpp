@@ -62,10 +62,10 @@ class STSDB : public ThermoDB
 {
 public:
 
-    STSDB(int arg) : ThermoDB(298.15, 101325.0),
-          m_has_electron(false),
-          m_use_tables(false),
-          m_last_bfacs_T(0.0) {} //
+    STSDB(int arg) : ThermoDB(298.15, 101325.0){}
+        //   m_has_electron(false),
+        //   m_use_tables(false),
+        //   m_last_bfacs_T(0.0) {} //
 
     /**
      * Computes the unitless species specific heat at constant pressure
