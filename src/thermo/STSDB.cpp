@@ -291,24 +291,28 @@ public:
     //    h[1] = m_vh[1]*Th + m_vhf[1];
     //    h[2] = m_vh[2]*Th + m_vhf[2];
 
-        const int SIZE = 37;
-        double state[SIZE];
-        double blank[SIZE];
-        double energy[SIZE];
-        string inFileName = "../../data/thermo/oxygen_energy.txt";
-        ifstream inFile;
-        inFile.open(inFileName.c_str());
-        if (inFile.is_open())
-        {
-            for (int i = 0; i < SIZE; i++)
-            {
-                inFile >> state[i];
-                inFile >> blank[i];
-                inFile >> energy[i];
-            }
+        // TODO: Fix energy read in. Possibly similar to XML
+        // readin for species.xml
+        IO::XmlDocument species_doc(databaseFileName("oxygen_energy.xml", "thermo"));
+        
+        // const int SIZE = 37;
+        // double state[SIZE];
+        // double blank[SIZE];
+        // double energy[SIZE];
+        // string inFileName = "../../data/thermo/oxygen_energy.txt";
+        // ifstream inFile;
+        // inFile.open(inFileName.c_str());
+        // if (inFile.is_open())
+        // {
+        //     for (int i = 0; i < SIZE; i++)
+        //     {
+        //         inFile >> state[i];
+        //         inFile >> blank[i];
+        //         inFile >> energy[i];
+        //     }
 
-            inFile.close(); // CLose input file
-        }
+        //     inFile.close(); // CLose input file
+        // }
         
         
         
