@@ -1,0 +1,222 @@
+<statelist>
+
+	<!-- O_0 -->
+	<state name="O2_0">
+		<e units=="1/cm3">787.380953594</e>
+	</state>
+
+
+	<!-- O_1 -->
+	<state name="O2_1">
+		<e units=="1/cm3">2343.76026609</e>
+	</state>
+
+
+	<!-- O_2 -->
+	<state name="O2_2">
+		<e units=="1/cm3">3876.56829159</e>
+	</state>
+
+
+	<!-- O_3 -->
+	<state name="O2_3">
+		<e units=="1/cm3">5386.02874609</e>
+	</state>
+
+
+	<!-- O_4 -->
+	<state name="O2_4">
+		<e units=="1/cm3">6872.33479359</e>
+	</state>
+
+
+	<!-- O_5 -->
+	<state name="O2_5">
+		<e units=="1/cm3">8335.64904609</e>
+	</state>
+
+
+	<!-- O_6 -->
+	<state name="O2_6">
+		<e units=="1/cm3">9776.10356359</e>
+	</state>
+
+
+	<!-- O_7 -->
+	<state name="O2_7">
+		<e units=="1/cm3">11193.7998541</e>
+	</state>
+
+
+	<!-- O_8 -->
+	<state name="O2_8">
+		<e units=="1/cm3">12588.8088736</e>
+	</state>
+
+
+	<!-- O_9 -->
+	<state name="O2_9">
+		<e units=="1/cm3">13961.1710261</e>
+	</state>
+
+
+	<!-- O_10 -->
+	<state name="O2_10">
+		<e units=="1/cm3">15310.8961636</e>
+	</state>
+
+
+	<!-- O_11 -->
+	<state name="O2_11">
+		<e units=="1/cm3">16637.9635861</e>
+	</state>
+
+
+	<!-- O_12 -->
+	<state name="O2_12">
+		<e units=="1/cm3">17942.3220416</e>
+	</state>
+
+
+	<!-- O_13 -->
+	<state name="O2_13">
+		<e units=="1/cm3">19223.8897261</e>
+	</state>
+
+
+	<!-- O_14 -->
+	<state name="O2_14">
+		<e units=="1/cm3">20482.5542836</e>
+	</state>
+
+
+	<!-- O_15 -->
+	<state name="O2_15">
+		<e units=="1/cm3">21718.1728061</e>
+	</state>
+
+
+	<!-- O_16 -->
+	<state name="O2_16">
+		<e units=="1/cm3">22930.5718336</e>
+	</state>
+
+
+	<!-- O_17 -->
+	<state name="O2_17">
+		<e units=="1/cm3">24119.5473541</e>
+	</state>
+
+
+	<!-- O_18 -->
+	<state name="O2_18">
+		<e units=="1/cm3">25284.8648036</e>
+	</state>
+
+
+	<!-- O_19 -->
+	<state name="O2_19">
+		<e units=="1/cm3">26426.2590661</e>
+	</state>
+
+
+	<!-- O_20 -->
+	<state name="O2_20">
+		<e units=="1/cm3">27543.4344736</e>
+	</state>
+
+
+	<!-- O_21 -->
+	<state name="O2_21">
+		<e units=="1/cm3">28636.0648061</e>
+	</state>
+
+
+	<!-- O_22 -->
+	<state name="O2_22">
+		<e units=="1/cm3">29703.7932916</e>
+	</state>
+
+
+	<!-- O_23 -->
+	<state name="O2_23">
+		<e units=="1/cm3">30746.2326061</e>
+	</state>
+
+
+	<!-- O_24 -->
+	<state name="O2_24">
+		<e units=="1/cm3">31762.9648736</e>
+	</state>
+
+
+	<!-- O_25 -->
+	<state name="O2_25">
+		<e units=="1/cm3">32753.5416661</e>
+	</state>
+
+
+	<!-- O_26 -->
+	<state name="O2_26">
+		<e units=="1/cm3">33717.4840036</e>
+	</state>
+
+
+	<!-- O_27 -->
+	<state name="O2_27">
+		<e units=="1/cm3">34654.2823541</e>
+	</state>
+
+
+	<!-- O_28 -->
+	<state name="O2_28">
+		<e units=="1/cm3">35563.3966336</e>
+	</state>
+
+
+	<!-- O_29 -->
+	<state name="O2_29">
+		<e units=="1/cm3">36444.2562061</e>
+	</state>
+
+
+	<!-- O_30 -->
+	<state name="O2_30">
+		<e units=="1/cm3">37296.2598836</e>
+	</state>
+
+
+	<!-- O_31 -->
+	<state name="O2_31">
+		<e units=="1/cm3">38118.7759261</e>
+	</state>
+
+
+	<!-- O_32 -->
+	<state name="O2_32">
+		<e units=="1/cm3">38911.1420416</e>
+	</state>
+
+
+	<!-- O_33 -->
+	<state name="O2_33">
+		<e units=="1/cm3">39672.6653861</e>
+	</state>
+
+
+	<!-- O_34 -->
+	<state name="O2_34">
+		<e units=="1/cm3">40402.6225636</e>
+	</state>
+
+
+	<!-- O_35 -->
+	<state name="O2_35">
+		<e units=="1/cm3">41100.2596261</e>
+	</state>
+
+
+	<!-- O_36 -->
+	<state name="O2_36">
+		<e units=="1/cm3">41764.7920736</e>
+	</state>
