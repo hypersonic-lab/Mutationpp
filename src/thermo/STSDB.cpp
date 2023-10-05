@@ -48,54 +48,6 @@ using namespace Mutation::Utilities;
 namespace Mutation {
     namespace Thermodynamics {
 
-// Simple for loop over the species just to make life a little easier
-#define LOOP(__op__)\
-for (int i = 0; i < m_ns; ++i) {\
-    __op__ ;\
-}
-
-#define LOOP_ATOMS(__op__)\
-for (int i = 0, j = 0; i < m_na; ++i) {\
-    j = mp_indices[i];\
-    __op__ ;\
-}
-
-// Loops over molecules. Inside the loop, the index i is zero based and indexes
-// internal molecular data.  The index j is the index corresponding to the 
-// original species data.
-#define LOOP_MOLECULES(__op__)\
-for (int i = 0, j = 0; i < m_nm; ++i) {\
-    j = mp_indices[m_na+i];\
-    __op__ ;\
-}
-
-// Loops over heavy particles (non electron species).  Inside the loop, index i
-// is zero based and indexes internal molecular data. The index j is the index
-// corresponding to the original species data.
-#define LOOP_HEAVY(__op__)\
-for (int i = 0, j = 0; i < m_na + m_nm; ++i) {\
-    j = (m_has_electron ? i+1 : i);\
-    __op__ ;\
-}
-
-typedef struct {
-    double ln_omega_t;  // ln(omega^(2 / L) * theta)
-    double linearity;   // L / 2
-} RotData;
-
-typedef struct {
-    double g;           // degeneracy
-    double theta;       // characteristic temperature
-} ElecLevel;
-
-typedef struct {
-    unsigned int offset;
-    unsigned int nheavy;
-    unsigned int nlevels;
-    int* p_nelec;
-    ElecLevel* p_levels;
-} ElectronicData;
-
 /**
  * A thermodynamic database that uses the Rigid-Rotator Harmonic-Oscillator
  * model for computing species thermodynamic properties.  See the individual
@@ -110,35 +62,10 @@ class STSDB : public ThermoDB
 {
 public:
 
-    STSDB(int arg)
-        : ThermoDB(298.15, 101325.0), m_ns(0), m_na(0), m_nm(0)
-          m_has_electron(false),
-          m_use_tables(false),
-          m_last_bfacs_T(0.0)
-    { }
-
-        /**
-     * Destructor.
-     */
-    ~STSDB()
-    {
-        delete [] mp_lnqtmw;
-        delete [] mp_hform;
-        delete [] mp_indices;
-//!        delete [] mp_rot_data;
-//!        delete [] mp_nvib;
-//!        delete [] mp_vib_temps;
-
-        delete [] m_elec_data.p_nelec;
-        delete [] m_elec_data.p_levels;
-        delete [] mp_part_sst;
-        delete [] mp_el_bfacs;
-
-        if (m_use_tables) {
-            delete mp_el_bfac_table;
-        }
-    }
-
+    STSDB(int arg) : ThermoDB(298.15, 101325.0){}//,
+        //   m_has_electron(false),
+        //   m_use_tables(false),
+        //   m_last_bfacs_T(0.0) {} //
 
     /**
      * Computes the unitless species specific heat at constant pressure
@@ -160,87 +87,83 @@ public:
     void cp(
         double Th, double Te, double Tr, double Tv, double Tel,
         double* const cp, double* const cpt, double* const cpr,
-            double* const cpv, double* const cpel)
-    {
-        // Special case if we only want total Cp
-        if (cp != NULL && cpt == NULL && cpr == NULL && cpv == NULL && 
-            cpel == NULL)
-        {
-            cpT(cp, Eq());
-            cpR(cp, PlusEq());
-            cpV(Tv, cp, PlusEq());
-            cpE(Tel, cp, PlusEq());
-            return;
-        }
-
+            double* const cpv, double* const cpel) {
+        
+        /**
+         * Computes the unitless species enthalpy \f$ h_i/R_U T_h\f$ of each
+         * species in thermal nonequilibrium, which is non-dimensionalized by the
+         * heavy particle translational temperature.
+         *
+         * @param Th  - heavy particle translational temperature
+         * @param Te  - free electron temperature
+         * @param Tr  - mixture rotational temperature
+         * @param Tv  - mixture vibrational temperature
+         * @param Tel - mixture electronic temperature
+         * @param h   - on return, the array of species non-dimensional enthalpies
+         * @param ht  - if not NULL, the array of species translational enthalpies
+         * @param hr  - if not NULL, the array of species rotational enthalpies
+         * @param hv  - if not NULL, the array of species vibrational enthalpies
+         * @param hel - if not NULL, the array of species electronic enthalpies
+         * @param hf  - if not NULL, the array of the species formation enthalpies
+         */
 
         // Setting to zero
-        LOOP(Eq(cp[i], 0.0))
-        // for (int i = 0; i < m_ns; i++){
-        //     cp[i] = 0.;
-        // }
+    for (int i = 0; i < m_ns; i++){
+        cp[i] = 0.;
+    }
 
      // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
      if (cpt != NULL) {
-        cpT(cpt, Eq());
-        if (cp != NULL) LOOP(cp[i] = cpt[i]);
-        //  for (int i = 0; i < m_ns; i++){
-        //      cpt[i] += 2.5; // Cv = 3/2 R; Cp = Cv + R
-        //      cp[i] += cpt[i];
+         for (int i = 0; i < m_ns; i++){
+             cpt[i] += 2.5; // Cv = 3/2 R; Cp = Cv + R
+             cp[i] += cpt[i];
          }
+
      } else {
-        cpT(cp, Eq());
-        //  for (int i = 0; i < m_ns; i++){
-        //      cp[i] += 2.5;
+         for (int i = 0; i < m_ns; i++){
+             cp[i] += 2.5;
          }
      }
 
      // Rotation. Assuming fulling active rotational mode
      if (cpr != NULL) {
-        cpR(cpr, Eq());
-        if (cp != NULL) LOOP_MOLECULES(cp[j] += cpr[j]);
-//          for (int i = 0; i < m_ns; i++){
-//              if (i == 0) {
-// //                 cp[i] = 0.0; // Ground state
-// //                 cp[i] += cpr[i];
-//                  continue; } // Ground state
-//              cpr[i] += 2.0; //iCv = R; Cp = Cv + R
-//              cp[i] += cpr[i];
-//          }
+         for (int i = 0; i < m_ns; i++){
+             if (i == 0) {
+//                 cp[i] = 0.0; // Ground state
+//                 cp[i] += cpr[i];
+                 continue; } // Ground state
+             cpr[i] += 2.0; //iCv = R; Cp = Cv + R
+             cp[i] += cpr[i];
+         }
 
      } else {
-        if (cp != NULL) cpR(cp, PlusEq());
-//          for (int i = 0; i < m_ns; i++){
-//              if (i == 0) {
-// //                 cp[i] = 0.0; // Ground state
-//                  continue; } // Ground state
-//              cp[i] += 2.0;
-//          }
+         for (int i = 0; i < m_ns; i++){
+             if (i == 0) {
+//                 cp[i] = 0.0; // Ground state
+                 continue; } // Ground state
+             cp[i] += 2.0;
+         }
      }
 
      // etc...
 
      // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
      if (cpv != NULL) {
-        cpV(Tv, cpv, Eq());
-        if (cp != NULL) LOOP_MOLECULES(cp[j] += cpv[j]);
-        //  for (int i = 0; i < m_ns; i++){
-        //      cpv[i] += 0.0; // Setting as zero for now. Need to think
-        //      cpv[i] += cpv[i];
-        //  }
+         for (int i = 0; i < m_ns; i++){
+             cpv[i] += 0.0; // Setting as zero for now. Need to think
+             cpv[i] += cpv[i];
+         }
 
      } else {
-        if (cp != NULL) cpV(Tv, cp, PlusEq());
-        //  for (int i = 0; i < m_ns; i++){
-        //      cpv[i] += 0.0;
-        //  }
+         for (int i = 0; i < m_ns; i++){
+             cpv[i] += 0.0;
+         }
      }
 
      // Electronic. For now setting as zero
      // cpel[0] = 0.0;
      // cpel[1] = 0.0;
      // cpel[2] = 0.0;
-     
 
     }
 
@@ -267,34 +190,12 @@ public:
         double* const h, double* const ht, double* const hr,
         double* const hv, double* const hel, double* const hf)
     {
-
-        /**
-         * Computes the unitless species enthalpy \f$ h_i/R_U T_h\f$ of each
-         * species in thermal nonequilibrium, which is non-dimensionalized by the
-         * heavy particle translational temperature.
-         *
-         * @param Th  - heavy particle translational temperature
-         * @param Te  - free electron temperature
-         * @param Tr  - mixture rotational temperature
-         * @param Tv  - mixture vibrational temperature
-         * @param Tel - mixture electronic temperature
-         * @param h   - on return, the array of species non-dimensional enthalpies
-         * @param ht  - if not NULL, the array of species translational enthalpies
-         * @param hr  - if not NULL, the array of species rotational enthalpies
-         * @param hv  - if not NULL, the array of species vibrational enthalpies
-         * @param hel - if not NULL, the array of species electronic enthalpies
-         * @param hf  - if not NULL, the array of the species formation enthalpies
-         */
         // Given Ts calculate h, ht, hr, hv, hel, hf
         // Old equations, before generalize
     //    h[0] = 2.5 + m_vhf[0];
     //    h[1] = m_vh[1]*Th + m_vhf[1];
     //    h[2] = m_vh[2]*Th + m_vhf[2];
 
-        // TODO: Fix energy read in. Possibly similar to XML
-        // readin for species.xml
-        IO::XmlDocument species_doc(databaseFileName("oxygen_energy.xml", "thermo"));
-        
         // const int SIZE = 37;
         // double state[SIZE];
         // double blank[SIZE];
@@ -313,7 +214,10 @@ public:
 
         //     inFile.close(); // CLose input file
         // }
-        
+        double energy[3];
+        energy[0] = 787.380953594;
+        energy[1] = 2343.76026609;
+        energy[2] = 3876.56829159;
         
         
         
@@ -589,14 +493,6 @@ public:
     
 //Calculate enthalpy from Gibbs
 
-private:
-
-    typedef Equals<double> Eq;
-    typedef EqualsYDivAlpha<double> EqDiv;
-    typedef PlusEqualsYDivAlpha<double> PlusEqDiv;
-    typedef PlusEquals<double> PlusEq;
-    typedef MinusEquals<double> MinusEq;
-
 protected:
     /**
      * Loads all of the species from the RRHO database.
@@ -647,209 +543,6 @@ protected:
     }
 
 private:
-    void updateElecBoltzmannFactors(double T)
-    {
-        if (std::abs(1.0 - m_last_bfacs_T / T) < 1.0e-16)
-            return;
-
-        if (m_use_tables)
-            mp_el_bfac_table->lookup(T, mp_el_bfacs);
-        else
-            ElecBFacsFunctor()(T, mp_el_bfacs, m_elec_data);
-
-        m_last_bfacs_T = T;
-    }
-
-    /**
-     * Computes the translational Cp/Ru for each species.
-     */
-    template <typename OP>
-    void cpT(double* const cp, const OP& op) {
-        LOOP(op(cp[i], 2.5));
-    }
-
-    /**
-     * Computes the rotational Cp/Ru for each species.
-     */
-    template <typename OP>
-    void cpR(double* const cp, const OP& op) {
-        op(cp[0], 0.0);
-        LOOP_ATOMS(op(cp[j], 0.0));
-        LOOP_MOLECULES(op(cp[j], 0.0));
-    }
-
-    /**
-     * Computes the vibratinoal Cp/Ru for each species.
-     */
-    template <typename OP>
-    void cpV(double Tv, double* const cp, const OP& op) {
-        int ilevel = 0;
-        double sum, fac1, fac2;
-        op(cp[0], 0.0);
-        LOOP_ATOMS(op(cp[j], 0.0));
-//!        LOOP_MOLECULES(
-//!            sum = 0.0;
-//!            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++) {
-//!                fac1 = mp_vib_temps[ilevel] / Tv;
-//!                fac2 = std::exp(fac1);
-//!                fac1 *= fac1*fac2;
-//!                fac2 -= 1.0;
-//!                sum += fac1/(fac2*fac2);
-//!            }
-//!            op(cp[j], sum);
-//!        )
-    }
-
-    /**
-     * Computes the electronic specific heat of each species and applies the
-     * value to the array using the given operation.
-     */
-    template <typename OP>
-    void cpE(double T, double* const p_cp, const OP& op)
-    {
-        updateElecBoltzmannFactors(T);
-        op(p_cp[0], 0.0);
-
-        double* facs = mp_el_bfacs;
-        for (unsigned int i = 0; i < m_elec_data.nheavy; ++i, facs += 3) {
-            if (m_elec_data.p_nelec[i] > 1)
-                op(p_cp[i+m_elec_data.offset],
-                    (facs[2]*facs[0]-facs[1]*facs[1])/(T*T*facs[0]*facs[0]));
-            else
-                op(p_cp[i+m_elec_data.offset], 0.0);
-        }
-    }
-
-
-    /**
-     * Computes the translational enthalpy of each species in K.
-     */
-    template <typename OP>
-    void hT(double T, double Te, double* const h, const OP& op) {
-        if (m_has_electron)
-            op(h[0], 2.5 * Te);
-        LOOP_HEAVY(op(h[j], 2.5 * T))
-    }
-
-    /**
-     * Computes the rotational enthalpy of each species in K.
-     */
-    template <typename OP>
-    void hR(double T, double* const h, const OP& op) {
-//!        LOOP_MOLECULES(op(h[j], mp_rot_data[i].linearity * T))
-    }
-
-    /**
-     * Computes the vibrational enthalpy of each species in K.
-     */
-    template <typename OP>
-    void hV(double T, double* const h, const OP& op) {
-        if (T < 10.0) {
-            LOOP_MOLECULES(op(h[j], 0.0));
-        } else {
-//!            int ilevel = 0;
-//!            double sum;
-//!            LOOP_MOLECULES(
-//!                sum = 0.0;
-//!                for (int k = 0; k < mp_nvib[i]; ++k, ilevel++)
-//!                    sum += mp_vib_temps[ilevel] /
-//!                        (std::exp(mp_vib_temps[ilevel] / T) - 1.0);
-//!                op(h[j], sum);
-//!            )
-        }
-    }
-
-    /**
-     * Computes the electronic enthalpy of each species in K and applies the
-     * value to the enthalpy array using the given operation.
-     */
-    template <typename OP>
-    void hE(double T, double* const p_h, const OP& op)
-    {
-        updateElecBoltzmannFactors(T);
-        op(p_h[0], 0.0);
-
-        double* facs = mp_el_bfacs;
-        for (int i = 0; i < m_elec_data.nheavy; ++i, facs += 3) {
-            if (facs[0] > 0)
-                op(p_h[i+m_elec_data.offset], facs[1]/facs[0]);
-            else
-                op(p_h[i+m_elec_data.offset], 0.0);
-        }
-    }
-
-    /**
-     * Computes the formation enthalpy of each species in K.
-     */
-    template <typename OP>
-    void hF(double* const h, const OP& op) {
-        LOOP(op(h[i], mp_hform[i] - mp_part_sst[i]));
-    }
-
-    /**
-     * Computes the unitless translational entropy of each species.
-     */
-    template <typename OP>
-    void sT(double Th, double Te, double P, double* const s, const OP& op) {
-        double fac = 2.5 * (1.0 + std::log(Th)) - std::log(P);
-        if (m_has_electron)
-            op(s[0], 2.5 * std::log(Te / Th) + fac + mp_lnqtmw[0]);
-        for (int i = (m_has_electron ? 1 : 0); i < m_ns; ++i)
-            op(s[i], fac + mp_lnqtmw[i]);
-    }
-
-    /**
-     * Computes the unitless rotational entropy of each species.
-     */
-    template <typename OP>
-    void sR(double T, double* const s, const OP& op) {
-        const double onelnT = 1.0 + std::log(T);
-//!        LOOP_MOLECULES(
-//!            op(s[j], mp_rot_data[i].linearity * (onelnT -
-//!                mp_rot_data[i].ln_omega_t));
-//!        )
-    }
-
-    /**
-     * Computes the unitless vibrational entropy of each species.
-     */
-    template <typename OP>
-    void sV(double T, double* const s, const OP& op) {
-        int ilevel = 0;
-        double fac, sum1, sum2;
-//!        LOOP_MOLECULES(
-//!            sum1 = sum2 = 0.0;
-//!            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++) {
-//!                fac  =  std::exp(mp_vib_temps[ilevel] / T);
-//!                sum1 += mp_vib_temps[ilevel] / (fac - 1.0);
-//!                sum2 += std::log(1.0 - 1.0 / fac);
-//!            }
-//!            op(s[j], (sum1 / T - sum2));
-//!        )
-    }
-
-    /**
-     * Computes the unitless electronic entropy of each species.
-     */
-    template <typename OP>
-    void sE(double T, double* const p_s, const OP& op) {
-        updateElecBoltzmannFactors(T);
-        op(p_s[0], 0.0);
-
-        double* facs = mp_el_bfacs;
-        for (int i = 0; i < m_elec_data.nheavy; ++i, facs += 3) {
-            if (facs[0] > 0)
-                op(p_s[i+m_elec_data.offset],
-                    (facs[1]/(facs[0]*T) + std::log(facs[0])));
-            else
-                op(p_s[i+m_elec_data.offset], 0.0);
-        }
-    }
-
-
-
-private:
-
     // Store here only the necessary data for calculating species thermodynamics
     const int m_ns = 3; // need to see how to recognize number of states from M++
     std::vector<double> m_vh {};
