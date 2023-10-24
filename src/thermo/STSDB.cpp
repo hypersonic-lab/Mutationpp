@@ -312,17 +312,17 @@ public:
         energy[2] = 3876.56829159;
         
                 // Special case where we only want the total enthalpy
-        if (ht == NULL && hr == NULL && hv == NULL && hel == NULL && 
-            hf == NULL && h != NULL) 
-        {
-            hT(Th, Te, h, Eq());
-            hR(Tr, h, PlusEq());
-            hV(Tv, h, PlusEq());
-            // hE(Tel, h, PlusEq());
-            // hF(h, PlusEq());
-            LOOP(h[i] /= Th);
-            return;
-        }
+        // if (ht == NULL && hr == NULL && hv == NULL && hel == NULL && 
+        //     hf == NULL && h != NULL) 
+        // {
+        //     hT(Th, Te, h, Eq());
+        //     hR(Tr, h, PlusEq());
+        //     hV(Tv, h, PlusEq());
+        //     // hE(Tel, h, PlusEq());
+        //     // hF(h, PlusEq());
+        //     LOOP(h[i] /= Th);
+        //     return;
+        // }
 
         
         
@@ -777,11 +777,11 @@ private:
      * Computes the translational enthalpy of each species in K.
      */
     template <typename OP>
-    void hT(double T, double Te, double* const h, const OP& op) {
-        if (m_has_electron)
-            op(h[0], 2.5 * Te);
-        LOOP_HEAVY(op(h[j], 2.5 * T))
-    }
+    // void hT(double T, double Te, double* const h, const OP& op) {
+    //     if (m_has_electron)
+    //         op(h[0], 2.5 * Te);
+    //     LOOP_HEAVY(op(h[j], 2.5 * T))
+    // }
 
     /**
      * Computes the rotational enthalpy of each species in K.
