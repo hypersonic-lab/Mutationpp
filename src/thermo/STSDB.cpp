@@ -38,8 +38,6 @@
 #include <cstdlib>
 #include <cmath>
 #include <cassert>
-#include <fstream>
-
 
 using namespace std;
 using namespace Mutation::Numerics;
@@ -47,6 +45,56 @@ using namespace Mutation::Utilities;
 
 namespace Mutation {
     namespace Thermodynamics {
+
+// Simple for loop over the species just to make life a little easier
+#define LOOP(__op__)\
+for (int i = 0; i < m_ns; ++i) {\
+    __op__ ;\
+}
+
+#define LOOP_ATOMS(__op__)\
+for (int i = 0, j = 0; i < m_na; ++i) {\
+    j = i;\
+    __op__ ;\
+} // j = mp_indices[i]
+
+// Loops over molecules. Inside the loop, the index i is zero based and indexes
+// internal molecular data.  The index j is the index corresponding to the 
+// original species data.
+#define LOOP_MOLECULES(__op__)\
+for (int i = 0, j = 0; i < m_nm; ++i) {\
+    j = m_na+i;\
+    __op__ ;\
+}
+    // j = mp_indices[m_na+i];
+
+// Loops over heavy particles (non electron species).  Inside the loop, index i
+// is zero based and indexes internal molecular data. The index j is the index
+// corresponding to the original species data.
+#define LOOP_HEAVY(__op__)\
+for (int i = 0, j = 0; i < m_na + m_nm; ++i) {\
+    j = (m_has_electron ? i+1 : i);\
+    __op__ ;\
+}
+
+// typedef struct {
+//     double ln_omega_t;  // ln(omega^(2 / L) * theta)
+//     double linearity;   // L / 2
+// } RotData;
+
+// typedef struct {
+//     double g;           // degeneracy
+//     double theta;       // characteristic temperature
+// } ElecLevel;
+
+// typedef struct {
+//     unsigned int offset;
+//     unsigned int nheavy;
+//     unsigned int nlevels;
+//     int* p_nelec;
+//     ElecLevel* p_levels;
+// } ElectronicData;
+
 
 /**
  * A thermodynamic database that uses the Rigid-Rotator Harmonic-Oscillator
@@ -62,10 +110,28 @@ class STSDB : public ThermoDB
 {
 public:
 
-    STSDB(int arg) : ThermoDB(298.15, 101325.0){}//,
-        //   m_has_electron(false),
-        //   m_use_tables(false),
-        //   m_last_bfacs_T(0.0) {} //
+    STSDB(int arg) : ThermoDB(298.15, 101325.0){}
+//          ,m_has_electron(false),
+//           m_use_tables(false),
+//           m_last_bfacs_T(0.0) {} //
+//             ~STSDB()
+//     {
+//         delete [] mp_lnqtmw;
+//         delete [] mp_hform;
+//         delete [] mp_indices;
+// //!        delete [] mp_rot_data;
+// //!        delete [] mp_nvib;
+// //!        delete [] mp_vib_temps;
+
+//         delete [] m_elec_data.p_nelec;
+//         delete [] m_elec_data.p_levels;
+//         delete [] mp_part_sst;
+//         delete [] mp_el_bfacs;
+
+//         if (m_use_tables) {
+//             delete mp_el_bfac_table;
+//         }
+//     }
 
     /**
      * Computes the unitless species specific heat at constant pressure
@@ -87,7 +153,8 @@ public:
     void cp(
         double Th, double Te, double Tr, double Tv, double Tel,
         double* const cp, double* const cpt, double* const cpr,
-            double* const cpv, double* const cpel) {
+            double* const cpv, double* const cpel)
+    {
         
         /**
          * Computes the unitless species enthalpy \f$ h_i/R_U T_h\f$ of each
@@ -112,34 +179,54 @@ public:
         cp[i] = 0.;
     }
 
+    if (cp != NULL && cpt == NULL && cpr == NULL && cpv == NULL && 
+            cpel == NULL)
+        {
+            cpT(cp, Eq());
+            cpR(cp, PlusEq());
+            cpV(Tv, cp, PlusEq());
+            // cpE(Tel, cp, PlusEq());
+            return;
+
      // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
      if (cpt != NULL) {
-         for (int i = 0; i < m_ns; i++){
-             cpt[i] += 2.5; // Cv = 3/2 R; Cp = Cv + R
-             cp[i] += cpt[i];
+        cpT(cpt, Eq());  // Setting to 2.5
+            if (cp != NULL)
+                LOOP(cp[i] += cpt[i]);
+        //  for (int i = 0; i < m_ns; i++){
+        //      cpt[i] += 2.5; // Cv = 3/2 R; Cp = Cv + R
+        //      cp[i] += cpt[i];
          }
 
      } else {
-         for (int i = 0; i < m_ns; i++){
-             cp[i] += 2.5;
-         }
+        if (cp != NULL)
+                //cpT(cp, PlusEq());
+                cpT(cp, Eq());   // Setting to 2.5
+        //  for (int i = 0; i < m_ns; i++){
+        //      cp[i] += 2.5;
+        //  }
      }
 
      // Rotation. Assuming fulling active rotational mode
      if (cpr != NULL) {
          for (int i = 0; i < m_ns; i++){
+            cpR(cpr, Eq()); // Setting to 0
+            if (cp != NULL)
+                // LOOP_MOLECULES(cp[j] += cpr[j]);
              if (i == 0) {
-//                 cp[i] = 0.0; // Ground state
-//                 cp[i] += cpr[i];
+                cp[i] = 0.0; // Ground state
+                cp[i] += cpr[i];
                  continue; } // Ground state
              cpr[i] += 2.0; //iCv = R; Cp = Cv + R
              cp[i] += cpr[i];
          }
 
      } else {
+        if (cp != NULL)
+                // cpR(cp, PlusEq()); // Add cpr to cp
          for (int i = 0; i < m_ns; i++){
              if (i == 0) {
-//                 cp[i] = 0.0; // Ground state
+                cp[i] = 0.0; // Ground state
                  continue; } // Ground state
              cp[i] += 2.0;
          }
@@ -149,15 +236,20 @@ public:
 
      // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
      if (cpv != NULL) {
-         for (int i = 0; i < m_ns; i++){
-             cpv[i] += 0.0; // Setting as zero for now. Need to think
-             cpv[i] += cpv[i];
-         }
+        cpV(Tv, cpv, Eq());
+            if (cp != NULL) 
+                LOOP_MOLECULES(cp[j] += cpv[j]);
+        //  for (int i = 0; i < m_ns; i++){
+        //      cpv[i] += 0.0; // Setting as zero for now. Need to think
+        //      cpv[i] += cpv[i];
+        //  }
 
      } else {
-         for (int i = 0; i < m_ns; i++){
-             cpv[i] += 0.0;
-         }
+        if (cp != NULL)
+                cpV(Tv, cp, PlusEq());
+        //  for (int i = 0; i < m_ns; i++){
+        //      cpv[i] += 0.0;
+        //  }
      }
 
      // Electronic. For now setting as zero
@@ -166,7 +258,7 @@ public:
      // cpel[2] = 0.0;
 
     }
-
+// TODO: Here I am, 10/19/23 --> 4:50pm
     /**
      * Computes the unitless species enthalpy \f$ h_i/R_U T_h\f$ of each
      * species in thermal nonequilibrium, which is non-dimensionalized by the
@@ -219,7 +311,19 @@ public:
         energy[1] = 2343.76026609;
         energy[2] = 3876.56829159;
         
-        
+                // Special case where we only want the total enthalpy
+        if (ht == NULL && hr == NULL && hv == NULL && hel == NULL && 
+            hf == NULL && h != NULL) 
+        {
+            hT(Th, Te, h, Eq());
+            hR(Tr, h, PlusEq());
+            hV(Tv, h, PlusEq());
+            // hE(Tel, h, PlusEq());
+            // hF(h, PlusEq());
+            LOOP(h[i] /= Th);
+            return;
+        }
+
         
         
         // Setting to zero
@@ -229,12 +333,18 @@ public:
 
         // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
         if (ht != NULL) {
+            // hT(Th, Te, ht, EqDiv(Th));
+            // if (h != NULL)
+            //     LOOP(h[i] = ht[i]);
             for (int i = 0; i < m_ns; i++){
                 ht[i] += 2.5; // Is this non-dimensional too? Taking in work flow too. Otherwise it would be 1.5.
                 h[i] += ht[i];
             }
 
         } else {
+            //hT(Th, Te, h, Eq());
+            // if (h != NULL)
+                // hT(Th, Te, h, EqDiv(Th));
             for (int i = 0; i < m_ns; i++){
                 h[i] += 2.5;
             }
@@ -242,19 +352,25 @@ public:
 
         // Rotation. Assuming fulling active rotational mode
         if (hr != NULL) {
+            // LOOP(hr[i] = 0.0);
+            // hR(Tr, hr, EqDiv(Th));
+            // if (h != NULL)
+                // LOOP_MOLECULES(h[j] += hr[j]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-//                    h[i] = 0.0; // Ground state
-//                    h[i] += hr[i];
+                   hr[i] = 0.0; // Ground state
+                   h[i] += hr[i];
                     continue; }
                 hr[i] += 1.0;
                 h[i] += hr[i];
             }
 
         } else {
+            if (h != NULL)
+                // hR(Tr, h, PlusEqDiv(Th));
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-//                    h[i] = 0.0; // Ground state
+                   h[i] = 0.0; // Ground state
                     continue; }
                 h[i] += 1.0;
             }
@@ -264,16 +380,22 @@ public:
 
         // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
         if (hv != NULL) {
+            LOOP(hv[i] = 0.0);
+            hV(Tv, hv, EqDiv(Th));
+            if (h != NULL)
+                // LOOP_MOLECULES(h[j] += hv[j]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
                     hv[i] = 0.0;
-//                    h[i] = 0.0; // Ground state
+                   h[i] = 0.0; // Ground state
                     continue; }
                 hv[i] = energy[i] * 1.42879 / Th * exp(-1*energy[i] * 1.42879 / Th); // See KMH notes
                 h[i] += hv[i];
             }
 
         } else {
+            if (h != NULL)
+                // hV(Tv, h, PlusEqDiv(Th));
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
                     h[i] = 0.0;
@@ -331,6 +453,20 @@ public:
 
             // Following similar approach as enthalpy
             // Setting to zero
+
+         if (st == NULL && sr == NULL && sv == NULL && sel == NULL) {
+            sT(Th, Te, P, s, Eq());
+            sR(Tr, s, PlusEq());
+            sV(Tv, s, PlusEq());
+            // sE(Tel, s, PlusEq());
+
+            // Include spin contribution for free electron entropy
+            if (m_has_electron)
+                s[0] += std::log(2.0);
+
+            return;
+        }
+        
         for (int i = 0; i < m_ns; i++){
             s[i] = 0.;
         }
@@ -339,6 +475,8 @@ public:
         // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
         // Will need to upload masses of each species
         if (st != NULL) {
+            // sT(Th, Te, P, st, Eq());
+            // LOOP(s[i] = st[i]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
                     st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
@@ -349,6 +487,7 @@ public:
             }
 
         } else {
+            // sT(Th, Te, P, s, Eq());
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
                     s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
@@ -360,6 +499,9 @@ public:
 
         // Rotation. Assuming fulling active rotational mode
         if (sr != NULL) {
+            // LOOP(sr[i] = 0.0);
+            // sR(Tr, sr, Eq());
+            // LOOP_MOLECULES(s[j] += sr[j]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
                     sr[i] = 0.0; // Ground state
@@ -374,6 +516,7 @@ public:
             // sr[2] = 1.0 + log((0.5 * Th / 2.1) / N ) + 1.0; // Eq. 3.78 of Boyd. Need to define N or substitute
 
         } else {
+            // sR(Tr, s, PlusEq());
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
                     s[i] += 0.0;
@@ -387,6 +530,9 @@ public:
 
         // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
         if (sv != NULL) {
+            // LOOP(sv[i] = 0.0);
+            // sV(Tv, sv, Eq());
+            // LOOP_MOLECULES(s[j] += sv[j]);
             for (int i = 0; i < m_ns; i++){
                 sv[i] = 0.0; // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
                 s[i] += sv[i];
@@ -395,6 +541,7 @@ public:
             // sv[1] = 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th; // Eq. 3.78 of Boyd. Need to define N or substitute
             // sv[2] =  1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
         } else {
+            // sV(Tv, s, PlusEq());
             for (int i = 0; i < m_ns; i++){
                 s[i] += 0.0;
             }
@@ -426,17 +573,31 @@ public:
         double* const g, double* const gt, double* const gr, double* const gv,
         double* const gel)
     {
-        // Given Ts calculate g, gt, gr, gv, gel
-        // Note: Check if NULL
+        // First compute the non-dimensional enthalpy
+        enthalpy(Th, Te, Tr, Tv, Tel, g, NULL, NULL, NULL, NULL, NULL);
 
-                   // Following similar approach as enthalpy
-            // Setting to zero
+        // Subtract the entropies
+        // sT(Th, Te, P, g, MinusEq());
+        // sR(Tr, g, MinusEq());
+        // sV(Tv, g, MinusEq());
+        // sE(Tel, g, MinusEq());
+
+        // Account for spin of free electrons
+        // if (m_has_electron)
+            // g[0] -= std::log(2.0);
+    // }
+
+        // // Given Ts calculate g, gt, gr, gv, gel
+        // // Note: Check if NULL
+
+        //            // Following similar approach as enthalpy
+        //     // Setting to zero
         for (int i = 0; i < m_ns; i++){
             g[i] = 0.;
         }
 
-        // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
-        // Will need to upload masses of each species
+        // // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
+        // // Will need to upload masses of each species
         if (gt != NULL) {
             for (int i = 0; i < m_ns; i++){
                 gt[i] += ht[i] - Th * st[i]; // G = H - TS
@@ -481,14 +642,14 @@ public:
                 gv[i] += hv[i] - Th * sv[i]; // G = H - TS // Tv?
             }
         }
-        // Electronic. For now setting as zero
-        // sel[0] = 0.0;
-        // sel[1] = 0.0;
-        // sel[2] = 0.0;
+        // // Electronic. For now setting as zero
+    //     // sel[0] = 0.0;
+    //     // sel[1] = 0.0;
+    //     // sel[2] = 0.0;
 
-        //h[0] += m_vhf[0];
-        //h[1] += m_vhf[1];
-        // h[2] += m_vhf[2];
+    //     //h[0] += m_vhf[0];
+    //     //h[1] += m_vhf[1];
+    //     // h[2] += m_vhf[2];
     }
     
 //Calculate enthalpy from Gibbs
@@ -505,6 +666,21 @@ protected:
         for ( ; species_iter != species_doc.root().end(); ++species_iter) {
             // Add the species to the list
             species.push_back(*species_iter);
+
+
+            // We can also add all of the excited states as implicitly defined
+            // species
+            IO::XmlElement::const_iterator rrho_iter =
+                species_iter->findTagWithAttribute(
+                    "thermodynamics", "type", "RRHO");
+
+            if (rrho_iter == species_iter->end())
+                continue;
+
+            Species& ground_state = species.back();
+            ParticleRRHO rrho(*rrho_iter);
+            for (size_t i = 0; i < rrho.nElectronicLevels(); ++i)
+                species.push_back(Species(ground_state, i));
         }
 
         // // @todo: 1/18/2023
@@ -543,8 +719,141 @@ protected:
     }
 
 private:
+    typedef Equals<double> Eq;
+    typedef EqualsYDivAlpha<double> EqDiv;
+    typedef PlusEqualsYDivAlpha<double> PlusEqDiv;
+    typedef PlusEquals<double> PlusEq;
+    typedef MinusEquals<double> MinusEq;
+
     // Store here only the necessary data for calculating species thermodynamics
     const int m_ns = 3; // need to see how to recognize number of states from M++
+    const int m_na = 1; // need to see how to recognize number of states from M++
+    const int m_nm = 2; // need to see how to recognize number of states from M++
+    // double m_vh[m_ns];
+    // double m_vhf[m_ns];
+    // double hv[m_ns];
+    // double ht[m_ns];
+    // double hr[m_ns];
+    /**
+     * Computes the translational Cp/Ru for each species.
+     */
+    template <typename OP>
+    void cpT(double* const cp, const OP& op) {
+        LOOP(op(cp[i], 2.5));
+    }
+
+    /**
+     * Computes the rotational Cp/Ru for each species.
+     */
+    template <typename OP>
+    void cpR(double* const cp, const OP& op) {
+        op(cp[0], 0.0);
+        LOOP_ATOMS(op(cp[j], 0.0));
+        LOOP_MOLECULES(op(cp[j], 0.0));
+    }
+
+    /**
+     * Computes the vibratinoal Cp/Ru for each species.
+     */
+    template <typename OP>
+    void cpV(double Tv, double* const cp, const OP& op) {
+        // int ilevel = 0;
+        // double sum, fac1, fac2;
+        op(cp[0], 0.0);
+        LOOP_ATOMS(op(cp[j], 0.0));
+//!        LOOP_MOLECULES(
+//!            sum = 0.0;
+//!            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++) {
+//!                fac1 = mp_vib_temps[ilevel] / Tv;
+//!                fac2 = std::exp(fac1);
+//!                fac1 *= fac1*fac2;
+//!                fac2 -= 1.0;
+//!                sum += fac1/(fac2*fac2);
+//!            }
+//!            op(cp[j], sum);
+//!        )
+    }
+    /**
+     * Computes the translational enthalpy of each species in K.
+     */
+    template <typename OP>
+    void hT(double T, double Te, double* const h, const OP& op) {
+        if (m_has_electron)
+            op(h[0], 2.5 * Te);
+        LOOP_HEAVY(op(h[j], 2.5 * T))
+    }
+
+    /**
+     * Computes the rotational enthalpy of each species in K.
+     */
+    template <typename OP>
+    void hR(double T, double* const h, const OP& op) {
+//!        LOOP_MOLECULES(op(h[j], mp_rot_data[i].linearity * T))
+    }
+
+    /**
+     * Computes the vibrational enthalpy of each species in K.
+     */
+    template <typename OP>
+    void hV(double T, double* const h, const OP& op) {
+        if (T < 10.0) {
+            LOOP_MOLECULES(op(h[j], 0.0));
+        } else {
+//!            int ilevel = 0;
+//!            double sum;
+//!            LOOP_MOLECULES(
+//!                sum = 0.0;
+//!                for (int k = 0; k < mp_nvib[i]; ++k, ilevel++)
+//!                    sum += mp_vib_temps[ilevel] /
+//!                        (std::exp(mp_vib_temps[ilevel] / T) - 1.0);
+//!                op(h[j], sum);
+//!            )
+        }
+    }
+    /**
+     * Computes the unitless translational entropy of each species.
+     */
+    template <typename OP>
+    void sT(double Th, double Te, double P, double* const s, const OP& op) {
+        double fac = 2.5 * (1.0 + std::log(Th)) - std::log(P);
+        if (m_has_electron)
+            op(s[0], 2.5 * std::log(Te / Th) + fac + mp_lnqtmw[0]);
+        for (int i = (m_has_electron ? 1 : 0); i < m_ns; ++i)
+            op(s[i], fac + mp_lnqtmw[i]);
+    }
+
+    /**
+     * Computes the unitless rotational entropy of each species.
+     */
+    template <typename OP>
+    void sR(double T, double* const s, const OP& op) {
+        const double onelnT = 1.0 + std::log(T);
+//!        LOOP_MOLECULES(
+//!            op(s[j], mp_rot_data[i].linearity * (onelnT -
+//!                mp_rot_data[i].ln_omega_t));
+//!        )
+    }
+
+    /**
+     * Computes the unitless vibrational entropy of each species.
+     */
+    template <typename OP>
+    void sV(double T, double* const s, const OP& op) {
+        int ilevel = 0;
+        double fac, sum1, sum2;
+//!        LOOP_MOLECULES(
+//!            sum1 = sum2 = 0.0;
+//!            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++) {
+//!                fac  =  std::exp(mp_vib_temps[ilevel] / T);
+//!                sum1 += mp_vib_temps[ilevel] / (fac - 1.0);
+//!                sum2 += std::log(1.0 - 1.0 / fac);
+//!            }
+//!            op(s[j], (sum1 / T - sum2));
+//!        )
+    }
+    // double sv[m_ns];
+    // double st[m_ns];
+    // double sr[m_ns];
     std::vector<double> m_vh {};
     std::vector<double> m_vhf {};
     std::vector<double> hv {}; //should this be in private?? //m_ for private
@@ -611,6 +920,10 @@ private:
 
 
 }; // class STSDB
+#undef LOOP
+#undef LOOP_HEAVY
+#undef LOOP_MOLECULES
+
 
 // Register the STSDB model with the other thermodynamic databases
 Utilities::Config::ObjectProvider<STSDB, ThermoDB> stsDB("STS");
