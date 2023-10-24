@@ -454,18 +454,18 @@ public:
             // Following similar approach as enthalpy
             // Setting to zero
 
-         if (st == NULL && sr == NULL && sv == NULL && sel == NULL) {
-            sT(Th, Te, P, s, Eq());
-            sR(Tr, s, PlusEq());
-            sV(Tv, s, PlusEq());
-            // sE(Tel, s, PlusEq());
+        //  if (st == NULL && sr == NULL && sv == NULL && sel == NULL) {
+        //     sT(Th, Te, P, s, Eq());
+        //     sR(Tr, s, PlusEq());
+        //     sV(Tv, s, PlusEq());
+        //     // sE(Tel, s, PlusEq());
 
-            // Include spin contribution for free electron entropy
-            if (m_has_electron)
-                s[0] += std::log(2.0);
+        //     // Include spin contribution for free electron entropy
+        //     if (m_has_electron)
+        //         s[0] += std::log(2.0);
 
-            return;
-        }
+        //     return;
+        // }
         
         for (int i = 0; i < m_ns; i++){
             s[i] = 0.;
@@ -813,14 +813,14 @@ private:
     /**
      * Computes the unitless translational entropy of each species.
      */
-    template <typename OP>
-    void sT(double Th, double Te, double P, double* const s, const OP& op) {
-        double fac = 2.5 * (1.0 + std::log(Th)) - std::log(P);
-        if (m_has_electron)
-            op(s[0], 2.5 * std::log(Te / Th) + fac + mp_lnqtmw[0]);
-        for (int i = (m_has_electron ? 1 : 0); i < m_ns; ++i)
-            op(s[i], fac + mp_lnqtmw[i]);
-    }
+    // template <typename OP>
+    // void sT(double Th, double Te, double P, double* const s, const OP& op) {
+    //     double fac = 2.5 * (1.0 + std::log(Th)) - std::log(P);
+    //     if (m_has_electron)
+    //         op(s[0], 2.5 * std::log(Te / Th) + fac + mp_lnqtmw[0]);
+    //     for (int i = (m_has_electron ? 1 : 0); i < m_ns; ++i)
+    //         op(s[i], fac + mp_lnqtmw[i]);
+    // }
 
     /**
      * Computes the unitless rotational entropy of each species.
