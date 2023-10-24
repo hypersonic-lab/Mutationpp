@@ -776,7 +776,7 @@ private:
     /**
      * Computes the translational enthalpy of each species in K.
      */
-    template <typename OP>
+    // template <typename OP>
     // void hT(double T, double Te, double* const h, const OP& op) {
     //     if (m_has_electron)
     //         op(h[0], 2.5 * Te);
