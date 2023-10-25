@@ -346,6 +346,7 @@ public:
             // if (h != NULL)
                 // hT(Th, Te, h, EqDiv(Th));
             for (int i = 0; i < m_ns; i++){
+                m_ht[i] += 2.5;
                 h[i] += 2.5;
             }
         }
@@ -370,8 +371,10 @@ public:
                 // hR(Tr, h, PlusEqDiv(Th));
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
+                    m_hr[i] = 0;
                    h[i] = 0.0; // Ground state
                     continue; }
+                m_hr[i] += 1.0;
                 h[i] += 1.0;
             }
         }
@@ -380,9 +383,9 @@ public:
 
         // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
         if (hv != NULL) {
-            LOOP(hv[i] = 0.0);
-            hV(Tv, hv, EqDiv(Th));
-            if (h != NULL)
+            // LOOP(hv[i] = 0.0);
+            // hV(Tv, hv, EqDiv(Th));
+            // if (h != NULL)
                 // LOOP_MOLECULES(h[j] += hv[j]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
@@ -399,8 +402,10 @@ public:
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
                     h[i] = 0.0;
+                    m_hv[i] = 0.0;
 //                    h[i] = 0.0; // Ground state
                     continue; }
+                m_hv[i] = energy[i] * 1.42879 / Th * exp(-1*energy[i] * 1.42879 / Th); // See KMH notes
                 h[i] = energy[i] * 1.42879 / Th * exp(-1*energy[i] * 1.42879 / Th); // See KMH notes
             }
         }
@@ -491,9 +496,11 @@ public:
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
                     s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
-                    s[i] += st[i];
+                    m_st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
+                    // s[i] += st[i];
                     continue; }
                 s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+                m_st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
             }
         }
 
@@ -507,7 +514,7 @@ public:
                     sr[i] = 0.0; // Ground state
                     s[i] += sr[i];
                     continue; }
-                sr[i] = hr[i]/Th + log(0.5 * Th / 2.1); // From slide 20 of Magin, need to check units
+                sr[i] = m_hr[i]/Th + log(0.5 * Th / 2.1); // From slide 20 of Magin, need to check units
                 s[i] += sr[i];
             }
             
@@ -519,9 +526,11 @@ public:
             // sR(Tr, s, PlusEq());
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
+                    m_sr[i] += 0.0;
                     s[i] += 0.0;
                     continue; }
-                s[i] += hr[i]/Th + log(0.5 * Th / 2.1); // From Magin above;
+                s[i] += m_hr[i]/Th + log(0.5 * Th / 2.1); // From Magin above;
+                m_sr[i] += m_hr[i]/Th + log(0.5 * Th / 2.1); // From Magin above;
             }
 
         }
@@ -544,6 +553,7 @@ public:
             // sV(Tv, s, PlusEq());
             for (int i = 0; i < m_ns; i++){
                 s[i] += 0.0;
+                m_sv[i] += 0.0;
             }
             // Old equations, before generalize
             // s[1] += 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th;
@@ -600,7 +610,7 @@ public:
         // // Will need to upload masses of each species
         if (gt != NULL) {
             for (int i = 0; i < m_ns; i++){
-                gt[i] += ht[i] - Th * st[i]; // G = H - TS
+                gt[i] += m_ht[i] - Th * m_st[i]; // G = H - TS
             }
 
             for (int i = 0; i < m_ns; i++){
@@ -609,13 +619,13 @@ public:
   
         } else {
             for (int i = 0; i < m_ns; i++){
-                gt[i] += ht[i] - Th * st[i]; // G = H - TS
+                g[i] += m_ht[i] - Th * m_st[i]; // G = H - TS
             }
         }
 
         if (gr != NULL) {
             for (int i = 0; i < m_ns; i++){
-                gr[i] += hr[i] - Th * sr[i]; // G = H - TS
+                gr[i] += m_hr[i] - Th * m_sr[i]; // G = H - TS
             }
 
             for (int i = 0; i < m_ns; i++){
@@ -624,13 +634,13 @@ public:
   
         } else {
             for (int i = 0; i < m_ns; i++){
-                gr[i] += hr[i] - Th * sr[i]; // G = H - TS
+                g[i] += m_hr[i] - Th * m_sr[i]; // G = H - TS
             }
         }
 
         if (gv != NULL) {
             for (int i = 0; i < m_ns; i++){
-                gv[i] += hv[i] - Th * st[i]; // G = H - TS // Tv?
+                gv[i] += m_hv[i] - Th * m_st[i]; // G = H - TS // Tv?
             }
 
             for (int i = 0; i < m_ns; i++){
@@ -639,7 +649,7 @@ public:
   
         } else {
             for (int i = 0; i < m_ns; i++){
-                gv[i] += hv[i] - Th * sv[i]; // G = H - TS // Tv?
+                g[i] += m_hv[i] - Th * m_sv[i]; // G = H - TS // Tv?
             }
         }
         // // Electronic. For now setting as zero
@@ -701,6 +711,12 @@ protected:
 //        m_ns = 3; // Number of energy states
         m_vh.resize(m_ns);
         m_vhf.resize(m_ns);
+        m_ht.resize(m_ns);
+        m_hr.resize(m_ns);
+        m_hv.resize(m_ns);
+        m_st.resize(m_ns);
+        m_sr.resize(m_ns);
+        m_sv.resize(m_ns);
         // Add ht, hr, hv...
 
         m_vh[0] = 0.; // Atomic oxygen
@@ -856,12 +872,12 @@ private:
     // double sr[m_ns];
     std::vector<double> m_vh {};
     std::vector<double> m_vhf {};
-    std::vector<double> hv {}; //should this be in private?? //m_ for private
-    std::vector<double> ht {}; //should this be in private??
-    std::vector<double> hr {}; //should this be in private??
-    std::vector<double> sv {}; //should this be in private??
-    std::vector<double> st {}; //should this be in private??
-    std::vector<double> sr {}; //should this be in private??
+    std::vector<double> m_hv {}; //should this be in private?? //m_ for private
+    std::vector<double> m_ht {}; //should this be in private??
+    std::vector<double> m_hr {}; //should this be in private??
+    std::vector<double> m_sv {}; //should this be in private??
+    std::vector<double> m_st {}; //should this be in private??
+    std::vector<double> m_sr {}; //should this be in private??
 
 
 
