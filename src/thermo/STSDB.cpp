@@ -306,10 +306,45 @@ public:
 
         //     inFile.close(); // CLose input file
         // }
-        double energy[3];
+        double energy[11];
         energy[0] = 787.380953594;
         energy[1] = 2343.76026609;
         energy[2] = 3876.56829159;
+        energy[3] = 5386.02874609;
+        energy[4] = 6872.33479359;
+        energy[5] = 8335.64904609;
+        energy[6] = 9776.10356359;
+        energy[7] = 11193.7998541;
+        energy[8] = 12588.8088736;
+        energy[9] = 13961.1710261;
+        // energy[10] = 15310.8961636;
+        // energy[11] = 16637.9635861;
+        // energy[12] = 17942.3220416;
+        // energy[13] = 19223.8897261;
+        // energy[14] = 20482.5542836;
+        // energy[15] = 21718.1728061;
+        // energy[16] = 22930.5718336;
+        // energy[17] = 24119.5473541;
+        // energy[18] = 25284.8648036;
+        // energy[19] = 26426.2590661;
+        // energy[20] = 27543.4344736;
+        // energy[21] = 28636.0648061;
+        // energy[22] = 29703.7932916;
+        // energy[23] = 30746.2326061;
+        // energy[24] = 31762.9648736;
+        // energy[25] = 32753.5416661;
+        // energy[26] = 33717.4840036;
+        // energy[27] = 34654.2823541;
+        // energy[28] = 35563.3966336;
+        // energy[29] = 36444.2562061;
+        // energy[30] = 37296.2598836;
+        // energy[31] = 38118.7759261;
+        // energy[32] = 38911.1420416;
+        // energy[33] = 39672.6653861;
+        // energy[34] = 40402.6225636;
+        // energy[35] = 41100.2596261;
+        // energy[36] = 41764.7920736;
+        // energy[2] = 3876.56829159;
         
                 // Special case where we only want the total enthalpy
         // if (ht == NULL && hr == NULL && hv == NULL && hel == NULL && 
@@ -390,9 +425,9 @@ public:
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
                     hv[i] = 0.0;
-                   h[i] = 0.0; // Ground state
+                    h[i] = 0.0; // Ground state
                     continue; }
-                hv[i] = energy[i] * 1.42879 / Th * exp(-1*energy[i] * 1.42879 / Th); // See KMH notes
+                hv[i] = energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
                 h[i] += hv[i];
             }
 
@@ -719,15 +754,29 @@ protected:
         m_sv.resize(m_ns);
         // Add ht, hr, hv...
 
+        // Nitrogen m_vhf
+        m_vhf[0] = 472440;
+        m_vhf[1] = 19425.13;
+        m_vhf[2] = 71231.59;
+        m_vhf[3] = 143937.47;
+        m_vhf[4] = 233797.83;
+        m_vhf[5] = 338000.97;
+        m_vhf[6] = 454210.59;
+        m_vhf[7] = 582378.25;
+        m_vhf[8] = 721541.19;
+        m_vhf[9] = 873713.56;
+
+
         m_vh[0] = 0.; // Atomic oxygen
         m_vh[1] = 7.87380953594E+02;
         m_vh[2] = 1.4E+03;
         // m_vh[3] = 7.87380953594E+02;
 
+        //USE THESE
         // I think these are enthlapy of formation
-        m_vhf[0] = 100.59; // Atomic oxygen
-        m_vhf[1] = 7.87380953594E+02;
-        m_vhf[2] = 1.0+02;
+        // m_vhf[0] = 100.59; // Atomic oxygen
+        // m_vhf[1] = 7.87380953594E+02;
+        // m_vhf[2] = 1.0+02;
         // m_vh[3] = 7.87380953594E+02;
 
         // @todo: 1/18/2023
@@ -742,9 +791,9 @@ private:
     typedef MinusEquals<double> MinusEq;
 
     // Store here only the necessary data for calculating species thermodynamics
-    const int m_ns = 3; // need to see how to recognize number of states from M++
+    const int m_ns = 10; // need to see how to recognize number of states from M++
     const int m_na = 1; // need to see how to recognize number of states from M++
-    const int m_nm = 2; // need to see how to recognize number of states from M++
+    const int m_nm = 9; // need to see how to recognize number of states from M++
     // double m_vh[m_ns];
     // double m_vhf[m_ns];
     // double hv[m_ns];
