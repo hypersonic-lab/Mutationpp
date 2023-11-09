@@ -306,8 +306,8 @@ public:
 
         //     inFile.close(); // CLose input file
         // }
-        double energy[46] = {0.0};
-//        energy[0] =0.0; 
+        double energy[m_ns] = {0.0};
+//        energy[0] =0.0;
 //        energy[1] =0.0;
 //        energy[2] =0.0;
 //        energy[3] =0.0;
