@@ -306,17 +306,17 @@ public:
 
         //     inFile.close(); // CLose input file
         // }
-        double energy[11];
-        energy[0] =0.0; 
-        energy[1] =0.0;
-        energy[2] =0.0;
-        energy[3] =0.0;
-        energy[4] =0.0;
-        energy[5] =0.0;
-        energy[6] =0.0;
-        energy[7] =0.0;
-        energy[8] =0.0;
-        energy[9] =0.0;
+        double energy[46] = {0.0};
+//        energy[0] =0.0; 
+//        energy[1] =0.0;
+//        energy[2] =0.0;
+//        energy[3] =0.0;
+//        energy[4] =0.0;
+//        energy[5] =0.0;
+//        energy[6] =0.0;
+//        energy[7] =0.0;
+//        energy[8] =0.0;
+//        energy[9] =0.0;
 //        double energy[11];
 //        energy[0] = 787.380953594;
 //        energy[1] = 2343.76026609;
@@ -462,7 +462,8 @@ public:
         // hel[2] = 0.0;
 
         for (int i = 0; i < m_ns; i++){
-            h[i] += m_vhf[i];
+            h[i] += energy[i];
+//            h[i] += m_vhf[i];
         }
 
         // Old equations, before generalize
@@ -802,9 +803,9 @@ private:
     typedef MinusEquals<double> MinusEq;
 
     // Store here only the necessary data for calculating species thermodynamics
-    const int m_ns = 10; // need to see how to recognize number of states from M++
+    const int m_ns = 48; // need to see how to recognize number of states from M++
     const int m_na = 1; // need to see how to recognize number of states from M++
-    const int m_nm = 9; // need to see how to recognize number of states from M++
+    const int m_nm = 47; // need to see how to recognize number of states from M++
     // double m_vh[m_ns];
     // double m_vhf[m_ns];
     // double hv[m_ns];
