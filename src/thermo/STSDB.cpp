@@ -492,8 +492,8 @@ public:
                     m_hv[i] = 0.0;
 //                    h[i] = 0.0; // Ground state
                     continue; }
-                m_hv[i] = energy[i] * 1.42879 / Th * exp(-1*energy[i] * 1.42879 / Th); // See KMH notes
-                h[i] = energy[i] * 1.42879 / Th * exp(-1*energy[i] * 1.42879 / Th); // See KMH notes
+                m_hv[i] = energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                h[i] = energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
             }
         }
 
