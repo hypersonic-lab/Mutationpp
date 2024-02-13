@@ -449,7 +449,7 @@ public:
                    hr[i] = 0.0; // Ground state
                    h[i] += hr[i];
                     continue; }
-                hr[i] += 1.0;
+                hr[i] += 2.0;
                 h[i] += hr[i];
             }
 
@@ -461,8 +461,8 @@ public:
                     m_hr[i] = 0;
                    h[i] = 0.0; // Ground state
                     continue; }
-                m_hr[i] += 1.0;
-                h[i] += 1.0;
+                m_hr[i] += 2.0;
+                h[i] += m_hr[i];
             }
         }
 
@@ -479,7 +479,7 @@ public:
                     hv[i] = 0.0;
                     h[i] = 0.0; // Ground state
                     continue; }
-                hv[i] = energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                hv[i] = energy[i-1] * 1.42879 / (Th *  KB) + 1; //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
                 h[i] += hv[i];
             }
 
@@ -492,8 +492,8 @@ public:
                     m_hv[i] = 0.0;
 //                    h[i] = 0.0; // Ground state
                     continue; }
-                m_hv[i] = energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
-                h[i] = energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                m_hv[i] = energy[i-1] * 1.42879 / (Th *  KB) + 1; // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                h[i] = m_hv[i]; //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
             }
         }
 
@@ -559,10 +559,14 @@ public:
 
         //     return;
         // }
-        
         for (int i = 0; i < m_ns; i++){
             s[i] = 0.;
         }
+        
+        // enthalpy(Th, Te, Tr, Tv, Tel, s, NULL, NULL, NULL, NULL, NULL);
+        // gibbs(Th, Te, Tr, Tv, Tel, P, s, NULL, NULL, NULL, NULL);
+
+        
 
 
         // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
@@ -572,10 +576,10 @@ public:
             // LOOP(s[i] = st[i]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
+                    st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
                     s[i] += st[i];
                     continue; }
-                st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+                st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
                 s[i] += st[i];
             }
 
@@ -583,12 +587,10 @@ public:
             // sT(Th, Te, P, s, Eq());
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
-                    m_st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
+                    s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
                     // s[i] += st[i];
                     continue; }
-                s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
-                m_st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
+                s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
             }
         }
 
@@ -599,10 +601,10 @@ public:
             // LOOP_MOLECULES(s[j] += sr[j]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    sr[i] = 0.0; // Ground state
+                    sr[i] = -1 * (m_gr[i] - m_hr[i]) / Th; // Ground state
                     s[i] += sr[i];
                     continue; }
-                sr[i] = m_hr[i]/Th + log(0.5 * Th / 2.1); // From slide 20 of Magin, need to check units
+                sr[i] = -1 * (m_gr[i] - m_hr[i]) / Th; // From slide 20 of Magin, need to check units
                 s[i] += sr[i];
             }
             
@@ -614,11 +616,10 @@ public:
             // sR(Tr, s, PlusEq());
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    m_sr[i] += 0.0;
-                    s[i] += 0.0;
+                    s[i] += -1 * (m_gr[i] - m_hr[i]) / Th;
                     continue; }
-                s[i] += m_hr[i]/Th + log(0.5 * Th / 2.1); // From Magin above;
-                m_sr[i] += m_hr[i]/Th + log(0.5 * Th / 2.1); // From Magin above;
+                s[i] += -1 * (m_gr[i] - m_hr[i]) / Th; // From Magin above;
+                // m_sr[i] += m_hr[i]/Th + log(0.5 * Th / 2.1); // From Magin above;
             }
 
         }
@@ -631,7 +632,7 @@ public:
             // sV(Tv, sv, Eq());
             // LOOP_MOLECULES(s[j] += sv[j]);
             for (int i = 0; i < m_ns; i++){
-                sv[i] = 0.0; // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
+                sv[i] = -1 * (m_gv[i] - m_hv[i]) / Th; // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
                 s[i] += sv[i];
             }
             // Old equations, before generalize
@@ -640,8 +641,7 @@ public:
         } else {
             // sV(Tv, s, PlusEq());
             for (int i = 0; i < m_ns; i++){
-                s[i] += 0.0;
-                m_sv[i] += 0.0;
+                s[i] += -1 * (m_gv[i] - m_hv[i]) / Th;
             }
             // Old equations, before generalize
             // s[1] += 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th;
@@ -671,8 +671,59 @@ public:
         double* const g, double* const gt, double* const gr, double* const gv,
         double* const gel)
     {
+        double energy[50];
+        energy[0] = 786.0234;
+        energy[1] = 2343.573;
+        energy[2] = 3881.3038;
+        energy[3] = 5398.5964;
+        energy[4] = 6894.8782;
+        energy[5] = 8369.5118;
+        energy[6] = 9822.0457;
+        energy[7] = 11251.754;
+        energy[8] = 12658.072;
+        energy[9] = 14040.4352;
+        energy[10] = 15398.3596;
+        energy[11] = 16731.2;
+        energy[12] = 18038.3111;
+        energy[13] = 19319.2091;
+        energy[14] = 20573.1679;
+        energy[15] = 21799.7037;
+        energy[16] = 22998.2518;
+        energy[17] = 24168.0058;
+        energy[18] = 25308.4816;
+        energy[19] = 26419.0341;
+        energy[20] = 27498.9373;
+        energy[21] = 28547.546;
+        energy[22] = 29564.2148;
+        energy[23] = 30548.1374;
+        energy[24] = 31498.6683;
+        energy[25] = 32414.9205;
+        energy[26] = 33296.168;
+        energy[27] = 34141.6041;
+        energy[28] = 34950.3419;
+        energy[29] = 35721.3326;
+        energy[30] = 36453.8504;
+        energy[31] = 37146.6854;
+        energy[32] = 37798.8698;
+        energy[33] = 38409.2744;
+        energy[34] = 38976.5281;
+        energy[35] = 39499.5822;
+        energy[36] = 39976.9044;
+        energy[37] = 40407.0429;
+        energy[38] = 40788.6264;
+        energy[39] = 41119.9613;
+        energy[40] = 41399.6763;
+        energy[41] = 41626.4003;
+        energy[42] = 41799.6494;
+        energy[43] = 41920.3914;
+        energy[44] = 41993.5464;
+        energy[45] = 42029.6803;
+        energy[46] = 42042.9885;
+        energy[47] = 0.0;
+        energy[48] = 0.0;
+        energy[49] = 0.0;
         // First compute the non-dimensional enthalpy
-        enthalpy(Th, Te, Tr, Tv, Tel, g, NULL, NULL, NULL, NULL, NULL);
+        // enthalpy(Th, Te, Tr, Tv, Tel, g, NULL, NULL, NULL, NULL, NULL);
 
         // Subtract the entropies
         // sT(Th, Te, P, g, MinusEq());
@@ -698,22 +749,31 @@ public:
         // // Will need to upload masses of each species
         if (gt != NULL) {
             for (int i = 0; i < m_ns; i++){
-                gt[i] += m_ht[i] - Th * m_st[i]; // G = H - TS
+                if (i == 0) {
+                    gt[i] += -1 * log(KB * Th / P) - log(pow((2*PI*15.999 / pow(HP,2.0)),1.5) * pow(KB,1.5)); // EQ 3.90 of Boyd. // Ground state
+                    g[i] += gt[i];
+                    continue; }
+                gt[i] += -1 * log(KB * Th / P) - log(pow((2*PI*31.998 / pow(HP,2.0)),1.5) * pow(KB,1.5));
+                g[i] += gt[i];
             }
-
             for (int i = 0; i < m_ns; i++){
                 g[i] += gt[i];
             } // Is there a way to combine this with previous loop?
   
         } else {
             for (int i = 0; i < m_ns; i++){
-                g[i] += m_ht[i] - Th * m_st[i]; // G = H - TS
+                if (i == 0) {
+                    g[i] += -1 * log(KB * Th / P) - log(pow((2*PI*15.999 / pow(HP,2.0)),1.5) * pow(KB,1.5)); // EQ 3.90 of Boyd. // Ground state
+                    m_gt[i] += -1 * log(KB * Th / P) - log(pow((2*PI*15.999 / pow(HP,2.0)),1.5) * pow(KB,1.5)); // EQ 3.90 of Boyd. // Ground state
+                    continue; }
+                g[i] += -1 * log(KB * Th / P) - log(pow((2*PI*31.998 / pow(HP,2.0)),1.5) * pow(KB,1.5));
+                m_gt[i] += -1 * log(KB * Th / P) - log(pow((2*PI*31.998 / pow(HP,2.0)),1.5) * pow(KB,1.5));
             }
         }
 
         if (gr != NULL) {
             for (int i = 0; i < m_ns; i++){
-                gr[i] += m_hr[i] - Th * m_sr[i]; // G = H - TS
+                gr[i] += -1 * log(Th / Tr) + 1; // G = H - TS
             }
 
             for (int i = 0; i < m_ns; i++){
@@ -722,22 +782,21 @@ public:
   
         } else {
             for (int i = 0; i < m_ns; i++){
-                g[i] += m_hr[i] - Th * m_sr[i]; // G = H - TS
+                g[i] += -1 * log(Th / Tr) + 1; // G = H - TS
+                m_gr[i] += -1 * log(Th / Tr) + 1; // G = H - TS
             }
         }
 
         if (gv != NULL) {
             for (int i = 0; i < m_ns; i++){
-                gv[i] += m_hv[i] - Th * m_st[i]; // G = H - TS // Tv?
-            }
-
-            for (int i = 0; i < m_ns; i++){
+                gv[i] += energy[i] / (KB * Th) + 1; // G = H - TS // Tv?
                 g[i] += gv[i];
-            } // Is there a way to combine this with previous loop?
+            }
   
         } else {
             for (int i = 0; i < m_ns; i++){
-                g[i] += m_hv[i] - Th * m_sv[i]; // G = H - TS // Tv?
+                g[i] += energy[i] / (KB * Th) + 1; // G = H - TS // Tv?
+                m_gv[i] += energy[i] / (KB * Th) + 1; // G = H - TS // Tv?
             }
         }
         // // Electronic. For now setting as zero
@@ -802,9 +861,9 @@ protected:
         m_ht.resize(m_ns);
         m_hr.resize(m_ns);
         m_hv.resize(m_ns);
-        m_st.resize(m_ns);
-        m_sr.resize(m_ns);
-        m_sv.resize(m_ns);
+        m_gt.resize(m_ns);
+        m_gr.resize(m_ns);
+        m_gv.resize(m_ns);
         // Add ht, hr, hv...
 
         // Nitrogen m_vhf
@@ -818,102 +877,102 @@ protected:
 //        m_vhf[7] = 582378.25;
 //        m_vhf[8] = 721541.19;
 //        m_vhf[9] = 873713.56;
-        // m_vhf[0] = 0.0;
-        // m_vhf[1] = 0.0;
-        // m_vhf[2] = 0.0;
-        // m_vhf[3] = 0.0;
-        // m_vhf[4] = 0.0;
-        // m_vhf[5] = 0.0;
-        // m_vhf[6] = 0.0;
-        // m_vhf[7] = 0.0;
-        // m_vhf[8] = 0.0;
-        // m_vhf[9] = 0.0;
-        // m_vhf[10] = 0.0;
-        // m_vhf[11] = 0.0;
-        // m_vhf[12] = 0.0;
-        // m_vhf[13] = 0.0;
-        // m_vhf[14] = 0.0;
-        // m_vhf[15] = 0.0;
-        // m_vhf[16] = 0.0;
-        // m_vhf[17] = 0.0;
-        // m_vhf[18] = 0.0;
-        // m_vhf[19] = 0.0;
-        // m_vhf[20] = 0.0;
-        // m_vhf[21] = 0.0;
-        // m_vhf[22] = 0.0;
-        // m_vhf[23] = 0.0;
-        // m_vhf[24] = 0.0;
-        // m_vhf[25] = 0.0;
-        // m_vhf[26] = 0.0;
-        // m_vhf[27] = 0.0;
-        // m_vhf[28] = 0.0;
-        // m_vhf[29] = 0.0;
-        // m_vhf[30] = 0.0;
-        // m_vhf[31] = 0.0;
-        // m_vhf[32] = 0.0;
-        // m_vhf[33] = 0.0;
-        // m_vhf[34] = 0.0;
-        // m_vhf[35] = 0.0;
-        // m_vhf[36] = 0.0;
-        // m_vhf[37] = 0.0;
-        // m_vhf[38] = 0.0;
-        // m_vhf[39] = 0.0;
-        // m_vhf[40] = 0.0;
-        // m_vhf[41] = 0.0;
-        // m_vhf[42] = 0.0;
-        // m_vhf[43] = 0.0;
-        // m_vhf[44] = 0.0;
-        // m_vhf[45] = 0.0;
-        // m_vhf[46] = 0.0;
-        // m_vhf[47] = 0.0;
-        // m_vhf[48] = 0.0;
-        m_vhf[0] = 9448.87932;
-        m_vhf[1] = 37795.51728;
-        m_vhf[2] = 85039.91388000001;
-        m_vhf[3] = 151182.06912;
-        m_vhf[4] = 236221.983;
-        m_vhf[5] = 340159.65552000003;
-        m_vhf[6] = 462995.08668000007;
-        m_vhf[7] = 604728.27648;
-        m_vhf[8] = 765359.22492;
-        m_vhf[9] = 944887.9319999999;
-        m_vhf[10] = 1143314.39772;
-        m_vhf[11] = 1360638.6220800001;
-        m_vhf[12] = 1596860.6050800001;
-        m_vhf[13] = 1851980.3467200003;
-        m_vhf[14] = 2125997.847;
-        m_vhf[15] = 2418913.10592;
-        m_vhf[16] = 2730726.12348;
-        m_vhf[17] = 3061436.8996800003;
-        m_vhf[18] = 3411045.43452;
-        m_vhf[19] = 3779551.728;
-        m_vhf[20] = 4166955.7801200002;
-        m_vhf[21] = 4573257.59088;
-        m_vhf[22] = 4998457.16028;
-        m_vhf[23] = 5442554.4883200005;
-        m_vhf[24] = 5905549.575;
-        m_vhf[25] = 6387442.4203200005;
-        m_vhf[26] = 6888233.0242800005;
-        m_vhf[27] = 7407921.38688;
-        m_vhf[28] = 7946507.50812;
-        m_vhf[29] = 8503991.388;
-        m_vhf[30] = 9080373.02652;
-        m_vhf[31] = 9675652.42368;
-        m_vhf[32] = 10289829.57948;
-        m_vhf[33] = 10922904.49392;
-        m_vhf[34] = 11574877.167;
-        m_vhf[35] = 12245747.59872;
-        m_vhf[36] = 12935515.78908;
-        m_vhf[37] = 13644181.73808;
-        m_vhf[38] = 14371745.44572;
-        m_vhf[39] = 15118206.912;
-        m_vhf[40] = 15883566.136920001;
-        m_vhf[41] = 16667823.120480001;
-        m_vhf[42] = 17470977.86268;
-        m_vhf[43] = 18293030.36352;
-        m_vhf[44] = 19133980.623;
-        m_vhf[45] = 19993828.64112;
-        m_vhf[46] = 20872574.417880002;
+        m_vhf[0] = 0.0;
+        m_vhf[1] = 0.0;
+        m_vhf[2] = 0.0;
+        m_vhf[3] = 0.0;
+        m_vhf[4] = 0.0;
+        m_vhf[5] = 0.0;
+        m_vhf[6] = 0.0;
+        m_vhf[7] = 0.0;
+        m_vhf[8] = 0.0;
+        m_vhf[9] = 0.0;
+        m_vhf[10] = 0.0;
+        m_vhf[11] = 0.0;
+        m_vhf[12] = 0.0;
+        m_vhf[13] = 0.0;
+        m_vhf[14] = 0.0;
+        m_vhf[15] = 0.0;
+        m_vhf[16] = 0.0;
+        m_vhf[17] = 0.0;
+        m_vhf[18] = 0.0;
+        m_vhf[19] = 0.0;
+        m_vhf[20] = 0.0;
+        m_vhf[21] = 0.0;
+        m_vhf[22] = 0.0;
+        m_vhf[23] = 0.0;
+        m_vhf[24] = 0.0;
+        m_vhf[25] = 0.0;
+        m_vhf[26] = 0.0;
+        m_vhf[27] = 0.0;
+        m_vhf[28] = 0.0;
+        m_vhf[29] = 0.0;
+        m_vhf[30] = 0.0;
+        m_vhf[31] = 0.0;
+        m_vhf[32] = 0.0;
+        m_vhf[33] = 0.0;
+        m_vhf[34] = 0.0;
+        m_vhf[35] = 0.0;
+        m_vhf[36] = 0.0;
+        m_vhf[37] = 0.0;
+        m_vhf[38] = 0.0;
+        m_vhf[39] = 0.0;
+        m_vhf[40] = 0.0;
+        m_vhf[41] = 0.0;
+        m_vhf[42] = 0.0;
+        m_vhf[43] = 0.0;
+        m_vhf[44] = 0.0;
+        m_vhf[45] = 0.0;
+        m_vhf[46] = 0.0;
+        m_vhf[47] = 0.0;
+        m_vhf[48] = 0.0;
+        // m_vhf[0] = 9448.87932;
+        // m_vhf[1] = 37795.51728;
+        // m_vhf[2] = 85039.91388000001;
+        // m_vhf[3] = 151182.06912;
+        // m_vhf[4] = 236221.983;
+        // m_vhf[5] = 340159.65552000003;
+        // m_vhf[6] = 462995.08668000007;
+        // m_vhf[7] = 604728.27648;
+        // m_vhf[8] = 765359.22492;
+        // m_vhf[9] = 944887.9319999999;
+        // m_vhf[10] = 1143314.39772;
+        // m_vhf[11] = 1360638.6220800001;
+        // m_vhf[12] = 1596860.6050800001;
+        // m_vhf[13] = 1851980.3467200003;
+        // m_vhf[14] = 2125997.847;
+        // m_vhf[15] = 2418913.10592;
+        // m_vhf[16] = 2730726.12348;
+        // m_vhf[17] = 3061436.8996800003;
+        // m_vhf[18] = 3411045.43452;
+        // m_vhf[19] = 3779551.728;
+        // m_vhf[20] = 4166955.7801200002;
+        // m_vhf[21] = 4573257.59088;
+        // m_vhf[22] = 4998457.16028;
+        // m_vhf[23] = 5442554.4883200005;
+        // m_vhf[24] = 5905549.575;
+        // m_vhf[25] = 6387442.4203200005;
+        // m_vhf[26] = 6888233.0242800005;
+        // m_vhf[27] = 7407921.38688;
+        // m_vhf[28] = 7946507.50812;
+        // m_vhf[29] = 8503991.388;
+        // m_vhf[30] = 9080373.02652;
+        // m_vhf[31] = 9675652.42368;
+        // m_vhf[32] = 10289829.57948;
+        // m_vhf[33] = 10922904.49392;
+        // m_vhf[34] = 11574877.167;
+        // m_vhf[35] = 12245747.59872;
+        // m_vhf[36] = 12935515.78908;
+        // m_vhf[37] = 13644181.73808;
+        // m_vhf[38] = 14371745.44572;
+        // m_vhf[39] = 15118206.912;
+        // m_vhf[40] = 15883566.136920001;
+        // m_vhf[41] = 16667823.120480001;
+        // m_vhf[42] = 17470977.86268;
+        // m_vhf[43] = 18293030.36352;
+        // m_vhf[44] = 19133980.623;
+        // m_vhf[45] = 19993828.64112;
+        // m_vhf[46] = 20872574.417880002;
 
 
 
@@ -964,7 +1023,7 @@ private:
     void cpR(double* const cp, const OP& op) {
         op(cp[0], 0.0);
         LOOP_ATOMS(op(cp[j], 0.0));
-        LOOP_MOLECULES(op(cp[j], 0.0));
+        LOOP_MOLECULES(op(cp[j], 2.0));
     }
 
     /**
@@ -976,6 +1035,7 @@ private:
         // double sum, fac1, fac2;
         op(cp[0], 0.0);
         LOOP_ATOMS(op(cp[j], 0.0));
+        LOOP_MOLECULES(op(cp[j], 1.0));
 //!        LOOP_MOLECULES(
 //!            sum = 0.0;
 //!            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++) {
@@ -1074,9 +1134,9 @@ private:
     std::vector<double> m_hv {}; //should this be in private?? //m_ for private
     std::vector<double> m_ht {}; //should this be in private??
     std::vector<double> m_hr {}; //should this be in private??
-    std::vector<double> m_sv {}; //should this be in private??
-    std::vector<double> m_st {}; //should this be in private??
-    std::vector<double> m_sr {}; //should this be in private??
+    std::vector<double> m_gv {}; //should this be in private??
+    std::vector<double> m_gt {}; //should this be in private??
+    std::vector<double> m_gr {}; //should this be in private??
 
 
 
