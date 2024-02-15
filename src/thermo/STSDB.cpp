@@ -724,7 +724,7 @@ public:
         energy[48] = 0.0;
         energy[49] = 0.0;
         // First compute the non-dimensional enthalpy
-        // enthalpy(Th, Te, Tr, Tv, Tel, g, NULL, NULL, NULL, NULL, NULL);
+        enthalpy(Th, Te, Tr, Tv, Tel, g, NULL, NULL, NULL, NULL, NULL);
 
         // Subtract the entropies
         // sT(Th, Te, P, g, MinusEq());
@@ -750,32 +750,22 @@ public:
         // // Will need to upload masses of each species
         if (gt != NULL) {
             for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    gt[i] += -1.0 * log(KB * Th / P) - log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,1.5)); // EQ 3.90 of Boyd. // Ground state
-                    g[i] += gt[i];
-                    continue; }
-                gt[i] += -1.0 * log(KB * Th / P) - log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,1.5));
-                g[i] += gt[i];
+                gt[i] += m_ht[i] - Th * m_st[i]; // G = H - TS
             }
+
             for (int i = 0; i < m_ns; i++){
                 g[i] += gt[i];
             } // Is there a way to combine this with previous loop?
   
         } else {
             for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    g[i] += -1.0 * log(KB * Th / P) - log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,1.5)); // EQ 3.90 of Boyd. // Ground state
-                    m_gt[i] += -1.0 * log(KB * Th / P) - log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,1.5)); // EQ 3.90 of Boyd. // Ground state
-                    continue; }
-                g[i] += -1.0 * log(KB * Th / P) - log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,1.5));
-                m_gt[i] += -1.0 * log(KB * Th / P) - log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,1.5));
+                g[i] += m_ht[i] - Th * m_st[i]; // G = H - TS
             }
         }
 
-        double ThetaR = 2.08; //char temp rot O2
         if (gr != NULL) {
             for (int i = 0; i < m_ns; i++){
-                gr[i] += -1.0 * log(Th / ThetaR) + 1; // G = H - TS
+                gr[i] += m_hr[i] - Th * m_sr[i]; // G = H - TS
             }
 
             for (int i = 0; i < m_ns; i++){
@@ -784,21 +774,22 @@ public:
   
         } else {
             for (int i = 0; i < m_ns; i++){
-                g[i] += -1.0 * log(Th / ThetaR) + 1; // G = H - TS
-                m_gr[i] += -1.0 * log(Th / ThetaR) + 1; // G = H - TS
+                g[i] += m_hr[i] - Th * m_sr[i]; // G = H - TS
             }
         }
 
         if (gv != NULL) {
             for (int i = 0; i < m_ns; i++){
-                gv[i] += energy[i] / (KB * Th) + 1; // G = H - TS // Tv?
-                g[i] += gv[i];
+                gv[i] += m_hv[i] - Th * m_st[i]; // G = H - TS // Tv?
             }
+
+            for (int i = 0; i < m_ns; i++){
+                g[i] += gv[i];
+            } // Is there a way to combine this with previous loop?
   
         } else {
             for (int i = 0; i < m_ns; i++){
-                g[i] += energy[i] / (KB * Th) + 1; // G = H - TS // Tv?
-                m_gv[i] += energy[i] / (KB * Th) + 1; // G = H - TS // Tv?
+                g[i] += m_hv[i] - Th * m_sv[i]; // G = H - TS // Tv?
             }
         }
         // // Electronic. For now setting as zero
