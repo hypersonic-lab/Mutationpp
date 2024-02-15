@@ -449,7 +449,7 @@ public:
                    hr[i] = 0.0; // Ground state
                    h[i] += hr[i];
                     continue; }
-                hr[i] += 2.0;
+                hr[i] += 1.0;
                 h[i] += hr[i];
             }
 
@@ -461,7 +461,7 @@ public:
                     m_hr[i] = 0;
                    h[i] = 0.0; // Ground state
                     continue; }
-                m_hr[i] += 2.0;
+                m_hr[i] += 1.0;
                 h[i] += m_hr[i];
             }
         }
@@ -479,7 +479,7 @@ public:
                     hv[i] = 0.0;
                     h[i] = 0.0; // Ground state
                     continue; }
-                hv[i] = energy[i-1] * 1.42879 / (Th *  KB) + 1; //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                hv[i] = energy[i-1] * 1.42879 / (Th *  KB); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
                 h[i] += hv[i];
             }
 
@@ -492,7 +492,7 @@ public:
                     m_hv[i] = 0.0;
 //                    h[i] = 0.0; // Ground state
                     continue; }
-                m_hv[i] = energy[i-1] * 1.42879 / (Th *  KB) + 1; // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                m_hv[i] = energy[i-1] * 1.42879 / (Th *  KB); // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
                 h[i] = m_hv[i]; //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
             }
         }
@@ -607,7 +607,7 @@ public:
                     sr[i] = 0.0; // Ground state
                     s[i] += sr[i];
                     continue; }
-                sr[i] = log(Th / (2 * ThetaR)) + 1.0; // From slide 20 of Magin, need to check units
+                sr[i] = (log(Th / (2 * ThetaR)) + 1.0) / Th; // From slide 20 of Magin, need to check units
                 s[i] += sr[i];
             }
             
@@ -622,8 +622,8 @@ public:
                     s[i] += 0.0;
                     m_sr[i] += 0.0;
                     continue; }
-                s[i] += log(Th / (2 * ThetaR)) + 1.0; // From Magin above;
-                m_sr[i] += log(Th / (2 * ThetaR)) + 1.0; // From Magin above;
+                s[i] += (log(Th / (2 * ThetaR)) + 1.0) / Th; // From Magin above;
+                m_sr[i] += (log(Th / (2 * ThetaR)) + 1.0) / Th; // From Magin above;
             }
 
         }
