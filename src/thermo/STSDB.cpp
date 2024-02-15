@@ -563,8 +563,8 @@ public:
             s[i] = 0.;
         }
         
-        enthalpy(Th, Te, Tr, Tv, Tel, s, NULL, NULL, NULL, NULL, NULL);
-        gibbs(Th, Te, Tr, Tv, Tel, P, s, NULL, NULL, NULL, NULL);
+        // enthalpy(Th, Te, Tr, Tv, Tel, s, NULL, NULL, NULL, NULL, NULL);
+        // gibbs(Th, Te, Tr, Tv, Tel, P, s, NULL, NULL, NULL, NULL);
 
         
 
@@ -588,9 +588,11 @@ public:
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
                     s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.99 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
+                    m_st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.99 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
                     // s[i] += st[i];
                     continue; }
                 s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+                m_st[i] = 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
             }
         }
 
@@ -618,9 +620,10 @@ public:
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
                     s[i] += 0.0;
+                    m_sr[i] += 0.0;
                     continue; }
                 s[i] += log(Th / (2 * ThetaR)) + 1.0; // From Magin above;
-                // m_sr[i] += m_hr[i]/Th + log(0.5 * Th / 2.1); // From Magin above;
+                m_sr[i] += log(Th / (2 * ThetaR)) + 1.0; // From Magin above;
             }
 
         }
@@ -643,6 +646,7 @@ public:
             // sV(Tv, s, PlusEq());
             for (int i = 0; i < m_ns; i++){
                 s[i] += 0.0;
+                m_sv[i] += 0.0;
             }
             // Old equations, before generalize
             // s[1] += 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th;
@@ -1127,9 +1131,9 @@ private:
     std::vector<double> m_hv {}; //should this be in private?? //m_ for private
     std::vector<double> m_ht {}; //should this be in private??
     std::vector<double> m_hr {}; //should this be in private??
-    std::vector<double> m_gv {}; //should this be in private??
-    std::vector<double> m_gt {}; //should this be in private??
-    std::vector<double> m_gr {}; //should this be in private??
+    std::vector<double> m_sv {}; //should this be in private??
+    std::vector<double> m_st {}; //should this be in private??
+    std::vector<double> m_sr {}; //should this be in private??
 
 
 
