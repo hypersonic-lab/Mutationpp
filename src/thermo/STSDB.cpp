@@ -563,8 +563,8 @@ public:
             s[i] = 0.;
         }
         
-        // enthalpy(Th, Te, Tr, Tv, Tel, s, NULL, NULL, NULL, NULL, NULL);
-        // gibbs(Th, Te, Tr, Tv, Tel, P, s, NULL, NULL, NULL, NULL);
+        enthalpy(Th, Te, Tr, Tv, Tel, s, NULL, NULL, NULL, NULL, NULL);
+        gibbs(Th, Te, Tr, Tv, Tel, P, s, NULL, NULL, NULL, NULL);
 
         
 
@@ -576,10 +576,10 @@ public:
             // LOOP(s[i] = st[i]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
+                    st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
                     s[i] += st[i];
                     continue; }
-                st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+                st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
                 s[i] += st[i];
             }
 
@@ -587,24 +587,25 @@ public:
             // sT(Th, Te, P, s, Eq());
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.999 / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
+                    s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*15.99 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
                     // s[i] += st[i];
                     continue; }
-                s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+                s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
             }
         }
 
         // Rotation. Assuming fulling active rotational mode
+        double ThetaR = 2.08; //char temp rot O2
         if (sr != NULL) {
             // LOOP(sr[i] = 0.0);
             // sR(Tr, sr, Eq());
             // LOOP_MOLECULES(s[j] += sr[j]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    sr[i] = -1 * (m_gr[i] - m_hr[i]) / Th; // Ground state
+                    sr[i] = 0.0; // Ground state
                     s[i] += sr[i];
                     continue; }
-                sr[i] = -1 * (m_gr[i] - m_hr[i]) / Th; // From slide 20 of Magin, need to check units
+                sr[i] = log(Th / (2 * ThetaR)) + 1.0; // From slide 20 of Magin, need to check units
                 s[i] += sr[i];
             }
             
@@ -616,9 +617,9 @@ public:
             // sR(Tr, s, PlusEq());
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    s[i] += -1 * (m_gr[i] - m_hr[i]) / Th;
+                    s[i] += 0.0;
                     continue; }
-                s[i] += -1 * (m_gr[i] - m_hr[i]) / Th; // From Magin above;
+                s[i] += log(Th / (2 * ThetaR)) + 1.0; // From Magin above;
                 // m_sr[i] += m_hr[i]/Th + log(0.5 * Th / 2.1); // From Magin above;
             }
 
@@ -632,7 +633,7 @@ public:
             // sV(Tv, sv, Eq());
             // LOOP_MOLECULES(s[j] += sv[j]);
             for (int i = 0; i < m_ns; i++){
-                sv[i] = -1 * (m_gv[i] - m_hv[i]) / Th; // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
+                sv[i] = 0.0; // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
                 s[i] += sv[i];
             }
             // Old equations, before generalize
@@ -641,7 +642,7 @@ public:
         } else {
             // sV(Tv, s, PlusEq());
             for (int i = 0; i < m_ns; i++){
-                s[i] += -1 * (m_gv[i] - m_hv[i]) / Th;
+                s[i] += 0.0;
             }
             // Old equations, before generalize
             // s[1] += 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th;
@@ -750,10 +751,10 @@ public:
         if (gt != NULL) {
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    gt[i] += -1 * log(KB * Th / P) - log(pow((2*PI*15.999 / pow(HP,2.0)),1.5) * pow(KB,1.5)); // EQ 3.90 of Boyd. // Ground state
+                    gt[i] += -1.0 * log(KB * Th / P) - log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,1.5)); // EQ 3.90 of Boyd. // Ground state
                     g[i] += gt[i];
                     continue; }
-                gt[i] += -1 * log(KB * Th / P) - log(pow((2*PI*31.998 / pow(HP,2.0)),1.5) * pow(KB,1.5));
+                gt[i] += -1.0 * log(KB * Th / P) - log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,1.5));
                 g[i] += gt[i];
             }
             for (int i = 0; i < m_ns; i++){
@@ -763,17 +764,18 @@ public:
         } else {
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    g[i] += -1 * log(KB * Th / P) - log(pow((2*PI*15.999 / pow(HP,2.0)),1.5) * pow(KB,1.5)); // EQ 3.90 of Boyd. // Ground state
-                    m_gt[i] += -1 * log(KB * Th / P) - log(pow((2*PI*15.999 / pow(HP,2.0)),1.5) * pow(KB,1.5)); // EQ 3.90 of Boyd. // Ground state
+                    g[i] += -1.0 * log(KB * Th / P) - log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,1.5)); // EQ 3.90 of Boyd. // Ground state
+                    m_gt[i] += -1.0 * log(KB * Th / P) - log(pow((2*PI*15.999 / NA / pow(HP,2.0)),1.5) * pow(KB,1.5)); // EQ 3.90 of Boyd. // Ground state
                     continue; }
-                g[i] += -1 * log(KB * Th / P) - log(pow((2*PI*31.998 / pow(HP,2.0)),1.5) * pow(KB,1.5));
-                m_gt[i] += -1 * log(KB * Th / P) - log(pow((2*PI*31.998 / pow(HP,2.0)),1.5) * pow(KB,1.5));
+                g[i] += -1.0 * log(KB * Th / P) - log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,1.5));
+                m_gt[i] += -1.0 * log(KB * Th / P) - log(pow((2*PI*31.998 / NA / pow(HP,2.0)),1.5) * pow(KB,1.5));
             }
         }
 
+        double ThetaR = 2.08; //char temp rot O2
         if (gr != NULL) {
             for (int i = 0; i < m_ns; i++){
-                gr[i] += -1 * log(Th / Tr) + 1; // G = H - TS
+                gr[i] += -1.0 * log(Th / ThetaR) + 1; // G = H - TS
             }
 
             for (int i = 0; i < m_ns; i++){
@@ -782,8 +784,8 @@ public:
   
         } else {
             for (int i = 0; i < m_ns; i++){
-                g[i] += -1 * log(Th / Tr) + 1; // G = H - TS
-                m_gr[i] += -1 * log(Th / Tr) + 1; // G = H - TS
+                g[i] += -1.0 * log(Th / ThetaR) + 1; // G = H - TS
+                m_gr[i] += -1.0 * log(Th / ThetaR) + 1; // G = H - TS
             }
         }
 
@@ -1000,9 +1002,9 @@ private:
     typedef MinusEquals<double> MinusEq;
 
     // Store here only the necessary data for calculating species thermodynamics
-    const int m_ns = 48; // need to see how to recognize number of states from M++
+    const int m_ns = 11; // need to see how to recognize number of states from M++
     const int m_na = 1; // need to see how to recognize number of states from M++
-    const int m_nm = 47; // need to see how to recognize number of states from M++
+    const int m_nm = 10; // need to see how to recognize number of states from M++
     // double m_vh[m_ns];
     // double m_vhf[m_ns];
     // double hv[m_ns];
@@ -1013,7 +1015,7 @@ private:
      */
     template <typename OP>
     void cpT(double* const cp, const OP& op) {
-        LOOP(op(cp[i], 2.5));
+        LOOP(op(cp[i], 1.5));
     }
 
     /**
@@ -1023,7 +1025,7 @@ private:
     void cpR(double* const cp, const OP& op) {
         op(cp[0], 0.0);
         LOOP_ATOMS(op(cp[j], 0.0));
-        LOOP_MOLECULES(op(cp[j], 2.0));
+        LOOP_MOLECULES(op(cp[j], 1.0));
     }
 
     /**
@@ -1035,7 +1037,7 @@ private:
         // double sum, fac1, fac2;
         op(cp[0], 0.0);
         LOOP_ATOMS(op(cp[j], 0.0));
-        LOOP_MOLECULES(op(cp[j], 1.0));
+        LOOP_MOLECULES(op(cp[j], 0.0));
 //!        LOOP_MOLECULES(
 //!            sum = 0.0;
 //!            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++) {
