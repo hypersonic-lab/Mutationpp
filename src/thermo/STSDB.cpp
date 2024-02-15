@@ -858,9 +858,9 @@ protected:
         m_ht.resize(m_ns);
         m_hr.resize(m_ns);
         m_hv.resize(m_ns);
-        m_gt.resize(m_ns);
-        m_gr.resize(m_ns);
-        m_gv.resize(m_ns);
+        m_st.resize(m_ns);
+        m_sr.resize(m_ns);
+        m_sv.resize(m_ns);
         // Add ht, hr, hv...
 
         // Nitrogen m_vhf
