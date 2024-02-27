@@ -754,7 +754,7 @@ public:
                     sv[i] = 0.0; // Ground state
                     s[i] += sv[i];
                  continue; } // Ground state
-                sv[i] = m_hv[i] / Th - 1/Th * log(1-exp(-1.0*energy[i-1] * 1.42879/Th)); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
+                sv[i] = 0.0;//m_hv[i] / Th - 1/Th * log(1-exp(-1.0*energy[i-1] * 1.42879/Th)); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
                 s[i] += sv[i];
             }
             // Old equations, before generalize
@@ -767,8 +767,8 @@ public:
                     s[i] = 0.0; // Ground state
                     m_sv[i] += 0.0;
                  continue; } // Ground state
-                s[i] += m_hv[i] / Th - 1/Th * log(1-exp(-1.0*energy[i-1] * 1.42879/Th));
-                m_sv[i] += m_hv[i] / Th - 1/Th * log(1-exp(-1.0*energy[i-1] * 1.42879/Th));
+                s[i] += 0.0;//m_hv[i] / Th - 1/Th * log(1-exp(-1.0*energy[i-1] * 1.42879/Th));
+                m_sv[i] += 0.0;//m_hv[i] / Th - 1/Th * log(1-exp(-1.0*energy[i-1] * 1.42879/Th));
             }
             // Old equations, before generalize
             // s[1] += 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th;
