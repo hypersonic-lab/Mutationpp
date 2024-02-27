@@ -508,7 +508,8 @@ public:
                     hv[i] = 0.0;
                     h[i] = 0.0; // Ground state
                     continue; }
-                hv[i] = energy[i-1] * 1.42879 / (Th) / (exp(-1.0 * energy[i-1]* 1.42879  / Th) - 1.0); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                hv[i] = (i-1) * energy[i-1] * 1.42879 / (Th); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                // hv[i] = energy[i-1] * 1.42879 / (Th) / (exp(-1.0 * energy[i-1]* 1.42879  / Th) - 1.0); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
                 h[i] += hv[i];
             }
 
@@ -521,7 +522,8 @@ public:
                     m_hv[i] = 0.0;
 //                    h[i] = 0.0; // Ground state
                     continue; }
-                m_hv[i] = energy[i-1] * 1.42879 / (Th) / (exp(1.0 * energy[i-1]* 1.42879  / Th) - 1.0);   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                m_hv[i] = (i-1) * energy[i-1] * 1.42879 / (Th);   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                // m_hv[i] = energy[i-1] * 1.42879 / (Th) / (exp(1.0 * energy[i-1]* 1.42879  / Th) - 1.0);   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
                 h[i] += m_hv[i]; //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
             }
         }
