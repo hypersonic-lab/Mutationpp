@@ -263,10 +263,10 @@ public:
      if (cpel != NULL) {
          for (int i = 0; i < m_ns; i++){
              if (i == 0) {
-                cpel[i] = 1/Th * pow((theta_1_O/Th),2.0) * (g1_O/g0_O * exp(-theta_1_O / Th)) / (pow(1+g1_O/g0_O * exp(-theta_1_O / Th),2.0)); // Ground state
+                cpel[i] = 1.0/Th * pow((theta_1_O/Th),2.0) * (g1_O/g0_O * exp(-theta_1_O / Th)) / (pow(1.0+g1_O/g0_O * exp(-theta_1_O / Th),2.0)); // Ground state
                 cp[i] += cpel[i];
                  continue; } // Ground state
-             cpel[i] += 1/Th * pow((theta_1_O2/Th),2.0) * (g1_O2/g0_O2 * exp(-theta_1_O2 / Th)) / (pow(1+g1_O2/g0_O2 * exp(-theta_1_O2 / Th),2.0)); // Boyd p. 110
+             cpel[i] += 1.0/Th * pow((theta_1_O2/Th),2.0) * (g1_O2/g0_O2 * exp(-theta_1_O2 / Th)) / (pow(1.0+g1_O2/g0_O2 * exp(-theta_1_O2 / Th),2.0)); // Boyd p. 110
              cp[i] += cpel[i];
          }
 
@@ -275,9 +275,9 @@ public:
                 // cpR(cp, PlusEq()); // Add cpr to cp
          for (int i = 0; i < m_ns; i++){
              if (i == 0) {
-                cp[i] = 1/Th * pow((theta_1_O/Th),2.0) * (g1_O/g0_O * exp(-theta_1_O / Th)) / (pow(1+g1_O/g0_O * exp(-theta_1_O / Th),2.0)); // Ground state
+                cp[i] = 1.0/Th * pow((theta_1_O/Th),2.0) * (g1_O/g0_O * exp(-theta_1_O / Th)) / (pow(1.0+g1_O/g0_O * exp(-theta_1_O / Th),2.0)); // Ground state
                  continue; } // Ground state
-             cp[i] += 1/Th * pow((theta_1_O2/Th),2.0) * (g1_O2/g0_O2 * exp(-theta_1_O2 / Th)) / (pow(1+g1_O2/g0_O2 * exp(-theta_1_O2 / Th),2.0));
+             cp[i] += 1.0/Th * pow((theta_1_O2/Th),2.0) * (g1_O2/g0_O2 * exp(-theta_1_O2 / Th)) / (pow(1.0+g1_O2/g0_O2 * exp(-theta_1_O2 / Th),2.0));
          }
      }
 
@@ -544,10 +544,10 @@ public:
                 // LOOP_MOLECULES(h[j] += hv[j]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    hel[i] = ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Th)) / (1 + g1_O/g0_O * exp(-theta_1_O / Th));
+                    hel[i] = ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Th)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Th));
                     h[i] += hel[i]; // Ground state
                     continue; }
-                hel[i] = ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Th)) / (1 + g1_O2/g0_O2 * exp(-theta_1_O2 / Th)); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                hel[i] = ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Th)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Th)); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
                 h[i] += hel[i];
             }
 
@@ -556,11 +556,11 @@ public:
                 // hV(Tv, h, PlusEqDiv(Th));
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    h[i] = ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Th)) / (1 + g1_O/g0_O * exp(-theta_1_O / Th));
-                    m_hel[i] = ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Th)) / (1 + g1_O/g0_O * exp(-theta_1_O / Th));
+                    h[i] = ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Th)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Th));
+                    m_hel[i] = ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Th)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Th));
 //                    h[i] = 0.0; // Ground state
                     continue; }
-                m_hel[i] = ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Th)) / (1 + g1_O2/g0_O2 * exp(-theta_1_O2 / Th));   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                m_hel[i] = ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Th)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Th));   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
                 h[i] += m_hel[i]; //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
             }
         }
@@ -788,10 +788,10 @@ public:
             // LOOP_MOLECULES(s[j] += sv[j]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    sel[i] = 1/Th * (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Th)) + (g1_O/g0_O*theta_1_O/Th*exp(-theta_1_O/Th))/(1+(g1_O/g0_O)*exp(-theta_1_O/Th))); // Ground state
+                    sel[i] = 1.0/Th * (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Th)) + (g1_O/g0_O*theta_1_O/Th*exp(-theta_1_O/Th))/(1+(g1_O/g0_O)*exp(-theta_1_O/Th))); // Ground state
                     s[i] += sv[i];
                  continue; } // Ground state
-                sel[i] = 1/Th * (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Th)) + (g1_O2/g0_O2*theta_1_O2/Th*exp(-theta_1_O2/Th))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Th))); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
+                sel[i] = 1.0/Th * (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Th)) + (g1_O2/g0_O2*theta_1_O2/Th*exp(-theta_1_O2/Th))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Th))); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
                 s[i] += sv[i];
             }
             // Old equations, before generalize
@@ -801,11 +801,11 @@ public:
             // sV(Tv, s, PlusEq());
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    s[i] = 1/Th * (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Th)) + (g1_O/g0_O*theta_1_O/Th*exp(-theta_1_O/Th))/(1+(g1_O/g0_O)*exp(-theta_1_O/Th))); // Ground state
-                    m_sel[i] += 1/Th * (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Th)) + (g1_O/g0_O*theta_1_O/Th*exp(-theta_1_O/Th))/(1+(g1_O/g0_O)*exp(-theta_1_O/Th)));
+                    s[i] = 1.0/Th * (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Th)) + (g1_O/g0_O*theta_1_O/Th*exp(-theta_1_O/Th))/(1+(g1_O/g0_O)*exp(-theta_1_O/Th))); // Ground state
+                    m_sel[i] += 1.0/Th * (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Th)) + (g1_O/g0_O*theta_1_O/Th*exp(-theta_1_O/Th))/(1+(g1_O/g0_O)*exp(-theta_1_O/Th)));
                  continue; } // Ground state
-                s[i] += 1/Th * (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Th)) + (g1_O2/g0_O2*theta_1_O2/Th*exp(-theta_1_O2/Th))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Th)));
-                m_sel[i] += 1/Th * (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Th)) + (g1_O2/g0_O2*theta_1_O2/Th*exp(-theta_1_O2/Th))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Th)));
+                s[i] += 1.0/Th * (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Th)) + (g1_O2/g0_O2*theta_1_O2/Th*exp(-theta_1_O2/Th))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Th)));
+                m_sel[i] += 1.0/Th * (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Th)) + (g1_O2/g0_O2*theta_1_O2/Th*exp(-theta_1_O2/Th))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Th)));
             }
             // Old equations, before generalize
             // s[1] += 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th;
