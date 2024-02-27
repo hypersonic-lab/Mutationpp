@@ -214,10 +214,10 @@ public:
             if (cp != NULL)
                 // LOOP_MOLECULES(cp[j] += cpr[j]);
              if (i == 0) {
-                cp[i] = 0.0; // Ground state
+                cpr[i] = 0.0; // Ground state
                 cp[i] += cpr[i];
                  continue; } // Ground state
-             cpr[i] += 2.0; //iCv = R; Cp = Cv + R
+             cpr[i] += 1.0; //iCv = R; Cp = Cv + R
              cp[i] += cpr[i];
          }
 
@@ -228,7 +228,7 @@ public:
              if (i == 0) {
                 cp[i] = 0.0; // Ground state
                  continue; } // Ground state
-             cp[i] += 2.0;
+             cp[i] += 1.0;
          }
      }
 
@@ -250,6 +250,35 @@ public:
         //  for (int i = 0; i < m_ns; i++){
         //      cpv[i] += 0.0;
         //  }
+     }
+
+    // Rotation. Assuming fulling active rotational mode
+    double g0_O2 = 3.0;
+    double g1_O2 = 2.0;
+    double theta_1_O2 = 11900;
+    double g0_O = 5.0;
+    double g1_O = 4.0;
+    double theta_1_O = 270;
+
+     if (cpel != NULL) {
+         for (int i = 0; i < m_ns; i++){
+             if (i == 0) {
+                cpel[i] = 1/Th * pow((theta_1_O/Th),2.0) * (g1_O/g0_O * exp(-theta_1_O / Th)) / (pow(1+g1_O/g0_O * exp(-theta_1_O / Th),2.0)); // Ground state
+                cp[i] += cpel[i];
+                 continue; } // Ground state
+             cpel[i] += 1/Th * pow((theta_1_O2/Th),2.0) * (g1_O2/g0_O2 * exp(-theta_1_O2 / Th)) / (pow(1+g1_O2/g0_O2 * exp(-theta_1_O2 / Th),2.0)); // Boyd p. 110
+             cp[i] += cpel[i];
+         }
+
+     } else {
+        if (cp != NULL)
+                // cpR(cp, PlusEq()); // Add cpr to cp
+         for (int i = 0; i < m_ns; i++){
+             if (i == 0) {
+                cp[i] = 1/Th * pow((theta_1_O/Th),2.0) * (g1_O/g0_O * exp(-theta_1_O / Th)) / (pow(1+g1_O/g0_O * exp(-theta_1_O / Th),2.0)); // Ground state
+                 continue; } // Ground state
+             cp[i] += 1/Th * pow((theta_1_O2/Th),2.0) * (g1_O2/g0_O2 * exp(-theta_1_O2 / Th)) / (pow(1+g1_O2/g0_O2 * exp(-theta_1_O2 / Th),2.0));
+         }
      }
 
      // Electronic. For now setting as zero
@@ -479,7 +508,7 @@ public:
                     hv[i] = 0.0;
                     h[i] = 0.0; // Ground state
                     continue; }
-                hv[i] = energy[i-1] * 1.42879 / (Th *  KB); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                hv[i] = energy[i-1] * 1.42879 / (Th) / (exp(-1.0 * energy[i-1]* 1.42879  / Th) - 1.0); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
                 h[i] += hv[i];
             }
 
@@ -492,8 +521,8 @@ public:
                     m_hv[i] = 0.0;
 //                    h[i] = 0.0; // Ground state
                     continue; }
-                m_hv[i] = energy[i-1] * 1.42879 / (Th *  KB); // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
-                h[i] = m_hv[i]; //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                m_hv[i] = energy[i-1] * 1.42879 / (Th) / (exp(1.0 * energy[i-1]* 1.42879  / Th) - 1.0);   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                h[i] += m_hv[i]; //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
             }
         }
 
@@ -501,6 +530,40 @@ public:
         // hel[0] = 0.0;
         // hel[1] = 0.0;
         // hel[2] = 0.0;
+        double g0_O2 = 3.0;
+        double g1_O2 = 2.0;
+        double theta_1_O2 = 11900;
+        double g0_O = 5.0;
+        double g1_O = 4.0;
+        double theta_1_O = 270;
+
+        if (hel != NULL) {
+            // LOOP(hv[i] = 0.0);
+            // hV(Tv, hv, EqDiv(Th));
+            // if (h != NULL)
+                // LOOP_MOLECULES(h[j] += hv[j]);
+            for (int i = 0; i < m_ns; i++){
+                if (i == 0) {
+                    hel[i] = ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Th)) / (1 + g1_O/g0_O * exp(-theta_1_O / Th));
+                    h[i] += hel[i]; // Ground state
+                    continue; }
+                hel[i] = ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Th)) / (1 + g1_O2/g0_O2 * exp(-theta_1_O2 / Th)); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                h[i] += hel[i];
+            }
+
+        } else {
+            if (h != NULL)
+                // hV(Tv, h, PlusEqDiv(Th));
+            for (int i = 0; i < m_ns; i++){
+                if (i == 0) {
+                    h[i] = ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Th)) / (1 + g1_O/g0_O * exp(-theta_1_O / Th));
+                    m_hel[i] = ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Th)) / (1 + g1_O/g0_O * exp(-theta_1_O / Th));
+//                    h[i] = 0.0; // Ground state
+                    continue; }
+                m_hel[i] = ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Th)) / (1 + g1_O2/g0_O2 * exp(-theta_1_O2 / Th));   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                h[i] += m_hel[i]; //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+            }
+        }
 
         for (int i = 0; i < m_ns; i++){
 //            h[i] += energy[i];
@@ -559,6 +622,57 @@ public:
 
         //     return;
         // }
+        double energy[50];
+        energy[0] = 786.0234;
+        energy[1] = 2343.573;
+        energy[2] = 3881.3038;
+        energy[3] = 5398.5964;
+        energy[4] = 6894.8782;
+        energy[5] = 8369.5118;
+        energy[6] = 9822.0457;
+        energy[7] = 11251.754;
+        energy[8] = 12658.072;
+        energy[9] = 14040.4352;
+        energy[10] = 15398.3596;
+        energy[11] = 16731.2;
+        energy[12] = 18038.3111;
+        energy[13] = 19319.2091;
+        energy[14] = 20573.1679;
+        energy[15] = 21799.7037;
+        energy[16] = 22998.2518;
+        energy[17] = 24168.0058;
+        energy[18] = 25308.4816;
+        energy[19] = 26419.0341;
+        energy[20] = 27498.9373;
+        energy[21] = 28547.546;
+        energy[22] = 29564.2148;
+        energy[23] = 30548.1374;
+        energy[24] = 31498.6683;
+        energy[25] = 32414.9205;
+        energy[26] = 33296.168;
+        energy[27] = 34141.6041;
+        energy[28] = 34950.3419;
+        energy[29] = 35721.3326;
+        energy[30] = 36453.8504;
+        energy[31] = 37146.6854;
+        energy[32] = 37798.8698;
+        energy[33] = 38409.2744;
+        energy[34] = 38976.5281;
+        energy[35] = 39499.5822;
+        energy[36] = 39976.9044;
+        energy[37] = 40407.0429;
+        energy[38] = 40788.6264;
+        energy[39] = 41119.9613;
+        energy[40] = 41399.6763;
+        energy[41] = 41626.4003;
+        energy[42] = 41799.6494;
+        energy[43] = 41920.3914;
+        energy[44] = 41993.5464;
+        energy[45] = 42029.6803;
+        energy[46] = 42042.9885;
+        energy[47] = 0.0;
+        energy[48] = 0.0;
+        energy[49] = 0.0;
         for (int i = 0; i < m_ns; i++){
             s[i] = 0.;
         }
@@ -566,9 +680,9 @@ public:
         // enthalpy(Th, Te, Tr, Tv, Tel, s, NULL, NULL, NULL, NULL, NULL);
         // gibbs(Th, Te, Tr, Tv, Tel, P, s, NULL, NULL, NULL, NULL);
 
-        
+        double test[50];
 
-
+        enthalpy(Th, Te, Tr, Tv, Tel, test, NULL, NULL, NULL, NULL, NULL);
         // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
         // Will need to upload masses of each species
         if (st != NULL) {
@@ -636,7 +750,11 @@ public:
             // sV(Tv, sv, Eq());
             // LOOP_MOLECULES(s[j] += sv[j]);
             for (int i = 0; i < m_ns; i++){
-                sv[i] = 0.0; // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
+                if (i == 0) {
+                    sv[i] = 0.0; // Ground state
+                    s[i] += sv[i];
+                 continue; } // Ground state
+                sv[i] = m_hv[i] / Th - 1/Th * log(1-exp(-1.0*energy[i-1] * 1.42879/Th)); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
                 s[i] += sv[i];
             }
             // Old equations, before generalize
@@ -645,13 +763,55 @@ public:
         } else {
             // sV(Tv, s, PlusEq());
             for (int i = 0; i < m_ns; i++){
-                s[i] += 0.0;
-                m_sv[i] += 0.0;
+                if (i == 0) {
+                    s[i] = 0.0; // Ground state
+                    m_sv[i] += 0.0;
+                 continue; } // Ground state
+                s[i] += m_hv[i] / Th - 1/Th * log(1-exp(-1.0*energy[i-1] * 1.42879/Th));
+                m_sv[i] += m_hv[i] / Th - 1/Th * log(1-exp(-1.0*energy[i-1] * 1.42879/Th));
             }
             // Old equations, before generalize
             // s[1] += 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th;
             // s[2] += 1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
         }
+
+        double g0_O2 = 3.0;
+        double g1_O2 = 2.0;
+        double theta_1_O2 = 11900;
+        double g0_O = 5.0;
+        double g1_O = 4.0;
+        double theta_1_O = 270;
+
+        if (sel != NULL) {
+            // LOOP(sv[i] = 0.0);
+            // sV(Tv, sv, Eq());
+            // LOOP_MOLECULES(s[j] += sv[j]);
+            for (int i = 0; i < m_ns; i++){
+                if (i == 0) {
+                    sel[i] = 1/Th * (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Th)) + (g1_O/g0_O*theta_1_O/Th*exp(-theta_1_O/Th))/(1+(g1_O/g0_O)*exp(-theta_1_O/Th))); // Ground state
+                    s[i] += sv[i];
+                 continue; } // Ground state
+                sel[i] = 1/Th * (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Th)) + (g1_O2/g0_O2*theta_1_O2/Th*exp(-theta_1_O2/Th))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Th))); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
+                s[i] += sv[i];
+            }
+            // Old equations, before generalize
+            // sv[1] = 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th; // Eq. 3.78 of Boyd. Need to define N or substitute
+            // sv[2] =  1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
+        } else {
+            // sV(Tv, s, PlusEq());
+            for (int i = 0; i < m_ns; i++){
+                if (i == 0) {
+                    s[i] = 1/Th * (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Th)) + (g1_O/g0_O*theta_1_O/Th*exp(-theta_1_O/Th))/(1+(g1_O/g0_O)*exp(-theta_1_O/Th))); // Ground state
+                    m_sel[i] += 1/Th * (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Th)) + (g1_O/g0_O*theta_1_O/Th*exp(-theta_1_O/Th))/(1+(g1_O/g0_O)*exp(-theta_1_O/Th)));
+                 continue; } // Ground state
+                s[i] += 1/Th * (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Th)) + (g1_O2/g0_O2*theta_1_O2/Th*exp(-theta_1_O2/Th))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Th)));
+                m_sel[i] += 1/Th * (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Th)) + (g1_O2/g0_O2*theta_1_O2/Th*exp(-theta_1_O2/Th))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Th)));
+            }
+            // Old equations, before generalize
+            // s[1] += 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th;
+            // s[2] += 1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
+        }
+
 
         // Electronic. For now setting as zero
         // sel[0] = 0.0;
@@ -796,6 +956,21 @@ public:
                 g[i] += m_hv[i] - Th * m_sv[i]; // G = H - TS // Tv?
             }
         }
+        
+        if (gel != NULL) {
+            for (int i = 0; i < m_ns; i++){
+                gel[i] += m_hel[i] - Th * m_sel[i]; // G = H - TS // Tv?
+            }
+
+            for (int i = 0; i < m_ns; i++){
+                g[i] += gel[i];
+            } // Is there a way to combine this with previous loop?
+  
+        } else {
+            for (int i = 0; i < m_ns; i++){
+                g[i] += m_hel[i] - Th * m_sel[i]; // G = H - TS // Tv?
+            }
+        }
         // // Electronic. For now setting as zero
     //     // sel[0] = 0.0;
     //     // sel[1] = 0.0;
@@ -858,9 +1033,11 @@ protected:
         m_ht.resize(m_ns);
         m_hr.resize(m_ns);
         m_hv.resize(m_ns);
+        m_hel.resize(m_ns);
         m_st.resize(m_ns);
         m_sr.resize(m_ns);
         m_sv.resize(m_ns);
+        m_sel.resize(m_ns);
         // Add ht, hr, hv...
 
         // Nitrogen m_vhf
@@ -1131,9 +1308,11 @@ private:
     std::vector<double> m_hv {}; //should this be in private?? //m_ for private
     std::vector<double> m_ht {}; //should this be in private??
     std::vector<double> m_hr {}; //should this be in private??
+    std::vector<double> m_hel {}; //should this be in private??
     std::vector<double> m_sv {}; //should this be in private??
     std::vector<double> m_st {}; //should this be in private??
     std::vector<double> m_sr {}; //should this be in private??
+    std::vector<double> m_sel {}; //should this be in private??
 
 
 
