@@ -1031,7 +1031,7 @@ protected:
     {
 //        m_ns = 3; // Number of energy states
         m_vh.resize(m_ns);
-        m_vhf.resize(m_ns);
+        m_vhf.resize(50);
         m_ht.resize(m_ns);
         m_hr.resize(m_ns);
         m_hv.resize(m_ns);
@@ -1102,6 +1102,7 @@ protected:
         m_vhf[46] = 0.0;
         m_vhf[47] = 0.0;
         m_vhf[48] = 0.0;
+        m_vhf[49] = 0.0;
         // m_vhf[0] = 9448.87932;
         // m_vhf[1] = 37795.51728;
         // m_vhf[2] = 85039.91388000001;
@@ -1176,9 +1177,9 @@ private:
     typedef MinusEquals<double> MinusEq;
 
     // Store here only the necessary data for calculating species thermodynamics
-    const int m_ns = 11; // need to see how to recognize number of states from M++
+    const int m_ns = 48; // need to see how to recognize number of states from M++
     const int m_na = 1; // need to see how to recognize number of states from M++
-    const int m_nm = 10; // need to see how to recognize number of states from M++
+    const int m_nm = 47; // need to see how to recognize number of states from M++
     // double m_vh[m_ns];
     // double m_vhf[m_ns];
     // double hv[m_ns];
