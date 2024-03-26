@@ -6,7 +6,7 @@
          <!-- -->
          <!-- --> 
 
-   <reaction formula="Ar(0)+e-=Ar(1)+e-"><!--0_1-->
+   <reaction formula="Ar(0)+e-=Ar(1)+e-">0_1
       <arrhenius A="1036898821.8185" T="133887.01" n="0.019797"/>
    </reaction>
    <reaction formula="Ar(0)+e-=Ar(2)+e-"><!--0_2-->
@@ -3444,7 +3444,7 @@
       <!-- Radiative processes - Spontaneous emission -->
       <!-- -->
 
-   <reaction formula="Ar(2)=>Ar(0)+hv">
+   <!-- <reaction formula="Ar(2)=>Ar(0)+hv">
       <arrhenius A="132500000.0" T="0.0" n="0.0"/>
    </reaction>
    <reaction formula="Ar(4)=>Ar(0)+hv">
@@ -3888,6 +3888,6 @@
    </reaction>
    <reaction formula="Ar+(1)+e-=>Ar(4)+ hv">
       <arrhenius A="1591.6747746956185" T="-316.3457030980956" n="-0.18469804520986088"/>
-   </reaction>  
+   </reaction>   -->
 
 </mechanism>
