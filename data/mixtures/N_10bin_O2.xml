@@ -1,4 +1,4 @@
-<mixture mechanism="N_10bin_equal_O2" thermo_db="STS">
+<mixture mechanism="N_10bin_equal" thermo_db="STS">
 
     <element_compositions default="default">
         <composition name="default"> N:1.0 </composition>
