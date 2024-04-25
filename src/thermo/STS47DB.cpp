@@ -684,7 +684,7 @@ public:
         // enthalpy(Th, Te, Tr, Tv, Tel, s, NULL, NULL, NULL, NULL, NULL);
         // gibbs(Th, Te, Tr, Tv, Tel, P, s, NULL, NULL, NULL, NULL);
 
-
+        double test[50];
         enthalpy(Th, Te, Tr, Tv, Tel, test, NULL, NULL, NULL, NULL, NULL);
         // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
         // Will need to upload masses of each species
