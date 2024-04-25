@@ -389,9 +389,7 @@ public:
         energy[44] = 41993.5464;
         energy[45] = 42029.6803;
         energy[46] = 42042.9885;
-        energy[47] = 0.0;
-        energy[48] = 0.0;
-        energy[49] = 0.0;
+
 
 //        double energy[11];
 //        energy[0] = 787.380953594;
@@ -678,9 +676,7 @@ public:
         energy[44] = 41993.5464;
         energy[45] = 42029.6803;
         energy[46] = 42042.9885;
-        energy[47] = 0.0;
-        energy[48] = 0.0;
-        energy[49] = 0.0;
+
         for (int i = 0; i < m_ns; i++){
             s[i] = 0.;
         }
@@ -688,7 +684,6 @@ public:
         // enthalpy(Th, Te, Tr, Tv, Tel, s, NULL, NULL, NULL, NULL, NULL);
         // gibbs(Th, Te, Tr, Tv, Tel, P, s, NULL, NULL, NULL, NULL);
 
-        double test[50];
 
         enthalpy(Th, Te, Tr, Tv, Tel, test, NULL, NULL, NULL, NULL, NULL);
         // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
@@ -892,9 +887,8 @@ public:
         energy[44] = 41993.5464;
         energy[45] = 42029.6803;
         energy[46] = 42042.9885;
-        energy[47] = 0.0;
-        energy[48] = 0.0;
-        energy[49] = 0.0;
+
+
         // First compute the non-dimensional enthalpy
         enthalpy(Th, Te, Tr, Tv, Tel, g, NULL, NULL, NULL, NULL, NULL);
 
@@ -1106,10 +1100,7 @@ protected:
         m_vhf[44] = 0.0;
         m_vhf[45] = 0.0;
         m_vhf[46] = 0.0;
-        m_vhf[47] = 0.0;
-        m_vhf[48] = 0.0;
-        m_vhf[49] = 0.0;
-        m_vhf[50] = 0.0;
+
         // m_vhf[0] = 9448.87932;
         // m_vhf[1] = 37795.51728;
         // m_vhf[2] = 85039.91388000001;
