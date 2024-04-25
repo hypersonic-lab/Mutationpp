@@ -34,6 +34,8 @@ add_sources(mutation++
     ParticleRRHO.cpp
     RrhoDB.cpp
     STSDB.cpp
+    STS10DB.cpp
+    STS47DB.cpp
     Species.cpp
     SpeciesListDescriptor.cpp
     SpeciesNameFSM.cpp
