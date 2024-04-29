@@ -4,6 +4,6 @@
     </species>
 
     <element_compositions default="default">
-        <composition name="default"> O:1.0 </composition>
+        <composition name="default"> Obin:1.0 </composition>
     </element_compositions>
 </mixture>
