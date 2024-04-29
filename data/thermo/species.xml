@@ -2621,7 +2621,7 @@
                                         <level degeneracy="   7767" energy="0.0" />
                                  </electronic_levels>
                                  <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                           19425.13
+                                           0
                                  </formation_enthalpy>
                          </thermodynamics>
                  </species>
@@ -2636,7 +2636,7 @@
                                         <level degeneracy="  36426" energy="0.0" />
                                  </electronic_levels>
                                  <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                           71231.59
+                                           0
                                  </formation_enthalpy>
                          </thermodynamics>
                  </species>
@@ -2651,7 +2651,7 @@
 									<level degeneracy="  91239" energy="0.0" />
 								</electronic_levels>
 								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										143937.47
+										0
 								</formation_enthalpy>
 						</thermodynamics>
 				</species>
@@ -2666,7 +2666,7 @@
 									<level degeneracy=" 182634" energy="0.0" />
 								</electronic_levels>
 								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										233797.83
+										0
 								</formation_enthalpy>
 						</thermodynamics>
 				</species>
@@ -2681,7 +2681,7 @@
 									<level degeneracy=" 312789" energy="0.0" />
 								</electronic_levels>
 								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										338000.97
+										0
 								</formation_enthalpy>
 						</thermodynamics>
 				</species>
@@ -2696,7 +2696,7 @@
 									<level degeneracy=" 498210" energy="0.0" />
 								</electronic_levels>
 								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										454210.59
+										0
 								</formation_enthalpy>
 						</thermodynamics>
 				</species>
@@ -2711,7 +2711,7 @@
 									<level degeneracy=" 772773" energy="0.0" />
 								</electronic_levels>
 								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										582378.25
+										0
 								</formation_enthalpy>
 						</thermodynamics>
 				</species>
@@ -2726,7 +2726,7 @@
 									<level degeneracy="1176771" energy="0.0" />
 								</electronic_levels>
 								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										721541.19
+										0
 								</formation_enthalpy>
 						</thermodynamics>
 				</species>
@@ -2741,7 +2741,7 @@
 									<level degeneracy="2013810" energy="0.0" />
 								</electronic_levels>
 								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										873713.56
+										0
 								</formation_enthalpy>
 						</thermodynamics>
 				</species>
@@ -2756,7 +2756,7 @@
 									<level degeneracy="3109059" energy="0.0" />
 								</electronic_levels>
 								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										1085127.88
+										0
 								</formation_enthalpy>
 						</thermodynamics>
 				</species>
@@ -3254,7 +3254,7 @@
                                      <level degeneracy="12" energy="0.0" />
                                  </electronic_levels>
                                  <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                         472440
+                                         249229
                                  </formation_enthalpy>
                          </thermodynamics>
                  </species>
