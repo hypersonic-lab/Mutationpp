@@ -241,7 +241,13 @@ public:
             if (cp != NULL) {
                 // LOOP_MOLECULES(cp[j] += cpv[j]);
          for (int i = 0; i < m_ns; i++){
-             cpv[i] += 0.0; // Setting as zero for now. Need to think
+            if (i == 0)
+            {
+                cpv[i] += 0.0; // Setting as zero for now. Need to think
+             cp[i] += cpv[i];
+             continue;
+            }
+             cpv[i] += 1.0; // Setting as zero for now. Need to think
              cp[i] += cpv[i];
          }
             }
@@ -249,7 +255,13 @@ public:
         if (cp != NULL){
                 // cpV(Tv, cp, PlusEq());
          for (int i = 0; i < m_ns; i++){
-             cp[i] += 0.0;
+            if (i == 0)
+            {
+                cpv[i] += 0.0; // Setting as zero for now. Need to think
+             cp[i] += cpv[i];
+             continue;
+            }
+             cp[i] += 1.0;
          }
      }
      }
