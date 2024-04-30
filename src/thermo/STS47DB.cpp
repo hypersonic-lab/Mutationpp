@@ -278,11 +278,11 @@ public:
          for (int i = 0; i < m_ns; i++){
              if (i == 0) {
                 // cpel[i] = 0.0; // Ground state
-                cpel[i] = 1.0/Th * pow((theta_1_O/Tel),2.0) * (g1_O/g0_O * exp(-theta_1_O / Tel)) / (pow(1.0+g1_O/g0_O * exp(-theta_1_O / Tel),2.0)); // Ground state
+                cpel[i] = 1.0/Th * pow((theta_1_O/Tel),2.0) * (g1_O/g0_O * exp(-theta_1_O / Tel)) / (pow(1.0+g1_O/g0_O * exp(-theta_1_O / Tel),2.0)) + 1.0; // Ground state
                 cp[i] += cpel[i];
                  continue; } // Ground state
             //  cpel[i] += 0.0; // Boyd p. 110
-             cpel[i] += 1.0/Th * pow((theta_1_O2/Tel),2.0) * (g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (pow(1.0+g1_O2/g0_O2 * exp(-theta_1_O2 / Tel),2.0)); // Boyd p. 110
+             cpel[i] += 1.0/Th * pow((theta_1_O2/Tel),2.0) * (g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (pow(1.0+g1_O2/g0_O2 * exp(-theta_1_O2 / Tel),2.0)) + 1.0; // Boyd p. 110
              cp[i] += cpel[i];
          }
 
@@ -292,10 +292,10 @@ public:
          for (int i = 0; i < m_ns; i++){
              if (i == 0) {
                 // cp[i] = 0.0; // Ground state
-                cp[i] += 1.0/Th * pow((theta_1_O/Tel),2.0) * (g1_O/g0_O * exp(-theta_1_O / Tel)) / (pow(1.0+g1_O/g0_O * exp(-theta_1_O / Tel),2.0)); // Ground state
+                cp[i] += 1.0/Th * pow((theta_1_O/Tel),2.0) * (g1_O/g0_O * exp(-theta_1_O / Tel)) / (pow(1.0+g1_O/g0_O * exp(-theta_1_O / Tel),2.0)) + 1.0; // Ground state
                  continue; } // Ground state
             //  cp[i] += 0.0;
-             cp[i] += 1.0/Th * pow((theta_1_O2/Tel),2.0) * (g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (pow(1.0+g1_O2/g0_O2 * exp(-theta_1_O2 / Tel),2.0));
+             cp[i] += 1.0/Th * pow((theta_1_O2/Tel),2.0) * (g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (pow(1.0+g1_O2/g0_O2 * exp(-theta_1_O2 / Tel),2.0)) + 1.0;
          }}
      }
 
