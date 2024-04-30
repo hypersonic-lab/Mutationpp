@@ -1,6 +1,6 @@
 <!-- Oxygen RBF extrapolation mapped model reaction mechanism, 10 states -->
 
-<mechanism name="O2_RBF_10">
+<mechanism name="O2sts_10">
 
 	<arrhenius_units A="mol,cm,s,K" E="J,mol,K" />
 
