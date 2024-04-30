@@ -751,9 +751,9 @@ public:
                     s[i] += 0.0;
                     m_sr[i] += 0.0;
                     continue; }
-                sr[i] += (log(Tr / (2 * ThetaR)) + 1.0) / Tr; // From slide 20 of Magin, need to check units
-                s[i] += (log(Tr / (2 * ThetaR)) + 1.0) / Tr;
-                m_sr[i] += (log(Th / (2 * ThetaR)) + 1.0) / Tr; // From Magin above;
+                sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From slide 20 of Magin, need to check units
+                s[i] += (log(Tr / (2 * ThetaR)) + 1.0);
+                m_sr[i] += (log(Th / (2 * ThetaR)) + 1.0); // From Magin above;
 
             }
             
@@ -768,8 +768,8 @@ public:
                     s[i] += 0.0;
                     m_sr[i] += 0.0;
                     continue; }
-                s[i] += (log(Th / (2 * ThetaR)) + 1.0) / Tr; // From Magin above;
-                m_sr[i] += (log(Th / (2 * ThetaR)) + 1.0) / Tr; // From Magin above;
+                s[i] += (log(Th / (2 * ThetaR)) + 1.0); // From Magin above;
+                m_sr[i] += (log(Th / (2 * ThetaR)) + 1.0); // From Magin above;
             }
 
         }
@@ -983,15 +983,15 @@ public:
                     gr[i] -= 0.0; // Ground state
                     g[i] -= 0.0;
                     continue; }
-                gr[i] -= (log(Tr / (2 * ThetaR)) + 1.0) / Tr; // G = H - TS
-                g[i] -= (log(Tr / (2 * ThetaR)) + 1.0) / Tr;
+                gr[i] -= (log(Tr / (2 * ThetaR)) + 1.0); // G = H - TS
+                g[i] -= (log(Tr / (2 * ThetaR)) + 1.0);
             }
         } else {
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
                     g[i] -= 0.0;
                     continue; }
-                g[i] -= (log(Tr / (2 * ThetaR)) + 1.0) / Tr;  // G = H - TS
+                g[i] -= (log(Tr / (2 * ThetaR)) + 1.0);  // G = H - TS
             }
         }
 
