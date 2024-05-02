@@ -605,10 +605,14 @@ public:
         //     }
         // }
 
-//         for (int i = 0; i < m_ns; i++){
-// //            h[i] += energy[i];
-//             h[i] += m_vhf[i];
-//         }
+        for (int i = 0; i < m_ns; i++){
+            if (i == 0){
+                h[i] += 249229.0 / RU / Th;
+            }
+            h[i] += 0.0;
+//            h[i] += energy[i];
+            // h[i] += m_vhf[i];
+        }
 
         // Old equations, before generalize
         // I think this below is already calculated above by the sums
