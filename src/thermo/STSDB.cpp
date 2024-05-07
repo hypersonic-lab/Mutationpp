@@ -1108,6 +1108,36 @@ protected:
     virtual void loadThermodynamicData()
     {
 //        m_ns = 3; // Number of energy states
+
+        m_ns = species().size();
+
+        vector<int> atom_indices;
+        vector<int> molecule_indices;
+
+        LOOP(
+            switch(species()[i].type()) {
+                case ATOM:
+                    atom_indices.push_back(i);
+                    break;
+                case MOLECULE:
+                    molecule_indices.push_back(i);
+                    break;
+                default:
+                    break;
+            }
+        )
+
+        m_na = atom_indices.size();
+        m_nm = molecule_indices.size();
+
+
+
+
+
+
+
+
+
         m_vh.resize(m_ns);
         m_vhf.resize(50);
         m_ht.resize(m_ns);
@@ -1118,6 +1148,10 @@ protected:
         m_sr.resize(m_ns);
         m_sv.resize(m_ns);
         m_sel.resize(m_ns);
+
+
+
+
         // Add ht, hr, hv...
 
         // Nitrogen m_vhf
@@ -1254,10 +1288,14 @@ private:
     typedef PlusEquals<double> PlusEq;
     typedef MinusEquals<double> MinusEq;
 
+    int m_ns;
+    int m_na;
+    int m_nm;
+
     // Store here only the necessary data for calculating species thermodynamics
-    const int m_ns = 48; // need to see how to recognize number of states from M++
-    const int m_na = 1; // need to see how to recognize number of states from M++
-    const int m_nm = 47; // need to see how to recognize number of states from M++
+    // const int m_ns = 48; // need to see how to recognize number of states from M++
+    // const int m_na = 1; // need to see how to recognize number of states from M++
+    // const int m_nm = 47; // need to see how to recognize number of states from M++
     // double m_vh[m_ns];
     // double m_vhf[m_ns];
     // double hv[m_ns];
