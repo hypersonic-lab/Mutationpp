@@ -1,0 +1,12 @@
+<!-- Neutral 5 species air mixture -->
+<mixture mechanism="O2">
+
+    <species>
+        O O2
+    </species>
+
+    <element_compositions default="default">
+        <composition name="default"> O: 1.0 </composition>
+    </element_compositions>
+
+</mixture>
