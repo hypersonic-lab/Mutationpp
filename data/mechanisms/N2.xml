@@ -1,0 +1,19 @@
+<!--
+Park air5 reaction mechanism
+Rates taken from:
+    1) Park et al., JTHT 15(1):76-90, 2001.
+    2) Park, JTHT 7(3):385-398, 1993.
+-->
+<mechanism name="N2">
+
+    <arrhenius_units A="mol,cm,s,K" E="kcal,mol,K" />
+
+    <!-- Park, 2001 -->
+    <reaction formula="N2+M=2N+M">
+        <arrhenius A="3.0E+22" n="-1.6" T="113200.0" />
+        <M>N2:3.0</M>
+    </reaction>
+
+</mechanism>
+
+
