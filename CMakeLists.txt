@@ -86,7 +86,7 @@ mark_as_advanced(
 # Update the documentation string of CMAKE_BUILD_TYPE for GUIs and set the
 # default build type as Release
 if (NOT CMAKE_BUILD_TYPE)
-    SET (CMAKE_BUILD_TYPE "Release" CACHE STRING
+    SET (CMAKE_BUILD_TYPE "Debug" CACHE STRING
         "Choose the type of build, options are: None Debug Release
         RelWithDebInfo MinSizeRel Profile Coverage." FORCE)
 endif ()
