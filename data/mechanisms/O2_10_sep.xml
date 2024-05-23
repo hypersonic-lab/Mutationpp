@@ -1,0 +1,339 @@
+<!-- Oxygen 10_sep extrapolation mapped model reaction mechanism, 37 states -->
+
+<mechanism name="O2_10_sep">
+
+	<arrhenius_units A="mol,cm,s,K" E="J,mol,K" />
+
+	<!-- 01-->
+	<reaction formula="O2_0+Obin=Obin+Obin+Obin">
+		<arrhenius A="  5.506244e+12" n="  3.409781e-01" T="  7.984343e+04" />
+	</reaction>
+
+
+	<!-- 02-->
+	<reaction formula="O2_2+Obin=Obin+Obin+Obin">
+		<arrhenius A="  3.580816e+12" n="  3.688780e-01" T="  7.116224e+04" />
+	</reaction>
+
+
+	<!-- 03-->
+	<reaction formula="O2_3+Obin=Obin+Obin+Obin">
+		<arrhenius A="  4.395664e+12" n="  3.471415e-01" T="  6.764784e+04" />
+	</reaction>
+
+
+	<!-- 04-->
+	<reaction formula="O2_6+Obin=Obin+Obin+Obin">
+		<arrhenius A="  8.101817e+12" n="  2.772039e-01" T="  5.824181e+04" />
+	</reaction>
+
+
+	<!-- 05-->
+	<reaction formula="O2_9+Obin=Obin+Obin+Obin">
+		<arrhenius A="  1.471028e+13" n="  2.110525e-01" T="  4.996157e+04" />
+	</reaction>
+
+
+	<!-- 06-->
+	<reaction formula="O2_12+Obin=Obin+Obin+Obin">
+		<arrhenius A="  2.106034e+13" n="  1.717495e-01" T="  4.240176e+04" />
+	</reaction>
+
+
+	<!-- 07-->
+	<reaction formula="O2_13+Obin=Obin+Obin+Obin">
+		<arrhenius A="  2.489103e+13" n="  1.569990e-01" T="  4.006133e+04" />
+	</reaction>
+
+
+	<!-- 08-->
+	<reaction formula="O2_16+Obin=Obin+Obin+Obin">
+		<arrhenius A="  3.213892e+13" n="  1.340319e-01" T="  3.334338e+04" />
+	</reaction>
+
+
+	<!-- 09-->
+	<reaction formula="O2_18+Obin=Obin+Obin+Obin">
+		<arrhenius A="  1.967435e+13" n="  1.771817e-01" T="  2.894754e+04" />
+	</reaction>
+
+
+	<!-- 10-->
+	<reaction formula="O2_32+Obin=Obin+Obin+Obin">
+		<arrhenius A="  8.526635e+11" n="  5.253570e-01" T="  6.407194e+03" />
+	</reaction>
+
+
+	<!-- 11-->
+	\<reaction formula="O2_0+Obin=O2_2+Obin">
+		<arrhenius A="  3.145815e+17" n="  -8.389265e-01" T="  4.482286e+04" />
+	</reaction>
+
+
+	<!-- 12-->
+	\<reaction formula="O2_0+Obin=O2_3+Obin">
+		<arrhenius A="  8.169772e+19" n="  -1.405912e+00" T="  5.658470e+04" />
+	</reaction>
+
+
+	<!-- 13-->
+	\<reaction formula="O2_0+Obin=O2_6+Obin">
+		<arrhenius A="  3.652801e+19" n="  -1.386679e+00" T="  6.854741e+04" />
+	</reaction>
+
+
+	<!-- 14-->
+	\<reaction formula="O2_0+Obin=O2_9+Obin">
+		<arrhenius A="  1.398728e+18" n="  -1.120612e+00" T="  7.274280e+04" />
+	</reaction>
+
+
+	<!-- 15-->
+	\<reaction formula="O2_0+Obin=O2_12+Obin">
+		<arrhenius A="  2.591080e+17" n="  -1.011032e+00" T="  7.592104e+04" />
+	</reaction>
+
+
+	<!-- 16-->
+	\<reaction formula="O2_0+Obin=O2_13+Obin">
+		<arrhenius A="  1.260363e+17" n="  -9.571766e-01" T="  7.670046e+04" />
+	</reaction>
+
+
+	<!-- 17-->
+	\<reaction formula="O2_0+Obin=O2_16+Obin">
+		<arrhenius A="  1.012438e+17" n="  -9.885973e-01" T="  7.970780e+04" />
+	</reaction>
+
+
+	<!-- 18-->
+	\<reaction formula="O2_0+Obin=O2_18+Obin">
+		<arrhenius A="  2.253947e+17" n="  -1.103946e+00" T="  8.203140e+04" />
+	</reaction>
+
+
+	<!-- 19-->
+	\<reaction formula="O2_0+Obin=O2_32+Obin">
+		<arrhenius A="  4.559167e+02" n="  2.000000e+00" T="  7.851767e+04" />
+	</reaction>
+
+
+	<!-- 20-->
+	\<reaction formula="O2_2+Obin=O2_3+Obin">
+		<arrhenius A="  2.068055e+06" n="  1.730372e+00" T="  6.903072e+03" />
+	</reaction>
+
+
+	<!-- 21-->
+	\<reaction formula="O2_2+Obin=O2_6+Obin">
+		<arrhenius A="  4.711662e+21" n="  -1.869958e+00" T="  5.400158e+04" />
+	</reaction>
+
+
+	<!-- 22-->
+	\<reaction formula="O2_2+Obin=O2_9+Obin">
+		<arrhenius A="  4.193321e+20" n="  -1.669288e+00" T="  6.336944e+04" />
+	</reaction>
+
+
+	<!-- 23-->
+	\<reaction formula="O2_2+Obin=O2_12+Obin">
+		<arrhenius A="  5.474830e+18" n="  -1.290630e+00" T="  6.653668e+04" />
+	</reaction>
+
+
+	<!-- 24-->
+	\<reaction formula="O2_2+Obin=O2_13+Obin">
+		<arrhenius A="  1.890343e+18" n="  -1.202820e+00" T="  6.734028e+04" />
+	</reaction>
+
+
+	<!-- 25-->
+	\<reaction formula="O2_2+Obin=O2_16+Obin">
+		<arrhenius A="  2.148415e+17" n="  -1.043214e+00" T="  6.947719e+04" />
+	</reaction>
+
+
+	<!-- 26-->
+	\<reaction formula="O2_2+Obin=O2_18+Obin">
+		<arrhenius A="  8.331861e+16" n="  -9.874579e-01" T="  7.075211e+04" />
+	</reaction>
+
+
+	<!-- 27-->
+	\<reaction formula="O2_2+Obin=O2_32+Obin">
+		<arrhenius A="  3.987824e+13" n="  -5.395064e-01" T="  7.655359e+04" />
+	</reaction>
+
+
+	<!-- 28-->
+	\<reaction formula="O2_3+Obin=O2_6+Obin">
+		<arrhenius A="  5.711612e+19" n="  -1.430100e+00" T="  4.242994e+04" />
+	</reaction>
+
+
+	<!-- 29-->
+	\<reaction formula="O2_3+Obin=O2_9+Obin">
+		<arrhenius A="  4.239151e+21" n="  -1.893165e+00" T="  5.847271e+04" />
+	</reaction>
+
+
+	<!-- 30-->
+	\<reaction formula="O2_3+Obin=O2_12+Obin">
+		<arrhenius A="  3.972192e+19" n="  -1.473388e+00" T="  6.287524e+04" />
+	</reaction>
+
+
+	<!-- 31-->
+	\<reaction formula="O2_3+Obin=O2_13+Obin">
+		<arrhenius A="  1.095932e+19" n="  -1.362557e+00" T="  6.372627e+04" />
+	</reaction>
+
+
+	<!-- 32-->
+	\<reaction formula="O2_3+Obin=O2_16+Obin">
+		<arrhenius A="  4.149057e+17" n="  -1.090685e+00" T="  6.565342e+04" />
+	</reaction>
+
+
+	<!-- 33-->
+	\<reaction formula="O2_3+Obin=O2_18+Obin">
+		<arrhenius A="  1.305640e+17" n="  -1.014551e+00" T="  6.689116e+04" />
+	</reaction>
+
+
+	<!-- 34-->
+	\<reaction formula="O2_3+Obin=O2_32+Obin">
+		<arrhenius A="  9.116022e+19" n="  -2.000000e+00" T="  7.985064e+04" />
+	</reaction>
+
+
+	<!-- 35-->
+	\<reaction formula="O2_6+Obin=O2_9+Obin">
+		<arrhenius A="  1.422995e+17" n="  -8.446583e-01" T="  3.285531e+04" />
+	</reaction>
+
+
+	<!-- 36-->
+	\<reaction formula="O2_6+Obin=O2_12+Obin">
+		<arrhenius A="  1.630922e+21" n="  -1.821708e+00" T="  4.986117e+04" />
+	</reaction>
+
+
+	<!-- 37-->
+	\<reaction formula="O2_6+Obin=O2_13+Obin">
+		<arrhenius A="  1.054792e+21" n="  -1.787835e+00" T="  5.248684e+04" />
+	</reaction>
+
+
+	<!-- 38-->
+	\<reaction formula="O2_6+Obin=O2_16+Obin">
+		<arrhenius A="  1.560539e+19" n="  -1.407346e+00" T="  5.589333e+04" />
+	</reaction>
+
+
+	<!-- 39-->
+	\<reaction formula="O2_6+Obin=O2_18+Obin">
+		<arrhenius A="  1.203821e+18" n="  -1.187001e+00" T="  5.696718e+04" />
+	</reaction>
+
+
+	<!-- 40-->
+	\<reaction formula="O2_6+Obin=O2_32+Obin">
+		<arrhenius A="  5.457943e+15" n="  -9.707560e-01" T="  6.247332e+04" />
+	</reaction>
+
+
+	<!-- 41-->
+	\<reaction formula="O2_9+Obin=O2_12+Obin">
+		<arrhenius A="  3.900916e+14" n="  -2.610889e-01" T="  2.522054e+04" />
+	</reaction>
+
+
+	<!-- 42-->
+	\<reaction formula="O2_9+Obin=O2_13+Obin">
+		<arrhenius A="  4.638023e+16" n="  -7.609989e-01" T="  3.170074e+04" />
+	</reaction>
+
+
+	<!-- 43-->
+	\<reaction formula="O2_9+Obin=O2_16+Obin">
+		<arrhenius A="  1.565278e+20" n="  -1.616085e+00" T="  4.492383e+04" />
+	</reaction>
+
+
+	<!-- 44-->
+	\<reaction formula="O2_9+Obin=O2_18+Obin">
+		<arrhenius A="  2.655366e+19" n="  -1.464653e+00" T="  4.783454e+04" />
+	</reaction>
+
+
+	<!-- 45-->
+	\<reaction formula="O2_9+Obin=O2_32+Obin">
+		<arrhenius A="  1.139111e+15" n="  -7.612756e-01" T="  5.197353e+04" />
+	</reaction>
+
+
+	<!-- 46-->
+	\<reaction formula="O2_12+Obin=O2_13+Obin">
+		<arrhenius A="  3.483222e+10" n="  7.386081e-01" T="  5.256916e+03" />
+	</reaction>
+
+
+	<!-- 47-->
+	\<reaction formula="O2_12+Obin=O2_16+Obin">
+		<arrhenius A="  9.339341e+14" n="  -3.783291e-01" T="  2.547145e+04" />
+	</reaction>
+
+
+	<!-- 48-->
+	\<reaction formula="O2_12+Obin=O2_18+Obin">
+		<arrhenius A="  3.621405e+17" n="  -1.009483e+00" T="  3.399215e+04" />
+	</reaction>
+
+
+	<!-- 49-->
+	\<reaction formula="O2_12+Obin=O2_32+Obin">
+		<arrhenius A="  8.712097e+14" n="  -6.839770e-01" T="  4.357328e+04" />
+	</reaction>
+
+
+	<!-- 50-->
+	\<reaction formula="O2_13+Obin=O2_16+Obin">
+		<arrhenius A="  1.260968e+14" n="  -1.603017e-01" T="  2.006113e+04" />
+	</reaction>
+
+
+	<!-- 51-->
+	\<reaction formula="O2_13+Obin=O2_18+Obin">
+		<arrhenius A="  6.081825e+15" n="  -5.874519e-01" T="  2.790808e+04" />
+	</reaction>
+
+
+	<!-- 52-->
+	\<reaction formula="O2_13+Obin=O2_32+Obin">
+		<arrhenius A="  1.022849e+15" n="  -6.864014e-01" T="  4.105957e+04" />
+	</reaction>
+
+
+	<!-- 53-->
+	\<reaction formula="O2_16+Obin=O2_18+Obin">
+		<arrhenius A="  6.286685e+13" n="  -6.873665e-02" T="  1.345276e+04" />
+	</reaction>
+
+
+	<!-- 54-->
+	\<reaction formula="O2_16+Obin=O2_32+Obin">
+		<arrhenius A="  1.530752e+15" n="  -6.909381e-01" T="  3.401511e+04" />
+	</reaction>
+
+
+	<!-- 55-->
+	\<reaction formula="O2_18+Obin=O2_32+Obin">
+		<arrhenius A="  1.824661e+15" n="  -6.852404e-01" T="  2.950973e+04" />
+	</reaction>
+
+
+
+
+</mechanism>
