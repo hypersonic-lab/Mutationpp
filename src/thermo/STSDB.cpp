@@ -955,6 +955,16 @@ public:
         energy[44] = 41993.5464;
         energy[45] = 42029.6803;
         energy[46] = 42042.9885;
+        energy[0] = 786.0234;
+        energy[1] = 3881.3038;
+        energy[2] = 5398.5964;
+        energy[3] = 9822.0457;
+        energy[4] = 14040.4352;
+        energy[5] = 18038.3111;
+        energy[6] = 19319.2091;
+        energy[7] = 22998.2518;
+        energy[8] = 25308.4816;
+        energy[9] = 37798.8698;
 
         // First compute the non-dimensional enthalpy
         // enthalpy(Th, Te, Tr, Tv, Tel, g, NULL, NULL, NULL, NULL, NULL);
