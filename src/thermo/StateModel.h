@@ -339,14 +339,31 @@ protected:
         const double rhoe_over_Ru = rhoe/RU;
         const double tol = rtol*std::abs(rhoe_over_Ru) + atol;
 
+        double* mp_work_2 = new double [ns];
+
         double f, fp, dT;
+        double lt, ut, templ, tempu, temp;
+
+
+        //Bisection Method Attempt
+        lt = 51.0;
+        ut = 20000.0;
+        if(T == 0.0) T=lt;
+
+        templ = lt;
+        tempu = ut;
 
         // Compute initial value of f
         h(T, p_work);
         f = alpha;
+        // for (int i = 0; i < ns; ++i)
+            // std::cerr << "The value of " << i << " mp_X: " << mp_X[i] << " h: " << p_work[i] <<  std::endl;
+            // std::cerr << "The value of " << i << " h: " << p_work[i] << std::endl;
+        // std::cerr << std::endl;
         for (int i = 0; i < ns; ++i)
             f += mp_X[i]*p_work[i];
         f = T*f - rhoe_over_Ru;
+        std::cout << "The INITIAL value of f: " << f << std::endl;
 
         int iter = 0;
         //cout << iter << " " << f << " " << T << endl;
@@ -357,18 +374,21 @@ protected:
                 std::cerr << "res = " << f / rhoe_over_Ru << ", T = " << T << std::endl;
                 return false;
             }
+            temp = (templ + tempu) / 2.0;
 
             // Compute df/dT
             cp(T, p_work);
             fp = alpha;
             for (int i = 0; i < ns; ++i)
                 fp += mp_X[i]*p_work[i];
+            std::cerr << "The value of fp: " << fp << std::endl;
+            std::cerr << "The value of T: " << T << " The value of rhoe: " << rhoe << std::endl;
 
             // Update T
             dT = f/fp;
             if (std::abs(T - 50.0) < 1.0e-10 && dT > 0) {
                 std::cerr << "Clamping T at 50 K, energy is too low for the "
-                     << "given species densities..." << std::endl;
+                     << "given species densities... " << T << " HELLO " << rhoe << std::endl;
                 return false;
             }
             while (T - dT < 50.0) dT *= 0.5; // prevent non-positive T
@@ -380,6 +400,7 @@ protected:
             for (int i = 0; i < ns; ++i)
                 f += mp_X[i]*p_work[i];
             f = T*f - rhoe_over_Ru;
+            std::cerr << "The LOOP value of f: " << f << std::endl;
             //cout << iter << " " << f << " " << T << endl;
         }
 
