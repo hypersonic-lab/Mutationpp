@@ -365,12 +365,11 @@ namespace Mutation
                 lt = 51.0;
                 ut = 20000.0;
                 // if(T == 0.0) T=lt;
-                ea = 1.1 * atol;
+                ea = 1.1 * tol;
 
                 templ = lt;
                 tempu = ut;
                 f = alpha;
-
 
                 // Compute initial value of f
 
@@ -396,8 +395,10 @@ namespace Mutation
                     f_lower = alpha;
                     f_upper = alpha;
                     // for (int i = 0; i < ns; ++i)
-                    // std::cerr << "The value of " << i << " mp_X: " << mp_X[i] << " h: " << p_work[i] <<  std::endl;
-                    // std::cerr << "The value of " << i << " h: " << p_work[i] << std::endl;
+                    // {
+                    //     std::cerr << "The value of " << i << " hu: " << mp_work_upper[i] << " hl: " << mp_work_lower[i] << std::endl;
+                    //     std::cerr << "The value of " << i << " h: " << p_work[i] << std::endl;
+                    // }
                     // std::cerr << std::endl;
                     for (int i = 0; i < ns; ++i)
                         f += mp_X[i] * p_work[i];
@@ -410,6 +411,10 @@ namespace Mutation
                     for (int i = 0; i < ns; ++i)
                         f_lower += mp_X[i] * mp_work_lower[i];
                     f_lower = templ * f_lower - rhoe_over_Ru;
+
+                    std::cerr << "The value of rhoe: " << rhoe_over_Ru << std::endl;
+                    std::cerr << "The value of f: " << f << "The value of fu: " << f_upper << "The value of fl: " << f_lower << std::endl;
+                    std::cerr << std::endl;
 
                     test = f_lower * f;
                     if (test == 0)
@@ -430,8 +435,10 @@ namespace Mutation
 
                     oldt = temp;
                     newt = (templ + tempu) / 2.0;
-                    ea = std::abs(newt - oldt) / newt * 100;
-                    std::cerr << "The value of ea: " << ea << std::endl;
+                    ea = std::abs(newt - oldt) / newt;
+                    // std::cerr << "The value of temp: " << newt << std::endl;
+                    // std::cerr << "The value of f: " << f << std::endl;
+                    // std::cerr << std::endl;
 
                     // Compute df/dT
                     // cp(T, p_work);
