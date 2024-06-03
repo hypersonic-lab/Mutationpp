@@ -1,9 +1,0 @@
-<mixture mechanism="O2sts" thermo_db="STS">
-    <species>
-        Obin O2_0 O2_1
-    </species>
-
-    <element_compositions default="default">
-        <composition name="default"> O:1.0 </composition>
-    </element_compositions>
-</mixture>
