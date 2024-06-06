@@ -476,9 +476,9 @@ public:
             // if (h != NULL)
             //     LOOP(h[i] = ht[i]);
             for (int i = 0; i < m_ns; i++){
-                ht[i] += 2.5; // Is this non-dimensional too? Taking in work flow too. Otherwise it would be 1.5.
-                m_ht[i] += 2.5;
-                h[i] += ht[i];
+                ht[i] = 2.5 * Th / Th; // Is this non-dimensional too? Taking in work flow too. Otherwise it would be 1.5.
+                m_ht[i] = 2.5 * Th / Th;
+                h[i] = ht[i];
             }
 
         } else {
@@ -486,8 +486,8 @@ public:
             if (h != NULL){
                 // hT(Th, Te, h, EqDiv(Th));
             for (int i = 0; i < m_ns; i++){
-                m_ht[i] += 2.5;
-                h[i] += 2.5;
+                m_ht[i] = 2.5 * Th / Th;
+                h[i] = 2.5 * Th / Th;
             }}
         }
 
@@ -499,13 +499,13 @@ public:
                 // LOOP_MOLECULES(h[j] += hr[j]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    m_hr[i] += 0.0;
-                    hr[i] += 0.0; // Ground state
+                    m_hr[i] = 0.0;
+                    hr[i] = 0.0; // Ground state
                     h[i] += 0.0;
                     continue; }
-                hr[i] += 1.0;
-                m_hr[i] += 1.0;
-                h[i] += 1.0;
+                hr[i] = 1.0 * Tr / Th;
+                m_hr[i] = 1.0 * Tr / Th;
+                h[i] += 1.0 * Tr / Th;
             }}
 
         } else {
@@ -513,11 +513,11 @@ public:
                 // hR(Tr, h, PlusEqDiv(Th));
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    m_hr[i] += 0.0;
+                    m_hr[i] = 0.0;
                     h[i] += 0.0; // Ground state
                     continue; }
-                m_hr[i] += 1.0;
-                h[i] += 1.0;
+                m_hr[i] = 1.0 * Tr / Th;
+                h[i] += 1.0 * Tr / Th;
             }}
         }
 
@@ -531,14 +531,14 @@ public:
                 // LOOP_MOLECULES(h[j] += hv[j]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    hv[i] += 0.0;
+                    hv[i] = 0.0;
                     h[i] += 0.0; // Ground state
-                    m_hv[i] += 0.0;
+                    m_hv[i] = 0.0;
                     continue; }
-                hv[i] += (i-1) * energy[i-1] * 1.42879 / (Tv); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
-                m_hv[i] += (i-1) * energy[i-1] * 1.42879 / (Tv);
+                hv[i] = (i-1) * energy[i-1] * 1.42879 / Th; //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                m_hv[i] = (i-1) * energy[i-1] * 1.42879 / Th;
                 // hv[i] = energy[i-1] * 1.42879 / (Th) / (exp(-1.0 * energy[i-1]* 1.42879  / Th) - 1.0); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
-                h[i] += (i-1) * energy[i-1] * 1.42879 / (Tv);
+                h[i] += (i-1) * energy[i-1] * 1.42879 / Th;
             }}
 
         } else {
@@ -547,12 +547,12 @@ public:
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
                     h[i] += 0.0;
-                    m_hv[i] += 0.0;
+                    m_hv[i] = 0.0;
 //                    h[i] = 0.0; // Ground state
                     continue; }
-                m_hv[i] += (i-1) * energy[i-1] * 1.42879 / (Tv);   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                m_hv[i] += (i-1) * energy[i-1] * 1.42879 / Th;   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
                 // m_hv[i] = energy[i-1] * 1.42879 / (Th) / (exp(1.0 * energy[i-1]* 1.42879  / Th) - 1.0);   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
-                h[i] += (i-1) * energy[i-1] * 1.42879 / (Tv); //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                h[i] += (i-1) * energy[i-1] * 1.42879 / Th; //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
             }}
         }
 
@@ -574,13 +574,13 @@ public:
                 // LOOP_MOLECULES(h[j] += hv[j]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    hel[i] += ((theta_1_O/Tel) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel));
-                    m_hel[i] += ((theta_1_O/Tel) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel));
-                    h[i] += ((theta_1_O/Tel) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)); // Ground state
+                    hel[i] = ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel));
+                    m_hel[i] = ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel));
+                    h[i] += ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)); // Ground state
                     continue; }
-                m_hel[i] += ((theta_1_O2/Tel) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel));   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
-                hel[i] += ((theta_1_O2/Tel) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
-                h[i] += ((theta_1_O2/Tel) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel));
+                m_hel[i] = ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel));   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                hel[i] = ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                h[i] += ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel));
             }}
 
         } else {
@@ -588,12 +588,12 @@ public:
                 // hV(Tv, h, PlusEqDiv(Th));
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    h[i] += ((theta_1_O/Tel) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel));
-                    m_hel[i] += ((theta_1_O/Tel) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel));
+                    h[i] += ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel));
+                    m_hel[i] = ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel));
 //                    h[i] = 0.0; // Ground state
                     continue; }
-                m_hel[i] += ((theta_1_O2/Tel) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel));   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
-                h[i] += ((theta_1_O2/Tel) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)); //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                m_hel[i] = ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel));   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                h[i] += ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)); //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
             }}
         }
 
@@ -615,9 +615,10 @@ public:
         //     }
         // }
 
+        double Tss = standardTemperature();
         for (int i = 0; i < m_ns; i++){
             if (i == 0){
-                h[i] += 249229.0 / RU / Th;
+                h[i] += (249229.0 / RU - 2.5*Tss - ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Tss)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tss))) / Th;
             }
             h[i] += 0.0;
 //            h[i] += energy[i];
@@ -1112,7 +1113,7 @@ protected:
             // species
             IO::XmlElement::const_iterator rrho_iter =
                 species_iter->findTagWithAttribute(
-                    "thermodynamics", "type", "RRHO");
+                    "thermodynamics", "type", "STS");
 
             if (rrho_iter == species_iter->end())
                 continue;
