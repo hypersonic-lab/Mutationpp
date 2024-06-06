@@ -11,7 +11,7 @@ Rates taken from:
     <!-- Park, 2001 -->
     <reaction formula="N2+M=2N+M">
         <arrhenius A="3.0E+22" n="-1.6" T="113200.0" />
-        <M>N:3.0</M>
+        <M>N:0.233</M>
     </reaction>
 
 </mechanism>
