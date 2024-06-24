@@ -75,6 +75,7 @@ public:
             // Check that species densities are at least positive
             assert(p_mass[i] >= 0.0);
             mp_X[i] = std::max(p_mass[i] / m_thermo.speciesMw(i), 0.0);
+            // std::cout << "i = " << i << ", X = " << mp_X[i] << ", p_mass = " << p_mass[i] << std::endl;
             conc += mp_X[i];
         }
 

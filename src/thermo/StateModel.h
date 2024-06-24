@@ -348,36 +348,35 @@ namespace Mutation
                 const double atol = 1.0e-12,
                 const double rtol = 1.0e-12,
                 const int max_iters = 100)
-            {
+    {
                 using std::cerr;
                 const int ns = m_thermo.nSpecies();
+                // const int ns = 11;
                 const double rhoe_over_Ru = rhoe / RU;
                 const double tol = rtol * std::abs(rhoe_over_Ru) + atol;
 
                 double *mp_work_lower = new double[ns];
                 double *mp_work_upper = new double[ns];
 
-                double f, fp, dT;
-                double f_upper, f_lower, test;
-                double lt, ut, templ, tempu, temp, oldt, newt, ea;
+                double f, fp, dT, fp_h;
+                // double f_upper, f_lower;
 
-                // Bisection Method Attempt
-                lt = 51.0;
-                ut = 20000.0;
-                // if(T == 0.0) T=lt;
-                ea = 1.1 * tol;
-
-                templ = lt;
-                tempu = ut;
-                f = alpha;
+                // double delta = 1.0e-6;
 
                 // Compute initial value of f
-
-                // std::cout << "The INITIAL value of f: " << f << std::endl;
+                h(T, p_work);
+                f = alpha;
+                for (int i = 0; i < ns; ++i)
+                {
+                    f += mp_X[i] * p_work[i];
+                    // std::cout << "i = " << i << ", X = " << mp_X[i] << ", h = " << p_work[i] << std::endl;
+                }
+                f = T * f - rhoe_over_Ru;
+                // std::cout << "INTIAL COMPARISON" << f << " " << T << " " << rhoe_over_Ru << std::endl;
 
                 int iter = 0;
                 // cout << iter << " " << f << " " << T << endl;
-                while (std::abs(ea) > tol)
+                while (std::abs(f) > tol)
                 {
                     // Check for max iterations
                     if (iter++ == max_iters)
@@ -386,89 +385,50 @@ namespace Mutation
                         std::cerr << "res = " << f / rhoe_over_Ru << ", T = " << T << std::endl;
                         return false;
                     }
-                    temp = (templ + tempu) / 2.0;
 
-                    h(temp, p_work);
-                    h(templ, mp_work_lower);
-                    h(tempu, mp_work_upper);
-                    f = alpha;
-                    f_lower = alpha;
-                    f_upper = alpha;
-                    // for (int i = 0; i < ns; ++i)
-                    // {
-                    //     std::cerr << "The value of " << i << " hu: " << mp_work_upper[i] << " hl: " << mp_work_lower[i] << std::endl;
-                    //     std::cerr << "The value of " << i << " h: " << p_work[i] << std::endl;
-                    // }
-                    // std::cerr << std::endl;
-                    for (int i = 0; i < ns; ++i)
-                        f += mp_X[i] * p_work[i];
-                    f = temp * f - rhoe_over_Ru;
-
-                    for (int i = 0; i < ns; ++i)
-                        f_upper += mp_X[i] * mp_work_upper[i];
-                    f_upper = tempu * f_upper - rhoe_over_Ru;
-
-                    for (int i = 0; i < ns; ++i)
-                        f_lower += mp_X[i] * mp_work_lower[i];
-                    f_lower = templ * f_lower - rhoe_over_Ru;
-
-                    std::cerr << "The value of rhoe: " << rhoe_over_Ru << std::endl;
-                    std::cerr << "The value of f: " << f << "The value of fu: " << f_upper << "The value of fl: " << f_lower << std::endl;
-                    std::cerr << std::endl;
-
-                    test = f_lower * f;
-                    if (test == 0)
-                    {
-                        ea = 0.0;
-                    }
-                    else
-                    {
-                        if (test < 0)
-                        {
-                            tempu = temp;
-                        }
-                        else
-                        {
-                            templ = temp;
-                        }
-                    }
-
-                    oldt = temp;
-                    newt = (templ + tempu) / 2.0;
-                    ea = std::abs(newt - oldt) / newt;
-                    // std::cerr << "The value of temp: " << newt << std::endl;
-                    // std::cerr << "The value of f: " << f << std::endl;
-                    // std::cerr << std::endl;
+                    // h(T + delta, mp_work_upper);
+                    // h(T - delta, mp_work_lower);
 
                     // Compute df/dT
-                    // cp(T, p_work);
-                    // fp = alpha;
-                    // for (int i = 0; i < ns; ++i)
-                    //     fp += mp_X[i]*p_work[i];
-                    // std::cerr << "The value of fp: " << fp << std::endl;
-                    // std::cerr << "The value of T: " << T << " The value of rhoe: " << rhoe << std::endl;
+                    cp(T, p_work);
+                    // f_lower = alpha;
+                    // f_upper = alpha;
 
-                    // // Update T
-                    // dT = f / fp;
-                    // if (std::abs(T - 50.0) < 1.0e-10 && dT > 0)
+                    // for (int i = 0; i < ns; ++i)
                     // {
-                    //     std::cerr << "Clamping T at 50 K, energy is too low for the "
-                    //               << "given species densities... " << T << " HELLO " << rhoe << std::endl;
-                    //     return false;
+                    //     f_upper += mp_X[i] * mp_work_upper[i];
+                    //     f_lower += mp_X[i] * mp_work_lower[i];
                     // }
-                    // while (T - dT < 50.0)
-                    //     dT *= 0.5; // prevent non-positive T
-                    // T -= dT;
 
-                    // // Recompute f
-                    // h(T, p_work);
-                    // f = alpha;
-                    // for (int i = 0; i < ns; ++i)
-                    //     f += mp_X[i] * p_work[i];
-                    // f = T * f - rhoe_over_Ru;
-                    // std::cerr << "The LOOP value of f: " << f << std::endl;
-                    // // cout << iter << " " << f << " " << T << endl;
-                    T = temp;
+                    fp = alpha;
+                    // fp_h = alpha;
+                    for (int i = 0; i < ns; ++i)
+                        fp += mp_X[i] * p_work[i];
+                    // fp_h = (f_lower - f_upper) / (2 * delta);
+                    // std::cerr << "fp: " << fp << " fp_h: "
+                                //   << fp_h << std::endl;
+
+                    // Update T
+                    dT = f / fp;
+                    if (std::abs(T - 50.0) < 1.0e-10 && dT > 0)
+                    {
+                        std::cerr << "Clamping T at 50 K, energy is too low for the "
+                                  << "given species densities..." << std::endl;
+                        return false;
+                    }
+                    while (T - dT < 50.0)
+                        dT *= 0.5; // prevent non-positive T
+                    T -= dT;
+                    // std::cout << "T is HERE = " << T << std::endl;
+                    // std::cout << "Energy is HERE = " << rhoe_over_Ru << std::endl;
+
+                    // Recompute f
+                    h(T, p_work);
+                    f = alpha;
+                    for (int i = 0; i < ns; ++i)
+                        f += mp_X[i] * p_work[i];
+                    f = T * f - rhoe_over_Ru;
+                    // std::cout << iter << "WEAREHERE" << f << " " << T << std::endl;
                 }
 
                 // Let the user know if we converged or not
