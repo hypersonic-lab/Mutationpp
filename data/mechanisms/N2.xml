@@ -9,9 +9,8 @@ Rates taken from:
     <arrhenius_units A="mol,cm,s,K" E="kcal,mol,K" />
 
     <!-- Park, 2001 -->
-    <reaction formula="N2+M=2N+M">
+    <reaction formula="N2+N=N+N+N">
         <arrhenius A="3.0E+22" n="-1.6" T="113200.0" />
-        <M>N:0.233</M>
     </reaction>
 
 </mechanism>
