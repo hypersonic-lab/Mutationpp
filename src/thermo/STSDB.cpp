@@ -574,13 +574,13 @@ public:
                 // LOOP_MOLECULES(h[j] += hv[j]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    hel[i] = ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel));
-                    m_hel[i] = ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel));
-                    h[i] += ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)); // Ground state
+                    hel[i] = ((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)) / Th;
+                    m_hel[i] = ((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)) / Th;
+                    h[i] += ((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)) / Th; // Ground state
                     continue; }
-                m_hel[i] = ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel));   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
-                hel[i] = ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
-                h[i] += ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel));
+                m_hel[i] = ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / Th;   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                hel[i] = ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / Th; //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                h[i] += ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / Th;
             }}
 
         } else {
@@ -588,12 +588,12 @@ public:
                 // hV(Tv, h, PlusEqDiv(Th));
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    h[i] += ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel));
-                    m_hel[i] = ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel));
+                    h[i] += ((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)) / Th;
+                    m_hel[i] = ((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)) / Th;
 //                    h[i] = 0.0; // Ground state
                     continue; }
-                m_hel[i] = ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel));   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
-                h[i] += ((theta_1_O2/Th) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)); //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                m_hel[i] = ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / Th;   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                h[i] += ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / Th; //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
             }}
         }
 
@@ -615,10 +615,11 @@ public:
         //     }
         // }
 
+        // See ln 806 and 655 in RRHO. Adjust enthalpy of formation to any temp
         double Tss = standardTemperature();
         for (int i = 0; i < m_ns; i++){
             if (i == 0){
-                h[i] += (249229.0 / RU - 2.5*Tss - ((theta_1_O/Th) * g1_O/g0_O * exp(-theta_1_O / Tss)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tss))) / Th;
+                h[i] += (249229.0 / RU - 2.5*Tss - ((theta_1_O/Tss) * g1_O/g0_O * exp(-theta_1_O / Tss)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tss))) / Th;
             }
             h[i] += 0.0;
 //            h[i] += energy[i];
@@ -790,7 +791,7 @@ public:
                     continue; }
                 sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From slide 20 of Magin, need to check units
                 s[i] += (log(Tr / (2 * ThetaR)) + 1.0);
-                m_sr[i] += (log(Th / (2 * ThetaR)) + 1.0); // From Magin above;
+                m_sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
 
             }
             
@@ -805,8 +806,8 @@ public:
                     s[i] += 0.0;
                     m_sr[i] += 0.0;
                     continue; }
-                s[i] += (log(Th / (2 * ThetaR)) + 1.0); // From Magin above;
-                m_sr[i] += (log(Th / (2 * ThetaR)) + 1.0); // From Magin above;
+                s[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
+                m_sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
             }
 
         }
@@ -858,13 +859,13 @@ public:
             // LOOP_MOLECULES(s[j] += sv[j]);
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    sel[i] += (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Th*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel))); // Ground state
+                    sel[i] += (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel))); // Ground state
                     m_sel[i] += (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel)));
                     s[i] += (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel)));
                  continue; } // Ground state
-                sel[i] += (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Th*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel))); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
+                sel[i] += (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel))); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
                 m_sel[i] +=  (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
-                s[i] += (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Th*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
+                s[i] += (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
             }
             // Old equations, before generalize
             // sv[1] = 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th; // Eq. 3.78 of Boyd. Need to define N or substitute
@@ -1069,11 +1070,11 @@ public:
         if (gel != NULL) {
             for (int i = 0; i < m_ns; i++){
                 if (i == 0) {
-                    gel[i] -= (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Th*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel))); // Ground state
-                    g[i] -= (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Th*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel)));
+                    gel[i] -= (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel))); // Ground state
+                    g[i] -= (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel)));
                  continue; } // Ground state
-                gel[i] -= (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Th*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel))); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
-                g[i] -= (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Th*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
+                gel[i] -= (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel))); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
+                g[i] -= (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
             }
         } else {
             for (int i = 0; i < m_ns; i++){
