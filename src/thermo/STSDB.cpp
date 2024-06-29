@@ -535,10 +535,14 @@ public:
                     h[i] += 0.0; // Ground state
                     m_hv[i] = 0.0;
                     continue; }
-                hv[i] = (i-1) * energy[i-1] * 1.42879 / Th; //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
-                m_hv[i] = (i-1) * energy[i-1] * 1.42879 / Th;
+                // exp(-\nu \eps_i / T)
+                // hv[i] = (i-1) * energy[i-1] * 1.42879 / Th; //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                // m_hv[i] = (i-1) * energy[i-1] * 1.42879 / Th;
+                double cm2J = 1.98630e-23;
+                hv[i] = energy[i-1] * cm2J / (KB * Th); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                m_hv[i] = energy[i-1] * cm2J / (KB * Th);
                 // hv[i] = energy[i-1] * 1.42879 / (Th) / (exp(-1.0 * energy[i-1]* 1.42879  / Th) - 1.0); //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
-                h[i] += (i-1) * energy[i-1] * 1.42879 / Th;
+                h[i] += energy[i-1] * cm2J / (KB * Th);
             }}
 
         } else {
@@ -550,9 +554,13 @@ public:
                     m_hv[i] = 0.0;
 //                    h[i] = 0.0; // Ground state
                     continue; }
-                m_hv[i] += (i-1) * energy[i-1] * 1.42879 / Th;   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                // exp(-\nu \eps_i / T)
+                double cm2J = 1.98630e-23;
+                // m_hv[i] += (i-1) * energy[i-1] * 1.42879 / Th;   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                m_hv[i] += energy[i-1] * cm2J / (KB * Th);   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
                 // m_hv[i] = energy[i-1] * 1.42879 / (Th) / (exp(1.0 * energy[i-1]* 1.42879  / Th) - 1.0);   // * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
-                h[i] += (i-1) * energy[i-1] * 1.42879 / Th; //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                // h[i] += (i-1) * energy[i-1] * 1.42879 / Th; //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+                h[i] += energy[i-1] * cm2J / (KB * Th); //energy[i-1] * 1.42879 / Th * exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
             }}
         }
 
