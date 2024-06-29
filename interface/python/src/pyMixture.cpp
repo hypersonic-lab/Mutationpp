@@ -380,10 +380,30 @@ void py_export_Mixture(py::module &m) {
           "speciesHOverRT",
           [](const Mutation::Mixture &self) {
             std::vector<double> h_i(self.nSpecies());
-            self.speciesCpOverR(h_i.data());
+            self.speciesHOverRT(h_i.data());
             return py::array(py::cast(h_i));
           },
           "Returns the unitless vector of species enthalpies \f$ H_i / R_u T "
+          "\f$.")
+
+     .def(
+          "speciesSOverR",
+          [](const Mutation::Mixture &self) {
+            std::vector<double> s_i(self.nSpecies());
+            self.speciesSOverR(s_i.data());
+            return py::array(py::cast(s_i));
+          },
+          "Returns the unitless vector of species entropies \f$ S_i / R_u "
+          "\f$.")
+
+     .def(
+          "speciesGOverRT",
+          [](const Mutation::Mixture &self) {
+            std::vector<double> g_i(self.nSpecies());
+            self.speciesGOverRT(g_i.data());
+            return py::array(py::cast(g_i));
+          },
+          "Returns the unitless vector of species Gibbs Free Energy \f$ G_i / R_u T "
           "\f$.")
 
       .def("mixtureHMole",
