@@ -2631,7 +2631,7 @@
                          <stoichiometry>
                                  O: 2
                          </stoichiometry>
-                         <thermodynamics type="Ar_STS">
+                         <thermodynamics type="STS">
                                  <electronic_levels units="1/cm">
                                         <level degeneracy="   7767" energy="0.0" />
                                  </electronic_levels>
@@ -2646,7 +2646,7 @@
                          <stoichiometry>
                                  O: 2
                          </stoichiometry>
-                         <thermodynamics type="Ar_STS">
+                         <thermodynamics type="STS">
                                  <electronic_levels units="1/cm">
                                         <level degeneracy="  36426" energy="0.0" />
                                  </electronic_levels>
@@ -2661,7 +2661,7 @@
 						<stoichiometry>
 								O: 2
 						</stoichiometry>
-						<thermodynamics type="Ar_STS">
+						<thermodynamics type="STS">
 								<electronic_levels units="1/cm">
 									<level degeneracy="  91239" energy="0.0" />
 								</electronic_levels>
@@ -2676,7 +2676,7 @@
 						<stoichiometry>
 								O: 2
 						</stoichiometry>
-						<thermodynamics type="Ar_STS">
+						<thermodynamics type="STS">
 								<electronic_levels units="1/cm">
 									<level degeneracy=" 182634" energy="0.0" />
 								</electronic_levels>
@@ -2691,7 +2691,7 @@
 						<stoichiometry>
 								O: 2
 						</stoichiometry>
-						<thermodynamics type="Ar_STS">
+						<thermodynamics type="STS">
 								<electronic_levels units="1/cm">
 									<level degeneracy=" 312789" energy="0.0" />
 								</electronic_levels>
@@ -2706,7 +2706,7 @@
 						<stoichiometry>
 								O: 2
 						</stoichiometry>
-						<thermodynamics type="Ar_STS">
+						<thermodynamics type="STS">
 								<electronic_levels units="1/cm">
 									<level degeneracy=" 498210" energy="0.0" />
 								</electronic_levels>
@@ -2721,7 +2721,7 @@
 						<stoichiometry>
 								O: 2
 						</stoichiometry>
-						<thermodynamics type="Ar_STS">
+						<thermodynamics type="STS">
 								<electronic_levels units="1/cm">
 									<level degeneracy=" 772773" energy="0.0" />
 								</electronic_levels>
@@ -2736,7 +2736,7 @@
 						<stoichiometry>
 								O: 2
 						</stoichiometry>
-						<thermodynamics type="Ar_STS">
+						<thermodynamics type="STS">
 								<electronic_levels units="1/cm">
 									<level degeneracy="1176771" energy="0.0" />
 								</electronic_levels>
@@ -2751,7 +2751,7 @@
 						<stoichiometry>
 								O: 2
 						</stoichiometry>
-						<thermodynamics type="Ar_STS">
+						<thermodynamics type="STS">
 								<electronic_levels units="1/cm">
 									<level degeneracy="2013810" energy="0.0" />
 								</electronic_levels>
@@ -2766,7 +2766,7 @@
 						<stoichiometry>
 								O: 2
 						</stoichiometry>
-						<thermodynamics type="Ar_STS">
+						<thermodynamics type="STS">
 								<electronic_levels units="1/cm">
 									<level degeneracy="3109059" energy="0.0" />
 								</electronic_levels>
