@@ -3,9 +3,8 @@
 
     <arrhenius_units A="mol,m,s,K" E="kcal,mol,K" />
 
-    <reaction formula="O2+M=2O+M">
-        <arrhenius A="2.75e13" n="-1.0" T="59500.0" />
-        <M>O:3.</M>
+    <reaction formula="O2+O=2O+O">
+        <arrhenius A="1.0e22" n="-1.50" T="59500.0" />
     </reaction>
 
 </mechanism>
