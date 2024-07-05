@@ -1,0 +1,9 @@
+<mixture mechanism="O2sts_10_Ar" thermo_db="Ar_STS">
+    <species>
+        Obin_Ar Arbin O2_0 O2_1 O2_2 O2_3 O2_4 O2_5 O2_6 O2_7 O2_8 O2_9
+    </species>
+
+    <element_compositions default="default">
+        <composition name="default"> O:0.9, Ar:0.1 </composition>
+    </element_compositions>
+</mixture>
