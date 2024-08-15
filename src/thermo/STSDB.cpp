@@ -281,7 +281,8 @@ public:
              if (i == 0) {
                 cp[i] += 0.0; // Ground state
                  continue; } // Ground state
-             cp[i] += 1.0;
+             cp[i] += cp_r[i+1];
+            //  cp[i] += 1.0;
          }}
      }
 
@@ -619,9 +620,12 @@ public:
                     hr[i] = 0.0; // Ground state
                     h[i] += 0.0;
                     continue; }
-                hr[i] = 1.0 * Tr / Th;
-                m_hr[i] = 1.0 * Tr / Th;
-                h[i] += 1.0 * Tr / Th;
+                hr[i] = h_r[i+1];
+                m_hr[i] = h_r[i+1];
+                h[i] += h_r[i+1];
+                // hr[i] = 1.0 * Tr / Th;
+                // m_hr[i] = 1.0 * Tr / Th;
+                // h[i] += 1.0 * Tr / Th;
             }}
 
         } else {
@@ -997,8 +1001,10 @@ public:
                     s[i] += 0.0;
                     m_sr[i] += 0.0;
                     continue; }
-                s[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
-                m_sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
+                s[i] += s_r[i+1]; // From Magin above;
+                m_sr[i] += s_r[i+1]; // From Magin above;
+                // s[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
+                // m_sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
             }
 
         }
