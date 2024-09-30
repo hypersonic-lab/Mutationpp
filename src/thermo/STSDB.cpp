@@ -13035,7 +13035,7 @@ public:
             };
         val1 *= Tr * Tr;
         double h_val = val1 / val2;;
-        h_r[i] = h_val * Tr / Th;
+        h_r[i] = h_val / Th;
     }
 
 
