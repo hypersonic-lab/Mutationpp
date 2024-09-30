@@ -13035,7 +13035,7 @@ public:
             };
         val1 *= Tr;
         double h_val = val1 / val2;;
-        h_r[i] = h_val;
+        h_r[i] = h_val / Th;
     }
 
 
@@ -19726,7 +19726,7 @@ public:
                 val2 += (2*j+1)*exp(-ro_energy[ctr][3]/(KB*Tr)) * ro_energy[ctr][3]/(KB*Tr*Tr);
                 ctr += 1;
             };
-        double val1 = log(0.5 * val);
+        double val1 = log(2 * val);
         val2 *= Tr;
         double val3 = val;
         double s_val = val1 + val2 / val3;
