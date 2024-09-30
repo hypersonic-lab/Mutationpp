@@ -13033,7 +13033,7 @@ public:
                 val2 += (2*j+1)*exp(-ro_energy[ctr][3]/(KB*Tr));
                 ctr += 1;
             };
-        val1 *= Tr;
+        val1 *= Tr * Tr;
         double h_val = val1 / val2;;
         h_r[i] = h_val / Th;
     }
