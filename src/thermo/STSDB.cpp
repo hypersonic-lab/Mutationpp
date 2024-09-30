@@ -6523,7 +6523,8 @@ public:
             };
         double val1 = 2 * Tr * val / (KB * Tr * Tr);
         double val2 = Tr * Tr * val * val / (KB * Tr * Tr) / (KB * Tr * Tr);
-        val3 -= 2 * val / Tr;
+		val3 *= Tr * Tr;
+        val3 -= 2 * Tr * Tr * val / (KB * Tr * Tr* Tr);
         double cp_val = (val1 - val2 / val4 + val3) / val4;
         cp_r[i] = cp_val;
     }
