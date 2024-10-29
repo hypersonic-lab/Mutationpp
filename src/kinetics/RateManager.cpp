@@ -89,17 +89,17 @@ typedef RateLawGroup1T<Arrhenius, ParkSelector> ArrheniusPark;
  */
 
 
-template <int Type>
-struct RateSelector {
-    typedef MMT_T ForwardGroup;
-    typedef MMT_T ReverseGroup;
-};
-
 // template <int Type>
 // struct RateSelector {
-//     typedef ArrheniusT ForwardGroup;
-//     typedef ArrheniusT ReverseGroup;
+//     typedef MMT_T ForwardGroup;
+//     typedef MMT_T ReverseGroup;
 // };
+
+template <int Type>
+struct RateSelector {
+    typedef ArrheniusT ForwardGroup;
+    typedef ArrheniusT ReverseGroup;
+};
 
 
 #define SELECT_RATE_LAWS(__TYPE__,__FORWARD__,__REVERSE__)\
@@ -109,6 +109,26 @@ template <> struct RateSelector<__TYPE__> {\
 };
 
 // Default rate law groups for non (kf(T), kb(T)) reaction types
+// SELECT_RATE_LAWS(ASSOCIATIVE_IONIZATION,     MMT_T,    MMT_TE)
+// SELECT_RATE_LAWS(DISSOCIATIVE_RECOMBINATION, MMT_TE,   MMT_T)
+// SELECT_RATE_LAWS(ASSOCIATIVE_DETACHMENT,     MMT_T,    MMT_TE)
+// SELECT_RATE_LAWS(DISSOCIATIVE_ATTACHMENT,    MMT_TE,   MMT_T)
+// SELECT_RATE_LAWS(DISSOCIATION_E,             MMT_TE,   MMT_TE)
+// SELECT_RATE_LAWS(RECOMBINATION_E,            MMT_TE,   MMT_TE)
+// SELECT_RATE_LAWS(DISSOCIATION_M,             MMT_PARK, MMT_T)
+// SELECT_RATE_LAWS(RECOMBINATION_M,            MMT_T,    MMT_PARK)
+// SELECT_RATE_LAWS(IONIZATION_E,               MMT_TE,   MMT_T)
+// SELECT_RATE_LAWS(ION_RECOMBINATION_E,        MMT_T,    MMT_TE)
+// SELECT_RATE_LAWS(IONIZATION_M,               MMT_T,    MMT_T)
+// SELECT_RATE_LAWS(ION_RECOMBINATION_M,        MMT_T,    MMT_T)
+// SELECT_RATE_LAWS(ELECTRONIC_ATTACHMENT_M,    MMT_TE,   MMT_T)
+// SELECT_RATE_LAWS(ELECTRONIC_DETACHMENT_M,    MMT_T,    MMT_TE)
+// SELECT_RATE_LAWS(ELECTRONIC_ATTACHMENT_E,    MMT_TE,   MMT_TE)
+// SELECT_RATE_LAWS(ELECTRONIC_DETACHMENT_E,    MMT_TE,   MMT_TE)
+// SELECT_RATE_LAWS(EXCHANGE,                   MMT_T,    MMT_T)
+// SELECT_RATE_LAWS(EXCITATION_M,               MMT_T,    MMT_T)
+// SELECT_RATE_LAWS(EXCITATION_E,               MMT_TE,   MMT_TE)
+
 SELECT_RATE_LAWS(ASSOCIATIVE_IONIZATION,     ArrheniusT,    ArrheniusTe)
 SELECT_RATE_LAWS(DISSOCIATIVE_RECOMBINATION, ArrheniusTe,   ArrheniusT)
 SELECT_RATE_LAWS(ASSOCIATIVE_DETACHMENT,     ArrheniusT,    ArrheniusTe)
@@ -129,26 +149,6 @@ SELECT_RATE_LAWS(EXCHANGE,                   ArrheniusT,    ArrheniusT)
 SELECT_RATE_LAWS(EXCITATION_M,               ArrheniusT,    ArrheniusT)
 SELECT_RATE_LAWS(EXCITATION_E,               ArrheniusTe,   ArrheniusTe)
 
-// SELECT_RATE_LAWS(ASSOCIATIVE_IONIZATION,     ArrheniusT,    ArrheniusTe)
-// SELECT_RATE_LAWS(DISSOCIATIVE_RECOMBINATION, ArrheniusTe,   ArrheniusT)
-// SELECT_RATE_LAWS(ASSOCIATIVE_DETACHMENT,     ArrheniusT,    ArrheniusTe)
-// SELECT_RATE_LAWS(DISSOCIATIVE_ATTACHMENT,    ArrheniusTe,   ArrheniusT)
-// SELECT_RATE_LAWS(DISSOCIATION_E,             ArrheniusTe,   ArrheniusTe)
-// SELECT_RATE_LAWS(RECOMBINATION_E,            ArrheniusTe,   ArrheniusTe)
-// SELECT_RATE_LAWS(DISSOCIATION_M,             ArrheniusPark, ArrheniusT)
-// SELECT_RATE_LAWS(RECOMBINATION_M,            ArrheniusT,    ArrheniusPark)
-// SELECT_RATE_LAWS(IONIZATION_E,               ArrheniusTe,   ArrheniusT)
-// SELECT_RATE_LAWS(ION_RECOMBINATION_E,        ArrheniusT,    ArrheniusTe)
-// SELECT_RATE_LAWS(IONIZATION_M,               ArrheniusT,    ArrheniusT)
-// SELECT_RATE_LAWS(ION_RECOMBINATION_M,        ArrheniusT,    ArrheniusT)
-// SELECT_RATE_LAWS(ELECTRONIC_ATTACHMENT_M,    ArrheniusTe,   ArrheniusT)
-// SELECT_RATE_LAWS(ELECTRONIC_DETACHMENT_M,    ArrheniusT,    ArrheniusTe)
-// SELECT_RATE_LAWS(ELECTRONIC_ATTACHMENT_E,    ArrheniusTe,   ArrheniusTe)
-// SELECT_RATE_LAWS(ELECTRONIC_DETACHMENT_E,    ArrheniusTe,   ArrheniusTe)
-// SELECT_RATE_LAWS(EXCHANGE,                   ArrheniusT,    ArrheniusT)
-// SELECT_RATE_LAWS(EXCITATION_M,               ArrheniusT,    ArrheniusT)
-// SELECT_RATE_LAWS(EXCITATION_E,               ArrheniusTe,   ArrheniusTe)
-
 
 #undef SELECT_RATE_LAWS
 
@@ -165,7 +165,7 @@ struct RateSelector_MMT {
     typedef MMT_T ReverseGroup;
 };
 
-#define SELECT_RATE_LAWS(__TYPE__,__FORWARD__,__REVERSE__)\
+#define SELECT_RATE_LAWS_MMT(__TYPE__,__FORWARD__,__REVERSE__)\
 template <> struct RateSelector_MMT<__TYPE__> {\
     typedef __FORWARD__ ForwardGroup;\
     typedef __REVERSE__ ReverseGroup;\
@@ -175,27 +175,27 @@ template <> struct RateSelector_MMT<__TYPE__> {\
     // TODO: Possibly can remove half of these
     
 // Default rate law groups for non (kf(T), kb(T)) reaction types
-SELECT_RATE_LAWS(ASSOCIATIVE_IONIZATION,     MMT_T,    MMT_TE)
-SELECT_RATE_LAWS(DISSOCIATIVE_RECOMBINATION, MMT_TE,   MMT_T)
-SELECT_RATE_LAWS(ASSOCIATIVE_DETACHMENT,     MMT_T,    MMT_TE)
-SELECT_RATE_LAWS(DISSOCIATIVE_ATTACHMENT,    MMT_TE,   MMT_T)
-SELECT_RATE_LAWS(DISSOCIATION_E,             MMT_TE,   MMT_TE)
-SELECT_RATE_LAWS(RECOMBINATION_E,            MMT_TE,   MMT_TE)
-SELECT_RATE_LAWS(DISSOCIATION_M,             MMT_PARK, MMT_T)
-SELECT_RATE_LAWS(RECOMBINATION_M,            MMT_T,    MMT_PARK)
-SELECT_RATE_LAWS(IONIZATION_E,               MMT_TE,   MMT_T)
-SELECT_RATE_LAWS(ION_RECOMBINATION_E,        MMT_T,    MMT_TE)
-SELECT_RATE_LAWS(IONIZATION_M,               MMT_T,    MMT_T)
-SELECT_RATE_LAWS(ION_RECOMBINATION_M,        MMT_T,    MMT_T)
-SELECT_RATE_LAWS(ELECTRONIC_ATTACHMENT_M,    MMT_TE,   MMT_T)
-SELECT_RATE_LAWS(ELECTRONIC_DETACHMENT_M,    MMT_T,    MMT_TE)
-SELECT_RATE_LAWS(ELECTRONIC_ATTACHMENT_E,    MMT_TE,   MMT_TE)
-SELECT_RATE_LAWS(ELECTRONIC_DETACHMENT_E,    MMT_TE,   MMT_TE)
-SELECT_RATE_LAWS(EXCHANGE,                   MMT_T,    MMT_T)
-SELECT_RATE_LAWS(EXCITATION_M,               MMT_T,    MMT_T)
-SELECT_RATE_LAWS(EXCITATION_E,               MMT_TE,   MMT_TE)
+SELECT_RATE_LAWS_MMT(ASSOCIATIVE_IONIZATION,     MMT_T,    MMT_TE)
+SELECT_RATE_LAWS_MMT(DISSOCIATIVE_RECOMBINATION, MMT_TE,   MMT_T)
+SELECT_RATE_LAWS_MMT(ASSOCIATIVE_DETACHMENT,     MMT_T,    MMT_TE)
+SELECT_RATE_LAWS_MMT(DISSOCIATIVE_ATTACHMENT,    MMT_TE,   MMT_T)
+SELECT_RATE_LAWS_MMT(DISSOCIATION_E,             MMT_TE,   MMT_TE)
+SELECT_RATE_LAWS_MMT(RECOMBINATION_E,            MMT_TE,   MMT_TE)
+SELECT_RATE_LAWS_MMT(DISSOCIATION_M,             MMT_PARK, MMT_T)
+SELECT_RATE_LAWS_MMT(RECOMBINATION_M,            MMT_T,    MMT_PARK)
+SELECT_RATE_LAWS_MMT(IONIZATION_E,               MMT_TE,   MMT_T)
+SELECT_RATE_LAWS_MMT(ION_RECOMBINATION_E,        MMT_T,    MMT_TE)
+SELECT_RATE_LAWS_MMT(IONIZATION_M,               MMT_T,    MMT_T)
+SELECT_RATE_LAWS_MMT(ION_RECOMBINATION_M,        MMT_T,    MMT_T)
+SELECT_RATE_LAWS_MMT(ELECTRONIC_ATTACHMENT_M,    MMT_TE,   MMT_T)
+SELECT_RATE_LAWS_MMT(ELECTRONIC_DETACHMENT_M,    MMT_T,    MMT_TE)
+SELECT_RATE_LAWS_MMT(ELECTRONIC_ATTACHMENT_E,    MMT_TE,   MMT_TE)
+SELECT_RATE_LAWS_MMT(ELECTRONIC_DETACHMENT_E,    MMT_TE,   MMT_TE)
+SELECT_RATE_LAWS_MMT(EXCHANGE,                   MMT_T,    MMT_T)
+SELECT_RATE_LAWS_MMT(EXCITATION_M,               MMT_T,    MMT_T)
+SELECT_RATE_LAWS_MMT(EXCITATION_E,               MMT_TE,   MMT_TE)
 
-#undef SELECT_RATE_LAWS
+#undef SELECT_RATE_LAWS_MMT
     
 //==============================================================================
 
@@ -262,13 +262,25 @@ template <int NReactionTypes>
 void RateManager::selectRate(
     const size_t rxn, const Reaction& reaction)
 {
-    if (reaction.type() == NReactionTypes)
-        addRate<
-            typename RateSelector<NReactionTypes>::ForwardGroup,
-            typename RateSelector<NReactionTypes>::ReverseGroup>(
-            rxn, reaction);
-    else
-        selectRate<NReactionTypes-1>(rxn, reaction);
+    const RateLaw* p_rate = reaction.rateLaw();
+    if (typeid(*p_rate) == typeid(Arrhenius)) {
+        if (reaction.type() == NReactionTypes)
+            addRate<
+                typename RateSelector<NReactionTypes>::ForwardGroup,
+                typename RateSelector<NReactionTypes>::ReverseGroup>(
+                rxn, reaction);
+        else
+            selectRate<NReactionTypes-1>(rxn, reaction);
+    }
+    else if (typeid(*p_rate) == typeid(MMT)) {
+        if (reaction.type() == NReactionTypes)
+            addRate<
+                typename RateSelector_MMT<NReactionTypes>::ForwardGroup,
+                typename RateSelector_MMT<NReactionTypes>::ReverseGroup>(
+                rxn, reaction);
+        else
+            selectRate<NReactionTypes-1>(rxn, reaction);
+    }
 }
 
 template <>
