@@ -112,7 +112,7 @@ public:
     MMT(const Mutation::Utilities::IO::XmlElement& node, const int order);
     
     MMT(const MMT& to_copy)
-        : m_lnA(to_copy.m_lnA), m_n(to_copy.m_n), m_temp(to_copy.m_temp), m_a(to_copy.m_a), m_U_s(to_copy.m_U_s)
+        : m_lnA(to_copy.m_lnA), m_n(to_copy.m_n), m_temp(to_copy.m_temp), m_a(to_copy.m_a), m_U_s(to_copy.m_U_s), m_theta_v(to_copy.m_theta_v), m_Tv(to_copy.m_Tv)
     { }
     
     
@@ -171,6 +171,10 @@ public:
     
     double thetaV() const {
         return m_theta_v;
+    }
+
+    double Tv() const {
+        return m_Tv;
     }
     
     
