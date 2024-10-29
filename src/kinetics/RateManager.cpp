@@ -59,6 +59,15 @@ TEMPERATURE_SELECTOR(ParkSelector, std::sqrt(state->T()*state->Tv()))
 
 #undef TEMPERATURE_SELECTOR
 
+/// MMT group evaluated at T
+typedef RateLawGroup1T<MMT, TSelector> MMT_T;
+
+/// MMT group evaluated at Te
+typedef RateLawGroup1T<MMT, TeSelector> MMT_TE;
+
+/// MMT group evaluated at sqrt(T*Tv)
+typedef RateLawGroup1T<MMT, ParkSelector> MMT_PARK;
+
 /// Arrhenius group evaluated at T
 typedef RateLawGroup1T<Arrhenius, TSelector> ArrheniusT;
 
@@ -69,14 +78,7 @@ typedef RateLawGroup1T<Arrhenius, TeSelector> ArrheniusTe;
 typedef RateLawGroup1T<Arrhenius, ParkSelector> ArrheniusPark;
     
     //TODO: maybe need to create and use RateLawGroup2T in RateLawGroup.h
-/// MMT group evaluated at T
-typedef RateLawGroup1T<MMT, TSelector> MMT_T;
 
-/// MMT group evaluated at Te
-typedef RateLawGroup1T<MMT, TeSelector> MMT_TE;
-
-/// MMT group evaluated at sqrt(T*Tv)
-typedef RateLawGroup1T<MMT, ParkSelector> MMT_PARK;
 
 //==============================================================================
 
@@ -89,9 +91,16 @@ typedef RateLawGroup1T<MMT, ParkSelector> MMT_PARK;
 
 template <int Type>
 struct RateSelector {
-    typedef ArrheniusT ForwardGroup;
-    typedef ArrheniusT ReverseGroup;
+    typedef MMT_T ForwardGroup;
+    typedef MMT_T ReverseGroup;
 };
+
+// template <int Type>
+// struct RateSelector {
+//     typedef ArrheniusT ForwardGroup;
+//     typedef ArrheniusT ReverseGroup;
+// };
+
 
 #define SELECT_RATE_LAWS(__TYPE__,__FORWARD__,__REVERSE__)\
 template <> struct RateSelector<__TYPE__> {\
@@ -119,6 +128,27 @@ SELECT_RATE_LAWS(ELECTRONIC_DETACHMENT_E,    ArrheniusTe,   ArrheniusTe)
 SELECT_RATE_LAWS(EXCHANGE,                   ArrheniusT,    ArrheniusT)
 SELECT_RATE_LAWS(EXCITATION_M,               ArrheniusT,    ArrheniusT)
 SELECT_RATE_LAWS(EXCITATION_E,               ArrheniusTe,   ArrheniusTe)
+
+// SELECT_RATE_LAWS(ASSOCIATIVE_IONIZATION,     ArrheniusT,    ArrheniusTe)
+// SELECT_RATE_LAWS(DISSOCIATIVE_RECOMBINATION, ArrheniusTe,   ArrheniusT)
+// SELECT_RATE_LAWS(ASSOCIATIVE_DETACHMENT,     ArrheniusT,    ArrheniusTe)
+// SELECT_RATE_LAWS(DISSOCIATIVE_ATTACHMENT,    ArrheniusTe,   ArrheniusT)
+// SELECT_RATE_LAWS(DISSOCIATION_E,             ArrheniusTe,   ArrheniusTe)
+// SELECT_RATE_LAWS(RECOMBINATION_E,            ArrheniusTe,   ArrheniusTe)
+// SELECT_RATE_LAWS(DISSOCIATION_M,             ArrheniusPark, ArrheniusT)
+// SELECT_RATE_LAWS(RECOMBINATION_M,            ArrheniusT,    ArrheniusPark)
+// SELECT_RATE_LAWS(IONIZATION_E,               ArrheniusTe,   ArrheniusT)
+// SELECT_RATE_LAWS(ION_RECOMBINATION_E,        ArrheniusT,    ArrheniusTe)
+// SELECT_RATE_LAWS(IONIZATION_M,               ArrheniusT,    ArrheniusT)
+// SELECT_RATE_LAWS(ION_RECOMBINATION_M,        ArrheniusT,    ArrheniusT)
+// SELECT_RATE_LAWS(ELECTRONIC_ATTACHMENT_M,    ArrheniusTe,   ArrheniusT)
+// SELECT_RATE_LAWS(ELECTRONIC_DETACHMENT_M,    ArrheniusT,    ArrheniusTe)
+// SELECT_RATE_LAWS(ELECTRONIC_ATTACHMENT_E,    ArrheniusTe,   ArrheniusTe)
+// SELECT_RATE_LAWS(ELECTRONIC_DETACHMENT_E,    ArrheniusTe,   ArrheniusTe)
+// SELECT_RATE_LAWS(EXCHANGE,                   ArrheniusT,    ArrheniusT)
+// SELECT_RATE_LAWS(EXCITATION_M,               ArrheniusT,    ArrheniusT)
+// SELECT_RATE_LAWS(EXCITATION_E,               ArrheniusTe,   ArrheniusTe)
+
 
 #undef SELECT_RATE_LAWS
 
