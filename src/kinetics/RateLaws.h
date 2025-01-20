@@ -143,6 +143,7 @@ public:
         // k must be the rate value --> derivative with respect to T
         // Jacobian? [d/dTtr, d/dTv] or just d/dTtr
         //        invT == 1/Ttr? if so, we can simplify division in all variables
+        double m_invTv = 1.0/m_Tv;
         double val1 = m_temp * (std::exp(m_temp*invTtr) - 2.0) / (std::exp(m_temp*invTtr) - 1.0);
         double val2 = m_n / invTtr;
         double val3 = m_theta_v / (std::exp(m_theta_v*invTtr));
