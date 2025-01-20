@@ -109,6 +109,8 @@ public:
         m_prods.incrReactions(p_g, p_r);
     }
     
+//Ke = Kf/Kb ==> ln(Ke) = ln(kf) - ln(kb)
+//ln(kf) - ln(ke) = ln(kf) - ln(P/RT) = ln(kb)
 
 protected:
 
