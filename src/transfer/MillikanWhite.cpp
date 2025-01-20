@@ -71,7 +71,10 @@ MillikanWhiteModelData::MillikanWhiteModelData(
     {
         double mwi = thermo.speciesMw(i+offset);
         double mu = 1000.0*m_impl->mw*mwi/(m_impl->mw + mwi); // reduced mass in g/mol
+        // m_impl->a[i] = 1.16E-2*std::sqrt(mu)*theta_power;
         m_impl->a[i] = 1.16E-3*std::sqrt(mu)*theta_power;
+        // m_impl->b[i] = 0.15*std::pow(mu, 0.25);
+        // m_impl->a[i] = 1.16E-3*std::sqrt(mu)*theta_power;
         m_impl->b[i] = 0.015*std::pow(mu, 0.25);
     }
 }
