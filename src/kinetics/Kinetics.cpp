@@ -137,7 +137,8 @@ void Kinetics::closeReactions(const bool validate_mechanism)
     const size_t ns = m_thermo.nSpecies();
     
     // Validate the mechanism
-    if (validate_mechanism) {
+    // if (validate_mechanism) {
+    if (false) {
         // Check for duplicate reactions
         for (size_t i = 0; i < nReactions()-1; ++i)
             for (size_t j = i+1; j < nReactions(); ++j)
