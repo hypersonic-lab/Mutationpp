@@ -299,9 +299,20 @@ void printMixtureInfo(const Mixture& mixture)
     cout << setw(6)  << "Type";
     cout << setw(12) << "Rate Law";
     cout.setf(std::ios::right, std::ios::adjustfield);
-    cout << setw(12) << "A (m,s,mol)";
-    cout << setw(7) << "n";
-    cout << setw(10) << "Ta (K)" << endl;
+    if (dynamic_cast<const Arrhenius*>(mixture.reactions()[1].rateLaw()) != NULL) {
+        cout << setw(12) << "A (m,s,mol)";
+        cout << setw(7) << "n";
+        cout << setw(10) << "Ta (K)" << endl;
+    }
+    else if (dynamic_cast<const MMT*>(mixture.reactions()[1].rateLaw()) != NULL) {
+        cout << setw(12) << "A (m,s,mol)";
+        cout << setw(7) << "n";
+        cout << setw(10) << "Ta (K)";
+        cout << setw(9) << "ThetaV";
+        cout << setw(10) << "aU";
+        cout << setw(10) << "U";
+        cout << setw(10) << "Tv" << endl;
+    }
     for (int i = 0; i < nr; ++i) {
         const Reaction& r = mixture.reactions()[i];
 
@@ -330,7 +341,7 @@ void printMixtureInfo(const Mixture& mixture)
         }
         
         // Print out rate constants
-        if (dynamic_cast<const MMT*>(r.rateLaw()) != NULL) {
+        else if (dynamic_cast<const MMT*>(r.rateLaw()) != NULL) {
             const MMT& rate =
                 dynamic_cast<const MMT&>(*(r.rateLaw()));
             cout << setw(12) << "MMT: ";
@@ -344,6 +355,13 @@ void printMixtureInfo(const Mixture& mixture)
             cout << setw(7)  << rate.n();
             cout.precision(1);
             cout << setw(10) << rate.T();
+            cout << setw(9)  << rate.thetaV();
+            cout.precision(4);
+            cout << setw(10)  << rate.a();
+            cout.precision(1);
+            cout << setw(10)  << rate.U_s();
+            cout << setw(10)  << rate.Tv();
+
         }
 
         cout << endl;
@@ -378,17 +396,19 @@ int main(int argc, char** argv)
 {
     MixtureOptions opts;
     
-    if (argc < 2 || argc > 3) {
-        cout << "- checkmix mixture-name" << endl;
-        cout << "           or          " << endl;
-        cout << "- checkmix database(NASA-7, NASA-9, RRHO) species-descriptor" << endl;
-        exit(1);
-    } else if (argc == 2) {
-        opts.loadFromFile(argv[1]);
-    } else {
-        opts.setThermodynamicDatabase(argv[1]);
-        opts.setSpeciesDescriptor(argv[2]);
-    }
+    // if (argc < 2 || argc > 3) {
+    //     cout << "- checkmix mixture-name" << endl;
+    //     cout << "           or          " << endl;
+    //     cout << "- checkmix database(NASA-7, NASA-9, RRHO) species-descriptor" << endl;
+    //     exit(1);
+    // } else if (argc == 2) {
+    //     opts.loadFromFile(argv[1]);
+    // } else {
+    //     opts.setThermodynamicDatabase(argv[1]);
+    //     opts.setSpeciesDescriptor(argv[2]);
+    // }
+    opts.loadFromFile("air5_MMT");
+    // opts.loadFromFile("air_5");
     
     cout << "location: " << opts.getSource() << endl;
 
