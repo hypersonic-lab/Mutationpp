@@ -33,7 +33,7 @@
 #include <cstdlib>
 
 #include "Utilities.h"
-
+using namespace std;
 namespace Mutation {
     namespace Kinetics {
 
@@ -127,13 +127,13 @@ public:
 //        val1 = m_lnA + m_n * lnT - m_temp * invT;
 //        invT == 1/Ttr? if so, we can simplify division in U,TF,lnQTR
         double m_invTv = 1.0/m_Tv;
-        double U = (1.0/invTtr * m_U_s) / (1.0/invTtr + m_a * m_U_s);
-        double TF = -1.0 * (1.0/invTtr * 1.0/m_invTv * U)                / (1.0/invTtr * 1.0/m_invTv - 1.0/invTtr * U
-                   + 1.0/invTtr * U);
+        double Ttr = 1.0 / invTtr;
+        double U = (Ttr * m_U_s) / (Ttr + m_a * m_U_s);
+        double TF = -1.0 * (Ttr * m_Tv * U) / (Ttr * (m_Tv - U) + m_Tv * U);
         double lnQTr = std::log(1.0 - std::exp(-1.0*m_temp*invTtr)) - std::log(1.0 - std::exp(-1.0*m_theta_v*invTtr));
         double lnQTF = std::log(1.0 - std::exp(-m_temp/TF)) - std::log(1.0 - std::exp(-m_theta_v/TF));
         double lnQTv = std::log(1.0 - std::exp(-1.0*m_temp*m_invTv)) - std::log(1.0 - std::exp(-1.0*m_theta_v*m_invTv));
-        double lnQU =  std::log(1.0 - std::exp(m_temp/U)) -  std::log(1. - std::exp(m_theta_v/U));
+        double lnQU =  std::log(1.0 - std::exp(m_temp/U) / (1.0 - std::exp(m_theta_v/U)));
 //        lnZ = lnQTr + lnQTF - lnQTv - lnQU
         return (m_lnA + m_n * lnTtr - m_temp * invTtr + lnQTr + lnQTF - lnQTv - lnQU);
     }
