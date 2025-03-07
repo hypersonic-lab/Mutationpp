@@ -70,7 +70,7 @@ public:
         return new Arrhenius(*this);
     }
     
-    inline double getLnRate(const double lnT, const double invT) const {
+    inline double getLnRate(const double lnT, const double invT, const double Tv = 0.0) const {
         return (m_lnA + m_n * lnT - m_temp * invT);
     }
     
@@ -122,18 +122,19 @@ public:
         return new MMT(*this);
     }
     
-    inline double getLnRate(const double lnTtr, const double invTtr) const {
+    inline double getLnRate(const double lnTtr, const double invTtr, const double Tv = 0.0) const {
 //         Possible log approximation Taylor Series?
 //        val1 = m_lnA + m_n * lnT - m_temp * invT;
 //        invT == 1/Ttr? if so, we can simplify division in U,TF,lnQTR
-        double m_invTv = 1.0/m_Tv;
+        // cout << Tv << endl;
+        double m_invTv = 1.0 / Tv;
         double Ttr = 1.0 / invTtr;
         double U = (Ttr * m_U_s) / (Ttr + m_a * m_U_s);
-        double TF = -1.0 * (Ttr * m_Tv * U) / (Ttr * (m_Tv - U) + m_Tv * U);
-        double lnQTr = std::log(1.0 - std::exp(-1.0*m_temp*invTtr)) - std::log(1.0 - std::exp(-1.0*m_theta_v*invTtr));
-        double lnQTF = std::log(1.0 - std::exp(-m_temp/TF)) - std::log(1.0 - std::exp(-m_theta_v/TF));
-        double lnQTv = std::log(1.0 - std::exp(-1.0*m_temp*m_invTv)) - std::log(1.0 - std::exp(-1.0*m_theta_v*m_invTv));
-        double lnQU =  std::log(1.0 - std::exp(m_temp/U) / (1.0 - std::exp(m_theta_v/U)));
+        double TF = -1.0 * (Ttr * Tv * U) / (Ttr * (Tv - U) + Tv * U);
+        double lnQTr = std::log((1.0 - std::exp(-1.0 * m_temp * invTtr)) / (1.0 - std::exp(-1.0 * m_theta_v * invTtr)));
+        double lnQTF = std::log((1.0 - std::exp(-m_temp / TF)) / (1.0 - std::exp(-m_theta_v / TF)));
+        double lnQTv = std::log((1.0 - std::exp(-1.0 * m_temp * m_invTv)) / (1.0 - std::exp(-1.0 * m_theta_v * m_invTv)));
+        double lnQU =  std::log(1.0 - std::exp(m_temp / U) / (1.0 - std::exp(m_theta_v / U)));
 //        lnZ = lnQTr + lnQTF - lnQTv - lnQU
         return (m_lnA + m_n * lnTtr - m_temp * invTtr + lnQTr + lnQTF - lnQTv - lnQU);
     }
