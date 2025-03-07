@@ -115,6 +115,7 @@ protected:
     /// This is the temperature computed to evaluate the rate law (should be set
     /// in the lnk() function)
     double m_t;
+    double m_tv;
     double m_last_t;
     
     /// Stores the reactants for reactions that will use this rate law for the
@@ -156,6 +157,7 @@ public:
     {
         // Determine the reaction temperature for this group
         m_t = TSelectorType().getT(p_state);
+        m_tv = TSelectorType().getTv(p_state);
 
         // Update only if the temperature has changed
         //if (std::abs(m_t - m_last_t) > 1.0e-10) {
@@ -164,7 +166,7 @@ public:
 
             for (int i = 0; i < m_rates.size(); ++i) {
                 const std::pair<size_t, RateLawType>& rate = m_rates[i];
-                p_lnk[rate.first] = rate.second.getLnRate(lnT, invT);
+                p_lnk[rate.first] = rate.second.getLnRate(lnT, invT, m_tv);
             }
         //}
 
