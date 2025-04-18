@@ -28,6 +28,19 @@
 #include "Mixture.h"
 #include "TransferModel.h"
 
+// Test headers
+// #include "RateLaws.h"
+// #include "RateManager.h"
+// #include "Reaction.h"
+// #include "Kinetics.h"
+#include "Constants.h"
+
+// using namespace Mutation::Thermodynamics;
+// using namespace Mutation;
+// using namespace Mutation::Thermodynamics;
+using namespace Mutation::Kinetics;
+
+
 namespace Mutation {
     namespace Transfer {
 
@@ -77,10 +90,13 @@ public:
  */
 	double source()
 	{
-		static int i_transfer_model = 0;
+		// static int i_transfer_model = 0;
+		static int i_transfer_model = (dynamic_cast<const MMT*>(mixture().reactions()[1].rateLaw()) != NULL);
 		switch (i_transfer_model){
 		   case 0:
 			  return compute_source_Candler();
+		   case 1:
+			  return compute_source_MMT();
 		  break;
 		   default:
 			  std::cerr << "The selected Chemistry-Vibration-Chemistry model is not implemented yet";
@@ -92,8 +108,13 @@ private:
 	int m_ns;
 	double* mp_wrk1;
 	double* mp_wrk2;
+	double* mp_wrk3;
+	double* mp_wrk4;
+	double Ttr;
+	double Tv;
 
 	double const compute_source_Candler();
+	double const compute_source_MMT();
 };
 
  /**
@@ -125,6 +146,99 @@ double const OmegaCV::compute_source_Candler()
 
 	 return(c1*sum*mixture().T()*RU);
  }
+
+ /**
+ * Preferential Model according to MMT 
+ */
+
+ double const OmegaCV::compute_source_MMT()
+ {
+	Ttr = mixture().T(); // Translational temperature
+	Tv = mixture().Tv(); // Vibrational temperature
+	const int nr = mixture().nReactions();
+
+	// Getting Production Rate
+	mixture().speciesHOverRT(NULL, NULL, NULL, mp_wrk1, NULL, NULL);
+	
+	// Get reaction enthalpies
+	std::fill(mp_wrk2, mp_wrk2+nr, 0.0);
+	mixture().getReactionDelta(mp_wrk1,mp_wrk2);
+
+	// Get molar rates of progress
+	mixture().netRatesOfProgress(mp_wrk3);
+
+	/// for r in reactions:
+	// if MMT:
+	/// do below
+	// if Arrhenius
+	//	Call netProgressRates(mp_wrk2)
+	// Add reactants
+	// Subtract products
+	// * R * T / M
+	
+	//Attempt to get data for each reaction
+	for(int i=0; i<nr; ++i) {
+		if (dynamic_cast<const MMT*>(mixture().reactions()[1].rateLaw()) != NULL){
+			const Reaction& r = mixture().reactions()[i];
+			const MMT& rate = dynamic_cast<const MMT&>(*(r.rateLaw()));
+			const double TD = rate.T();
+			const double thetaV = rate.thetaV();
+			const double aU = rate.a();
+			const double Us = rate.U_s();
+			const double U = 1 / (aU / Ttr + 1 / Us);
+			const double TF = 1 / (1 / Tv - 1 / Ttr - 1 / U);
+			const double e_vib = -1.0 * KB * (thetaV / std::exp(thetaV/TF)) - (TD / std::exp(TD/TF));
+			mp_wrk4[i] = e_vib; // J units
+		}
+    // m_reactants.decrSpecies(mp_rop, p_wdot);
+    // m_rev_prods.incrSpecies(mp_rop, p_wdot);
+    // m_irr_prods.incrSpecies(mp_rop, p_wdot);		}
+	};
+
+	double Qv = 0.0;
+	// const double eps = 1.0E-15;
+	// const int ns = mixture().nSpecies();
+	// for(int i=0; i<ns; ++i){
+		// if Arrhenius: Vibrational Energy * Production Rate (Candler)
+		for(int j=0; j<nr; ++j){
+			if (dynamic_cast<const MMT*>(mixture().reactions()[j].rateLaw()) != NULL){
+				Qv += mp_wrk1[j]; // evib_d * R_j
+			}
+			else { // Arrhenius reactions
+				Qv += mp_wrk2[j]*mp_wrk3[j] *RU*mixture().T();
+				break;
+			}
+		}
+	// }
+
+
+
+	/*
+	Q = 0
+	ind = 0
+	for s in species:
+		for r in reaction:
+			if mixture().Y()[ind] == 0: // or < eps
+				continue
+			Q += e_vib(r,s) * R(s)
+		ind += 1
+  	*/
+ 
+	  // Getting Vibrational Energy
+	//   mixture().speciesHOverRT(NULL, NULL, NULL, mp_wrk1, NULL, NULL);
+
+	  
+ 
+	  // Inner Product
+	//   double c1 = 1.0E0;
+	//   double sum = 0.E0;
+ 
+	//   for(int i = 0 ; i < m_ns; ++i)
+	// 	  sum += mp_wrk1[i]*mp_wrk2[i]; // /mixture().speciesMw(i);
+ 
+	  return(Qv);
+  }
+ 
 
 // Register the transfer model
 Mutation::Utilities::Config::ObjectProvider<
