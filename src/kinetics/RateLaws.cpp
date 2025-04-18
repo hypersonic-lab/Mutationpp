@@ -227,7 +227,7 @@ MMT::MMT(const XmlElement& node, const int order)
         // Convert to K
         m_temp = sm_tunits[2].convertToBase(m_temp);
     } else {
-        node.parseError("Arrhenius rate law must define coefficient Ea or T!");
+        node.parseError("MMT rate law must define coefficient Ea or T!");
     }
 }
     
