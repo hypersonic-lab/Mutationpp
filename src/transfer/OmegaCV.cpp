@@ -90,8 +90,15 @@ public:
  */
 	double source()
 	{
-		// static int i_transfer_model = 0;
-		static int i_transfer_model = (dynamic_cast<const MMT*>(mixture().reactions()[1].rateLaw()) != NULL);
+		static int i_transfer_model = 0;
+		const int nr = mixture().nReactions();
+		for(int i=0; i<nr; ++i) {
+			i_transfer_model = (dynamic_cast<const MMT*>(mixture().reactions()[i].rateLaw()) != NULL);
+			if (i_transfer_model){
+				break;
+			}
+		}
+		// static int i_transfer_model = (dynamic_cast<const MMT*>(mixture().reactions()[1].rateLaw()) != NULL);
 		switch (i_transfer_model){
 		   case 0:
 			  return compute_source_Candler();
@@ -178,7 +185,7 @@ double const OmegaCV::compute_source_Candler()
 	
 	//Attempt to get data for each reaction
 	for(int i=0; i<nr; ++i) {
-		if (dynamic_cast<const MMT*>(mixture().reactions()[1].rateLaw()) != NULL){
+		if (dynamic_cast<const MMT*>(mixture().reactions()[i].rateLaw()) != NULL){
 			const Reaction& r = mixture().reactions()[i];
 			const MMT& rate = dynamic_cast<const MMT&>(*(r.rateLaw()));
 			const double TD = rate.T();
