@@ -8,7 +8,7 @@ Add NO + M from PARK
 Add Exchange from Bose/Candler
 
 -->
-<mechanism name="air_5_MMT">
+<mechanism name="air_5_MMT_arr">
 
     <mmt_units A="mol,cm,s,K" E="kcal,mol,K" thetaV="K" U="K" Tv="K" />
 

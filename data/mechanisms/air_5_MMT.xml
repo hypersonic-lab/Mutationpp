@@ -2,6 +2,11 @@
 Parametric Comparison of the Park and MMT Chemical Kinetics Models for Hypersonic Blunt Cones
 
 Chaudhry, Boyd
+
+
+Add NO + M from PARK
+Add Exchange from Bose/Candler
+
 -->
 <mechanism name="air_5_MMT">
 
