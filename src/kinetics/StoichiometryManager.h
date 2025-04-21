@@ -32,6 +32,11 @@
 #include <vector>
 #include <cstdlib>
 
+// #include "Mixture.h"
+// #include "TransferModel.h"
+// using namespace Mutation::Kinetics;
+
+
 namespace Mutation {
     namespace Kinetics {
 
@@ -144,9 +149,13 @@ public:
             p_s[m_sps[i]] -= p_r[m_rxn];
     }
     
+    
 protected:
 
     size_t m_rxn;
+    size_t m_sp1;
+    size_t m_sp2;
+    size_t m_sp3;
     size_t m_sps[N];
     
 }; // class Stoich<N>
@@ -198,23 +207,48 @@ public:
         if (sp1 <= sp2) {
             m_sps[0] = sp1;
             m_sps[1] = sp2;
+            m_sp1 = sp1;
+            m_sp2 = sp2;
         } else {
             m_sps[0] = sp2;
             m_sps[1] = sp1;
+            m_sp1 = sp2;
+            m_sp2 = sp1;
         }
         
         if (m_sps[1] <= sp3)
+        {
             m_sps[2] = sp3;
+            m_sp3 = sp3;
+        }
         else {
             if (sp3 <= m_sps[0]) {
                 m_sps[2] = m_sps[1];
                 m_sps[1] = m_sps[0];
                 m_sps[0] = sp3;
+                m_sp3 = m_sp2;
+                m_sp2 = m_sp1;
+                m_sp1 = sp3;
             } else {
                 m_sps[2] = m_sps[1];
                 m_sps[1] = sp3;
+                m_sp3 = m_sp2;
+                m_sp2 = sp3;
             }
         }
+    }
+    double rxn() const {
+        return m_rxn;
+    }
+
+    double sp_1() const {
+        return m_sp1;
+    }
+    double sp_2() const {
+        return m_sp2;
+    }
+    double sp_3() const {
+        return m_sp3;
     }
 };
 
@@ -240,6 +274,18 @@ public:
     void incrSpecies(const double* const p_r, double* const p_s) const;
     
     void decrSpecies(const double* const p_r, double* const p_s) const;
+
+    std::vector<Stoich1> ret_stoich1(){
+        return m_stoich1_vec;
+    }
+
+    std::vector<Stoich2> ret_stoich2(){
+        return m_stoich2_vec;
+    }
+
+    std::vector<Stoich3> ret_stoich3(){
+        return m_stoich3_vec;
+    }
 
 private:
 
