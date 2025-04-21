@@ -165,14 +165,14 @@ double const OmegaCV::compute_source_Candler()
 	const int nr = mixture().nReactions();
 
 	// Getting Production Rate
-	mixture().speciesHOverRT(NULL, NULL, NULL, mp_wrk1, NULL, NULL);
+	// mixture().speciesHOverRT(NULL, NULL, NULL, mp_wrk1, NULL, NULL);
 	
 	// Get reaction enthalpies
-	std::fill(mp_wrk2, mp_wrk2+nr, 0.0);
-	mixture().getReactionDelta(mp_wrk1,mp_wrk2);
+	// std::fill(mp_wrk2, mp_wrk2+nr, 0.0);
+	// mixture().getReactionDelta(mp_wrk1,mp_wrk2);
 
 	// Get molar rates of progress
-	mixture().netRatesOfProgress(mp_wrk3);
+	// mixture().netRatesOfProgress(mp_wrk3);
 
 	/// for r in reactions:
 	// if MMT:
@@ -195,7 +195,7 @@ double const OmegaCV::compute_source_Candler()
 			const double U = 1 / (aU / Ttr + 1 / Us);
 			const double TF = 1 / (1 / Tv - 1 / Ttr - 1 / U);
 			const double e_vib = -1.0 * KB * (thetaV / std::exp(thetaV/TF)) - (TD / std::exp(TD/TF));
-			mp_wrk4[i] = e_vib; // J units
+			mp_wrk1[i] = e_vib; // J units
 		}
     // m_reactants.decrSpecies(mp_rop, p_wdot);
     // m_rev_prods.incrSpecies(mp_rop, p_wdot);
@@ -212,8 +212,7 @@ double const OmegaCV::compute_source_Candler()
 				Qv += mp_wrk1[j]; // evib_d * R_j
 			}
 			else { // Arrhenius reactions
-				Qv += mp_wrk2[j]*mp_wrk3[j] *RU*mixture().T();
-				break;
+				// Qv += mp_wrk2[j]*mp_wrk3[j] *RU*mixture().T();
 			}
 		}
 	// }
