@@ -75,12 +75,16 @@ public:
 		m_ns = mixture().nSpecies();
 		mp_wrk1 = new double [m_ns];
 		mp_wrk2 = new double [m_ns];
+		mp_wrk3 = new double [m_ns];
+		mp_wrk4 = new double [m_ns];
 	};
 
 	~OmegaCV()
 	{
 		delete [] mp_wrk1;
 		delete [] mp_wrk2;
+		delete [] mp_wrk3;
+		delete [] mp_wrk4;
 	};
 /**
  * Computes the source terms of the Vibration-Chemistry energy transfer in \f$ [J/(m^3\cdot s)] \f$
@@ -164,25 +168,12 @@ double const OmegaCV::compute_source_Candler()
 	Tv = mixture().Tv(); // Vibrational temperature
 	const int nr = mixture().nReactions();
 
-	// Getting Production Rate
-	// mixture().speciesHOverRT(NULL, NULL, NULL, mp_wrk1, NULL, NULL);
-	
-	// Get reaction enthalpies
-	// std::fill(mp_wrk2, mp_wrk2+nr, 0.0);
-	// mixture().getReactionDelta(mp_wrk1,mp_wrk2);
+	 // Getting Vibrational Energy
+	 mixture().speciesHOverRT(NULL, NULL, NULL, mp_wrk1, NULL, NULL);
 
-	// Get molar rates of progress
-	// mixture().netRatesOfProgress(mp_wrk3);
+	 // Getting Production Rate
+	 mixture().netProductionRates_MMT(mp_wrk2);
 
-	/// for r in reactions:
-	// if MMT:
-	/// do below
-	// if Arrhenius
-	//	Call netProgressRates(mp_wrk2)
-	// Add reactants
-	// Subtract products
-	// * R * T / M
-	
 	//Attempt to get data for each reaction
 	for(int i=0; i<nr; ++i) {
 		if (dynamic_cast<const MMT*>(mixture().reactions()[i].rateLaw()) != NULL){
@@ -195,24 +186,17 @@ double const OmegaCV::compute_source_Candler()
 			const double U = 1 / (aU / Ttr + 1 / Us);
 			const double TF = 1 / (1 / Tv - 1 / Ttr - 1 / U);
 			const double e_vib = -1.0 * KB * (thetaV / std::exp(thetaV/TF)) - (TD / std::exp(TD/TF));
-			mp_wrk1[i] = e_vib; // J units
+			mp_wrk3[i] = e_vib; // J units
 		}
-    // m_reactants.decrSpecies(mp_rop, p_wdot);
-    // m_rev_prods.incrSpecies(mp_rop, p_wdot);
-    // m_irr_prods.incrSpecies(mp_rop, p_wdot);		}
 	};
 
 	double Qv = 0.0;
-	// const double eps = 1.0E-15;
-	// const int ns = mixture().nSpecies();
-	// for(int i=0; i<ns; ++i){
-		// if Arrhenius: Vibrational Energy * Production Rate (Candler)
 		for(int j=0; j<nr; ++j){
 			if (dynamic_cast<const MMT*>(mixture().reactions()[j].rateLaw()) != NULL){
-				Qv += mp_wrk1[j]; // evib_d * R_j
+				Qv += mp_wrk3[j]; // evib_d * R_j
 			}
 			else { // Arrhenius reactions
-				// Qv += mp_wrk2[j]*mp_wrk3[j] *RU*mixture().T();
+				Qv += mp_wrk2[j]*mp_wrk3[j]*RU*mixture().T();
 			}
 		}
 	// }
