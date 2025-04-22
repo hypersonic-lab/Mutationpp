@@ -148,6 +148,42 @@ public:
         for (int i = 0; i < N; ++i)
             p_s[m_sps[i]] -= p_r[m_rxn];
     }
+
+        /**
+     * Performs the following operation on the species in this reaction:
+     * \f[
+     *     s_i = s_i + \nu_{ij} r_j, \quad \forall \; i = 1,\dots,n_s
+     * \f]
+     * where \f$r_j\f$ is a reaction dependent quantity, \f$s_i\f$ are species
+     * dependent quantities, and \f$\nu_{ij}\f$ is the stoichiometric coefficient
+     * for species i in reaction j.
+     */
+    inline void incrSpecies_MMT(const double* const p_r, double* const p_s, double* MMT) const
+    {
+        for (int i = 0; i < N; ++i){
+            if (MMT[m_rxn]){
+                p_s[m_sps[i]] += p_r[m_rxn];
+            }
+        }    
+    }
+    
+    /**
+     * Performs the following operation on the species in this reaction:
+     * \f[
+     *     s_i = s_i - \nu_{ij} r_j, \quad \forall \; i = 1,\dots,n_s
+     * \f]
+     * where \f$r_j\f$ is a reaction dependent quantity, \f$s_i\f$ are species
+     * dependent quantities, and \f$\nu_{ij}\f$ is the stoichiometric coefficient
+     * for species i in reaction j.
+     */
+    inline void decrSpecies_MMT(const double* const p_r, double* const p_s, double* MMT) const
+    {
+        for (int i = 0; i < N; ++i){
+            if (MMT[m_rxn]){
+                p_s[m_sps[i]] -= p_r[m_rxn];
+            }
+        }    
+    }
     
     
 protected:
@@ -274,6 +310,10 @@ public:
     void incrSpecies(const double* const p_r, double* const p_s) const;
     
     void decrSpecies(const double* const p_r, double* const p_s) const;
+
+    void incrSpecies_MMT(const double* const p_r, double* const p_s, double* const MMT) const;
+    
+    void decrSpecies_MMT(const double* const p_r, double* const p_s, double* const MMT) const;
 
     std::vector<Stoich1> ret_stoich1(){
         return m_stoich1_vec;
