@@ -180,6 +180,7 @@ public:
      * @param p_wdot - on return, the species production rates in kg/m^3-s
      */
     void netProductionRates(double* const p_wdot);
+    void netProductionRates_MMT(double* const p_wdot);
 
     /**
      * Fills the matrix p_jac with the species production rate jacobian matrix
