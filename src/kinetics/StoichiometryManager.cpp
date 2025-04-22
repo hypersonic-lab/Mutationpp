@@ -81,6 +81,28 @@ STOICH_MGR_APPLY_FUNC(decrSpecies, decrSpecies)
 #undef STOICH_MGR_APPLY_FUNC
 
 
+#define STOICH_MGR_APPLY_FUNC_MMT(__my_func__,__stoic_func__)\
+template<class Iterator, class Vec1, class Vec2, class Vec3>\
+inline static void _##__my_func__ (\
+    Iterator begin, const Iterator end, const Vec1& input, Vec2& output, const Vec3 MMT)\
+{\
+    for (; begin != end; ++begin)\
+        begin-> __stoic_func__ (input, output, MMT);\
+}\
+void StoichiometryManager:: __my_func__ (\
+    const double* const in, double* const out, double* const MMT) const\
+{\
+    _##__my_func__ (m_stoich1_vec.begin(), m_stoich1_vec.end(), in , out , MMT);\
+    _##__my_func__ (m_stoich2_vec.begin(), m_stoich2_vec.end(), in , out , MMT);\
+    _##__my_func__ (m_stoich3_vec.begin(), m_stoich3_vec.end(), in , out , MMT);\
+}
+
+STOICH_MGR_APPLY_FUNC_MMT(incrSpecies_MMT, incrSpecies_MMT)
+STOICH_MGR_APPLY_FUNC_MMT(decrSpecies_MMT, decrSpecies_MMT)
+
+#undef STOICH_MGR_APPLY_FUNC_MMT
+
+
     } // namespace Kinetics
 } // namespace Mutation
 
