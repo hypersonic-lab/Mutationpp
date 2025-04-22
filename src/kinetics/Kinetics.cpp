@@ -343,10 +343,6 @@ void Kinetics::netProductionRates(
 
 //==============================================================================
 
-// void ST(const double* const in, double* const out){
-//     ST2()
-// }
-
 void Kinetics::netProductionRates_MMT(double* const p_wdot)
 {
     // Special case of no reactions
@@ -370,43 +366,6 @@ void Kinetics::netProductionRates_MMT(double* const p_wdot)
     for (int i = 0; i < nr; i++){
         reactions_MMT[i] = (dynamic_cast<const MMT*>(m_reactions[i].rateLaw()) != NULL);
     }
-
-    // Reactants
-    // std::vector<int>::iterator BEGIN = m_reactants.ret_stoich1().begin();
-    // std::vector<int>::iterator END = m_reactants.ret_stoich1().end();
-    // std::vector<int>::iterator BEGIN = m_reactants.ret_stoich1().begin();
-    // std::vector<int>::iterator END = m_reactants.ret_stoich1().end();
-    // for ( ; m_reactants.ret_stoich1().begin() !=  m_reactants.ret_stoich1().end() ; ++m_reactants.ret_stoich1().begin() ){
-    // // for ( ; BEGIN !=  END ; ++BEGIN ){
-    //     m_reactants.ret_stoich1().begin()->decrSpecies_MMT(mp_rop, p_wdot);
-    // }
-    // int BEGIN = 0;
-    // int END = m_reactants.ret_stoich2().end();
-    // auto ST2 = [&]() {
-    //     int i = 0;
-    //     for (; m_reactants.ret_stoich2().begin() != m_reactants.ret_stoich2().end(); ++m_reactants.ret_stoich2().begin()) {
-    //         m_reactants.ret_stoich2().begin()->decrSpecies_MMT(mp_rop, p_wdot);
-    //         cout << i << endl;
-    //         i++;
-    //     }
-    // };
-    // int i = 0;
-    // ST2();
-    // std::vector<Stoich2> ST2 = m_reactants.ret_stoich2();
-    // for ( ; ST2.begin() !=  ST2.end() ; ++ST2.begin() ){
-    //     ST2.begin()->decrSpecies_MMT(mp_rop, p_wdot);
-    //     cout << i << endl;
-    //     i++;
-    // }
-    // int BEGIN = 0;
-    // int END = m_reactants.ret_stoich3().end();
-    // for ( ; m_reactants.ret_stoich3().begin() !=  m_reactants.ret_stoich3().end() ; ++m_reactants.ret_stoich3().begin() ){
-    //     m_reactants.ret_stoich3().begin()->decrSpecies_MMT(mp_rop, p_wdot);
-    // }
-
-    // Reversible Products
-
-    // Irreversible Products
 
     m_reactants.decrSpecies_MMT(mp_rop, p_wdot,reactions_MMT);
     m_rev_prods.incrSpecies_MMT(mp_rop, p_wdot,reactions_MMT);
