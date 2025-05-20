@@ -1,0 +1,8 @@
+<!-- Neutral 5 species air mixture -->
+<mixture mechanism="Park_STSDB_mech" thermo_db="STS">
+
+    <species>
+        Obin O2_0
+    </species>
+
+</mixture>
