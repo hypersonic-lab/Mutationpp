@@ -1,0 +1,65 @@
+<!-- Oxygen Dan extrapolation mapped model reaction mechanism, 2 states -->
+
+<mechanism name="STS_excited_2">
+    
+    <arrhenius_units A="mol,cm,s,K" E="J,mol,K" />
+    
+	<!-- 01-->
+	<reaction formula="O2_0+Obin=Obin+Obin+Obin">
+		<arrhenius A="  5.506244e+12" n="  3.409781e-01" T="  7.984343e+04" />
+	</reaction>
+
+
+	<!-- 02-->
+	<reaction formula="O2_1+Obin=Obin+Obin+Obin">
+		<arrhenius A="  3.643875e+12" n="  3.766888e-01" T="  7.515236e+04" />
+	</reaction>    
+
+	<!-- 03-->
+	<reaction formula="O2_2+Obin=Obin+Obin+Obin">
+		<arrhenius A="  3.580816e+12" n="  3.688780e-01" T="  7.116224e+04" />
+	</reaction>
+    
+	<!-- 48-->
+	<reaction formula="O2_0+Obin=O2_1+Obin">
+		<arrhenius A="  1.581301e+05" n="  2.000000e+00" T="  1.054691e+04" />
+	</reaction>
+
+	<!-- 49-->
+	<reaction formula="O2_0+Obin=O2_2+Obin">
+		<arrhenius A="  3.145815e+17" n="  -8.389265e-01" T="  4.482286e+04" />
+	</reaction>
+
+		<!-- 94-->
+	<reaction formula="O2_1+Obin=O2_2+Obin">
+		<arrhenius A="  1.125283e+06" n="  1.796619e+00" T="  8.536955e+03" />
+	</reaction>
+
+
+    	<!-- 48-->
+	<reaction formula="O2_0+M=O2_1+M">
+		<arrhenius A="  2.935768e+14" n="  -3.535180e-01" T="  8.901645e+03" />
+	</reaction>
+
+	<reaction formula="O2_1+M=O2_2+M">
+		<arrhenius A="  1.949221e+14" n="  -2.400911e-01" T="  8.796495e+03" />
+	</reaction>
+
+
+
+	<reaction formula="O2_0+M=Obin+Obin+M">
+		<arrhenius A="  5.068730e+14" n="  8.110896e-02" T="  6.011475e+04" />
+	</reaction>
+
+		<!-- 02-->
+	<reaction formula="O2_1+M=Obin+Obin+M">
+		<arrhenius A="  1.719880e+14" n="  1.866902e-01" T="  5.759779e+04" />
+	</reaction>
+
+		<!-- 03-->
+	<reaction formula="O2_2+M=Obin+Obin+M">
+		<arrhenius A="  9.396707e+13" n="  2.469449e-01" T="  5.542963e+04" />
+	</reaction>
+
+    
+</mechanism>

@@ -1,0 +1,9 @@
+<mixture mechanism="STS_excited_2" thermo_db="STS">
+    <species>
+        Obin O2_0 O2_1 O2_2
+    </species>
+
+    <element_compositions default="default">
+        <composition name="default"> O:1.0 </composition>
+    </element_compositions>
+</mixture>
