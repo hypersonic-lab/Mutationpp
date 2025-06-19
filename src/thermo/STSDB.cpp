@@ -13036,7 +13036,7 @@ public:
             };
         val1 *= Tr * Tr;
         double h_val = val1 / val2;;
-        h_r[i] = h_val / Th;
+        h_r[i] = h_val;
     }
 
 
@@ -13172,8 +13172,8 @@ public:
                     m_hr[i] = 0.0;
                     h[i] += 0.0; // Ground state
                     continue; }
-                m_hr[i] = h_r[i-1];
-                h[i] += h_r[i-1];
+                m_hr[i] = h_r[i-1] / Th;
+                h[i] += h_r[i-1] / Th;
                 // m_hr[i] = 1.0 * Tr / Th;
                 // h[i] += 1.0 * Tr / Th;
             }}
