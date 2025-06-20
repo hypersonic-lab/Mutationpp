@@ -20906,7 +20906,7 @@ private:
 
 
 // Register the STSDB model with the other thermodynamic databases
-Utilities::Config::ObjectProvider<STSDB_Ar, ThermoDB> stsDB_Ar("Ar_STS");
+Utilities::Config::ObjectProvider<STSDB_Ar, ThermoDB> stsDB_Ar("STS_Ar");
 
     } // namespace Thermodynamics
 } // namespace Mutation
