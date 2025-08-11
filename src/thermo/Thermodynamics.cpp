@@ -176,9 +176,9 @@ bool Thermodynamics::speciesThermoValidAtT(const size_t i, const double T) const
 //==============================================================================
 
 void Thermodynamics::setState(
-    const double* const p_v1, const double* const p_v2, const int vars, double h, bool CENTRAL, bool FOLLOW_UP)
+    const double* const p_v1, const double* const p_v2, const int vars, double h, bool NEWTON, bool FORWARD, bool CENTRAL)
 {
-    mp_state->setState(p_v1, p_v2, vars, h, CENTRAL, FOLLOW_UP);
+    mp_state->setState(p_v1, p_v2, vars, h, NEWTON, FORWARD, CENTRAL);
     convert<X_TO_Y>(X(), mp_y);
 }
 

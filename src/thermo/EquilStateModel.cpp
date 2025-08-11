@@ -58,9 +58,10 @@ public:
         double T = 300.0;
         double P = ONEATM;
         const double h = 1e-3;
+        bool FORWARD = false;
         bool CENTRAL = false;
-        bool FOLLOW_UP = false;
-        setState(&P, &T, 1, h, CENTRAL, FOLLOW_UP);
+        bool NEWTON = false;
+        setState(&P, &T, 1, h, NEWTON, FORWARD, CENTRAL);
     }
 
     virtual ~EquilStateModel()
@@ -79,7 +80,7 @@ public:
      */
     virtual void setState(
         const double* const p_mass, const double* const p_energy,
-        const int vars = 0, const double h = 1e-3, bool CENTRAL = false, bool FOLLOW_UP = false)
+        const int vars = 0, const double h = 1e-3, bool NEWTON = true, bool FORWARD = false, bool CENTRAL = false)
     {
         // Determine temperature, pressure, and mole fractions depending on
         // variable set

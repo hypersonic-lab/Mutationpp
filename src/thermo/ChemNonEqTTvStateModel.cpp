@@ -78,7 +78,7 @@ public:
      */
     void setState(
         const double* const p_mass, const double* const p_energy,
-        const int vars = 0, const double h = 1e-3, bool CENTRAL = false, bool FOLLOW_UP = false)
+        const int vars = 0, const double h = 1e-3, bool NEWTON = false, bool FORWARD = false, bool CENTRAL = false)
     {
         const int ns = m_thermo.nSpecies();
 
@@ -101,7 +101,7 @@ public:
         switch (vars) {
         case 0: {
 
-            solveEnergies(p_mass, p_energy, h, CENTRAL, FOLLOW_UP);
+            solveEnergies(p_mass, p_energy, h, NEWTON, FORWARD, CENTRAL);
 
             break;
         }
@@ -254,7 +254,7 @@ public:
   * @param p_rhoe - total and internal mass energy
   */
 
-    void solveEnergies(const double* const p_rhoi, const double* const p_rhoe, double dh=0.001, bool CENTRAL=false, bool FOLLOW_UP=false, const double Tv_old = 0, const double T_old = 0)
+    void solveEnergies(const double* const p_rhoi, const double* const p_rhoe, double dh=0.001, bool NEWTON = true, bool FORWARD = false, bool CENTRAL = false, const double Tv_old = 0, const double T_old = 0)
 {
     const double atol = 1.0e-10;
     const double rtol = 1.0e-10;
@@ -272,7 +272,7 @@ public:
 
     bool CONVERGED = false;
 
-    if (FOLLOW_UP){
+    if (NEWTON){
         static Matrix<double, Dynamic, Dynamic, RowMajor> ci;
         ci.resize(2, m_thermo.nSpecies());
         getEnergiesMass(ei.data());
@@ -297,13 +297,16 @@ public:
         }
 
         if (i == imax){
-            std::cout << "Warning, didn't converge temperatures.Trying Perturbation Method." << f.norm() << std::endl;
+            std::cout << "Warning, didn't converge temperatures. |f| = " << f.norm() << std::endl;
+            if (FORWARD or CENTRAL){
+                std::cout << "Trying Perturbation Method" << std::endl;
+            }
         }
         else{
             CONVERGED = true;
         }
     }
-    if (!CONVERGED){
+    if (!CONVERGED && (FORWARD or CENTRAL)){
     // Initial temperature guesses
     m_T  = (T_old  > 0.0) ? T_old  : 3000.0;
     m_Tv = (Tv_old > 0.0) ? Tv_old : 3000.0;
