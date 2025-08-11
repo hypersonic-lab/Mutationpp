@@ -270,6 +270,40 @@ public:
     static Matrix<double, Dynamic, Dynamic, RowMajor> ei;
     ei.resize(2, m_thermo.nSpecies());
 
+    bool CONVERGED = false;
+
+    if (FOLLOW_UP){
+        static Matrix<double, Dynamic, Dynamic, RowMajor> ci;
+        ci.resize(2, m_thermo.nSpecies());
+        getEnergiesMass(ei.data());
+
+        Vector2d f, e, cv;
+        e = ei*yi;
+        f = e - emix;
+
+        int i;
+        for (i = 0; (f.norm() > rtol*emix.norm() + atol) && (i < imax); ++i) {
+            // Update temperatures
+            getCvsMass(ci.data());
+            cv = ci*yi;
+
+            m_Tv = std::max(m_Tv - f[1]/cv[1], 0.1*m_Tv);
+            m_T  = std::max(m_T + (f[1]-f[0])/cv[0], 0.1*m_T);
+
+            // Update function evaluation
+            getEnergiesMass(ei.data());
+            e = ei*yi;
+            f = e - emix;
+        }
+
+        if (i == imax){
+            std::cout << "Warning, didn't converge temperatures.Trying Perturbation Method." << f.norm() << std::endl;
+        }
+        else{
+            CONVERGED = true;
+        }
+    }
+    if (!CONVERGED){
     // Initial temperature guesses
     m_T  = (T_old  > 0.0) ? T_old  : 3000.0;
     m_Tv = (Tv_old > 0.0) ? Tv_old : 3000.0;
@@ -394,6 +428,7 @@ public:
         std::cout << "Warning, FD Newton did not converge temperatures: |f| = " << f_final.norm() << std::endl;
     }
     }
+}
 }
 
 
