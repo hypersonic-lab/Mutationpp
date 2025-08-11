@@ -334,12 +334,12 @@ public:
             Vector2d f_perturbed_up = e_perturbed - emix;
 
             temp = backup;
-            double& temp = (j == 0) ? m_T : m_Tv;
-            double perturb = std::max(dh, 0.01 * backup);
+            temp = (j == 0) ? m_T : m_Tv;
+            perturb = std::max(dh, 0.01 * backup);
             temp -= perturb;
 
             getEnergiesMass(ei.data());
-            Vector2d e_perturbed = ei * yi;
+            e_perturbed = ei * yi;
             Vector2d f_perturbed_down = e_perturbed - emix;
 
             J.col(j) = (f_perturbed_up - f_perturbed_down) / (2.0 * perturb);
