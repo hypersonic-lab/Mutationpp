@@ -273,6 +273,7 @@ public:
     bool CONVERGED = false;
 
     if (NEWTON){
+        const int imax = 100;
         static Matrix<double, Dynamic, Dynamic, RowMajor> ci;
         ci.resize(2, m_thermo.nSpecies());
         getEnergiesMass(ei.data());
@@ -307,6 +308,7 @@ public:
         }
     }
     if (!CONVERGED && (FORWARD or CENTRAL)){
+    const int max = 30;
     // Initial temperature guesses
     m_T  = (T_old  > 0.0) ? T_old  : 3000.0;
     m_Tv = (Tv_old > 0.0) ? Tv_old : 3000.0;
