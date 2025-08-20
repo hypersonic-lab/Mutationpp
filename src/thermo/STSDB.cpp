@@ -6507,27 +6507,27 @@ public:
     double cp_r[50]; 
 
     int ctr = 0;
-    for (int i = 0; i < m_nm; ++i){
-        double val = 0.0;
-        double val3 = 0.0;
-        double val4 = 0.0;
-            for (int j = 0; j < numRoStates[i]; ++j)
-            {
-                val += (2*j+1)*exp(-1.0 * ro_energy[ctr][3] / (KB * Tr)) * ro_energy[ctr][3];
-                val3 += (2*j+1)*exp(-1.0 * ro_energy[ctr][3]/(KB*Tr)) * ro_energy[ctr][3] * ro_energy[ctr][3] / (KB * KB * Tr * Tr * Tr * Tr);
-                val4 += (2*j+1)*exp(-1.0 * ro_energy[ctr][3]/(KB*Tr));
-				// cout << "i: " << i << " m_ns: " << m_ns - 1 << endl;
-				// cout << "m_ns: " << m_ns << " m_na: " << m_na << " m_nm: " << m_nm << endl;
-				// std::cout << "The counter is: " << ctr << " " << i << " " << j << " " << ro_energy[ctr][0] << " " << ro_energy[ctr][1] << endl;
-                ctr += 1;
-            };
-        double val1 = 2 * Tr * val / (KB * Tr * Tr);
-        double val2 = Tr * Tr * val * val / (KB * Tr * Tr) / (KB * Tr * Tr);
-		val3 *= Tr * Tr;
-        val3 -= 2 * Tr * Tr * val / (KB * Tr * Tr* Tr);
-        double cp_val = (val1 - val2 / val4 + val3) / val4;
-        cp_r[i] = cp_val;
-    }
+    // for (int i = 0; i < m_nm; ++i){
+    //     double val = 0.0;
+    //     double val3 = 0.0;
+    //     double val4 = 0.0;
+    //         for (int j = 0; j < numRoStates[i]; ++j)
+    //         {
+    //             val += (2*j+1)*exp(-1.0 * ro_energy[ctr][3] / (KB * Tr)) * ro_energy[ctr][3];
+    //             val3 += (2*j+1)*exp(-1.0 * ro_energy[ctr][3]/(KB*Tr)) * ro_energy[ctr][3] * ro_energy[ctr][3] / (KB * KB * Tr * Tr * Tr * Tr);
+    //             val4 += (2*j+1)*exp(-1.0 * ro_energy[ctr][3]/(KB*Tr));
+	// 			// cout << "i: " << i << " m_ns: " << m_ns - 1 << endl;
+	// 			// cout << "m_ns: " << m_ns << " m_na: " << m_na << " m_nm: " << m_nm << endl;
+	// 			// std::cout << "The counter is: " << ctr << " " << i << " " << j << " " << ro_energy[ctr][0] << " " << ro_energy[ctr][1] << endl;
+    //             ctr += 1;
+    //         };
+    //     double val1 = 2 * Tr * val / (KB * Tr * Tr);
+    //     double val2 = Tr * Tr * val * val / (KB * Tr * Tr) / (KB * Tr * Tr);
+	// 	val3 *= Tr * Tr;
+    //     val3 -= 2 * Tr * Tr * val / (KB * Tr * Tr* Tr);
+    //     double cp_val = (val1 - val2 / val4 + val3) / val4;
+    //     cp_r[i] = cp_val;
+    // }
 
      // Rotation. Assuming fulling active rotational mode
      if (cpr != NULL) {
@@ -6539,10 +6539,10 @@ public:
                 cpr[i] = 0.0; // Ground state
                 cp[i] += 0.0;
                  continue; } // Ground state
-             cpr[i] += cp_r[i-1]; //iCv = R; Cp = Cv + R
-             cp[i] += cp_r[i-1];}
-            //  cpr[i] += 1.0; //iCv = R; Cp = Cv + R
-            //  cp[i] += 1.0;}
+            //  cpr[i] += cp_r[i-1]; //iCv = R; Cp = Cv + R
+            //  cp[i] += cp_r[i-1];}
+             cpr[i] += 1.0; //iCv = R; Cp = Cv + R
+             cp[i] += 1.0;}
          }
 
      } else {
@@ -6552,8 +6552,8 @@ public:
              if (i == 0) {
                 cp[i] += 0.0; // Ground state
                  continue; } // Ground state
-             cp[i] += cp_r[i-1];
-            //  cp[i] += 1.0;
+            //  cp[i] += cp_r[i-1];
+             cp[i] += 1.0;
          }}
      }
 
@@ -13024,20 +13024,20 @@ public:
 
     double h_r[50]; 
 
-    int ctr = 0;
-    for (int i = 0; i < m_nm; ++i){
-        double val1 = 0.0;
-        double val2 = 0.0;
-            for (int j = 0; j < numRoStates[i]; ++j)
-            {
-                val1 += (2*j+1)*exp(-1 * ro_energy[ctr][3] / (KB * Tr)) * ro_energy[ctr][3]/(KB * Tr * Tr);
-                val2 += (2*j+1)*exp(-ro_energy[ctr][3]/(KB*Tr));
-                ctr += 1;
-            };
-        val1 *= Tr * Tr;
-        double h_val = val1 / val2;;
-        h_r[i] = h_val;
-    }
+    // int ctr = 0;
+    // for (int i = 0; i < m_nm; ++i){
+    //     double val1 = 0.0;
+    //     double val2 = 0.0;
+    //         for (int j = 0; j < numRoStates[i]; ++j)
+    //         {
+    //             val1 += (2*j+1)*exp(-1 * ro_energy[ctr][3] / (KB * Tr)) * ro_energy[ctr][3]/(KB * Tr * Tr);
+    //             val2 += (2*j+1)*exp(-ro_energy[ctr][3]/(KB*Tr));
+    //             ctr += 1;
+    //         };
+    //     val1 *= Tr * Tr;
+    //     double h_val = val1 / val2;;
+    //     h_r[i] = h_val;
+    // }
 
 
         // 10 Equal bins
@@ -13156,12 +13156,12 @@ public:
                     hr[i] = 0.0; // Ground state
                     h[i] += 0.0;
                     continue; }
-                hr[i] = h_r[i-1] / Th;
-                m_hr[i] = h_r[i-1] / Th;
-                h[i] += h_r[i-1] / Th;
-                // hr[i] = 1.0 * Tr / Th;
-                // m_hr[i] = 1.0 * Tr / Th;
-                // h[i] += 1.0 * Tr / Th;
+                // hr[i] = h_r[i-1] / Th;
+                // m_hr[i] = h_r[i-1] / Th;
+                // h[i] += h_r[i-1] / Th;
+                hr[i] = 1.0 * Tr / Th;
+                m_hr[i] = 1.0 * Tr / Th;
+                h[i] += 1.0 * Tr / Th;
             }}
 
         } else {
@@ -13172,10 +13172,10 @@ public:
                     m_hr[i] = 0.0;
                     h[i] += 0.0; // Ground state
                     continue; }
-                m_hr[i] = h_r[i-1] / Th;
-                h[i] += h_r[i-1] / Th;
-                // m_hr[i] = 1.0 * Tr / Th;
-                // h[i] += 1.0 * Tr / Th;
+                // m_hr[i] = h_r[i-1] / Th;
+                // h[i] += h_r[i-1] / Th;
+                m_hr[i] = 1.0 * Tr / Th;
+                h[i] += 1.0 * Tr / Th;
             }}
         }
 
@@ -19717,22 +19717,22 @@ public:
 
     double s_r[50]; 
 
-    int ctr = 0;
-    for (int i = 0; i < m_nm; ++i){
-        double val = 0.0;
-        double val2 = 0.0;
-            for (int j = 0; j < numRoStates[i]; ++j)
-            {
-                val += (2*j+1)*exp(-1 * ro_energy[ctr][3] / (KB * Tr));
-                val2 += (2*j+1)*exp(-ro_energy[ctr][3]/(KB*Tr)) * ro_energy[ctr][3]/(KB*Tr*Tr);
-                ctr += 1;
-            };
-        double val1 = log(0.5 * val);
-        val2 *= Tr;
-        double val3 = val;
-        double s_val = val1 + val2 / val3;
-        s_r[i] = s_val;
-    }
+    // int ctr = 0;
+    // for (int i = 0; i < m_nm; ++i){
+    //     double val = 0.0;
+    //     double val2 = 0.0;
+    //         for (int j = 0; j < numRoStates[i]; ++j)
+    //         {
+    //             val += (2*j+1)*exp(-1 * ro_energy[ctr][3] / (KB * Tr));
+    //             val2 += (2*j+1)*exp(-ro_energy[ctr][3]/(KB*Tr)) * ro_energy[ctr][3]/(KB*Tr*Tr);
+    //             ctr += 1;
+    //         };
+    //     double val1 = log(0.5 * val);
+    //     val2 *= Tr;
+    //     double val3 = val;
+    //     double s_val = val1 + val2 / val3;
+    //     s_r[i] = s_val;
+    // }
 
 
         for (int i = 0; i < m_ns; i++){
@@ -19786,12 +19786,17 @@ public:
                     s[i] += 0.0;
                     m_sr[i] += 0.0;
                     continue; }
-                sr[i] += s_r[i-1]; // From slide 20 of Magin, need to check units
-                s[i] += s_r[i-1];
-                m_sr[i] += s_r[i-1]; // From Magin above;
-                // sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From slide 20 of Magin, need to check units
-                // s[i] += (log(Tr / (2 * ThetaR)) + 1.0);
-                // m_sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
+                // sr[i] += s_r[i-1]; // From slide 20 of Magin, need to check units
+                // s[i] += s_r[i-1];
+                // m_sr[i] += s_r[i-1]; // From Magin above;
+				// ln(omegaT) = log(thetaR) + 2/Lin * log*(steric)
+				// :::: Linearity * (1 + ln(T) - log(thetaR) + 2/Lin * log*(steric))
+				// :::: 1 + ln(T) - log(thetaR) - 2/Lin * log*(steric)
+				// :::: 1 + ln(T) - log(thetaR) - log(2)
+				// :::: 1 + ln(T/(2thetaR))
+                sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From slide 20 of Magin, need to check units
+                s[i] += (log(Tr / (2 * ThetaR)) + 1.0);
+                m_sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
 
             }
             
@@ -19806,10 +19811,10 @@ public:
                     s[i] += 0.0;
                     m_sr[i] += 0.0;
                     continue; }
-                s[i] += s_r[i-1]; // From Magin above;
-                m_sr[i] += s_r[i-1]; // From Magin above;
-                // s[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
-                // m_sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
+                // s[i] += s_r[i-1]; // From Magin above;
+                // m_sr[i] += s_r[i-1]; // From Magin above;
+                s[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
+                m_sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
             }
 
         }
