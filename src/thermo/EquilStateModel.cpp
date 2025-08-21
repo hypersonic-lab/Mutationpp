@@ -57,7 +57,8 @@ public:
         // Initial solution
         double T = 300.0;
         double P = ONEATM;
-        setState(&P, &T, 1);
+        bool NEWTON = true;
+        setState(&P, &T, 1, NEWTON);
     }
 
     virtual ~EquilStateModel()
@@ -76,7 +77,7 @@ public:
      */
     virtual void setState(
         const double* const p_mass, const double* const p_energy,
-        const int vars = 0)
+        const int vars = 0, bool NEWTON = true)
     {
         // Determine temperature, pressure, and mole fractions depending on
         // variable set
@@ -272,10 +273,10 @@ public:
       * Sets the state of the equilibrium mixture given temperature and pressure.
       */
      virtual void setState(
-         const double* const p_T, const double* const p_P, const int vars = 1)
+         const double* const p_T, const double* const p_P, const int vars = 1, bool NEWTON = true)
      {
           //assert(vars == 1);
-          EquilStateModel::setState(p_P, p_T, 1);
+          EquilStateModel::setState(p_P, p_T, 1, NEWTON);
      }
 };
 
