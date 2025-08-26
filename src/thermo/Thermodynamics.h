@@ -306,7 +306,7 @@ public:
      * used.
      */
     void setState(
-        const double* const p_v1, const double* const p_v2, const int vars = 0, bool NEWTON = true);
+        const double* const p_v1, const double* const p_v2, const int vars = 0, const double h = 1e-3, bool NEWTON = true, bool CENTRAL = false, bool Forward = false);
         
     /**
      * Computes the equilibrium composition of the mixture at the given fixed
