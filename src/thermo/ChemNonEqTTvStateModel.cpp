@@ -78,7 +78,7 @@ public:
      */
     void setState(
         const double* const p_mass, const double* const p_energy,
-        const int vars = 0, bool NEWTON = true)
+        const int vars = 0, const double h = 1e-3, bool NEWTON = false, bool FORWARD = false, bool CENTRAL = false)
     {
         const int ns = m_thermo.nSpecies();
 
@@ -101,7 +101,7 @@ public:
         switch (vars) {
         case 0: {
 
-            solveEnergies(p_mass, p_energy, NEWTON);
+            solveEnergies(p_mass, p_energy, h, NEWTON, FORWARD, CENTRAL);
 
             break;
         }
@@ -254,11 +254,11 @@ public:
   * @param p_rhoe - total and internal mass energy
   */
 
-    void solveEnergies(const double* const p_rhoi, const double* const p_rhoe, bool NEWTON = true, const double Tv_old = 0, const double T_old = 0)
-{
+    void solveEnergies(const double* const p_rhoi, const double* const p_rhoe, double dh=0.001, bool NEWTON = true, bool FORWARD = false, bool CENTRAL = false, const double Tv_old = 0, const double T_old = 0)
+    {
     const double atol = 1.0e-10;
     const double rtol = 1.0e-10;
-    const double dh = 1e-3;        // finite-diff perturbation
+    const int    imax = 30;
     const double min_temp = 10.0;  // lower clamp for temperatures
 
     Map<const VectorXd> rhoi(p_rhoi, m_thermo.nSpecies());
@@ -269,13 +269,11 @@ public:
     static Matrix<double, Dynamic, Dynamic, RowMajor> ei;
     ei.resize(2, m_thermo.nSpecies());
 
-    // Initial temperature guesses
-    m_T  = (T_old  > 0.0) ? T_old  : 3000.0;
-    m_Tv = (Tv_old > 0.0) ? Tv_old : 3000.0;
-    Vector2d T = Vector2d(m_T, m_Tv);
+    bool CONVERGED = false;
 
-    Vector2d f, f_new;
-    Matrix2d J;
+    if (!NEWTON && !FORWARD && !CENTRAL){
+        FORWARD = true;
+    }    
 
     if (NEWTON){
         const int imax = 100;
@@ -304,63 +302,81 @@ public:
 
         if (i == imax){
             std::cout << "Warning, didn't converge temperatures. |f| = " << f.norm() << std::endl;
+            if (FORWARD or CENTRAL){
+                std::cout << "Trying Perturbation Method" << std::endl;
+            }
+        }
+        else{
+            CONVERGED = true;
         }
     }
-    else{
-        const int imax = 30;
-        for (int iter = 0; iter < imax; ++iter) {
-            getEnergiesMass(ei.data());
-            Vector2d e = ei * yi;
-            f = e - emix;
+    if (!CONVERGED && (FORWARD or CENTRAL)){
+    // Initial temperature guesses
+    m_T  = (T_old  > 0.0) ? T_old  : 3000.0;
+    m_Tv = (Tv_old > 0.0) ? Tv_old : 3000.0;
+    Vector2d T = Vector2d(m_T, m_Tv);
 
-            if (f.norm() < atol + rtol * emix.norm()) {
+    Vector2d f, f_new;
+    Matrix2d J;
+
+    if (CENTRAL){
+        throw NotImplementedError("2T SolveEnergies() Central Finite Difference");
+    }
+    else{
+        for (int iter = 0; iter < imax; ++iter) {
+        getEnergiesMass(ei.data());
+        Vector2d e = ei * yi;
+        f = e - emix;
+
+        if (f.norm() < atol + rtol * emix.norm()) {
+            break;
+        }
+
+        // Compute Jacobian numerically
+        for (int j = 0; j < 2; ++j) {
+            double& temp = (j == 0) ? m_T : m_Tv;
+            double backup = temp;
+            double perturb = dh;
+            temp += perturb;
+
+            getEnergiesMass(ei.data());
+            Vector2d e_perturbed = ei * yi;
+            Vector2d f_perturbed = e_perturbed - emix;
+            J.col(j) = (f_perturbed - f) / perturb;
+
+            temp = backup;
+        }
+
+        // Solve for update
+        Vector2d dT = -J.fullPivLu().solve(f);
+
+        // Apply update with basic damping to avoid negative temperatures
+        double alpha = 1.0;
+        for (int damp = 0; damp < 5; ++damp) {
+            Vector2d T_trial = T + alpha * dT;
+            if (T_trial[0] > min_temp && T_trial[1] > min_temp) {
+                m_T  = T_trial[0];
+                m_Tv = T_trial[1];
                 break;
             }
-
-            // Compute Jacobian numerically
-            for (int j = 0; j < 2; ++j) {
-                double& temp = (j == 0) ? m_T : m_Tv;
-                double backup = temp;
-                double perturb = std::max(dh, 0.01 * backup);
-                temp += perturb;
-
-                getEnergiesMass(ei.data());
-                Vector2d e_perturbed = ei * yi;
-                Vector2d f_perturbed = e_perturbed - emix;
-                J.col(j) = (f_perturbed - f) / perturb;
-
-                temp = backup;
-            }
-
-            // Solve for update
-            Vector2d dT = -J.fullPivLu().solve(f);
-
-            // Apply update with basic damping to avoid negative temperatures
-            double alpha = 1.0;
-            for (int damp = 0; damp < 5; ++damp) {
-                Vector2d T_trial = T + alpha * dT;
-                if (T_trial[0] > min_temp && T_trial[1] > min_temp) {
-                    m_T  = T_trial[0];
-                    m_Tv = T_trial[1];
-                    break;
-                }
-                alpha *= 0.5;
-            }
-
-            T = Vector2d(m_T, m_Tv);
+            alpha *= 0.5;
         }
 
-        if (std::isnan(m_T))   m_T  = T_old;
-        if (std::isnan(m_Tv))  m_Tv = Tv_old;
+        T = Vector2d(m_T, m_Tv);
+    }
 
-        getEnergiesMass(ei.data());
-        Vector2d e_final = ei * yi;
-        Vector2d f_final = e_final - emix;
-        if (f_final.norm() > atol + rtol * emix.norm()) {
-            std::cout << "Warning, FD Newton did not converge temperatures: |f| = " << f_final.norm() << std::endl;
-        }
+    if (std::isnan(m_T))   m_T  = T_old;
+    if (std::isnan(m_Tv))  m_Tv = Tv_old;
+
+    getEnergiesMass(ei.data());
+    Vector2d e_final = ei * yi;
+    Vector2d f_final = e_final - emix;
+    if (f_final.norm() > atol + rtol * emix.norm()) {
+        std::cout << "Warning, FD Newton did not converge temperatures: |f| = " << f_final.norm() << std::endl;
+    }
+    }
 }
-}
+    }
 
 
 private:
