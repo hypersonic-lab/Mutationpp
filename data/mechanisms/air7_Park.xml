@@ -1,0 +1,43 @@
+<!--
+Park air7 reaction mechanism
+Rates taken from:
+    1) Josyula et al., doi:10.2514/2.7036.
+-->
+<mechanism name="air_7_Park">
+
+    <arrhenius_units A="mol,cm,s,K" E="kcal,mol,K" />
+
+    <!-- Park, 2001 -->
+    <reaction formula="N2+M=2N+M">
+        <arrhenius A="7.0E+21" n="-1.6" T="113200.0" />
+        <M>O:4.285714285714286, N:4.285714285714286</M>
+    </reaction>
+
+    <!-- Park, 2001 -->
+    <reaction formula="O2+M=2O+M">
+        <arrhenius A="2.0E+21" n="-1.5" T="59360.0" />
+        <M>O:5.0, N:5.0</M>
+    </reaction>
+
+    <!-- Park, 1993 -->
+    <reaction formula="NO+M=N+O+M">
+        <arrhenius A="5.0E15" n="0.0" T="75500.0" />
+        <M>NO:22.0, N:22.0, O:22.0</M>
+    </reaction>
+
+    <!-- Park, 2001 -->
+    <reaction formula="N2+O=NO+N">
+        <arrhenius A="5.7E+12" n="0.42" T="42938.0" />
+    </reaction>
+
+    <!-- Park, 2001 -->
+    <reaction formula="NO+O=O2+N">
+        <arrhenius A="8.4E+12" n="0.0" T="19400.0" />
+    </reaction>
+
+    <!-- Park, 2001-->
+    <reaction formula="N+O=NO++e-">
+        <arrhenius A="5.3E+12" n="0.00" T="31900.0" />
+    </reaction>
+
+</mechanism>
