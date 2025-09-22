@@ -1,4 +1,4 @@
-<mixture mechanism="STS_46_to_36_xesmf_irrev" thermo_db="STS">
+<mixture mechanism="STS_46_to_36_xesmf_irrev" thermo_db="STS36">
     <species>
         Obin O2_0 O2_1 O2_2 O2_3 O2_4 O2_5 O2_6 O2_7 O2_8 O2_9 O2_10 
         O2_11 O2_12 O2_13 O2_14 O2_15 O2_16 O2_17 O2_18 O2_19 O2_20 

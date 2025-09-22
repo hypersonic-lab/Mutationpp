@@ -1,0 +1,11 @@
+<mixture thermo_db="RRHO">
+
+    <species>
+        Ar O
+    </species>
+    
+    <element_compositions default="Ar">
+        <composition name="Ar"> Ar: 1.0 </composition>
+    </element_compositions>
+
+</mixture>

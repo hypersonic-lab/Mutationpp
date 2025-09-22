@@ -1,0 +1,11 @@
+<mixture thermo_db="Ar_STS">
+
+    <species>
+        Arbin Obin
+    </species>
+    
+    <element_compositions default="Ar">
+        <composition name="Ar"> Ar: 1.0 </composition>
+    </element_compositions>
+
+</mixture>
