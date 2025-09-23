@@ -1,6 +1,6 @@
 <!-- Oxygen Dan extrapolation mapped model reaction mechanism, 2 states -->
 
-<mechanism name="STS_46_to_36_RegGrid">
+<mechanism name="STS_46_to_36_RegGrid_scaled">
     
  
 	<arrhenius_units A="mol,cm,s,K" E="J,mol,K" />
