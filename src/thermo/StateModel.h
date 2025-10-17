@@ -345,9 +345,9 @@ namespace Mutation
                 double &T,
                 double *const p_work,
                 const double alpha = 0.0,
-                const double atol = 1.0e-12,
-                const double rtol = 1.0e-12,
-                const int max_iters = 100)
+                const double atol = 1.0e-10,
+                const double rtol = 1.0e-10,
+                const int max_iters = 500)
     {
                 using std::cerr;
                 const int ns = m_thermo.nSpecies();
@@ -359,9 +359,9 @@ namespace Mutation
                 double *mp_work_upper = new double[ns];
 
                 double f, fp, dT, fp_h;
-                // double f_upper, f_lower;
+                double f_upper, f_lower;
 
-                // double delta = 1.0e-6;
+                double delta = 1.0e-3;
 
                 // Compute initial value of f
                 h(T, p_work);
@@ -378,6 +378,19 @@ namespace Mutation
                 // cout << iter << " " << f << " " << T << endl;
                 while (std::abs(f) > tol)
                 {
+                    double temp_u = T;
+                    double temp_l = T;
+                    double backup = temp_u;
+                    // double perturb = std::max(delta, 0.01 * backup);
+                    double perturb = delta;
+                    temp_u += perturb;
+                    temp_l -= 0.0;
+                    // temp_l -= perturb;
+
+
+                    // std::cout << "T= " << temp_u << std::endl;
+                    // std::cout << "T= " << temp_l << std::endl;
+
                     // Check for max iterations
                     if (iter++ == max_iters)
                     {
@@ -386,30 +399,39 @@ namespace Mutation
                         return false;
                     }
 
-                    // h(T + delta, mp_work_upper);
-                    // h(T - delta, mp_work_lower);
+                    h(temp_u, mp_work_upper);
+                    h(temp_l, mp_work_lower);
 
                     // Compute df/dT
-                    cp(T, p_work);
-                    // f_lower = alpha;
-                    // f_upper = alpha;
+                    // cp(T, p_work);
+                    f_lower = alpha;
+                    f_upper = alpha;
 
-                    // for (int i = 0; i < ns; ++i)
-                    // {
-                    //     f_upper += mp_X[i] * mp_work_upper[i];
-                    //     f_lower += mp_X[i] * mp_work_lower[i];
-                    // }
-
-                    fp = alpha;
-                    // fp_h = alpha;
                     for (int i = 0; i < ns; ++i)
-                        fp += mp_X[i] * p_work[i];
-                    // fp_h = (f_lower - f_upper) / (2 * delta);
+                    {
+                        f_upper += mp_X[i] * mp_work_upper[i];
+                        f_lower += mp_X[i] * mp_work_lower[i];
+                    }
+
+                    f_upper = (temp_u) * f_upper - rhoe_over_Ru;
+                    f_lower = (temp_l) * f_lower - rhoe_over_Ru;
+
+                    // fp = alpha;
+                    fp_h = alpha;
+                    // for (int i = 0; i < ns; ++i)
+                        // fp += mp_X[i] * p_work[i];
+                    fp_h = (f_upper - f_lower) / (delta);
+                    // fp_h = (f_upper - f_lower) / (2.0 * delta);
                     // std::cerr << "fp: " << fp << " fp_h: "
                                 //   << fp_h << std::endl;
 
                     // Update T
-                    dT = f / fp;
+                    // dT = f / fp;
+                    dT = f / fp_h;
+                    // std::cout << "f = " << f << std::endl;
+                    // std::cout << "fup = " << f_upper << " T= " << temp_u << std::endl;
+                    // std::cout << "ful = " << f_lower << " T= " << temp_l << std::endl;
+                    // std::cout << std::endl;
                     if (std::abs(T - 50.0) < 1.0e-10 && dT > 0)
                     {
                         std::cerr << "Clamping T at 50 K, energy is too low for the "
