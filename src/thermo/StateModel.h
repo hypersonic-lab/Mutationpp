@@ -349,161 +349,57 @@ namespace Mutation
                 const double rtol = 1.0e-10,
                 const int max_iters = 500)
     {
-                using std::cerr;
-                const int ns = m_thermo.nSpecies();
-                // const int ns = 11;
-                const double rhoe_over_Ru = rhoe / RU;
-                const double tol = rtol * std::abs(rhoe_over_Ru) + atol;
+        using std::cerr;
+        const int ns = m_thermo.nSpecies();
+        const double rhoe_over_Ru = rhoe/RU;
+        const double tol = rtol*std::abs(rhoe_over_Ru) + atol;
 
-                double *mp_work_lower = new double[ns];
-                double *mp_work_mid = new double[ns];
-                double *mp_work_upper = new double[ns];
+        double f, fp, dT;
 
-                double f, fp, dT, fp_h;
-                double f_upper, f_lower, f_mid;
+        // Compute initial value of f
+        h(T, p_work);
+        f = alpha;
+        for (int i = 0; i < ns; ++i)
+            f += mp_X[i]*p_work[i];
+        f = T*f - rhoe_over_Ru;
 
-                double delta = 1.0e-3;
+        int iter = 0;
+        //cout << iter << " " << f << " " << T << endl;
+        while (std::abs(f) > tol) {
+            // Check for max iterations
+            if (iter++ == max_iters) {
+                std::cerr << "Exceeded max iterations when computing temperature!\n";
+                std::cerr << "res = " << f / rhoe_over_Ru << ", T = " << T << std::endl;
+                return false;
+            }
 
-                // Compute initial value of f
-                h(T, p_work);
-                f = alpha;
-                for (int i = 0; i < ns; ++i)
-                {
-                    f += mp_X[i] * p_work[i];
-                    // std::cout << "i = " << i << ", X = " << mp_X[i] << ", h = " << p_work[i] << std::endl;
-                }
-                f = T * f - rhoe_over_Ru;
-                // std::cout << "INTIAL COMPARISON" << f << " " << T << " " << rhoe_over_Ru << std::endl;
+            // Compute df/dT
+            cp(T, p_work);
+            fp = alpha;
+            for (int i = 0; i < ns; ++i)
+                fp += mp_X[i]*p_work[i];
 
-                int iter = 0;
-                // cout << iter << " " << f << " " << T << endl;
-                double lt = 100;
-                double ut = 100000;
-                int iters = 0;
-                double ea = 1.1*tol;
-                double temp_u = lt;
-                double temp_l = ut;
-                double oldt = T;
-                double newt = T;
-                while ((ea >= tol) && (iter < max_iters))
-                {
+            // Update T
+            dT = f/fp;
+            if (std::abs(T - 50.0) < 1.0e-10 && dT > 0) {
+                std::cerr << "Clamping T at 50 K, energy is too low for the "
+                     << "given species densities..." << std::endl;
+                return false;
+            }
+            while (T - dT < 50.0) dT *= 0.5; // prevent non-positive T
+            T -= dT;
 
-                     if (iter++ == max_iters)
-                    {
-                        std::cerr << "Exceeded max iterations when computing temperature!\n";
-                        std::cerr << "res = " << f / rhoe_over_Ru << ", T = " << T << std::endl;
-                        return false;
-                    }
+            // Recompute f
+            h(T, p_work);
+            f = alpha;
+            for (int i = 0; i < ns; ++i)
+                f += mp_X[i]*p_work[i];
+            f = T*f - rhoe_over_Ru;
+            //cout << iter << " " << f << " " << T << endl;
+        }
 
-
-                    double temp = (temp_l + temp_u) / 2;
-                    h(temp_u, mp_work_upper);
-                    h(temp_l, mp_work_lower);
-                    h(temp, mp_work_mid);
-
-                    f_lower = alpha;
-                    f_upper = alpha;
-                    f_mid = alpha;
-
-                    for (int i = 0; i < ns; ++i)
-                    {
-                        f_upper += mp_X[i] * mp_work_upper[i];
-                        f_lower += mp_X[i] * mp_work_lower[i];
-                        f_mid += mp_X[i] * mp_work_mid[i];
-                    }
-
-                    f_upper = (temp_u) * f_upper - rhoe_over_Ru;
-                    f_lower = (temp_l) * f_lower - rhoe_over_Ru;
-                    f_mid = (temp) * f_mid - rhoe_over_Ru;
-
-                    f_upper = f_upper - f;
-                    f_lower = f_lower - f;
-                    f_mid = f_mid - f;
-
-                    double test = f_lower * f_mid;
-                    if (test == 0){
-                        ea = 0;
-                    }                  
-                    else{
-                        if (test < 0){
-                            temp_u = temp;
-                        }
-                        else{
-                            temp_l = temp;
-                        }
-                    }
-                    oldt = temp;
-                    newt = (temp_l + temp_u) / 2;
-                    ea  = std::abs(newt - oldt) / newt * 100;
-                    if (std::abs(temp-ut) < 1){
-                        T = lt;
-                    }
-                    else{
-                        T = temp;
-                    }
-
-
-
-                    // double backup = temp_u;
-                    // double perturb = std::max(delta, 0.01 * backup);
-                    // double perturb = delta;
-                    // temp_u += perturb;
-                    // temp_l -= 0.0;
-                    // temp_l -= perturb;
-
-
-                    // std::cout << "T= " << temp_u << std::endl;
-                    // std::cout << "T= " << temp_l << std::endl;
-
-                    // Check for max iterations
-                   
-
-                    // h(temp_u, mp_work_upper);
-                    // h(temp_l, mp_work_lower);
-
-                    // Compute df/dT
-                    // cp(T, p_work);
-                    
-
-                    // fp = alpha;
-                    // fp_h = alpha;
-                    // for (int i = 0; i < ns; ++i)
-                        // fp += mp_X[i] * p_work[i];
-                    // fp_h = (f_upper - f_lower) / (delta);
-                    // fp_h = (f_upper - f_lower) / (2.0 * delta);
-                    // std::cerr << "fp: " << fp << " fp_h: "
-                                //   << fp_h << std::endl;
-
-                    // Update T
-                    // dT = f / fp;
-                    // dT = f / fp_h;
-                    // std::cout << "f = " << f << std::endl;
-                    // std::cout << "fup = " << f_upper << " T= " << temp_u << std::endl;
-                    // std::cout << "ful = " << f_lower << " T= " << temp_l << std::endl;
-                    // std::cout << std::endl;
-                    if (std::abs(T - 50.0) < 1.0e-10 && dT > 0)
-                    {
-                        std::cerr << "Clamping T at 50 K, energy is too low for the "
-                                  << "given species densities..." << std::endl;
-                        return false;
-                    }
-                    // while (T - dT < 50.0)
-                    //     dT *= 0.5; // prevent non-positive T
-                    // T -= dT;
-                    // std::cout << "T is HERE = " << T << std::endl;
-                    // std::cout << "Energy is HERE = " << rhoe_over_Ru << std::endl;
-
-                    // Recompute f
-                    // h(T, p_work);
-                    // f = alpha;
-                    // for (int i = 0; i < ns; ++i)
-                    //     f += mp_X[i] * p_work[i];
-                    // f = T * f - rhoe_over_Ru;
-                    // std::cout << iter << "WEAREHERE" << f << " " << T << std::endl;
-                }
-
-                // Let the user know if we converged or not
-                return true;
+        // Let the user know if we converged or not
+        return true;
             }
 
         protected:
