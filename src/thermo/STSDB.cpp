@@ -13286,8 +13286,10 @@ public:
         for (int i = 0; i < m_ns; i++){
             if (i == 0){
                 h[i] += (249229.0 / RU - 2.5*Tss - ((theta_1_O/Tss) * g1_O/g0_O * exp(-theta_1_O / Tss)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tss))) / Th;
+				continue;
             }
-            h[i] += 0.0;
+			double cm2J = 1.98630e-23;
+            h[i] += 0 - (2.5 * Tss / Th + 1.0 * Tss / Th + energy[0] * cm2J / (KB * Th) + ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tss)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tss)) / Th); 
 //            h[i] += energy[i];
             // h[i] += m_vhf[i];
         }
@@ -20360,7 +20362,7 @@ private:
      */
     template <typename OP>
     void cpT(double* const cp, const OP& op) {
-        LOOP(op(cp[i], 1.5));
+        LOOP(op(cp[i], 2.5));
     }
 
     /**
