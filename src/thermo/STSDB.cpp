@@ -1115,7 +1115,7 @@ private:
     int m_na;
     int m_nm;
 
-	bool m_has_electron
+	bool m_has_electron;
 
 	std::array<double, 47> m_energy = {
     786.0234, 2343.573, 3881.3038,
@@ -1188,10 +1188,10 @@ private:
 
 		for (int i = 0; i < m_ns; i++){
 			if (i == 0){
-				op(p_cp[i],pow((theta_1_O/Tel),2.0) * (g1_O/g0_O * exp(-theta_1_O / Tel)) / (pow(1.0+g1_O/g0_O * exp(-theta_1_O / Tel),2.0))); // Ground state
+				op(p_cp[i],pow((theta_1_O/T),2.0) * (g1_O/g0_O * exp(-theta_1_O / T)) / (pow(1.0+g1_O/g0_O * exp(-theta_1_O / T),2.0))); // Ground state
 			}
 			else {
-				op(p_cp[i],pow((theta_1_O2/Tel),2.0) * (g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (pow(1.0+g1_O2/g0_O2 * exp(-theta_1_O2 / Tel),2.0)));
+				op(p_cp[i],pow((theta_1_O2/T),2.0) * (g1_O2/g0_O2 * exp(-theta_1_O2 / T)) / (pow(1.0+g1_O2/g0_O2 * exp(-theta_1_O2 / T),2.0)));
 			}
 		}
     }
