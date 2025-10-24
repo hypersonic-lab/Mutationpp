@@ -77,10 +77,10 @@ for (int i = 0, j = 0; i < m_na + m_nm; ++i) {\
     __op__ ;\
 }
 
-// typedef struct {
-//     double ln_omega_t;  // ln(omega^(2 / L) * theta)
-//     double linearity;   // L / 2
-// } RotData;
+typedef struct {
+    double ln_omega_t;  // ln(omega^(2 / L) * theta)
+    double linearity;   // L / 2
+} RotData;
 
 // typedef struct {
 //     double g;           // degeneracy
@@ -110,28 +110,28 @@ class STSDB : public ThermoDB
 {
 public:
 
-    STSDB(int arg) : ThermoDB(298.15, 101325.0){}
+    STSDB(int arg) : ThermoDB(298.15, 101325.0){
 //          ,m_has_electron(false),
 //           m_use_tables(false),
 //           m_last_bfacs_T(0.0) {} //
 //             ~STSDB()
 //     {
 //         delete [] mp_lnqtmw;
-//         delete [] mp_hform;
+        delete [] mp_hform;
 //         delete [] mp_indices;
-// //!        delete [] mp_rot_data;
+        delete [] mp_rot_data;
 // //!        delete [] mp_nvib;
 // //!        delete [] mp_vib_temps;
 
 //         delete [] m_elec_data.p_nelec;
 //         delete [] m_elec_data.p_levels;
-//         delete [] mp_part_sst;
+        delete [] mp_part_sst;
 //         delete [] mp_el_bfacs;
 
 //         if (m_use_tables) {
 //             delete mp_el_bfac_table;
 //         }
-//     }
+    }
 
     /**
      * Computes the unitless species specific heat at constant pressure
@@ -411,15 +411,15 @@ public:
     // }
 
         
-                // Special case where we only want the total enthalpy
+        // Special case where we only want the total enthalpy
         // if (ht == NULL && hr == NULL && hv == NULL && hel == NULL && 
         //     hf == NULL && h != NULL) 
         // {
         //     hT(Th, Te, h, Eq());
         //     hR(Tr, h, PlusEq());
         //     hV(Tv, h, PlusEq());
-        //     // hE(Tel, h, PlusEq());
-        //     // hF(h, PlusEq());
+        //     hE(Tel, h, PlusEq());
+        //     hF(h, PlusEq());
         //     LOOP(h[i] /= Th);
         //     return;
         // }
@@ -432,59 +432,82 @@ public:
         }
 
         // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
-        if (ht != NULL) {
-            // hT(Th, Te, ht, EqDiv(Th));
-            // if (h != NULL)
-            //     LOOP(h[i] = ht[i]);
-            for (int i = 0; i < m_ns; i++){
-                ht[i] = 2.5 * Th / Th; // Is this non-dimensional too? Taking in work flow too. Otherwise it would be 1.5.
-                m_ht[i] = 2.5 * Th / Th;
-                h[i] = ht[i];
-            }
+        // if (ht != NULL) {
+        //     // hT(Th, Te, ht, EqDiv(Th));
+        //     // if (h != NULL)
+        //     //     LOOP(h[i] = ht[i]);
+        //     for (int i = 0; i < m_ns; i++){
+        //         ht[i] = 2.5 * Th / Th; // Is this non-dimensional too? Taking in work flow too. Otherwise it would be 1.5.
+        //         m_ht[i] = 2.5 * Th / Th;
+        //         h[i] = ht[i];
+        //     }
 
-        } else {
+        // } else {
+        //     //hT(Th, Te, h, Eq());
+        //     if (h != NULL){
+        //         // hT(Th, Te, h, EqDiv(Th));
+        //     for (int i = 0; i < m_ns; i++){
+        //         m_ht[i] = 2.5 * Th / Th;
+        //         h[i] = 2.5 * Th / Th;
+        //     }}
+        // }
+
+		// Otherwise selectively choose what we want
+        // Translational enthalpy
+        if (ht == NULL) {
             //hT(Th, Te, h, Eq());
-            if (h != NULL){
-                // hT(Th, Te, h, EqDiv(Th));
-            for (int i = 0; i < m_ns; i++){
-                m_ht[i] = 2.5 * Th / Th;
-                h[i] = 2.5 * Th / Th;
-            }}
+            if (h != NULL)
+                hT(Th, Te, h, EqDiv(Th));
+        } else {
+            hT(Th, Te, ht, EqDiv(Th));
+            if (h != NULL)
+                LOOP(h[i] = ht[i]);
         }
 
         // Rotation. Assuming fully active rotational mode
-        if (hr != NULL) {
-            // LOOP(hr[i] = 0.0);
-            // hR(Tr, hr, EqDiv(Th));
-            if (h != NULL){
-                // LOOP_MOLECULES(h[j] += hr[j]);
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    m_hr[i] = 0.0;
-                    hr[i] = 0.0; // Ground state
-                    h[i] += 0.0;
-                    continue; }
-                // hr[i] = h_r[i-1] / Th;
-                // m_hr[i] = h_r[i-1] / Th;
-                // h[i] += h_r[i-1] / Th;
-                hr[i] = 1.0 * Tr / Th;
-                m_hr[i] = 1.0 * Tr / Th;
-                h[i] += 1.0 * Tr / Th;
-            }}
+        // if (hr != NULL) {
+        //     // LOOP(hr[i] = 0.0);
+        //     // hR(Tr, hr, EqDiv(Th));
+        //     if (h != NULL){
+        //         // LOOP_MOLECULES(h[j] += hr[j]);
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             m_hr[i] = 0.0;
+        //             hr[i] = 0.0; // Ground state
+        //             h[i] += 0.0;
+        //             continue; }
+        //         // hr[i] = h_r[i-1] / Th;
+        //         // m_hr[i] = h_r[i-1] / Th;
+        //         // h[i] += h_r[i-1] / Th;
+        //         hr[i] = 1.0 * Tr / Th;
+        //         m_hr[i] = 1.0 * Tr / Th;
+        //         h[i] += 1.0 * Tr / Th;
+        //     }}
 
+        // } else {
+        //     if (h != NULL){
+        //         // hR(Tr, h, PlusEqDiv(Th));
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             m_hr[i] = 0.0;
+        //             h[i] += 0.0; // Ground state
+        //             continue; }
+        //         // m_hr[i] = h_r[i-1] / Th;
+        //         // h[i] += h_r[i-1] / Th;
+        //         m_hr[i] = 1.0 * Tr / Th;
+        //         h[i] += 1.0 * Tr / Th;
+        //     }}
+        // }
+
+		// Rotatonal enthalpy
+        if (hr == NULL) {
+            if (h != NULL)
+                hR(Tr, h, PlusEqDiv(Th));
         } else {
-            if (h != NULL){
-                // hR(Tr, h, PlusEqDiv(Th));
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    m_hr[i] = 0.0;
-                    h[i] += 0.0; // Ground state
-                    continue; }
-                // m_hr[i] = h_r[i-1] / Th;
-                // h[i] += h_r[i-1] / Th;
-                m_hr[i] = 1.0 * Tr / Th;
-                h[i] += 1.0 * Tr / Th;
-            }}
+            LOOP(hr[i] = 0.0);
+            hR(Tr, hr, EqDiv(Th));
+            if (h != NULL)
+                LOOP_MOLECULES(h[j] += hr[j]);
         }
 
         // etc...
@@ -529,17 +552,28 @@ public:
                 h[i] += m_energy[i-1] * cm2J / (KB * Th); //m_energy[i-1] * 1.42879 / Th * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
             }}
         }
+        // Vibrational enthalpy
+        // if (hv == NULL) {
+        //     if (h != NULL)
+        //         hV(Tv, h, PlusEqDiv(Th));
+        // } else {
+        //     LOOP(hv[i] = 0.0);
+        //     hV(Tv, hv, EqDiv(Th));
+        //     if (h != NULL)
+        //         LOOP_MOLECULES(h[j] += hv[j]);
+        // }
+
 
         // Electronic. For now setting as zero
         // hel[0] = 0.0;
         // hel[1] = 0.0;
         // hel[2] = 0.0;
-        double g0_O2 = 3.0;
-        double g1_O2 = 2.0;
-        double theta_1_O2 = 11900;
-        double g0_O = 5.0;
-        double g1_O = 4.0;
-        double theta_1_O = 270;
+//         double g0_O2 = 3.0;
+//         double g1_O2 = 2.0;
+//         double theta_1_O2 = 11900;
+//         double g0_O = 5.0;
+//         double g1_O = 4.0;
+//         double theta_1_O = 270;
 
         if (hel != NULL) {
             // LOOP(hv[i] = 0.0);
@@ -571,6 +605,18 @@ public:
             }}
         }
 
+		        // Electronic enthalpy
+        // if (hel == NULL) {
+        //     if (h != NULL)
+        //         hE(Tel, h, PlusEqDiv(Th));
+        // } else {
+        //     LOOP(hel[i] = 0.0);
+        //     hE(Tel, hel, EqDiv(Th));
+        //     if (h != NULL)
+        //         LOOP(h[i] += hel[i]);
+        // }
+
+
         // if (hf != NULL) {
         //     // LOOP(hv[i] = 0.0);
         //     // hV(Tv, hv, EqDiv(Th));
@@ -601,6 +647,16 @@ public:
 //            h[i] += m_energy[i];
             // h[i] += m_vhf[i];
         }
+        // // Formation enthalpy
+        // if (hf == NULL) {
+        //     if (h != NULL)
+        //         hF(h, PlusEqDiv(Th));
+        // } else {
+        //     hF(hf, EqDiv(Th));
+        //     if (h != NULL)
+        //         LOOP(h[i] += hf[i]);
+        // }
+
 
         // Old equations, before generalize
         // I think this below is already calculated above by the sums
@@ -1004,8 +1060,10 @@ protected:
                 species_iter->findTagWithAttribute(
                     "thermodynamics", "type", "STS");
 
-            if (rrho_iter == species_iter->end())
-                continue;
+            if (rrho_iter == species_iter->end()){
+				std::cout << "TEST" << std::endl;
+                continue;}
+			std::cout << "NOPE" << std::endl;
 
             Species& ground_state = species.back();
             ParticleRRHO rrho(*rrho_iter);
@@ -1036,6 +1094,8 @@ protected:
         vector<int> atom_indices;
         vector<int> molecule_indices;
 
+
+
         LOOP(
             switch(species()[i].type()) {
                 case ATOM:
@@ -1051,6 +1111,60 @@ protected:
 
         m_na = atom_indices.size();
         m_nm = molecule_indices.size();
+		        // Compute the contribution of the partition functions at the standard
+        // state temperature to the species enthalpies
+
+        // Store the species formation enthalpies in K
+
+				        // Load the RRHO models for each of the needed species
+        IO::XmlDocument species_doc(databaseFileName("species.xml", "thermo"));
+        
+        vector<ParticleRRHO> rrhos;
+        map<std::string, const ParticleRRHO*> to_expand;
+        
+        for (int i = 0; i < m_ns; ++i) {
+            if (species()[i].name() == species()[i].groundStateName()) {
+                rrhos.push_back(*(species_doc.root().findTagWithAttribute(
+                    "species", "name", species()[i].groundStateName())->
+                        findTagWithAttribute("thermodynamics", "type", "STS")));
+            }
+            else {
+                const ParticleRRHO* p_rrho = to_expand[species()[i].groundStateName()];
+                if (p_rrho == NULL) {
+                    p_rrho = new ParticleRRHO(
+                        *(species_doc.root().findTagWithAttribute(
+                            "species", "name", species()[i].groundStateName())->
+                                findTagWithAttribute("thermodynamics", "type", "STS")));
+                    to_expand[species()[i].groundStateName()] = p_rrho;
+                }
+                rrhos.push_back(ParticleRRHO(*p_rrho, species()[i].level()));
+            }
+        }
+
+
+        mp_hform = new double [m_ns];
+        LOOP(mp_hform[i] = rrhos[i].formationEnthalpy() / RU)
+
+		        // Store the molecule's rotational energy parameters
+        mp_rot_data = new RotData [m_nm];
+        LOOP_MOLECULES(
+            const ParticleRRHO& rrho = rrhos[j];
+            int linear = rrho.linearity();
+			std::cout << i << " " << rrho.linearity() << std::endl;
+            mp_rot_data[i].linearity  = linear / 2.0;
+            mp_rot_data[i].ln_omega_t = 
+                std::log(rrho.rotationalTemperature()) + 2.0 / linear *
+                std::log(rrho.stericFactor());
+        )
+
+
+        mp_part_sst = new double [m_ns];
+        double Tss = standardTemperature();
+        hT(Tss, Tss, mp_part_sst, Eq());
+        hR(Tss, mp_part_sst, PlusEq());
+        hV(Tss, mp_part_sst, PlusEq());
+        hE(Tss, mp_part_sst, PlusEq());
+
 
 
 
@@ -1117,6 +1231,20 @@ private:
 
 	bool m_has_electron;
 
+	double* mp_part_sst;
+	double* mp_hform;
+
+	RotData*   mp_rot_data;
+
+	double g0_O2 = 3.0;
+	double g1_O2 = 2.0;
+	double theta_1_O2 = 11900;
+	double g0_O = 5.0;
+	double g1_O = 4.0;
+	double theta_1_O = 270;
+	double cm2J = 1.98630e-23;
+
+
 	std::array<double, 47> m_energy = {
     786.0234, 2343.573, 3881.3038,
 	5398.5964, 6894.8782, 8369.5118,
@@ -1177,12 +1305,12 @@ private:
 	    template <typename OP>
     void cpE(double T, double* const p_cp, const OP& op)
     {
-		double g0_O2 = 3.0;
-		double g1_O2 = 2.0;
-		double theta_1_O2 = 11900;
-		double g0_O = 5.0;
-		double g1_O = 4.0;
-		double theta_1_O = 270;
+		// double g0_O2 = 3.0;
+		// double g1_O2 = 2.0;
+		// double theta_1_O2 = 11900;
+		// double g0_O = 5.0;
+		// double g1_O = 4.0;
+		// double theta_1_O = 270;
 
 		op(p_cp[0], 0.0);
 
@@ -1199,19 +1327,19 @@ private:
     /**
      * Computes the translational enthalpy of each species in K.
      */
-    // template <typename OP>
-    // void hT(double T, double Te, double* const h, const OP& op) {
-    //     if (m_has_electron)
-    //         op(h[0], 2.5 * Te);
-    //     LOOP_HEAVY(op(h[j], 2.5 * T))
-    // }
+    template <typename OP>
+    void hT(double T, double Te, double* const h, const OP& op) {
+        if (m_has_electron)
+            op(h[0], 2.5 * Te);
+        LOOP_HEAVY(op(h[j], 2.5 * T))
+    }
 
     /**
      * Computes the rotational enthalpy of each species in K.
      */
     template <typename OP>
     void hR(double T, double* const h, const OP& op) {
-//!        LOOP_MOLECULES(op(h[j], mp_rot_data[i].linearity * T))
+        LOOP_MOLECULES(op(h[j], mp_rot_data[i].linearity * T))
     }
 
     /**
@@ -1222,17 +1350,39 @@ private:
         if (T < 10.0) {
             LOOP_MOLECULES(op(h[j], 0.0));
         } else {
-//!            int ilevel = 0;
-//!            double sum;
-//!            LOOP_MOLECULES(
-//!                sum = 0.0;
-//!                for (int k = 0; k < mp_nvib[i]; ++k, ilevel++)
-//!                    sum += mp_vib_temps[ilevel] /
-//!                        (std::exp(mp_vib_temps[ilevel] / T) - 1.0);
-//!                op(h[j], sum);
-//!            )
+            LOOP_MOLECULES(op(h[j], m_energy[i] * cm2J / (KB * T)))
         }
     }
+
+	    /**
+     * Computes the electronic enthalpy of each species in K and applies the
+     * value to the enthalpy array using the given operation.
+     */
+    template <typename OP>
+    void hE(double T, double* const p_h, const OP& op)
+    {
+
+		op(p_h[0], 0.0);
+
+		for (int i = 0; i < m_ns; i++){
+			if (i == 0){
+				op(p_h[i],((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / T)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / T))); // Ground state
+			}
+			else {
+				op(p_h[i],((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / T)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / T)));
+			}
+		}
+    }
+
+	    /**
+     * Computes the formation enthalpy of each species in K.
+     */
+    template <typename OP>
+    void hF(double* const h, const OP& op) {
+        LOOP(op(h[i], mp_hform[i] - mp_part_sst[i]))
+    }
+
+
     /**
      * Computes the unitless translational entropy of each species.
      */
