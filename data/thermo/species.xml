@@ -2658,652 +2658,835 @@
          
          <!-- Oxygen diatomic 0 bin 2-1 non Uniform, not definite numbers -->
                  <species name="O2_0">
-                         <stoichiometry>
+                        <stoichiometry>
                                  O: 2
-                         </stoichiometry>
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
                          <thermodynamics type="STS">
-                                 <electronic_levels units="1/cm">
-                                        <level degeneracy="   7767" energy="0.0" />
-                                 </electronic_levels>
-                                 <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                           0
-                                 </formation_enthalpy>
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
                          </thermodynamics>
                  </species>
 
                  <!-- Oxygen diatomic 1 bin 9-1 non Uniform -->
                  <species name="O2_1">
-                         <stoichiometry>
+                        <stoichiometry>
                                  O: 2
-                         </stoichiometry>
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
                          <thermodynamics type="STS">
-                                 <electronic_levels units="1/cm">
-                                        <level degeneracy="  36426" energy="0.0" />
-                                 </electronic_levels>
-                                 <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                           0
-                                 </formation_enthalpy>
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
                          </thermodynamics>
                  </species>
 
 				 <!-- Oxygen diatomic 2 bin 9-1 non Uniform -->
 				<species name="O2_2">
-						<stoichiometry>
-								O: 2
-						</stoichiometry>
-						<thermodynamics type="STS">
-								<electronic_levels units="1/cm">
-									<level degeneracy="  91239" energy="0.0" />
-								</electronic_levels>
-								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										0
-								</formation_enthalpy>
-						</thermodynamics>
-				</species>
-
-				<!-- Oxygen diatomic 3 bin 9-1 non Uniform -->
-				<species name="O2_3">
-						<stoichiometry>
-								O: 2
-						</stoichiometry>
-						<thermodynamics type="STS">
-								<electronic_levels units="1/cm">
-									<level degeneracy=" 182634" energy="0.0" />
-								</electronic_levels>
-								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										0
-								</formation_enthalpy>
-						</thermodynamics>
-				</species>
-
-				<!-- Oxygen diatomic 4 bin 9-1 non Uniform -->
-				<species name="O2_4">
-						<stoichiometry>
-								O: 2
-						</stoichiometry>
-						<thermodynamics type="STS">
-								<electronic_levels units="1/cm">
-									<level degeneracy=" 312789" energy="0.0" />
-								</electronic_levels>
-								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										0
-								</formation_enthalpy>
-						</thermodynamics>
-				</species>
-
-				<!-- Oxygen diatomic 5 bin 9-1 non Uniform -->
-				<species name="O2_5">
-						<stoichiometry>
-								O: 2
-						</stoichiometry>
-						<thermodynamics type="STS">
-								<electronic_levels units="1/cm">
-									<level degeneracy=" 498210" energy="0.0" />
-								</electronic_levels>
-								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										0
-								</formation_enthalpy>
-						</thermodynamics>
-				</species>
-
-				<!-- Oxygen diatomic 6 bin 9-1 non Uniform -->
-				<species name="O2_6">
-						<stoichiometry>
-								O: 2
-						</stoichiometry>
-						<thermodynamics type="STS">
-								<electronic_levels units="1/cm">
-									<level degeneracy=" 772773" energy="0.0" />
-								</electronic_levels>
-								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										0
-								</formation_enthalpy>
-						</thermodynamics>
-				</species>
-
-				<!-- Oxygen diatomic 7 bin 9-1 non Uniform -->
-				<species name="O2_7">
-						<stoichiometry>
-								O: 2
-						</stoichiometry>
-						<thermodynamics type="STS">
-								<electronic_levels units="1/cm">
-									<level degeneracy="1176771" energy="0.0" />
-								</electronic_levels>
-								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										0
-								</formation_enthalpy>
-						</thermodynamics>
-				</species>
-
-				<!-- Oxygen diatomic 8 bin 9-1 non Uniform -->
-				<species name="O2_8">
-						<stoichiometry>
-								O: 2
-						</stoichiometry>
-						<thermodynamics type="STS">
-								<electronic_levels units="1/cm">
-									<level degeneracy="2013810" energy="0.0" />
-								</electronic_levels>
-								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										0
-								</formation_enthalpy>
-						</thermodynamics>
-				</species>
-
-				<!-- Oxygen diatomic 9 bin 9-1 non Uniform -->
-				<species name="O2_9">
-						<stoichiometry>
-								O: 2
-						</stoichiometry>
-						<thermodynamics type="STS">
-								<electronic_levels units="1/cm">
-									<level degeneracy="3109059" energy="0.0" />
-								</electronic_levels>
-								<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-										0
-								</formation_enthalpy>
-						</thermodynamics>
-				</species>
-                
-                <species name="O2_10">
                         <stoichiometry>
-                                O: 2
+                                 O: 2
                         </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_11">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_12">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_13">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_14">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_15">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_16">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_17">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_18">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_19">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_20">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_21">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_22">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_23">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_24">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_25">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_26">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_27">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_28">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_29">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_30">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_31">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_32">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_33">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_34">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_35">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_36">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_37">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_38">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_39">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_40">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_41">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_42">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_43">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_44">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_45">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-                <species name="O2_46">
-                        <stoichiometry>
-                                O: 2
-                        </stoichiometry>
-                        <thermodynamics type="STS">
-                                <electronic_levels units="1/cm">
-                                    <level degeneracy="0" energy="0.0" />
-                                </electronic_levels>
-                                <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                        0.0
-                                </formation_enthalpy>
-                        </thermodynamics>
-                </species>
-
-            
-                 <!-- Oxygen for bin model: 10bin -->
-                 <species name="Obin">
-                         <stoichiometry>
-                                 O: 1
-                         </stoichiometry>
+						<linear>
+								yes
+						</linear>
                          <thermodynamics type="STS">
-                                 <electronic_levels units="1/cm">
-                                     <level degeneracy="12" energy="0.0" />
-                                 </electronic_levels>
-                                 <formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-                                         249229.0
-                                 </formation_enthalpy>
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
                          </thermodynamics>
                  </species>
 
+				<!-- Oxygen diatomic 3 bin 9-1 non Uniform -->
+				<species name="O2_3">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+
+				<!-- Oxygen diatomic 4 bin 9-1 non Uniform -->
+				<species name="O2_4">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+
+				<!-- Oxygen diatomic 5 bin 9-1 non Uniform -->
+				<species name="O2_5">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+
+				<!-- Oxygen diatomic 6 bin 9-1 non Uniform -->
+				<species name="O2_6">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+
+				<!-- Oxygen diatomic 7 bin 9-1 non Uniform -->
+				<species name="O2_7">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+
+				<!-- Oxygen diatomic 8 bin 9-1 non Uniform -->
+				<species name="O2_8">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+
+				<!-- Oxygen diatomic 9 bin 9-1 non Uniform -->
+				<species name="O2_9">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                
+                <species name="O2_10">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+
+                <species name="O2_11">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+
+                <species name="O2_12">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_13">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_14">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_15">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_16">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_17">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_18">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_19">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+
+                <species name="O2_20">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_21">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_22">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_23">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_24">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_25">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_26">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_27">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_28">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_29">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+
+                <species name="O2_30">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_31">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_32">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_33">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_34">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_35">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_36">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_37">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_38">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_39">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_40">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_41">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_42">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_43">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_44">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_45">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+                <species name="O2_46">
+                        <stoichiometry>
+                                 O: 2
+                        </stoichiometry>
+						<linear>
+								yes
+						</linear>
+                         <thermodynamics type="STS">
+						<electronic_levels units="1/cm">
+							<level degeneracy="3" energy="0.0" />
+						</electronic_levels>
+							<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+									0
+							</formation_enthalpy>
+                         </thermodynamics>
+                 </species>
+
+            
+                 <!-- Oxygen for bin model: 10bin -->
+	<species name="Obin">
+		<stoichiometry>
+			O: 1
+		</stoichiometry>
+		<thermodynamics type="STS">
+			<electronic_levels units="1/cm">
+				<level degeneracy="9" energy="0.0" />
+				<level degeneracy="5" energy="15889.0" />
+				<level degeneracy="1" energy="33794.0" />
+				<level degeneracy="5" energy="73768.0" />
+				<level degeneracy="3" energy="76792.0" />
+				<level degeneracy="15" energy="86624.0" />
+				<level degeneracy="9" energy="88641.0" />
+				<level degeneracy="5" energy="95480.0" />
+				<level degeneracy="3" energy="96222.0" />
+				<level degeneracy="25" energy="97513.0" />
+				<level degeneracy="15" energy="97593.0" />
+				<level degeneracy="15" energy="99207.0" />
+				<level degeneracy="9" energy="99771.0" />
+				<level degeneracy="15" energy="101223.0" />
+				<level degeneracy="5" energy="102191.0" />
+				<level degeneracy="3" energy="102513.0" />
+				<level degeneracy="5" energy="102755.0" />
+				<level degeneracy="25" energy="102917.0" />
+				<level degeneracy="15" energy="102997.0" />
+				<level degeneracy="56" energy="103078.0" />
+				<level degeneracy="15" energy="103723.0" />
+				<level degeneracy="9" energy="103965.0" />
+				<level degeneracy="5" energy="105094.0" />
+				<level degeneracy="3" energy="105256.0" />
+				<level degeneracy="40" energy="105498.0" />
+				<level degeneracy="56" energy="105554.0" />
+				<level degeneracy="15" energy="105901.0" />
+				<level degeneracy="9" energy="105982.0" />
+				<level degeneracy="5" energy="106627.0" />
+				<level degeneracy="3" energy="106708.0" />
+				<level degeneracy="168" energy="106869.0" />
+				<level degeneracy="5" energy="107514.0" />
+				<level degeneracy="3" energy="107595.0" />
+				<level degeneracy="96" energy="107700.0" />
+				<level degeneracy="8" energy="108175.0" />
+				<level degeneracy="40" energy="108224.0" />
+				<level degeneracy="8" energy="108555.0" />
+				<level degeneracy="40" energy="108595.0" />
+				<level degeneracy="3" energy="108829.0" />
+				<level degeneracy="40" energy="108853.0" />
+			</electronic_levels>
+			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+				249229
+			</formation_enthalpy>
+		</thermodynamics>
+	</species>
 				 <!-- Oxygen for bin model: 10bin -->
                  <species name="Obin_Ar">
                          <stoichiometry>
