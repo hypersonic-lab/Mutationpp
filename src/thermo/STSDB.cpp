@@ -457,17 +457,10 @@ protected:
      */
     virtual void loadThermodynamicData()
     {
-//        m_ns = 3; // Number of energy states
-
         m_ns = species().size();
 		m_has_electron = (species()[0].type() == ELECTRON);
 
-		        // Compute the contribution of the partition functions at the standard
-        // state temperature to the species enthalpies
-
-        // Store the species formation enthalpies in K
-
-				        // Load the RRHO models for each of the needed species
+		// Load the RRHO models for each of the needed species
         IO::XmlDocument species_doc(databaseFileName("species.xml", "thermo"));
         
         vector<ParticleRRHO> rrhos;
@@ -501,8 +494,6 @@ protected:
 
 		vector<int> atom_indices;
         vector<int> molecule_indices;
-
-
 
         LOOP(
             switch(species()[i].type()) {
@@ -539,65 +530,11 @@ protected:
                 std::log(rrho.stericFactor());
         )
 
-
         mp_part_sst = new double [m_ns];
         hT(Tss, Tss, mp_part_sst, Eq());
         hR(Tss, mp_part_sst, PlusEq());
         hV_f(Tss, mp_part_sst, PlusEq());
         hE(Tss, mp_part_sst, PlusEq());
-
-
-
-
-
-
-
-
-
-
-        m_vh.resize(m_ns);
-        m_vhf.resize(50);
-        m_ht.resize(m_ns);
-        m_hr.resize(m_ns);
-        m_hv.resize(m_ns);
-        m_hel.resize(m_ns);
-        m_hf.resize(m_ns);
-        m_st.resize(m_ns);
-        m_sr.resize(m_ns);
-        m_sv.resize(m_ns);
-        m_sel.resize(m_ns);
-
-
-
-
-        // Add ht, hr, hv...
-
-        // Nitrogen m_vhf
-//        m_vhf[0] = 472440;
-//        m_vhf[1] = 19425.13;
-//        m_vhf[2] = 71231.59;
-//        m_vhf[3] = 143937.47;
-//        m_vhf[4] = 233797.83;
-//        m_vhf[5] = 338000.97;
-//        m_vhf[6] = 454210.59;
-//        m_vhf[7] = 582378.25;
-//        m_vhf[8] = 721541.19;
-//        m_vhf[9] = 873713.56;
-
-        m_vh[0] = 0.; // Atomic oxygen
-        m_vh[1] = 7.87380953594E+02;
-        m_vh[2] = 1.4E+03;
-        // m_vh[3] = 7.87380953594E+02;
-
-        //USE THESE
-        // I think these are enthlapy of formation
-        // m_vhf[0] = 100.59; // Atomic oxygen
-        // m_vhf[1] = 7.87380953594E+02;
-        // m_vhf[2] = 1.0+02;
-        // m_vh[3] = 7.87380953594E+02;
-
-        // @todo: 1/18/2023
-        // Load the necessary thermodynamic data
     }
 
 private:
@@ -629,9 +566,7 @@ private:
     double Tss = standardTemperature();
     double ThetaR = 2.08; //char temp rot O2
 
-
-
-	std::array<double, 47> m_energy = {
+	std::array<double, 47> m_energy = { // Varandas energy ladder cm-1
     786.0234, 2343.573, 3881.3038,
 	5398.5964, 6894.8782, 8369.5118,
 	9822.0457, 11251.754, 12658.072,
@@ -650,16 +585,6 @@ private:
 	42029.6803, 42042.9885
 	};
 
-
-    // Store here only the necessary data for calculating species thermodynamics
-    // const int m_ns = 48; // need to see how to recognize number of states from M++
-    // const int m_na = 1; // need to see how to recognize number of states from M++
-    // const int m_nm = 47; // need to see how to recognize number of states from M++
-    // double m_vh[m_ns];
-    // double m_vhf[m_ns];
-    // double hv[m_ns];
-    // double ht[m_ns];
-    // double hr[m_ns];
     /**
      * Computes the translational Cp/Ru for each species.
      */
@@ -769,7 +694,7 @@ private:
 		}
     }
 
-	    /**
+	/**
      * Computes the formation enthalpy of each species in K.
      */
     template <typename OP>
@@ -795,10 +720,7 @@ private:
      */
     template <typename OP>
     void sR(double T, double* const s, const OP& op) {
-        // const double onelnT = 1.0 + std::log(T);
         LOOP_MOLECULES(
-            // op(s[j], mp_rot_data[i].linearity * (onelnT -
-            //     mp_rot_data[i].ln_omega_t));
             op(s[j], (log(T / (2 * ThetaR)) + 1.0));
         )
     }
@@ -812,13 +734,6 @@ private:
         double fac, sum1, sum2;
         LOOP_MOLECULES(
             op(s[j], 0.0);
-//!            sum1 = sum2 = 0.0;
-//!            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++) {
-//!                fac  =  std::exp(mp_vib_temps[ilevel] / T);
-//!                sum1 += mp_vib_temps[ilevel] / (fac - 1.0);
-//!                sum2 += std::log(1.0 - 1.0 / fac);
-//!            }
-//!            op(s[j], (sum1 / T - sum2));
         )
     }
 
@@ -827,10 +742,7 @@ private:
      */
     template <typename OP>
     void sE(double T, double* const p_s, const OP& op) {
-
-        
 		op(p_s[0], 0.0);
-
 		for (int i = 0; i < m_ns; i++){
 			if (i == 0){
 				op(p_s[i],(log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/T)) + (g1_O/g0_O*theta_1_O/T*exp(-theta_1_O/T))/(1+(g1_O/g0_O)*exp(-theta_1_O/T)))); // Ground state
@@ -839,37 +751,7 @@ private:
 				op(p_s[i],(log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/T)) + (g1_O2/g0_O2*theta_1_O2/T*exp(-theta_1_O2/T))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/T))));
 			}
 		}
-
-
-        // updateElecBoltzmannFactors(T);
-        // op(p_s[0], 0.0);
-
-        // double* facs = mp_el_bfacs;
-        // for (int i = 0; i < m_elec_data.nheavy; ++i, facs += 3) {
-        //     if (facs[0] > 0)
-        //         op(p_s[i+m_elec_data.offset],
-        //             (facs[1]/(facs[0]*T) + std::log(facs[0])));
-        //     else
-        //         op(p_s[i+m_elec_data.offset], 0.0);
-        // }
     }
-
-
-    // double sv[m_ns];
-    // double st[m_ns];
-    // double sr[m_ns];
-    std::vector<double> m_vh {};
-    std::vector<double> m_vhf {};
-    std::vector<double> m_hv {}; //should this be in private?? //m_ for private
-    std::vector<double> m_ht {}; //should this be in private??
-    std::vector<double> m_hr {}; //should this be in private??
-    std::vector<double> m_hel {}; //should this be in private??
-    std::vector<double> m_hf {}; //should this be in private??
-    std::vector<double> m_sv {}; //should this be in private??
-    std::vector<double> m_st {}; //should this be in private??
-    std::vector<double> m_sr {}; //should this be in private??
-    std::vector<double> m_sel {}; //should this be in private??
-
 }; // class STSDB
 #undef LOOP
 #undef LOOP_HEAVY
