@@ -85,7 +85,6 @@ ParticleRRHO::ParticleRRHO(const IO::XmlElement& xml_element)
                 if (level_iter->tag() == "level") {
                     level_iter->getAttribute("degeneracy",  degeneracy);
                     level_iter->getAttribute("energy", temperature);
-                    
                     // convert from 1/cm to K
                     m_electronic_energies.push_back(
                         std::make_pair(degeneracy, temperature * 1.4387));
@@ -103,10 +102,11 @@ ParticleRRHO::ParticleRRHO(const ParticleRRHO& rrho, const size_t level)
       m_linearity(rrho.m_linearity),
       m_rotational_t(rrho.m_rotational_t),
       m_electronic_energies(1, std::make_pair(rrho.electronicEnergy(level).first, 0.0)),
-      m_vibrational_energies(rrho.m_vibrational_energies)
+    //   m_vibrational_energies(rrho.m_vibrational_energies)
+      m_vibrational_energies(1, rrho.vibrationalEnergy(level))
 {
     // Make sure the level used is actually present in the given RRHO parameters
-    assert(level < rrho.nElectronicLevels());
+    assert((level < rrho.nElectronicLevels()) || (level < rrho.nVibrationalLevels()));
 }
 
 //==============================================================================
