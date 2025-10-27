@@ -2399,7 +2399,87 @@
 			</formation_enthalpy>
 		</thermodynamics>
 	</species>
- 
+
+	<!-- Oxygen diatomic -->
+	<species name="O2_ABC">
+		<stoichiometry>
+			O: 2
+		</stoichiometry>
+		<thermodynamics type="STS">
+			<linear>
+				yes
+			</linear>
+			<rotational_temperature units="K">
+				2.086
+			</rotational_temperature>
+			<steric_factor>
+				2
+			</steric_factor>
+			<vibrational_temperatures units="1/cm">
+				<level degeneracy="1" energy="786.0234"/>
+				<level degeneracy="1" energy="2343.573"/>
+				<level degeneracy="1" energy="3881.3038"/>
+				<level degeneracy="1" energy="5398.5964"/>
+				<level degeneracy="1" energy="6894.8782"/>
+				<level degeneracy="1" energy="8369.5118"/>
+				<level degeneracy="1" energy="9822.0457"/>
+				<level degeneracy="1" energy="11251.754"/>
+				<level degeneracy="1" energy="12658.072"/>
+				<level degeneracy="1" energy="14040.4352"/>
+				<level degeneracy="1" energy="15398.3596"/>
+				<level degeneracy="1" energy="16731.2"/>
+				<level degeneracy="1" energy="18038.3111"/>
+				<level degeneracy="1" energy="19319.2091"/>
+				<level degeneracy="1" energy="20573.1679"/>
+				<level degeneracy="1" energy="21799.7037"/>
+				<level degeneracy="1" energy="22998.2518"/>
+				<level degeneracy="1" energy="24168.0058"/>
+				<level degeneracy="1" energy="25308.4816"/>
+				<level degeneracy="1" energy="26419.0341"/>
+				<level degeneracy="1" energy="27498.9373"/>
+				<level degeneracy="1" energy="28547.546"/>
+				<level degeneracy="1" energy="29564.2148"/>
+				<level degeneracy="1" energy="30548.1374"/>
+				<level degeneracy="1" energy="31498.6683"/>
+				<level degeneracy="1" energy="32414.9205"/>
+				<level degeneracy="1" energy="33296.168"/>
+				<level degeneracy="1" energy="34141.6041"/>
+				<level degeneracy="1" energy="34950.3419"/>
+				<level degeneracy="1" energy="35721.3326"/>
+				<level degeneracy="1" energy="36453.8504"/>
+				<level degeneracy="1" energy="37146.6854"/>
+				<level degeneracy="1" energy="37798.8698"/>
+				<level degeneracy="1" energy="38409.2744"/>
+				<level degeneracy="1" energy="38976.5281"/>
+				<level degeneracy="1" energy="39499.5822"/>
+				<level degeneracy="1" energy="39976.9044"/>
+				<level degeneracy="1" energy="40407.0429"/>
+				<level degeneracy="1" energy="40788.6264"/>
+				<level degeneracy="1" energy="41119.9613"/>
+				<level degeneracy="1" energy="41399.6763"/>
+				<level degeneracy="1" energy="41626.4003"/>
+				<level degeneracy="1" energy="41799.6494"/>
+				<level degeneracy="1" energy="41920.3914"/>
+				<level degeneracy="1" energy="41993.5464"/>
+				<level degeneracy="1" energy="42029.6803"/>
+				<level degeneracy="1" energy="42042.9885"/>
+			</vibrational_temperatures>
+			<electronic_levels units="1/cm">
+				<level degeneracy="3" energy="0.0" />
+				<!-- <level degeneracy="2" energy="7917.5" />
+				<level degeneracy="1" energy="13195.1" />
+				<level degeneracy="1" energy="33055.7" />
+				<level degeneracy="6" energy="34690.9" />
+				<level degeneracy="3" energy="35393.1" />
+				<level degeneracy="3" energy="49792.1" /> -->
+			</electronic_levels>
+			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+				0.0
+			</formation_enthalpy>
+		</thermodynamics>
+	</species>
+
+
 	<!-- Oxygen diatomic cation -->
 	<species name="O2+">
 		<stoichiometry>
