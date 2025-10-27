@@ -54,7 +54,7 @@ for (int i = 0; i < m_ns; ++i) {\
 
 #define LOOP_ATOMS(__op__)\
 for (int i = 0, j = 0; i < m_na; ++i) {\
-    j = i;\
+    j = mp_indices[i];\
     __op__ ;\
 } // j = mp_indices[i]
 
@@ -63,7 +63,7 @@ for (int i = 0, j = 0; i < m_na; ++i) {\
 // original species data.
 #define LOOP_MOLECULES(__op__)\
 for (int i = 0, j = 0; i < m_nm; ++i) {\
-    j = m_na+i;\
+    j = mp_indices[m_na+i];\
     __op__ ;\
 }
     // j = mp_indices[m_na+i];
@@ -118,7 +118,7 @@ public:
 //     {
 //         delete [] mp_lnqtmw;
         delete [] mp_hform;
-//         delete [] mp_indices;
+        delete [] mp_indices;
         delete [] mp_rot_data;
 // //!        delete [] mp_nvib;
 // //!        delete [] mp_vib_temps;
@@ -412,17 +412,17 @@ public:
 
         
         // Special case where we only want the total enthalpy
-        // if (ht == NULL && hr == NULL && hv == NULL && hel == NULL && 
-        //     hf == NULL && h != NULL) 
-        // {
-        //     hT(Th, Te, h, Eq());
-        //     hR(Tr, h, PlusEq());
-        //     hV(Tv, h, PlusEq());
-        //     hE(Tel, h, PlusEq());
-        //     hF(h, PlusEq());
-        //     LOOP(h[i] /= Th);
-        //     return;
-        // }
+        if (ht == NULL && hr == NULL && hv == NULL && hel == NULL && 
+            hf == NULL && h != NULL) 
+        {
+            hT(Th, Te, h, Eq());
+            hR(Tr, h, PlusEq());
+            hV(Tv, h, PlusEq());
+            hE(Tel, h, PlusEq());
+            hF(h, PlusEq());
+            LOOP(h[i] /= Th);
+            return;
+        }
 
         
         
@@ -513,55 +513,55 @@ public:
         // etc...
 
         // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
-        if (hv != NULL) {
-            // LOOP(hv[i] = 0.0);
-            // hV(Tv, hv, EqDiv(Th));
-            if (h != NULL){
-                // LOOP_MOLECULES(h[j] += hv[j]);
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    hv[i] = 0.0;
-                    h[i] += 0.0; // Ground state
-                    m_hv[i] = 0.0;
-                    continue; }
-                // exp(-\nu \eps_i / T)
-                // hv[i] = (i-1) * energy[i-1] * 1.42879 / Th; //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
-                // m_hv[i] = (i-1) * energy[i-1] * 1.42879 / Th;
-                double cm2J = 1.98630e-23;
-                hv[i] = m_energy[i-1] * cm2J / (KB * Th); //* exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
-                m_hv[i] = m_energy[i-1] * cm2J / (KB * Th);
-                // hv[i] = m_energy[i-1] * 1.42879 / (Th) / (exp(-1.0 * m_energy[i-1]* 1.42879  / Th) - 1.0); //* exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
-                h[i] += m_energy[i-1] * cm2J / (KB * Th);
-            }}
+//         if (hv != NULL) {
+//             // LOOP(hv[i] = 0.0);
+//             // hV(Tv, hv, EqDiv(Th));
+//             if (h != NULL){
+//                 // LOOP_MOLECULES(h[j] += hv[j]);
+//             for (int i = 0; i < m_ns; i++){
+//                 if (i == 0) {
+//                     hv[i] = 0.0;
+//                     h[i] += 0.0; // Ground state
+//                     m_hv[i] = 0.0;
+//                     continue; }
+//                 // exp(-\nu \eps_i / T)
+//                 // hv[i] = (i-1) * energy[i-1] * 1.42879 / Th; //* exp(-1*energy[i-1] * 1.42879 / Th); // See KMH notes
+//                 // m_hv[i] = (i-1) * energy[i-1] * 1.42879 / Th;
+//                 double cm2J = 1.98630e-23;
+//                 hv[i] = m_energy[i-1] * cm2J / (KB * Th); //* exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
+//                 m_hv[i] = m_energy[i-1] * cm2J / (KB * Th);
+//                 // hv[i] = m_energy[i-1] * 1.42879 / (Th) / (exp(-1.0 * m_energy[i-1]* 1.42879  / Th) - 1.0); //* exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
+//                 h[i] += m_energy[i-1] * cm2J / (KB * Th);
+//             }}
 
-        } else {
-            if (h != NULL){
-                // hV(Tv, h, PlusEqDiv(Th));
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    h[i] += 0.0;
-                    m_hv[i] = 0.0;
-//                    h[i] = 0.0; // Ground state
-                    continue; }
-                // exp(-\nu \eps_i / T)
-                double cm2J = 1.98630e-23;
-                // m_hv[i] += (i-1) * m_energy[i-1] * 1.42879 / Th;   // * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
-                m_hv[i] += m_energy[i-1] * cm2J / (KB * Th);   // * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
-                // m_hv[i] = m_energy[i-1] * 1.42879 / (Th) / (exp(1.0 * m_energy[i-1]* 1.42879  / Th) - 1.0);   // * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
-                // h[i] += (i-1) * m_energy[i-1] * 1.42879 / Th; //m_energy[i-1] * 1.42879 / Th * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
-                h[i] += m_energy[i-1] * cm2J / (KB * Th); //m_energy[i-1] * 1.42879 / Th * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
-            }}
-        }
+//         } else {
+//             if (h != NULL){
+//                 // hV(Tv, h, PlusEqDiv(Th));
+//             for (int i = 0; i < m_ns; i++){
+//                 if (i == 0) {
+//                     h[i] += 0.0;
+//                     m_hv[i] = 0.0;
+// //                    h[i] = 0.0; // Ground state
+//                     continue; }
+//                 // exp(-\nu \eps_i / T)
+//                 double cm2J = 1.98630e-23;
+//                 // m_hv[i] += (i-1) * m_energy[i-1] * 1.42879 / Th;   // * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
+//                 m_hv[i] += m_energy[i-1] * cm2J / (KB * Th);   // * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
+//                 // m_hv[i] = m_energy[i-1] * 1.42879 / (Th) / (exp(1.0 * m_energy[i-1]* 1.42879  / Th) - 1.0);   // * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
+//                 // h[i] += (i-1) * m_energy[i-1] * 1.42879 / Th; //m_energy[i-1] * 1.42879 / Th * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
+//                 h[i] += m_energy[i-1] * cm2J / (KB * Th); //m_energy[i-1] * 1.42879 / Th * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
+//             }}
+//         }
         // Vibrational enthalpy
-        // if (hv == NULL) {
-        //     if (h != NULL)
-        //         hV(Tv, h, PlusEqDiv(Th));
-        // } else {
-        //     LOOP(hv[i] = 0.0);
-        //     hV(Tv, hv, EqDiv(Th));
-        //     if (h != NULL)
-        //         LOOP_MOLECULES(h[j] += hv[j]);
-        // }
+        if (hv == NULL) {
+            if (h != NULL)
+                hV(Tv, h, PlusEqDiv(Th));
+        } else {
+            LOOP(hv[i] = 0.0);
+            hV(Tv, hv, EqDiv(Th));
+            if (h != NULL)
+                LOOP_MOLECULES(h[j] += hv[j]);
+        }
 
 
         // Electronic. For now setting as zero
@@ -575,46 +575,46 @@ public:
 //         double g1_O = 4.0;
 //         double theta_1_O = 270;
 
-        if (hel != NULL) {
-            // LOOP(hv[i] = 0.0);
-            // hV(Tv, hv, EqDiv(Th));
-            if (h != NULL){
-                // LOOP_MOLECULES(h[j] += hv[j]);
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    hel[i] = ((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)) / Th;
-                    m_hel[i] = ((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)) / Th;
-                    h[i] += ((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)) / Th; // Ground state
-                    continue; }
-                m_hel[i] = ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / Th;   // * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
-                hel[i] = ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / Th; //* exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
-                h[i] += ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / Th;
-            }}
+//         if (hel != NULL) {
+//             // LOOP(hv[i] = 0.0);
+//             // hV(Tv, hv, EqDiv(Th));
+//             if (h != NULL){
+//                 // LOOP_MOLECULES(h[j] += hv[j]);
+//             for (int i = 0; i < m_ns; i++){
+//                 if (i == 0) {
+//                     hel[i] = ((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)) / Th;
+//                     m_hel[i] = ((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)) / Th;
+//                     h[i] += ((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)) / Th; // Ground state
+//                     continue; }
+//                 m_hel[i] = ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / Th;   // * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
+//                 hel[i] = ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / Th; //* exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
+//                 h[i] += ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / Th;
+//             }}
 
-        } else {
-            if (h != NULL){
-                // hV(Tv, h, PlusEqDiv(Th));
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    h[i] += ((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)) / Th;
-                    m_hel[i] = ((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)) / Th;
-//                    h[i] = 0.0; // Ground state
-                    continue; }
-                m_hel[i] = ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / Th;   // * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
-                h[i] += ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / Th; //m_energy[i-1] * 1.42879 / Th * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
-            }}
-        }
+//         } else {
+//             if (h != NULL){
+//                 // hV(Tv, h, PlusEqDiv(Th));
+//             for (int i = 0; i < m_ns; i++){
+//                 if (i == 0) {
+//                     h[i] += ((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)) / Th;
+//                     m_hel[i] = ((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / Tel)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tel)) / Th;
+// //                    h[i] = 0.0; // Ground state
+//                     continue; }
+//                 m_hel[i] = ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / Th;   // * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
+//                 h[i] += ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tel)) / Th; //m_energy[i-1] * 1.42879 / Th * exp(-1*m_energy[i-1] * 1.42879 / Th); // See KMH notes
+//             }}
+//         }
 
 		        // Electronic enthalpy
-        // if (hel == NULL) {
-        //     if (h != NULL)
-        //         hE(Tel, h, PlusEqDiv(Th));
-        // } else {
-        //     LOOP(hel[i] = 0.0);
-        //     hE(Tel, hel, EqDiv(Th));
-        //     if (h != NULL)
-        //         LOOP(h[i] += hel[i]);
-        // }
+        if (hel == NULL) {
+            if (h != NULL)
+                hE(Tel, h, PlusEqDiv(Th));
+        } else {
+            LOOP(hel[i] = 0.0);
+            hE(Tel, hel, EqDiv(Th));
+            if (h != NULL)
+                LOOP(h[i] += hel[i]);
+        }
 
 
         // if (hf != NULL) {
@@ -636,26 +636,48 @@ public:
         // }
 
         // See ln 806 and 655 in RRHO. Adjust enthalpy of formation to any temp
-        double Tss = standardTemperature();
-        for (int i = 0; i < m_ns; i++){
-            if (i == 0){
-                h[i] += (249229.0 / RU - 2.5*Tss - ((theta_1_O/Tss) * g1_O/g0_O * exp(-theta_1_O / Tss)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tss))) / Th;
-				continue;
-            }
-			double cm2J = 1.98630e-23;
-            h[i] += 0 - (2.5 * Tss / Th + 1.0 * Tss / Th + m_energy[0] * cm2J / (KB * Th) + ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tss)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tss)) / Th); 
-//            h[i] += m_energy[i];
-            // h[i] += m_vhf[i];
-        }
+        // double Tss = standardTemperature();
         // // Formation enthalpy
         // if (hf == NULL) {
-        //     if (h != NULL)
-        //         hF(h, PlusEqDiv(Th));
+        //     if (h != NULL){
+        //         for (int i = 0; i < m_ns; i++){
+        //     if (i == 0){
+        //         h[i] += (249229.0 / RU - 2.5*Tss - ((theta_1_O/Tss) * g1_O/g0_O * exp(-theta_1_O / Tss)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tss))) / Th;
+		// 		continue;
+        //     }
+		// 	double cm2J = 1.98630e-23;
+        //     h[i] += (0 - (2.5 * Tss + 1.0 * Tss + m_energy[0] * cm2J / (KB) + ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tss)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tss)))) / Th; 
+        // }}
         // } else {
-        //     hF(hf, EqDiv(Th));
-        //     if (h != NULL)
-        //         LOOP(h[i] += hf[i]);
+        //     for (int i = 0; i < m_ns; i++){
+        //     if (i == 0){
+        //         hf[i] = (249229.0 / RU - 2.5*Tss - ((theta_1_O/Tss) * g1_O/g0_O * exp(-theta_1_O / Tss)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / Tss))) / Th;
+		// 		continue;
+        //     }
+		// 	double cm2J = 1.98630e-23;
+        //     hf[i] = (0 - (2.5 * Tss + 1.0 * Tss + m_energy[0] * cm2J / (KB) + ((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / Tss)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / Tss)))) / Th; 
         // }
+        //     if (h != NULL){
+        //         for (int i = 0; i < m_ns; i++){
+        //             h[i] += hf[i];
+        //         }
+        //         // LOOP(h[i] += hf[i]);
+        //     }
+        // }
+        // std::cout << "Method 1: " << hf[0] << " " << hf[1] << endl;
+
+        
+        // Formation enthalpy
+        if (hf == NULL) {
+            if (h != NULL)
+                hF(h, PlusEqDiv(Th));
+        } else {
+            hF(hf, EqDiv(Th));
+            if (h != NULL)
+                LOOP(h[i] += hf[i]);
+        }
+        // std::cout << "Method 2: " << hf[0] << " " << hf[1] << endl;
+
 
 
         // Old equations, before generalize
@@ -729,6 +751,20 @@ public:
     //     s_r[i] = s_val;
     // }
 
+            // Special case where we only want the total entropy
+        if (st == NULL && sr == NULL && sv == NULL && sel == NULL) {
+            sT(Th, Te, P, s, Eq());
+            sR(Tr, s, PlusEq());
+            sV(Tv, s, PlusEq());
+            sE(Tel, s, PlusEq());
+            
+            // Include spin contribution for free electron entropy
+            if (m_has_electron)
+                s[0] += std::log(2.0);
+            
+            return;
+        }
+
 
         for (int i = 0; i < m_ns; i++){
             s[i] = 0.;
@@ -742,150 +778,192 @@ public:
         // enthalpy(Th, Te, Tr, Tv, Tel, test, NULL, NULL, NULL, NULL, NULL);
         // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
         // Will need to upload masses of each species
-        if (st != NULL) {
-            // sT(Th, Te, P, st, Eq());
-            // LOOP(s[i] = st[i]);
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
-                    m_st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
-                    s[i] +=  2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
-                    continue; }
-                st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
-                s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
-                m_st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
-           }
 
-        } else {
-            // sT(Th, Te, P, s, Eq());
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
-                    m_st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
-                    // s[i] += st[i];
-                    continue; }
-                s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
-                m_st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
-            }
+        
+        // if (st != NULL) {
+        //     // sT(Th, Te, P, st, Eq());
+        //     // LOOP(s[i] = st[i]);
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
+        //             m_st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+        //             s[i] +=  2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+        //             continue; }
+        //         st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+        //         s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+        //         m_st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+        //    }
+
+        // } else {
+        //     // sT(Th, Te, P, s, Eq());
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // EQ 3.90 of Boyd. // Ground state
+        //             m_st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+        //             // s[i] += st[i];
+        //             continue; }
+        //         s[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+        //         m_st[i] += 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+        //     }
+        // }
+
+        if (st == NULL)
+            sT(Th, Te, P, s, Eq());
+        else {
+            sT(Th, Te, P, st, Eq());
+            LOOP(s[i] = st[i]);
         }
 
         // Rotation. Assuming fulling active rotational mode
-        double ThetaR = 2.08; //char temp rot O2
-        if (sr != NULL) {
-            // LOOP(sr[i] = 0.0);
-            // sR(Tr, sr, Eq());
-            // LOOP_MOLECULES(s[j] += sr[j]);
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    sr[i] += 0.0; // Ground state
-                    s[i] += 0.0;
-                    m_sr[i] += 0.0;
-                    continue; }
-                // sr[i] += s_r[i-1]; // From slide 20 of Magin, need to check units
-                // s[i] += s_r[i-1];
-                // m_sr[i] += s_r[i-1]; // From Magin above;
-				// ln(omegaT) = log(thetaR) + 2/Lin * log*(steric)
-				// :::: Linearity * (1 + ln(T) - log(thetaR) + 2/Lin * log*(steric))
-				// :::: 1 + ln(T) - log(thetaR) - 2/Lin * log*(steric)
-				// :::: 1 + ln(T) - log(thetaR) - log(2)
-				// :::: 1 + ln(T/(2thetaR))
-                sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From slide 20 of Magin, need to check units
-                s[i] += (log(Tr / (2 * ThetaR)) + 1.0);
-                m_sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
+        // double ThetaR = 2.08; //char temp rot O2
+        // if (sr != NULL) {
+        //     // LOOP(sr[i] = 0.0);
+        //     // sR(Tr, sr, Eq());
+        //     // LOOP_MOLECULES(s[j] += sr[j]);
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             sr[i] += 0.0; // Ground state
+        //             s[i] += 0.0;
+        //             m_sr[i] += 0.0;
+        //             continue; }
+        //         // sr[i] += s_r[i-1]; // From slide 20 of Magin, need to check units
+        //         // s[i] += s_r[i-1];
+        //         // m_sr[i] += s_r[i-1]; // From Magin above;
+		// 		// ln(omegaT) = log(thetaR) + 2/Lin * log*(steric)
+		// 		// :::: Linearity * (1 + ln(T) - log(thetaR) + 2/Lin * log*(steric))
+		// 		// :::: 1 + ln(T) - log(thetaR) - 2/Lin * log*(steric)
+		// 		// :::: 1 + ln(T) - log(thetaR) - log(2)
+		// 		// :::: 1 + ln(T/(2thetaR))
+        //         sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From slide 20 of Magin, need to check units
+        //         s[i] += (log(Tr / (2 * ThetaR)) + 1.0);
+        //         m_sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
 
-            }
+        //     }
             
-            // Old equations, before generalize
-            // sr[1] = 1.0 + log((0.5 * Th / 2.1) / N ) + 1.0; // Eq. 3.78 of Boyd. Need to define N or substitute
-            // sr[2] = 1.0 + log((0.5 * Th / 2.1) / N ) + 1.0; // Eq. 3.78 of Boyd. Need to define N or substitute
+        //     // Old equations, before generalize
+        //     // sr[1] = 1.0 + log((0.5 * Th / 2.1) / N ) + 1.0; // Eq. 3.78 of Boyd. Need to define N or substitute
+        //     // sr[2] = 1.0 + log((0.5 * Th / 2.1) / N ) + 1.0; // Eq. 3.78 of Boyd. Need to define N or substitute
 
-        } else {
-            // sR(Tr, s, PlusEq());
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    s[i] += 0.0;
-                    m_sr[i] += 0.0;
-                    continue; }
-                // s[i] += s_r[i-1]; // From Magin above;
-                // m_sr[i] += s_r[i-1]; // From Magin above;
-                s[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
-                m_sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
-            }
+        // } else {
+        //     // sR(Tr, s, PlusEq());
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             s[i] += 0.0;
+        //             m_sr[i] += 0.0;
+        //             continue; }
+        //         // s[i] += s_r[i-1]; // From Magin above;
+        //         // m_sr[i] += s_r[i-1]; // From Magin above;
+        //         s[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
+        //         m_sr[i] += (log(Tr / (2 * ThetaR)) + 1.0); // From Magin above;
+        //     }
 
+        // }
+        
+        // Rotational entropy
+        if (sr == NULL)
+            sR(Tr, s, PlusEq());
+        else {
+            LOOP(sr[i] = 0.0);
+            sR(Tr, sr, Eq());
+            LOOP_MOLECULES(s[j] += sr[j]);
         }
-
         // etc...
 
         // Vibration. Assuming the characteristic vib temperature is the vib energy level of that state.
-        if (sv != NULL) {
-            // LOOP(sv[i] = 0.0);
-            // sV(Tv, sv, Eq());
-            // LOOP_MOLECULES(s[j] += sv[j]);
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    sv[i] += 0.0; // Ground state
-                    m_sv[i] += 0.0;
-                    s[i] += 0.0;
-                 continue; } // Ground state
-                sv[i] += 0.0;//m_hv[i] / Th - 1/Th * log(1-exp(-1.0*m_energy[i-1] * 1.42879/Th)); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
-                s[i] += 0.0;
-            }
-            // Old equations, before generalize
-            // sv[1] = 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th; // Eq. 3.78 of Boyd. Need to define N or substitute
-            // sv[2] =  1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
-        } else {
-            // sV(Tv, s, PlusEq());
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    s[i] += 0.0; // Ground state
-                    m_sv[i] += 0.0;
-                 continue; } // Ground state
-                s[i] += 0.0;//m_hv[i] / Th - 1/Th * log(1-exp(-1.0*m_energy[i-1] * 1.42879/Th));
-                m_sv[i] += 0.0;//m_hv[i] / Th - 1/Th * log(1-exp(-1.0*m_energy[i-1] * 1.42879/Th));
-            }
-            // Old equations, before generalize
-            // s[1] += 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th;
-            // s[2] += 1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
+        // if (sv != NULL) {
+        //     // LOOP(sv[i] = 0.0);
+        //     // sV(Tv, sv, Eq());
+        //     // LOOP_MOLECULES(s[j] += sv[j]);
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             sv[i] += 0.0; // Ground state
+        //             m_sv[i] += 0.0;
+        //             s[i] += 0.0;
+        //          continue; } // Ground state
+        //         sv[i] += 0.0;//m_hv[i] / Th - 1/Th * log(1-exp(-1.0*m_energy[i-1] * 1.42879/Th)); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
+        //         s[i] += 0.0;
+        //     }
+        //     // Old equations, before generalize
+        //     // sv[1] = 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th; // Eq. 3.78 of Boyd. Need to define N or substitute
+        //     // sv[2] =  1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
+        // } else {
+        //     // sV(Tv, s, PlusEq());
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             s[i] += 0.0; // Ground state
+        //             m_sv[i] += 0.0;
+        //          continue; } // Ground state
+        //         s[i] += 0.0;//m_hv[i] / Th - 1/Th * log(1-exp(-1.0*m_energy[i-1] * 1.42879/Th));
+        //         m_sv[i] += 0.0;//m_hv[i] / Th - 1/Th * log(1-exp(-1.0*m_energy[i-1] * 1.42879/Th));
+        //     }
+        //     // Old equations, before generalize
+        //     // s[1] += 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th;
+        //     // s[2] += 1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
+        // }
+
+        // Vibrational entropy
+        if (sv == NULL)
+            sV(Tv, s, PlusEq());
+        else {
+            LOOP(sv[i] = 0.0);
+            sV(Tv, sv, Eq());
+            LOOP_MOLECULES(s[j] += sv[j]);
         }
 
-        double g0_O2 = 3.0;
-        double g1_O2 = 2.0;
-        double theta_1_O2 = 11900;
-        double g0_O = 5.0;
-        double g1_O = 4.0;
-        double theta_1_O = 270;
+        // double g0_O2 = 3.0;
+        // double g1_O2 = 2.0;
+        // double theta_1_O2 = 11900;
+        // double g0_O = 5.0;
+        // double g1_O = 4.0;
+        // double theta_1_O = 270;
 
-        if (sel != NULL) {
-            // LOOP(sv[i] = 0.0);
-            // sV(Tv, sv, Eq());
-            // LOOP_MOLECULES(s[j] += sv[j]);
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    sel[i] += (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel))); // Ground state
-                    m_sel[i] += (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel)));
-                    s[i] += (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel)));
-                 continue; } // Ground state
-                sel[i] += (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel))); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
-                m_sel[i] +=  (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
-                s[i] += (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
-            }
-            // Old equations, before generalize
-            // sv[1] = 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th; // Eq. 3.78 of Boyd. Need to define N or substitute
-            // sv[2] =  1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
-        } else {
-            // sV(Tv, s, PlusEq());
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    s[i] += (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel))); // Ground state
-                    m_sel[i] += (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel)));
-                 continue; } // Ground state
-                s[i] += (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
-                m_sel[i] += (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
-            }
-            // Old equations, before generalize
-            // s[1] += 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th;
-            // s[2] += 1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
+
+        // if (sel != NULL) {
+        //     // LOOP(sv[i] = 0.0);
+        //     // sV(Tv, sv, Eq());
+        //     // LOOP_MOLECULES(s[j] += sv[j]);
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             sel[i] += (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel))); // Ground state
+        //             m_sel[i] += (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel)));
+        //             s[i] += (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel)));
+        //          continue; } // Ground state
+        //         sel[i] += (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel))); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
+        //         m_sel[i] +=  (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
+        //         s[i] += (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
+        //     }
+        //     // Old equations, before generalize
+        //     // sv[1] = 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th; // Eq. 3.78 of Boyd. Need to define N or substitute
+        //     // sv[2] =  1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
+        // } else {
+        //     // sV(Tv, s, PlusEq());
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             s[i] += (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel))); // Ground state
+        //             m_sel[i] += (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel)));
+        //          continue; } // Ground state
+        //         s[i] += (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
+        //         m_sel[i] += (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
+        //     }
+        //     // Old equations, before generalize
+        //     // s[1] += 1.0 + log(exp(-7.87380953594E+02 * 1.42879 / Th) / N ) + 7.87380953594E+02 * 1.42879 / Th;
+        //     // s[2] += 1.0 + log(exp(-2.34376026609E+03 * 1.42879 / Th) / N ) + 2.34376026609E+03 * 1.42879 / Th;
+        // }
+
+                // Electronic entropy
+        if (sel == NULL)
+            sE(Tel, s, PlusEq());
+        else {
+            LOOP(sel[i] = 0.0);
+            sE(Tel, sel, Eq());
+            LOOP(s[i] += sel[i]);
         }
+
+                // Include spin contribution for free electron entropy
+        if (m_has_electron)
+            s[0] += std::log(2.0);
+
+
 
 
         // Electronic. For now setting as zero
@@ -940,6 +1018,13 @@ public:
         //     g[i] = 0.;
         // }
         enthalpy(Th, Te, Tr, Tv, Tel, g, NULL, NULL, NULL, NULL, NULL);
+
+        // Subtract the entropies
+        sT(Th, Te, P, g, MinusEq());
+        sR(Tr, g, MinusEq());
+        sV(Tv, g, MinusEq());
+        sE(Tel, g, MinusEq());
+
         // for (int i = 0; i < m_ns; i++){
         //     g[i] = 0.;
         // }
@@ -949,85 +1034,85 @@ public:
         // }
         // // Eventually, replace this with a loop over all species as they should have equal translational enthalpy
         // // Will need to upload masses of each species
-        if (gt != NULL) {
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    gt[i] -= 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
-                    continue;
-                }
-                gt[i] -= 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // G = H - TS
-                g[i] -= 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
-            }
-        } else {
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0){
-                    g[i] -= 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
-                    continue;
-                }
-                g[i] -= 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // G = H - TS
-            }
-        }
+        // if (gt != NULL) {
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             gt[i] -= 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+        //             continue;
+        //         }
+        //         gt[i] -= 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // G = H - TS
+        //         g[i] -= 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+        //     }
+        // } else {
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0){
+        //             g[i] -= 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5;
+        //             continue;
+        //         }
+        //         g[i] -= 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0319988 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5; // G = H - TS
+        //     }
+        // }
 
-        double ThetaR = 2.08; //char temp rot O2
-        if (gr != NULL) {
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    gr[i] -= 0.0; // Ground state
-                    g[i] -= 0.0;
-                    continue; }
-                gr[i] -= (log(Tr / (2 * ThetaR)) + 1.0); // G = H - TS
-                g[i] -= (log(Tr / (2 * ThetaR)) + 1.0);
-            }
-        } else {
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    g[i] -= 0.0;
-                    continue; }
-                g[i] -= (log(Tr / (2 * ThetaR)) + 1.0);  // G = H - TS
-            }
-        }
+        // double ThetaR = 2.08; //char temp rot O2
+        // if (gr != NULL) {
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             gr[i] -= 0.0; // Ground state
+        //             g[i] -= 0.0;
+        //             continue; }
+        //         gr[i] -= (log(Tr / (2 * ThetaR)) + 1.0); // G = H - TS
+        //         g[i] -= (log(Tr / (2 * ThetaR)) + 1.0);
+        //     }
+        // } else {
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             g[i] -= 0.0;
+        //             continue; }
+        //         g[i] -= (log(Tr / (2 * ThetaR)) + 1.0);  // G = H - TS
+        //     }
+        // }
 
-        if (gv != NULL) {
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    gv[i] -= 0.0; // Ground state
-                    g[i] -= 0.0;
-                 continue; } // Ground state
-                gv[i] -= 0.0; // G = H - TS // Tv?
-                g[i] -= 0.0;
-            }
-        } else {
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    g[i] -= 0.0;
-                 continue; } // Ground state
-                g[i] -= 0.0;
-            }
-        }
+        // if (gv != NULL) {
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             gv[i] -= 0.0; // Ground state
+        //             g[i] -= 0.0;
+        //          continue; } // Ground state
+        //         gv[i] -= 0.0; // G = H - TS // Tv?
+        //         g[i] -= 0.0;
+        //     }
+        // } else {
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             g[i] -= 0.0;
+        //          continue; } // Ground state
+        //         g[i] -= 0.0;
+        //     }
+        // }
         
-        double g0_O2 = 3.0;
-        double g1_O2 = 2.0;
-        double theta_1_O2 = 11900;
-        double g0_O = 5.0;
-        double g1_O = 4.0;
-        double theta_1_O = 270;
-        if (gel != NULL) {
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    gel[i] -= (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel))); // Ground state
-                    g[i] -= (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel)));
-                 continue; } // Ground state
-                gel[i] -= (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel))); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
-                g[i] -= (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
-            }
-        } else {
-            for (int i = 0; i < m_ns; i++){
-                if (i == 0) {
-                    g[i] -= (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel))); // Ground state
-                 continue; } // Ground state
-                g[i] -= (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
-            }
-        }
+        // double g0_O2 = 3.0;
+        // double g1_O2 = 2.0;
+        // double theta_1_O2 = 11900;
+        // double g0_O = 5.0;
+        // double g1_O = 4.0;
+        // double theta_1_O = 270;
+        // if (gel != NULL) {
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             gel[i] -= (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel))); // Ground state
+        //             g[i] -= (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel)));
+        //          continue; } // Ground state
+        //         gel[i] -= (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel))); // Setting to 0 based on discussion with George -- no degeneracy, don't lose any info since sts
+        //         g[i] -= (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
+        //     }
+        // } else {
+        //     for (int i = 0; i < m_ns; i++){
+        //         if (i == 0) {
+        //             g[i] -= (log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/Tel)) + (g1_O/g0_O*theta_1_O/Tel*exp(-theta_1_O/Tel))/(1+(g1_O/g0_O)*exp(-theta_1_O/Tel))); // Ground state
+        //          continue; } // Ground state
+        //         g[i] -= (log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/Tel)) + (g1_O2/g0_O2*theta_1_O2/Tel*exp(-theta_1_O2/Tel))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/Tel)));
+        //     }
+        // }
         // // Electronic. For now setting as zero
     //     // sel[0] = 0.0;
     //     // sel[1] = 0.0;
@@ -1061,9 +1146,7 @@ protected:
                     "thermodynamics", "type", "STS");
 
             if (rrho_iter == species_iter->end()){
-				std::cout << "TEST" << std::endl;
                 continue;}
-			std::cout << "NOPE" << std::endl;
 
             Species& ground_state = species.back();
             ParticleRRHO rrho(*rrho_iter);
@@ -1091,26 +1174,6 @@ protected:
         m_ns = species().size();
 		m_has_electron = (species()[0].type() == ELECTRON);
 
-        vector<int> atom_indices;
-        vector<int> molecule_indices;
-
-
-
-        LOOP(
-            switch(species()[i].type()) {
-                case ATOM:
-                    atom_indices.push_back(i);
-                    break;
-                case MOLECULE:
-                    molecule_indices.push_back(i);
-                    break;
-                default:
-                    break;
-            }
-        )
-
-        m_na = atom_indices.size();
-        m_nm = molecule_indices.size();
 		        // Compute the contribution of the partition functions at the standard
         // state temperature to the species enthalpies
 
@@ -1141,16 +1204,47 @@ protected:
             }
         }
 
+		map<std::string, const ParticleRRHO*>::iterator iter =
+		to_expand.begin();
+        while (iter != to_expand.end()) {
+            delete iter->second;
+            iter++;
+        }
+
+		vector<int> atom_indices;
+        vector<int> molecule_indices;
+
+
+
+        LOOP(
+            switch(species()[i].type()) {
+                case ATOM:
+                    atom_indices.push_back(i);
+                    break;
+                case MOLECULE:
+                    molecule_indices.push_back(i);
+                    break;
+                default:
+                    break;
+            }
+        )
+
+        m_na = atom_indices.size();
+        m_nm = molecule_indices.size();
+
+		// Order the atoms first followed by the molecules
+        mp_indices = new int [m_na + m_nm];
+        copy(atom_indices.begin(), atom_indices.end(), mp_indices);
+        copy(molecule_indices.begin(), molecule_indices.end(), mp_indices+m_na);
 
         mp_hform = new double [m_ns];
         LOOP(mp_hform[i] = rrhos[i].formationEnthalpy() / RU)
 
-		        // Store the molecule's rotational energy parameters
+		// Store the molecule's rotational energy parameters
         mp_rot_data = new RotData [m_nm];
         LOOP_MOLECULES(
             const ParticleRRHO& rrho = rrhos[j];
             int linear = rrho.linearity();
-			std::cout << i << " " << rrho.linearity() << std::endl;
             mp_rot_data[i].linearity  = linear / 2.0;
             mp_rot_data[i].ln_omega_t = 
                 std::log(rrho.rotationalTemperature()) + 2.0 / linear *
@@ -1159,10 +1253,9 @@ protected:
 
 
         mp_part_sst = new double [m_ns];
-        double Tss = standardTemperature();
         hT(Tss, Tss, mp_part_sst, Eq());
         hR(Tss, mp_part_sst, PlusEq());
-        hV(Tss, mp_part_sst, PlusEq());
+        hV_f(Tss, mp_part_sst, PlusEq());
         hE(Tss, mp_part_sst, PlusEq());
 
 
@@ -1180,6 +1273,7 @@ protected:
         m_hr.resize(m_ns);
         m_hv.resize(m_ns);
         m_hel.resize(m_ns);
+        m_hf.resize(m_ns);
         m_st.resize(m_ns);
         m_sr.resize(m_ns);
         m_sv.resize(m_ns);
@@ -1234,6 +1328,7 @@ private:
 	double* mp_part_sst;
 	double* mp_hform;
 
+	int*       mp_indices;
 	RotData*   mp_rot_data;
 
 	double g0_O2 = 3.0;
@@ -1243,6 +1338,9 @@ private:
 	double g1_O = 4.0;
 	double theta_1_O = 270;
 	double cm2J = 1.98630e-23;
+    double Tss = standardTemperature();
+    double ThetaR = 2.08; //char temp rot O2
+
 
 
 	std::array<double, 47> m_energy = {
@@ -1350,7 +1448,16 @@ private:
         if (T < 10.0) {
             LOOP_MOLECULES(op(h[j], 0.0));
         } else {
-            LOOP_MOLECULES(op(h[j], m_energy[i] * cm2J / (KB * T)))
+            LOOP_MOLECULES(op(h[j], m_energy[i] * cm2J / (KB)))
+        }
+    }
+
+    template <typename OP>
+    void hV_f(double T, double* const h, const OP& op) {
+        if (T < 10.0) {
+            LOOP_MOLECULES(op(h[j], 0.0));
+        } else {
+            LOOP_MOLECULES(op(h[j], m_energy[0] * cm2J / (KB)))
         }
     }
 
@@ -1386,25 +1493,26 @@ private:
     /**
      * Computes the unitless translational entropy of each species.
      */
-    // template <typename OP>
-    // void sT(double Th, double Te, double P, double* const s, const OP& op) {
-    //     double fac = 2.5 * (1.0 + std::log(Th)) - std::log(P);
-    //     if (m_has_electron)
-    //         op(s[0], 2.5 * std::log(Te / Th) + fac + mp_lnqtmw[0]);
-    //     for (int i = (m_has_electron ? 1 : 0); i < m_ns; ++i)
-    //         op(s[i], fac + mp_lnqtmw[i]);
-    // }
+    template <typename OP>
+    void sT(double Th, double Te, double P, double* const s, const OP& op) {
+        // double fac = 2.5 * (1.0 + std::log(Th)) - std::log(P);
+        // if (m_has_electron)
+        //     op(s[0], 2.5 * std::log(Te / Th) + fac + mp_lnqtmw[0]);
+        for (int i = (m_has_electron ? 1 : 0); i < m_ns; ++i)
+            op(s[i], 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5);
+    }
 
     /**
      * Computes the unitless rotational entropy of each species.
      */
     template <typename OP>
     void sR(double T, double* const s, const OP& op) {
-        const double onelnT = 1.0 + std::log(T);
-//!        LOOP_MOLECULES(
-//!            op(s[j], mp_rot_data[i].linearity * (onelnT -
-//!                mp_rot_data[i].ln_omega_t));
-//!        )
+        // const double onelnT = 1.0 + std::log(T);
+        LOOP_MOLECULES(
+            // op(s[j], mp_rot_data[i].linearity * (onelnT -
+            //     mp_rot_data[i].ln_omega_t));
+            op(s[j], (log(T / (2 * ThetaR)) + 1.0));
+        )
     }
 
     /**
@@ -1414,7 +1522,8 @@ private:
     void sV(double T, double* const s, const OP& op) {
         int ilevel = 0;
         double fac, sum1, sum2;
-//!        LOOP_MOLECULES(
+        LOOP_MOLECULES(
+            op(s[j], 0.0);
 //!            sum1 = sum2 = 0.0;
 //!            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++) {
 //!                fac  =  std::exp(mp_vib_temps[ilevel] / T);
@@ -1422,8 +1531,42 @@ private:
 //!                sum2 += std::log(1.0 - 1.0 / fac);
 //!            }
 //!            op(s[j], (sum1 / T - sum2));
-//!        )
+        )
     }
+
+    /**
+     * Computes the unitless electronic entropy of each species.
+     */
+    template <typename OP>
+    void sE(double T, double* const p_s, const OP& op) {
+
+        
+		op(p_s[0], 0.0);
+
+		for (int i = 0; i < m_ns; i++){
+			if (i == 0){
+				op(p_s[i],(log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/T)) + (g1_O/g0_O*theta_1_O/T*exp(-theta_1_O/T))/(1+(g1_O/g0_O)*exp(-theta_1_O/T)))); // Ground state
+			}
+			else {
+				op(p_s[i],(log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/T)) + (g1_O2/g0_O2*theta_1_O2/T*exp(-theta_1_O2/T))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/T))));
+			}
+		}
+
+
+        // updateElecBoltzmannFactors(T);
+        // op(p_s[0], 0.0);
+
+        // double* facs = mp_el_bfacs;
+        // for (int i = 0; i < m_elec_data.nheavy; ++i, facs += 3) {
+        //     if (facs[0] > 0)
+        //         op(p_s[i+m_elec_data.offset],
+        //             (facs[1]/(facs[0]*T) + std::log(facs[0])));
+        //     else
+        //         op(p_s[i+m_elec_data.offset], 0.0);
+        // }
+    }
+
+
     // double sv[m_ns];
     // double st[m_ns];
     // double sr[m_ns];
@@ -1433,6 +1576,7 @@ private:
     std::vector<double> m_ht {}; //should this be in private??
     std::vector<double> m_hr {}; //should this be in private??
     std::vector<double> m_hel {}; //should this be in private??
+    std::vector<double> m_hf {}; //should this be in private??
     std::vector<double> m_sv {}; //should this be in private??
     std::vector<double> m_st {}; //should this be in private??
     std::vector<double> m_sr {}; //should this be in private??
