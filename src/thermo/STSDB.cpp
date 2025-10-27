@@ -110,18 +110,22 @@ class STSDB : public ThermoDB
 {
 public:
 
-    STSDB(int arg) : ThermoDB(298.15, 101325.0){
+    STSDB(int arg) : ThermoDB(298.15, 101325.0)
 //          ,m_has_electron(false),
 //           m_use_tables(false),
-//           m_last_bfacs_T(0.0) {} //
-//             ~STSDB()
-//     {
+//           m_last_bfacs_T(0.0)
+    { }
+    /**
+     * Destructor.
+     */
+    ~STSDB()
+    {
 //         delete [] mp_lnqtmw;
         delete [] mp_hform;
         delete [] mp_indices;
         delete [] mp_rot_data;
-// //!        delete [] mp_nvib;
-// //!        delete [] mp_vib_temps;
+        delete [] mp_nvib;
+        delete [] mp_vib_temps;
 
 //         delete [] m_elec_data.p_nelec;
 //         delete [] m_elec_data.p_levels;
@@ -438,8 +442,14 @@ protected:
 
             Species& ground_state = species.back();
             ParticleRRHO rrho(*rrho_iter);
-            for (size_t i = 0; i < rrho.nElectronicLevels(); ++i)
+            // for (size_t i = 0; i < rrho.nElectronicLevels(); ++i)
+            // {
+            //     species.push_back(Species(ground_state, i));
+            // }
+            for (size_t i = 0; i < rrho.nVibrationalLevels(); ++i)
+            {
                 species.push_back(Species(ground_state, i));
+            }
         }
 
         // // @todo: 1/18/2023
@@ -530,6 +540,23 @@ protected:
                 std::log(rrho.stericFactor());
         )
 
+        // Store the vibrational temperatures of all the molecules in a compact
+        // form
+        mp_nvib = new int [m_nm];
+        int nvib = 0;
+        LOOP_MOLECULES(
+            mp_nvib[i] = rrhos[j].nVibrationalLevels();
+            nvib += mp_nvib[i];
+        )
+        
+        mp_vib_temps = new double [nvib];
+        int ilevel = 0;
+        LOOP_MOLECULES(
+            const ParticleRRHO& rrho = rrhos[j];
+            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++)
+                mp_vib_temps[ilevel] = rrho.vibrationalEnergy(0);
+        )
+
         mp_part_sst = new double [m_ns];
         hT(Tss, Tss, mp_part_sst, Eq());
         hR(Tss, mp_part_sst, PlusEq());
@@ -555,6 +582,9 @@ private:
 
 	int*       mp_indices;
 	RotData*   mp_rot_data;
+
+    int*       mp_nvib;
+    double*    mp_vib_temps;
 
 	double g0_O2 = 3.0;
 	double g1_O2 = 2.0;
@@ -661,7 +691,8 @@ private:
         if (T < 10.0) {
             LOOP_MOLECULES(op(h[j], 0.0));
         } else {
-            LOOP_MOLECULES(op(h[j], m_energy[i] * cm2J / (KB)))
+            LOOP_MOLECULES(op(h[j], mp_vib_temps[i] * cm2J / (KB)))
+            // LOOP_MOLECULES(op(h[j], m_energy[i] * cm2J / (KB)))
         }
     }
 
@@ -670,11 +701,12 @@ private:
         if (T < 10.0) {
             LOOP_MOLECULES(op(h[j], 0.0));
         } else {
-            LOOP_MOLECULES(op(h[j], m_energy[0] * cm2J / (KB)))
+            LOOP_MOLECULES(op(h[j], mp_vib_temps[0] * cm2J / (KB)))
+            // LOOP_MOLECULES(op(h[j], m_energy[0] * cm2J / (KB)))
         }
     }
 
-	    /**
+	/**
      * Computes the electronic enthalpy of each species in K and applies the
      * value to the enthalpy array using the given operation.
      */
