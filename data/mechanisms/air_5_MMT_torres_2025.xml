@@ -1,0 +1,94 @@
+<!--
+Parametric Comparison of the Park and MMT Chemical Kinetics Models for Hypersonic Blunt Cones
+
+Chaudhry, Boyd
+
+
+Add NO + M from PARK
+Add Exchange from Bose/Candler
+
+-->
+<mechanism name="air_5_MMT_torres_2025">
+
+    <mmt_units A="mol,cm,s,K" E="kcal,mol,K" thetaV="K" U="K" Tv="K" />
+    <arrhenius_units A="mol,cm,s,K" E="kcal,mol,K" />
+
+
+    <reaction formula="N2+N2=2N+N2">
+        <MMT A="1.5259E+17" n="-0.40654" T="113200.0" thetaV="3414.0" aU="0.49725" U="265482.0"/>
+    </reaction>
+
+    <reaction formula="N2+O2=2N+O2">
+        <MMT A="1.6671E+20" n="-1.1484" T="113200.0" thetaV="3414.0" aU="0.36900" U="376750.0"/>
+    </reaction>
+
+    <reaction formula="N2+NO=2N+NO">
+        <MMT A="1.5259E+17" n="-0.40654" T="113200.0" thetaV="3414.0" aU="0.49725" U="265482.0"/>
+    </reaction>
+
+    <reaction formula="N2+N=3N">
+        <MMT A="4.6825E+17" n="-0.51270" T="113200.0" thetaV="3414.0" aU="0.39547" U="805087.0"/>
+    </reaction>
+
+    <reaction formula="N2+O=2N+O">
+        <MMT A="3.4678E+17" n="-0.50732" T="113200.0" thetaV="3414.0" aU="0.35075" U="-720429.0"/>
+    </reaction>
+
+    <reaction formula="O2+N2=2O+N2">
+        <MMT A="2.3279E17" n="-0.53233" T="59330.0" thetaV="2251.0" aU="0.71386" U="-107879.0"/>
+    </reaction>
+
+    <reaction formula="O2+O2=2O+O2">
+        <MMT A="6.4741E17" n="-0.59391" T="59330.0" thetaV="2251.0" aU="0.46110" U="54974.0"/>
+    </reaction>
+
+    <reaction formula="O2+NO=2O+NO">
+        <MMT A="6.4741E17" n="-0.59391" T="59330.0" thetaV="2251.0" aU="0.46110" U="54974.0"/>
+    </reaction>
+
+    <reaction formula="O2+N=2O+N">
+        <MMT A="1.7446E17" n="-0.44587" T="59330.0" thetaV="2251.0" aU="0.37965" U="-313988.0"/>
+    </reaction>  
+
+    <reaction formula="O2+O=2O+O">
+        <MMT A="1.5537E17" n="-0.47445" T="59330.0" thetaV="2251.0" aU="0.36157" U="96143.0"/>
+    </reaction>
+
+    <reaction formula="NO+N2=N+O+N2">
+        <arrhenius A="3.5889E14" n="-0.07945" T="52644.0"/>
+    </reaction>
+
+    <reaction formula="NO+O2=N+O+O2">
+        <arrhenius A="3.5889E14" n="-0.07945" T="52644.0"/>
+    </reaction>
+
+    <reaction formula="NO+NO=N+O+NO">
+        <arrhenius A="3.5889E14" n="-0.07945" T="52644.0"/>
+    </reaction>
+
+    <reaction formula="NO+N=2N+O">
+        <MMT A="2.5759E17" n="-0.59741" T="75360.0" thetaV="2744.0" aU="0.51679" U="3876179.0"/>
+    </reaction>
+
+    <reaction formula="NO+O=2O+N">
+        <MMT A="7.0310E16" n="-0.52778" T="75360.0" thetaV="2744.0" aU="0.30100" U="-3007416.0"/>
+    </reaction>
+
+    <reaction formula="NO+NO=2O+N2">
+        <arrhenius A="1.1786E16" n="-0.54728" T="53783.0"/> 
+    </reaction>
+
+    <reaction formula="NO+NO=2N+O2">
+        <arrhenius A="1.3688E21" n="-1.6611" T="106199"/> 
+    </reaction>
+
+    <reaction formula="N2+O2=NO+N+O">
+        <arrhenius A="2.9053E14" n="0.15022" T="89282.0"/> 
+    </reaction>
+
+
+
+
+</mechanism>
+
+
