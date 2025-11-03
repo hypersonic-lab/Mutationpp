@@ -168,11 +168,19 @@ double const OmegaCV::compute_source_Candler()
 	Tv = mixture().Tv(); // Vibrational temperature
 	const int nr = mixture().nReactions();
 
+    // Torres2025 "Parameterization and benchmarking of the Modified Marrone-Treanor Model for five-species air∗"
+	// const double f_e_NB = 0.85; // Non-Boltzmann Factor
+	const double f_e_NB = 1.0; // Non-Boltzmann Factor
+
 	 // Getting Vibrational Energy
 	 mixture().speciesHOverRT(NULL, NULL, NULL, mp_wrk1, NULL, NULL);
 
-	 // Getting Production Rate
-	 mixture().netProductionRates_MMT(mp_wrk2);
+	 // Getting Production Rate for arrhenius (species)
+	 mixture().netProductionRates_non_preferential(mp_wrk2);
+
+	 // netRatesOfProgress for MMT (reactions)
+	 mixture().netRatesOfProgress(mp_wrk3);
+
 
 	//Attempt to get data for each reaction
 	for(int i=0; i<nr; ++i) {
@@ -183,24 +191,32 @@ double const OmegaCV::compute_source_Candler()
 			const double thetaV = rate.thetaV();
 			const double aU = rate.a();
 			const double Us = rate.U_s();
+			// Speed up by storing U and TF
 			const double U = 1 / (aU / Ttr + 1 / Us);
+			// std::cout << "aU: " << aU << " Ttr: " << Ttr << " Tv: " << Tv << " Us: " << Us << std::endl << std::endl;
 			const double TF = 1 / (1 / Tv - 1 / Ttr - 1 / U);
-			const double e_vib = -1.0 * KB * (thetaV / std::exp(thetaV/TF)) - (TD / std::exp(TD/TF));
-			mp_wrk3[i] = e_vib; // J units
+			// std::cout << "thetaV: " << thetaV << " TF: " << TF << " TD: " << TD << std::endl << std::endl;
+			const double e_vib = (KB * thetaV / (std::exp(thetaV/TF)-1.0) - KB * TD / (std::exp(TD/TF)-1.0));
+			// const double e_vib = -1.0 * (KB * thetaV / (std::exp(thetaV/TF)) - KB * TD / (std::exp(TD/TF)));
+			mp_wrk4[i] = f_e_NB * e_vib; // J units
 		}
-	};
+	}
 
 	double Qv = 0.0;
-		for(int j=0; j<nr; ++j){
-			if (dynamic_cast<const MMT*>(mixture().reactions()[j].rateLaw()) != NULL){
-				Qv += mp_wrk3[j]; // evib_d * R_j
-			}
-			else { // Arrhenius reactions
-				Qv += mp_wrk2[j]*mp_wrk3[j]*RU*mixture().T();
-			}
+	for(int i = 0 ; i < m_ns; ++i)
+	{
+		// std::cout << "Species " << i << " " << mp_wrk1[i] << " " << mp_wrk2[i] << std::endl << std::endl;
+		 Qv += mp_wrk1[i]*mp_wrk2[i]/mixture().speciesMw(i);
+	}
+	Qv *= mixture().T()*RU;
+	for(int j=0; j < nr; ++j)
+	{
+		if (dynamic_cast<const MMT*>(mixture().reactions()[j].rateLaw()) != NULL)
+		{
+			// std::cout << "Rxn " << j << " " << mp_wrk3[j] << " " << mp_wrk4[j] << std::endl << std::endl;
+			Qv += mp_wrk3[j] * mp_wrk4[j] ; // evib_d * R_j
 		}
-	// }
-
+	}
 
 
 	/*

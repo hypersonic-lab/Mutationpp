@@ -79,6 +79,20 @@ public:
         return m_irr;
     }
 
+    /**
+     * Returns the indices of non-preferential reactions.
+     */
+    const std::vector<size_t>& non_pref_Reactions() const {
+        return m_non_pref;
+    }
+
+    /**
+     * Returns the indices of preferential reactions.
+     */
+    const std::vector<size_t>& pref_Reactions() const {
+        return m_pref;
+    }
+
 private:
 
     /**
@@ -128,6 +142,12 @@ private:
     
     /// Stores the indices of non-reversible reactions
     std::vector<size_t> m_irr;
+
+    /// Stores the indices of non-preferential reactions
+    std::vector<size_t> m_non_pref;
+
+    /// Stores the indices of preferential reactions
+    std::vector<size_t> m_pref;
 };
 
 

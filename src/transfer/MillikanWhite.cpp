@@ -142,8 +142,16 @@ double MillikanWhiteModel::relaxationTime(
     const double T_fac = std::pow(thermo.T(), -1.0/3.0);
     const double p_atm = thermo.P() / ONEATM;
     const double tau_mw = 
+        // (Xh/(m_data.a()*(T_fac - m_data.b()) - 18.42).exp()).sum() / 
+        // (Xh.sum()*p_atm);
         (Xh*(m_data.a()*(T_fac - m_data.b()) - 18.42).exp()).sum() / 
         (Xh.sum()*p_atm);
+    // std::cout << Xh[0] << " " << Xh[1] << " " << Xh[2] << " " << Xh[3] << " " << Xh[4] << std::endl;
+    // std::cout << thermo.X()[0] << " " << thermo.X()[1] << " " << thermo.X()[2] << " " << thermo.X()[3] << " " << thermo.X()[4] << std::endl << std::endl;
+    // std::cout << (Xh*(m_data.a()*(T_fac - m_data.b()) - 18.42).exp()).sum() / 
+    //     (Xh.sum()*p_atm) << std::endl;
+    // std::cout << (Xh/(m_data.a()*(T_fac - m_data.b()) - 18.42).exp()).sum() / 
+    //     (Xh.sum()*p_atm) << std::endl << std::endl;
 
     // Park correction
     const double ni = thermo.numberDensity() * thermo.X()[m_data.speciesIndex()];

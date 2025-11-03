@@ -330,6 +330,13 @@ void RateManager::addRate(const size_t rxn, const Reaction& reaction)
     } else {
         m_irr.push_back(rxn);
     }
+
+    if (dynamic_cast<const Arrhenius*>(reaction.rateLaw()) != NULL) {
+        m_non_pref.push_back(rxn);
+    }
+    else {
+        m_pref.push_back(rxn);
+    }
 }
 
 //==============================================================================

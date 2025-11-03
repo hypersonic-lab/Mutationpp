@@ -223,6 +223,18 @@ void Kinetics::forwardRateCoefficients(double* const p_kf)
         Map<const ArrayXd>(mp_rates->lnkf(), nReactions()).exp();
 }
 
+void Kinetics::forwardRateCoefficients_non_preferential(double* const p_kf)
+{
+    if (nReactions() == 0)
+        return;
+
+    mp_rates->update(m_thermo);
+    Map<ArrayXd>(p_kf, nReactions()) = 
+        Map<const ArrayXd>(mp_rates->lnkf(), nReactions()).exp();
+    for(int i=0; i < mp_rates->pref_Reactions().size(); ++i)
+        p_kf[mp_rates->pref_Reactions()[i]] = 0.0;
+}
+
 //==============================================================================
 
 void Kinetics::backwardRateCoefficients(double* const p_kb)
@@ -236,6 +248,22 @@ void Kinetics::backwardRateCoefficients(double* const p_kb)
         
     for(int i=0; i < mp_rates->irrReactions().size(); ++i)
         p_kb[mp_rates->irrReactions()[i]] = 0.0;
+}
+
+void Kinetics::backwardRateCoefficients_non_preferential(double* const p_kb)
+{
+    if (nReactions() == 0)
+        return;
+
+    mp_rates->update(m_thermo);
+    Map<ArrayXd>(p_kb, nReactions()) = 
+        Map<const ArrayXd>(mp_rates->lnkb(), nReactions()).exp();
+        
+    for(int i=0; i < mp_rates->irrReactions().size(); ++i)
+        p_kb[mp_rates->irrReactions()[i]] = 0.0;
+    
+    for(int i=0; i < mp_rates->pref_Reactions().size(); ++i)
+        p_kb[mp_rates->pref_Reactions()[i]] = 0.0;
 }
 
 
@@ -261,6 +289,14 @@ void Kinetics::forwardRatesOfProgress(
     m_thirdbodies.multiplyThirdbodies(p_conc, p_ropf);
 }
 
+void Kinetics::forwardRatesOfProgress_non_preferential(
+    const double* const p_conc, double* const p_ropf)
+{
+    forwardRateCoefficients_non_preferential(p_ropf);
+    m_reactants.multReactions(p_conc, p_ropf);
+    m_thirdbodies.multiplyThirdbodies(p_conc, p_ropf);
+}
+
 //==============================================================================
 
 void Kinetics::backwardRatesOfProgress(double* const p_ropb)
@@ -279,6 +315,14 @@ void Kinetics::backwardRatesOfProgress(
     const double* const p_conc, double* const p_ropb)
 {
     backwardRateCoefficients(p_ropb);
+    m_rev_prods.multReactions(p_conc, p_ropb);
+    m_thirdbodies.multiplyThirdbodies(p_conc, p_ropb);
+}
+
+void Kinetics::backwardRatesOfProgress_non_preferential(
+    const double* const p_conc, double* const p_ropb)
+{
+    backwardRateCoefficients_non_preferential(p_ropb);
     m_rev_prods.multReactions(p_conc, p_ropb);
     m_thirdbodies.multiplyThirdbodies(p_conc, p_ropb);
 }
@@ -324,6 +368,16 @@ void Kinetics::netRatesOfProgress(
         Map<ArrayXd>(mp_ropf, nReactions()) - Map<ArrayXd>(mp_ropb, nReactions());
 }
 
+void Kinetics::netRatesOfProgress_non_preferential(
+    const double* const p_conc, double* const p_rop)
+{
+    forwardRatesOfProgress_non_preferential(p_conc, mp_ropf);
+    backwardRatesOfProgress_non_preferential(p_conc, mp_ropb);
+
+    Map<ArrayXd>(p_rop, nReactions()) = 
+        Map<ArrayXd>(mp_ropf, nReactions()) - Map<ArrayXd>(mp_ropb, nReactions());
+}
+
 /*
 //==============================================================================
 
@@ -343,7 +397,7 @@ void Kinetics::netProductionRates(
 
 //==============================================================================
 
-void Kinetics::netProductionRates_MMT(double* const p_wdot)
+void Kinetics::netProductionRates_non_preferential(double* const p_wdot)
 {
     // Special case of no reactions
     if (nReactions() == 0) {
@@ -356,20 +410,13 @@ void Kinetics::netProductionRates_MMT(double* const p_wdot)
         (m_thermo.numberDensity() / NA) *
         Map<const ArrayXd>(m_thermo.X(), m_thermo.nSpecies());
 
-    netRatesOfProgress(p_wdot, mp_rop);
+    netRatesOfProgress_non_preferential(p_wdot, mp_rop);
     
     // Sum all contributions from every reaction
     std::fill(p_wdot, p_wdot+m_thermo.nSpecies(), 0.0);
-    const int nr = nReactions();
-    double reactions_MMT[nReactions()];
-
-    for (int i = 0; i < nr; i++){
-        reactions_MMT[i] = (dynamic_cast<const MMT*>(m_reactions[i].rateLaw()) != NULL);
-    }
-
-    m_reactants.decrSpecies_MMT(mp_rop, p_wdot,reactions_MMT);
-    m_rev_prods.incrSpecies_MMT(mp_rop, p_wdot,reactions_MMT);
-    m_irr_prods.incrSpecies_MMT(mp_rop, p_wdot,reactions_MMT);
+    m_reactants.decrSpecies(mp_rop, p_wdot);
+    m_rev_prods.incrSpecies(mp_rop, p_wdot);
+    m_irr_prods.incrSpecies(mp_rop, p_wdot);
 
     // Multiply by species molecular weights
     for (int i = 0; i < m_thermo.nSpecies(); ++i)

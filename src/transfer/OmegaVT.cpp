@@ -34,6 +34,7 @@
 #include <Eigen/Dense>
 
 using namespace Mutation;
+using namespace Mutation::Kinetics;
 
 namespace Mutation {
     namespace Transfer {
@@ -90,10 +91,55 @@ class OmegaVT : public TransferModel
 {
 public:
     OmegaVT(Mixture&);
-    virtual ~OmegaVT() = default;
-    virtual double source() override;
+    // OmegaVT(Mixture&) : TransferModel(mix)
+    // {
+    //     m_ns = mixture().nSpecies();
+    //     hv_T = new double [m_ns];
+    //     hv_Tv = new double [m_ns];
+    //     hel_T = new double [m_ns];
+    //     hel_Tv = new double [m_ns];
+    // };
+    // virtual ~OmegaVT() = default;
+    ~OmegaVT()
+	{
+		delete [] hv_T;
+		delete [] hv_Tv;
+		delete [] hel_T;
+		delete [] hel_Tv;
+	};
+    // virtual double source() override;
+    double source()
+	{
+		static int i_transfer_model = 0;
+		const int nr = mixture().nReactions();
+		for(int i=0; i<nr; ++i) {
+			i_transfer_model = (dynamic_cast<const MMT*>(mixture().reactions()[i].rateLaw()) != NULL);
+			if (i_transfer_model){
+				break;
+			}
+		}
+		// static int i_transfer_model = (dynamic_cast<const MMT*>(mixture().reactions()[1].rateLaw()) != NULL);
+		switch (i_transfer_model){
+		   case 0:
+			  return compute_source_preferential();
+		   case 1:
+			  return compute_source_non_preferential();
+		  break;
+		   default:
+			  std::cerr << "The selected vibration-translation energy relaxation model is not implemented yet";
+			  return 0.0;
+		}
+	}
 private:
     std::vector<Vibrator> m_vibrators;
+    int m_ns;
+	double* hv_T;
+	double* hv_Tv;
+	double* hel_T;
+	double* hel_Tv;
+
+    double compute_source_non_preferential();
+	double compute_source_preferential();
 };
 
 
@@ -104,6 +150,8 @@ Utilities::Config::ObjectProvider<OmegaVT, TransferModel> omegaVT("OmegaVT");
 OmegaVT::OmegaVT(Mixture& mix) : 
     TransferModel(mix)
 {
+    
+
     Thermodynamics::HarmonicOscillatorDB hodb;
     MillikanWhiteModelDB mwdb(mix);
 
@@ -111,15 +159,94 @@ OmegaVT::OmegaVT(Mixture& mix) :
     {
         if (species.type() == Thermodynamics::MOLECULE)
         {
+            // std::cout << "Species: " << species.name() << std::endl;
             auto ho = hodb.create(species.name());
+            // std::cout << "Temperatures: " << ho.characteristicTemperatures()[0] << std::endl;
             auto mw = mwdb.create(species.name(), ho.characteristicTemperatures()[0]);
             m_vibrators.emplace_back(ho, mw);
         }   
+        else
+        {
+            // std::cout << "Species: " << species.name() << std::endl;
+            auto ho = hodb.create(species.name());
+            // std::cout << "Temperatures: " << 0 << std::endl;
+            auto mw = mwdb.create(species.name(), 0);
+            m_vibrators.emplace_back(ho, mw);
+        }   
     }
+    
 }
 
 
-double OmegaVT::source()
+// double OmegaVT::source()
+// {
+//     auto Y = mixture().Y();
+//     auto T = mixture().T();
+//     auto Tv = mixture().Tv();
+//     m_ns = mixture().nSpecies();
+//     hv_T = new double[m_ns](); 
+//     hv_Tv = new double[m_ns](); 
+//     hel_T = new double[m_ns](); 
+//     hel_Tv = new double[m_ns](); 
+
+//     // double src = 0.0;
+
+//     // for (auto& vibrator: m_vibrators)
+//     // {
+//     //     const auto iv = vibrator.speciesIndex();
+//     //     const auto tau = vibrator.relaxationTime(mixture());
+//     //     const auto mw = vibrator.molecularWeight();
+//     //     src += Y[iv]*(vibrator.energy(T) - vibrator.energy(Tv))/(mw*tau);
+//     // }
+//     // std::cout << src << std::endl;
+//     // return src * mixture().density() * RU;
+
+
+//     auto X = mixture().X();
+//     const int ns = mixture().nSpecies();
+//     mixture().speciesHOverRT(T, T, T, T, T, NULL, NULL, NULL, hv_T, hel_T, NULL);
+//     mixture().speciesHOverRT(T, Tv, T, Tv, Tv, NULL, NULL, NULL, hv_Tv, hel_Tv, NULL);
+
+//     double src = 0.0;
+//     double tau_sum = 0.0;
+//     double X_sum = 0.0;
+//     double ET, ETv;
+
+//     for (auto& vibrator: m_vibrators)
+//     {
+//         const auto iv = vibrator.speciesIndex();
+//         const auto mw = vibrator.molecularWeight();
+
+//         // ET = T * RU * (hv_T[iv] + hel_T[iv]); // J/mol
+//         // ETv = T * RU * (hv_Tv[iv] + hel_Tv[iv]); // J/mol
+        
+//         // std::cout << "T: " << ET << " Tv: " << ETv << std::endl;
+//         // src += Y[iv] * (ET - ETv) / (mw);
+//         // if (vibrator.energy(Tv) > 1) // molecule
+//         if (mixture().species()[iv].type() == Thermodynamics::MOLECULE)
+//         {
+//             const auto tau = vibrator.relaxationTime(mixture());
+//             src += Y[iv]*(vibrator.energy(T) - vibrator.energy(Tv))/(mw) * RU;
+//             // std::cout << "tau= " << tau << " X= " << X[iv] << std::endl;
+//             tau_sum += X[iv] / tau;
+//             X_sum += X[iv];
+//             // std::cout << "tau_sum: " << tau_sum << " X_sum: " << X_sum << std::endl;
+//         }
+//         else {
+//             // std::cout << "T: " << hv_T[iv] << " Tv: " << hv_Tv[iv] << std::endl;
+//             ET = T * RU * (hv_T[iv] + hel_T[iv]); // J/mol
+//             ETv = T * RU * (hv_Tv[iv] + hel_Tv[iv]); // J/mol
+//             src += Y[iv] * (ET - ETv) / (mw);
+//         }
+//     }
+//     double tau_denom = X_sum / tau_sum;
+//     src = src / tau_denom;
+//     // std::cout << src << std::endl;
+
+//     return src * mixture().density();// * RU;
+// }
+
+double OmegaVT::compute_source_non_preferential()
 {
     auto Y = mixture().Y();
     auto T = mixture().T();
@@ -136,6 +263,77 @@ double OmegaVT::source()
     }
 
     return src * mixture().density() * RU;
+}
+
+
+
+
+double OmegaVT::compute_source_preferential()
+{
+    auto Y = mixture().Y();
+    auto T = mixture().T();
+    auto Tv = mixture().Tv();
+    m_ns = mixture().nSpecies();
+    hv_T = new double[m_ns](); 
+    hv_Tv = new double[m_ns](); 
+    hel_T = new double[m_ns](); 
+    hel_Tv = new double[m_ns](); 
+
+    // double src = 0.0;
+
+    // for (auto& vibrator: m_vibrators)
+    // {
+    //     const auto iv = vibrator.speciesIndex();
+    //     const auto tau = vibrator.relaxationTime(mixture());
+    //     const auto mw = vibrator.molecularWeight();
+    //     src += Y[iv]*(vibrator.energy(T) - vibrator.energy(Tv))/(mw*tau);
+    // }
+    // std::cout << src << std::endl;
+    // return src * mixture().density() * RU;
+
+
+    auto X = mixture().X();
+    const int ns = mixture().nSpecies();
+    mixture().speciesHOverRT(T, T, T, T, T, NULL, NULL, NULL, hv_T, hel_T, NULL);
+    mixture().speciesHOverRT(T, Tv, T, Tv, Tv, NULL, NULL, NULL, hv_Tv, hel_Tv, NULL);
+
+    double src = 0.0;
+    double tau_sum = 0.0;
+    double X_sum = 0.0;
+    double ET, ETv;
+
+    for (auto& vibrator: m_vibrators)
+    {
+        const auto iv = vibrator.speciesIndex();
+        const auto mw = vibrator.molecularWeight();
+
+        // ET = T * RU * (hv_T[iv] + hel_T[iv]); // J/mol
+        // ETv = T * RU * (hv_Tv[iv] + hel_Tv[iv]); // J/mol
+        
+        // std::cout << "T: " << ET << " Tv: " << ETv << std::endl;
+        // src += Y[iv] * (ET - ETv) / (mw);
+        // if (vibrator.energy(Tv) > 1) // molecule
+        if (mixture().species()[iv].type() == Thermodynamics::MOLECULE)
+        {
+            const auto tau = vibrator.relaxationTime(mixture());
+            src += Y[iv]*(vibrator.energy(T) - vibrator.energy(Tv))/(mw) * RU;
+            // std::cout << "tau= " << tau << " X= " << X[iv] << std::endl;
+            tau_sum += X[iv] / tau;
+            X_sum += X[iv];
+            // std::cout << "tau_sum: " << tau_sum << " X_sum: " << X_sum << std::endl;
+        }
+        else {
+            // std::cout << "T: " << hv_T[iv] << " Tv: " << hv_Tv[iv] << std::endl;
+            ET = T * RU * (hv_T[iv] + hel_T[iv]); // J/mol
+            ETv = T * RU * (hv_Tv[iv] + hel_Tv[iv]); // J/mol
+            src += Y[iv] * (ET - ETv) / (mw);
+        }
+    }
+    double tau_denom = X_sum / tau_sum;
+    src = src / tau_denom;
+    // std::cout << src << std::endl;
+
+    return src * mixture().density();// * RU;
 }
 
 

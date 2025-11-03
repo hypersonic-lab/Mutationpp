@@ -112,7 +112,7 @@ public:
     MMT(const Mutation::Utilities::IO::XmlElement& node, const int order);
     
     MMT(const MMT& to_copy)
-        : m_lnA(to_copy.m_lnA), m_n(to_copy.m_n), m_temp(to_copy.m_temp), m_a(to_copy.m_a), m_U_s(to_copy.m_U_s), m_theta_v(to_copy.m_theta_v), m_Tv(to_copy.m_Tv)
+        : m_lnA(to_copy.m_lnA), m_n(to_copy.m_n), m_temp(to_copy.m_temp), m_a(to_copy.m_a), m_U_s(to_copy.m_U_s), m_theta_v(to_copy.m_theta_v)
     { }
     
     
@@ -123,20 +123,20 @@ public:
     }
     
     inline double getLnRate(const double lnTtr, const double invTtr, const double Tv = 0.0) const {
-//         Possible log approximation Taylor Series?
-//        val1 = m_lnA + m_n * lnT - m_temp * invT;
-//        invT == 1/Ttr? if so, we can simplify division in U,TF,lnQTR
-        // cout << Tv << endl;
+        // Torres2025 "Parameterization and benchmarking of the Modified Marrone-Treanor Model for five-species air∗"
+	    const double ln_f_k_NB = std::log(0.5); // Non-Boltzmann Factor
+
         double m_invTv = 1.0 / Tv;
         double Ttr = 1.0 / invTtr;
-        double U = (Ttr * m_U_s) / (Ttr + m_a * m_U_s);
-        double TF = -1.0 * (Ttr * Tv * U) / (Ttr * (Tv - U) + Tv * U);
+        double U = 1.0 / (m_a / Ttr + 1.0 / m_U_s);
+        double TF = 1.0 / (1.0 / Tv - 1.0 / Ttr - 1.0 / U);
         double lnQTr = std::log((1.0 - std::exp(-1.0 * m_temp * invTtr)) / (1.0 - std::exp(-1.0 * m_theta_v * invTtr)));
-        double lnQTF = std::log((1.0 - std::exp(-m_temp / TF)) / (1.0 - std::exp(-m_theta_v / TF)));
+        double lnQTF = std::log((1.0 - std::exp(-1.0 * m_temp / TF)) / (1.0 - std::exp(-1.0 * m_theta_v / TF)));
         double lnQTv = std::log((1.0 - std::exp(-1.0 * m_temp * m_invTv)) / (1.0 - std::exp(-1.0 * m_theta_v * m_invTv)));
-        double lnQU =  std::log(1.0 - std::exp(m_temp / U) / (1.0 - std::exp(m_theta_v / U)));
+        double lnQU =  std::log((1.0 - std::exp(m_temp / U)) / (1.0 - std::exp(m_theta_v / U)));
 //        lnZ = lnQTr + lnQTF - lnQTv - lnQU
         return (m_lnA + m_n * lnTtr - m_temp * invTtr + lnQTr + lnQTF - lnQTv - lnQU);
+        // return (ln_f_k_NB + m_lnA + m_n * lnTtr - m_temp * invTtr + lnQTr + lnQTF - lnQTv - lnQU);
     }
     
     // Can I change function arguments?
@@ -144,11 +144,14 @@ public:
         // k must be the rate value --> derivative with respect to T
         // Jacobian? [d/dTtr, d/dTv] or just d/dTtr
         //        invT == 1/Ttr? if so, we can simplify division in all variables
-        double m_invTv = 1.0/m_Tv;
-        double val1 = m_temp * (std::exp(m_temp*invTtr) - 2.0) / (std::exp(m_temp*invTtr) - 1.0);
-        double val2 = m_n / invTtr;
-        double val3 = m_theta_v / (std::exp(m_theta_v*invTtr));
-        return (k*pow(invTtr,2.0)*(val1 + val2 + val3));
+        // double m_invTv = 1.0/m_Tv;
+        // double val1 = m_temp * (std::exp(m_temp*invTtr) - 2.0) / (std::exp(m_temp*invTtr) - 1.0);
+        // double val2 = m_n / invTtr;
+        // double val3 = m_theta_v / (std::exp(m_theta_v*invTtr));
+        // return (k*pow(invTtr,2.0)*(val1 + val2 + val3));
+        throw InvalidInputError("MMT Derivative", "MMT Derivative")
+        << "MMT derivative not implemented in RateLaws.";
+        return 0.0;
     }
 
     double A() const {
@@ -186,7 +189,6 @@ private:
     static std::vector<Mutation::Utilities::Units> sm_tunits;
     static std::vector<Mutation::Utilities::Units> sm_tvunits;
     static std::vector<Mutation::Utilities::Units> sm_uunits;
-    static std::vector<Mutation::Utilities::Units> sm_tempvunits;
 
     double m_lnA;
     double m_n;

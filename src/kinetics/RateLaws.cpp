@@ -112,17 +112,15 @@ void MMT::setUnits(const XmlElement& node)
 {
     assert( node.tag() == "mmt_units" );
     // To edit
-    std::string a, t, tv, u, tempv;
+    std::string a, t, tv, u;
     node.getAttribute("A", a);
     node.getAttribute("T", t);
     node.getAttribute("thetaV", tv);
     node.getAttribute("U", u);
-    node.getAttribute("Tv", tempv); //Until we know how to access second temperature
     sm_aunits = Units::split(a);
     sm_tunits = Units::split(t);
     sm_tvunits = Units::split(tv);
     sm_uunits = Units::split(u);
-    sm_tempvunits = Units::split(tempv); //Until we know how to access second temperature
 }
 
 // C,Td,au,U*
@@ -160,20 +158,10 @@ std::vector<Units> _default_uunits() {
     return units;
 }
     
-std::vector<Units> _default_tempvunits() {
-    std::vector<Units> units;
-//    units.push_back("mol");
-//    units.push_back("m");
-//    units.push_back("s");
-    units.push_back("K");
-    return units;
-}
-
 std::vector<Units> MMT::sm_aunits = std::vector<Units>();
 std::vector<Units> MMT::sm_tunits = std::vector<Units>();
 std::vector<Units> MMT::sm_tvunits = std::vector<Units>();
 std::vector<Units> MMT::sm_uunits = std::vector<Units>();
-std::vector<Units> MMT::sm_tempvunits = std::vector<Units>();
     
     
 MMT::MMT(const XmlElement& node, const int order)
@@ -188,8 +176,6 @@ MMT::MMT(const XmlElement& node, const int order)
         sm_aunits = _default_tvunits();
     if (sm_uunits.empty())
         sm_uunits = _default_uunits();
-    if (sm_tempvunits.empty())
-        sm_tempvunits = _default_tempvunits();
     
     // Load the temperature exponent (defaults to 0)
     node.getAttribute("n", m_n, 0.0);
@@ -199,8 +185,6 @@ MMT::MMT(const XmlElement& node, const int order)
     node.getAttribute("U", m_U_s, 0.0);
 //     Load Ttr (defaults to 0)
 //    node.getAttribute("ttr", m_temp_Ttr, 0.0);
-    // Load Tv (defaults to 0)
-    node.getAttribute("Tv", m_Tv, 0.0);
     // Load Tv (defaults to 0)
     node.getAttribute("thetaV", m_theta_v, 0.0);
     

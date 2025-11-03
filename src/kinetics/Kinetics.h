@@ -104,6 +104,7 @@ public:
      * @param kf  on return, \f$ k_{f,j} \f$
      */
     void forwardRateCoefficients(double* const p_kf);
+    void forwardRateCoefficients_non_preferential(double* const p_kf);
     
     /**
      * Fills the vector kb with the backward rate coefficients 
@@ -112,6 +113,7 @@ public:
      * @param kb  on return, \f$ k_{b,j} \f$
      */
     void backwardRateCoefficients(double* const p_kb);
+    void backwardRateCoefficients_non_preferential(double* const p_kb);
     
     /**
      * Fills the vector ropf with the forward rate of progress variables for
@@ -130,6 +132,8 @@ public:
      */
     void forwardRatesOfProgress(
         const double* const p_conc, double* const p_ropf);
+    void forwardRatesOfProgress_non_preferential(
+        const double* const p_conc, double* const p_ropf);
     
     /**
      * Fills the vector ropb with the backward rates of progress variables for
@@ -147,6 +151,8 @@ public:
      * @param ropb  on return, the backward rates of progress in mol/m^3-s
      */
     void backwardRatesOfProgress(
+        const double* const p_conc, double* const p_ropb);
+    void backwardRatesOfProgress_non_preferential(
         const double* const p_conc, double* const p_ropb);
     
     /**
@@ -167,6 +173,7 @@ public:
      * @param p_rop on return, the net rates of progress in mol/m^3-s
      */
     void netRatesOfProgress(const double* const p_conc, double* const p_rop);
+    void netRatesOfProgress_non_preferential(const double* const p_conc, double* const p_rop);
     
     /**
      * Fills the vector wdot with the net species production rates due to the
@@ -180,7 +187,7 @@ public:
      * @param p_wdot - on return, the species production rates in kg/m^3-s
      */
     void netProductionRates(double* const p_wdot);
-    void netProductionRates_MMT(double* const p_wdot);
+    void netProductionRates_non_preferential(double* const p_wdot);
 
     /**
      * Fills the matrix p_jac with the species production rate jacobian matrix

@@ -158,14 +158,18 @@ public:
      * dependent quantities, and \f$\nu_{ij}\f$ is the stoichiometric coefficient
      * for species i in reaction j.
      */
-    inline void incrSpecies_MMT(const double* const p_r, double* const p_s, double* MMT) const
+    inline void incrSpecies_non_preferential(const double* const p_r, double* const p_s, double* non_preferential) const
     {
         for (int i = 0; i < N; ++i){
-            if (MMT[m_rxn]){
+            if (non_preferential[m_rxn]){
                 p_s[m_sps[i]] += p_r[m_rxn];
+            }
+            else{
+                p_s[m_sps[i]] += 0.0;
             }
         }    
     }
+
     
     /**
      * Performs the following operation on the species in this reaction:
@@ -176,14 +180,18 @@ public:
      * dependent quantities, and \f$\nu_{ij}\f$ is the stoichiometric coefficient
      * for species i in reaction j.
      */
-    inline void decrSpecies_MMT(const double* const p_r, double* const p_s, double* MMT) const
+    inline void decrSpecies_non_preferential(const double* const p_r, double* const p_s, double* non_preferential) const
     {
         for (int i = 0; i < N; ++i){
-            if (MMT[m_rxn]){
+            if (non_preferential[m_rxn]){
                 p_s[m_sps[i]] -= p_r[m_rxn];
+            }
+            else{
+                p_s[m_sps[i]] -= 0.0;
             }
         }    
     }
+
     
     
 protected:
@@ -311,10 +319,10 @@ public:
     
     void decrSpecies(const double* const p_r, double* const p_s) const;
 
-    void incrSpecies_MMT(const double* const p_r, double* const p_s, double* const MMT) const;
+    void incrSpecies_non_preferential(const double* const p_r, double* const p_s, double* const MMT) const;
     
-    void decrSpecies_MMT(const double* const p_r, double* const p_s, double* const MMT) const;
-
+    void decrSpecies_non_preferential(const double* const p_r, double* const p_s, double* const MMT) const;
+    
     std::vector<Stoich1> ret_stoich1(){
         return m_stoich1_vec;
     }

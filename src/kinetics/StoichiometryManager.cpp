@@ -81,7 +81,7 @@ STOICH_MGR_APPLY_FUNC(decrSpecies, decrSpecies)
 #undef STOICH_MGR_APPLY_FUNC
 
 
-#define STOICH_MGR_APPLY_FUNC_MMT(__my_func__,__stoic_func__)\
+#define STOICH_MGR_APPLY_FUNC_NON_PREFERENTIAL(__my_func__,__stoic_func__)\
 template<class Iterator, class Vec1, class Vec2, class Vec3>\
 inline static void _##__my_func__ (\
     Iterator begin, const Iterator end, const Vec1& input, Vec2& output, const Vec3 MMT)\
@@ -97,8 +97,8 @@ void StoichiometryManager:: __my_func__ (\
     _##__my_func__ (m_stoich3_vec.begin(), m_stoich3_vec.end(), in , out , MMT);\
 }
 
-STOICH_MGR_APPLY_FUNC_MMT(incrSpecies_MMT, incrSpecies_MMT)
-STOICH_MGR_APPLY_FUNC_MMT(decrSpecies_MMT, decrSpecies_MMT)
+STOICH_MGR_APPLY_FUNC_NON_PREFERENTIAL(incrSpecies_non_preferential, incrSpecies_non_preferential)
+STOICH_MGR_APPLY_FUNC_NON_PREFERENTIAL(decrSpecies_non_preferential, decrSpecies_non_preferential)
 
 #undef STOICH_MGR_APPLY_FUNC_MMT
 
