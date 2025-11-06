@@ -178,9 +178,9 @@ public:
         return m_theta_v;
     }
 
-    double Tv() const {
-        return m_Tv;
-    }
+    // double Tv() const {
+    //     return m_Tv;
+    // }
     
     
 private:
@@ -194,7 +194,7 @@ private:
     double m_n;
     double m_temp; // TD?
     double m_theta_v; // Maybe referenced from other part of M++?
-    double m_Tv; // Maybe referenced from other part of M++?
+    // double m_Tv; // Maybe referenced from other part of M++?
 //    double m_temp_Ttr; // Maybe referenced from other part of M++?
     double m_a;
     double m_U_s;
