@@ -105,10 +105,11 @@ ParticleRRHO::ParticleRRHO(const ParticleRRHO& rrho, const size_t level)
     //   m_vibrational_energies(rrho.m_vibrational_energies)
     //   m_vibrational_energies(1, rrho.vibrationalEnergy(level))
 {
+    double cm2K = 1.4387;
     if (level < rrho.m_vibrational_energies.size())
     {
         m_vibrational_energies = { rrho.vibrationalEnergy(level) };
-        m_hform = rrho.m_hform;
+        m_hform = rrho.m_hform + RU*rrho.vibrationalEnergy(level) * cm2K;
     } 
     else 
     {
