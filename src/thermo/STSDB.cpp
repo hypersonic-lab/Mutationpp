@@ -565,7 +565,7 @@ protected:
         mp_part_sst = new double [m_ns];
         hT(Tss, Tss, mp_part_sst, Eq());
         hR(Tss, mp_part_sst, PlusEq());
-        hV_f(Tss, mp_part_sst, PlusEq());
+        hV(Tss, mp_part_sst, PlusEq());
         hE(Tss, mp_part_sst, PlusEq());
     }
 
@@ -698,16 +698,6 @@ private:
         } else {
             LOOP_MOLECULES(op(h[j], m_energy[i] * cm2J / (KB)))
             // LOOP_MOLECULES(op(h[j], m_energy[i] * cm2J / (KB)))
-        }
-    }
-
-    template <typename OP>
-    void hV_f(double T, double* const h, const OP& op) {
-        if (T < 10.0) {
-            LOOP_MOLECULES(op(h[j], 0.0));
-        } else {
-            LOOP_MOLECULES(op(h[j], m_energy[0] * cm2J / (KB)))
-            // LOOP_MOLECULES(op(h[j], m_energy[0] * cm2J / (KB)))
         }
     }
 
