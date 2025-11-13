@@ -109,6 +109,22 @@ Species::Species(const Species& to_copy, const size_t level) :
     m_name += ss.str();
 }
 
+Species::Species(const Species& to_copy, const size_t e_level, const size_t v_level) :
+    m_name(to_copy.m_name),
+    m_ground_state_name(to_copy.m_name),
+    m_mw(to_copy.m_mw),
+    m_charge(to_copy.m_charge),
+    m_phase(to_copy.m_phase),
+    m_type(to_copy.m_type),
+    // m_level(level),
+    m_stoichiometry(to_copy.m_stoichiometry)
+{ 
+    m_level = max(e_level, v_level);
+    stringstream ss;
+    ss << "(" << m_level << ")";
+    m_name += ss.str();
+}
+
 //==============================================================================
 
 Species::Species(

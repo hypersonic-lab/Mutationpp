@@ -148,11 +148,17 @@ public:
         const StoichList& stoichiometry);
     
     /**
-     * Instantiate a new species object which represents a single electronic
+     * Instantiate a new species object which represents a single electronic or vibrational
+     * state of the given species.
+     */
+    Species(const Species& species, const size_t e_level, const size_t v_level);
+
+    /**
+     * Instantiate a new species object which represents a single electronic or vibrational
      * state of the given species.
      */
     Species(const Species& species, const size_t level);
-    
+
     /**
      * Copy constructor.
      */

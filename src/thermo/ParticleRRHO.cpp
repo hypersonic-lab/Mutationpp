@@ -97,8 +97,8 @@ ParticleRRHO::ParticleRRHO(const IO::XmlElement& xml_element)
 //==============================================================================
 
 ParticleRRHO::ParticleRRHO(const ParticleRRHO& rrho, const size_t level)
-    : m_hform(rrho.m_hform + RU*rrho.electronicEnergy(level).second),
-      m_steric(rrho.m_steric),
+    // : m_hform(rrho.m_hform + RU*rrho.electronicEnergy(level).second),
+    : m_steric(rrho.m_steric),
       m_linearity(rrho.m_linearity),
       m_rotational_t(rrho.m_rotational_t),
       m_electronic_energies(1, std::make_pair(rrho.electronicEnergy(level).first, 0.0))
@@ -108,10 +108,12 @@ ParticleRRHO::ParticleRRHO(const ParticleRRHO& rrho, const size_t level)
     if (level < rrho.m_vibrational_energies.size())
     {
         m_vibrational_energies = { rrho.vibrationalEnergy(level) };
+        m_hform = rrho.m_hform;
     } 
     else 
     {
         m_vibrational_energies = rrho.m_vibrational_energies; // or default value
+        m_hform = rrho.m_hform + RU*rrho.electronicEnergy(level).second;
     }
 
     // Make sure the level used is actually present in the given RRHO parameters
