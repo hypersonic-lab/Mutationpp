@@ -101,10 +101,19 @@ ParticleRRHO::ParticleRRHO(const ParticleRRHO& rrho, const size_t level)
       m_steric(rrho.m_steric),
       m_linearity(rrho.m_linearity),
       m_rotational_t(rrho.m_rotational_t),
-      m_electronic_energies(1, std::make_pair(rrho.electronicEnergy(level).first, 0.0)),
+      m_electronic_energies(1, std::make_pair(rrho.electronicEnergy(level).first, 0.0))
     //   m_vibrational_energies(rrho.m_vibrational_energies)
-      m_vibrational_energies(1, rrho.vibrationalEnergy(level))
+    //   m_vibrational_energies(1, rrho.vibrationalEnergy(level))
 {
+    if (level < rrho.m_vibrational_energies.size())
+    {
+        m_vibrational_energies = { rrho.vibrationalEnergy(level) };
+    } 
+    else 
+    {
+        m_vibrational_energies = rrho.m_vibrational_energies; // or default value
+    }
+
     // Make sure the level used is actually present in the given RRHO parameters
     assert((level < rrho.nElectronicLevels()) || (level < rrho.nVibrationalLevels()));
 }
