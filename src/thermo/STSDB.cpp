@@ -442,14 +442,19 @@ protected:
 
             Species& ground_state = species.back();
             ParticleRRHO rrho(*rrho_iter);
-            // for (size_t i = 0; i < rrho.nElectronicLevels(); ++i)
-            // {
-            //     species.push_back(Species(ground_state, i));
-            // }
-            for (size_t i = 0; i < rrho.nVibrationalLevels(); ++i)
+            if (rrho.nVibrationalLevels() > 1) {
+                for (size_t i = 0; i < rrho.nVibrationalLevels(); ++i)
             {
-                species.push_back(Species(ground_state, i));
+                species.push_back(Species(ground_state, 0, i));
             }
+            }
+            else {
+                for (size_t i = 0; i < rrho.nElectronicLevels(); ++i)
+                {
+                    species.push_back(Species(ground_state, i, 0));
+                }
+            }
+            
         }
 
         // // @todo: 1/18/2023
@@ -554,7 +559,7 @@ protected:
         LOOP_MOLECULES(
             const ParticleRRHO& rrho = rrhos[j];
             for (int k = 0; k < mp_nvib[i]; ++k, ilevel++)
-                mp_vib_temps[ilevel] = rrho.vibrationalEnergy(0);
+                mp_vib_temps[ilevel] = rrho.vibrationalEnergy(k);
         )
 
         mp_part_sst = new double [m_ns];
@@ -691,7 +696,7 @@ private:
         if (T < 10.0) {
             LOOP_MOLECULES(op(h[j], 0.0));
         } else {
-            LOOP_MOLECULES(op(h[j], mp_vib_temps[i] * cm2J / (KB)))
+            LOOP_MOLECULES(op(h[j], m_energy[i] * cm2J / (KB)))
             // LOOP_MOLECULES(op(h[j], m_energy[i] * cm2J / (KB)))
         }
     }
@@ -701,7 +706,7 @@ private:
         if (T < 10.0) {
             LOOP_MOLECULES(op(h[j], 0.0));
         } else {
-            LOOP_MOLECULES(op(h[j], mp_vib_temps[0] * cm2J / (KB)))
+            LOOP_MOLECULES(op(h[j], m_energy[0] * cm2J / (KB)))
             // LOOP_MOLECULES(op(h[j], m_energy[0] * cm2J / (KB)))
         }
     }
