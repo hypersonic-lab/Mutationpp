@@ -2401,7 +2401,7 @@
 	</species>
 
 	<!-- Oxygen diatomic -->
-	<species name="O2_ABC">
+	<species name="O2_V">
 		<stoichiometry>
 			O: 2
 		</stoichiometry>
@@ -2463,6 +2463,77 @@
 				41993.5464
 				42029.6803
 				42042.9885			</vibrational_temperatures>
+			<electronic_levels units="1/cm">
+				<level degeneracy="3" energy="0.0" />
+				<level degeneracy="2" energy="11900.0" />
+				<!-- <level degeneracy="3" energy="0.0" />
+				<level degeneracy="2" energy="7917.5" />
+				<level degeneracy="1" energy="13195.1" />
+				<level degeneracy="1" energy="33055.7" />
+				<level degeneracy="6" energy="34690.9" />
+				<level degeneracy="3" energy="35393.1" />
+				<level degeneracy="3" energy="49792.1" /> -->
+			</electronic_levels>
+			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+				0.0
+			</formation_enthalpy>
+		</thermodynamics>
+	</species>
+
+	<!-- Oxygen diatomic -->
+	<species name="O2_D">
+		<stoichiometry>
+			O: 2
+		</stoichiometry>
+		<thermodynamics type="STS">
+			<linear>
+				yes
+			</linear>
+			<rotational_temperature units="K">
+				2.086
+			</rotational_temperature>
+			<steric_factor>
+				2
+			</steric_factor>
+			<vibrational_temperatures units="1/cm">
+				787.380953594
+				2343.76026609
+				3876.56829159
+				5386.02874609
+				6872.33479359
+				8335.64904609
+				9776.10356359
+				11193.7998541
+				12588.8088736
+				13961.1710261
+				15310.8961636
+				16637.9635861
+				17942.3220416
+				19223.8897261
+				20482.5542836
+				21718.1728061
+				22930.5718336
+				24119.5473541
+				25284.8648036
+				26426.2590661
+				27543.4344736
+				28636.0648061
+				29703.7932916
+				30746.2326061
+				31762.9648736
+				32753.5416661
+				33717.4840036
+				34654.2823541
+				35563.3966336
+				36444.2562061
+				37296.2598836
+				38118.7759261
+				38911.1420416
+				39672.6653861
+				40402.6225636
+				41100.2596261
+				41764.7920736
+			</vibrational_temperatures>
 			<electronic_levels units="1/cm">
 				<level degeneracy="3" energy="0.0" />
 				<level degeneracy="2" energy="11900.0" />
