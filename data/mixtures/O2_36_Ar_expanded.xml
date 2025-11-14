@@ -1,0 +1,9 @@
+<mixture mechanism="O2_Ar_STS_36_xesmf_skipna_expanded" thermo_db="STS">
+    <species>
+        Arbin Obin O2_V(!)
+    </species>
+
+    <!-- <element_compositions default="default">
+        <composition name="default"> Obin:1.0 </composition>
+    </element_compositions> -->
+</mixture>

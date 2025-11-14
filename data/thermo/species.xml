@@ -9,7 +9,7 @@
 			<electronic_levels units="1/cm">
 				<level degeneracy="1" energy="0.0" />
 				<level degeneracy="5" energy="93144.1" />
-				<level degeneracy="3" energy="93751.0" />
+				<!-- <level degeneracy="3" energy="93751.0" />
 				<level degeneracy="1" energy="94554.1" />
 				<level degeneracy="3" energy="95400.2" />
 				<level degeneracy="3" energy="104102.5" />
@@ -37,7 +37,7 @@
 				<level degeneracy="7" energy="114822.5" />
 				<level degeneracy="1" energy="114862.2" />
 				<level degeneracy="3" energy="114975.5" />
-				<level degeneracy="3" energy="115367.4" />
+				<level degeneracy="3" energy="115367.4" /> -->
 			</electronic_levels>
 			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
 				0
@@ -3595,7 +3595,7 @@
 		<thermodynamics type="STS">
 			<electronic_levels units="1/cm">
 				<level degeneracy="5" energy="0.0" />
-				<level degeneracy="4" energy="270.0" />
+				<level degeneracy="3" energy="228.0" />
 				<!-- <level degeneracy="9" energy="0.0" />
 				<level degeneracy="5" energy="15889.0" />
 				<level degeneracy="1" energy="33794.0" />
