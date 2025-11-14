@@ -82,18 +82,18 @@ typedef struct {
     double linearity;   // L / 2
 } RotData;
 
-// typedef struct {
-//     double g;           // degeneracy
-//     double theta;       // characteristic temperature
-// } ElecLevel;
+typedef struct {
+    double g;           // degeneracy
+    double theta;       // characteristic temperature
+} ElecLevel;
 
-// typedef struct {
-//     unsigned int offset;
-//     unsigned int nheavy;
-//     unsigned int nlevels;
-//     int* p_nelec;
-//     ElecLevel* p_levels;
-// } ElectronicData;
+typedef struct {
+    unsigned int offset;
+    unsigned int nheavy;
+    unsigned int nlevels;
+    int* p_nelec;
+    ElecLevel* p_levels;
+} ElectronicData;
 
 
 /**
@@ -110,31 +110,33 @@ class STSDB : public ThermoDB
 {
 public:
 
-    STSDB(int arg) : ThermoDB(298.15, 101325.0)
-//          ,m_has_electron(false),
-//           m_use_tables(false),
-//           m_last_bfacs_T(0.0)
+    STSDB(int arg)
+        : ThermoDB(298.15, 101325.0), m_ns(0), m_na(0), m_nm(0),
+          m_has_electron(false), 
+          m_use_tables(false),
+          m_last_bfacs_T(0.0)
     { }
+
     /**
      * Destructor.
      */
     ~STSDB()
     {
-//         delete [] mp_lnqtmw;
+        delete [] mp_lnqtmw;
         delete [] mp_hform;
         delete [] mp_indices;
         delete [] mp_rot_data;
         delete [] mp_nvib;
         delete [] mp_vib_temps;
 
-//         delete [] m_elec_data.p_nelec;
-//         delete [] m_elec_data.p_levels;
+        delete [] m_elec_data.p_nelec;
+        delete [] m_elec_data.p_levels;
         delete [] mp_part_sst;
-//         delete [] mp_el_bfacs;
+        delete [] mp_el_bfacs;
 
-//         if (m_use_tables) {
-//             delete mp_el_bfac_table;
-//         }
+        if (m_use_tables) {
+            delete mp_el_bfac_table;
+        }
     }
 
     /**
@@ -451,7 +453,7 @@ protected:
             else {
                 for (size_t i = 0; i < rrho.nElectronicLevels(); ++i)
                 {
-                    species.push_back(Species(ground_state, i, 0));
+                    species.push_back(Species(ground_state, i));
                 }
             }
             
@@ -496,12 +498,12 @@ protected:
                                 findTagWithAttribute("thermodynamics", "type", "STS")));
                     to_expand[species()[i].groundStateName()] = p_rrho;
                 }
-                rrhos.push_back(ParticleRRHO(*p_rrho, species()[i].level()));
+                rrhos.push_back(ParticleRRHO(*p_rrho, species()[i].level(), species()[i].vib_level()));
             }
         }
 
 		map<std::string, const ParticleRRHO*>::iterator iter =
-		to_expand.begin();
+		    to_expand.begin();
         while (iter != to_expand.end()) {
             delete iter->second;
             iter++;
@@ -531,6 +533,11 @@ protected:
         copy(atom_indices.begin(), atom_indices.end(), mp_indices);
         copy(molecule_indices.begin(), molecule_indices.end(), mp_indices+m_na);
 
+        // Store the species constants found in the translational entropy term
+        mp_lnqtmw = new double [m_ns];
+        double qt = 2.5*std::log(KB) + 1.5*std::log(TWOPI/(NA*HP*HP));
+        LOOP(mp_lnqtmw[i] = qt + 1.5*std::log(species()[i].molecularWeight()))
+
         mp_hform = new double [m_ns];
         LOOP(mp_hform[i] = rrhos[i].formationEnthalpy() / RU)
 
@@ -555,12 +562,45 @@ protected:
         )
         
         mp_vib_temps = new double [nvib];
-        int ilevel = 0;
+        int itemp = 0;
         LOOP_MOLECULES(
             const ParticleRRHO& rrho = rrhos[j];
-            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++)
-                mp_vib_temps[ilevel] = rrho.vibrationalEnergy(k);
+            for (int k = 0; k < mp_nvib[i]; ++k, itemp++)
+                mp_vib_temps[itemp] = rrho.vibrationalEnergy(k);
         )
+
+        // Finally store the electronic energy levels in a compact form like the
+        // vibrational energy levels
+        m_elec_data.p_nelec = new int [m_na + m_nm];
+        m_elec_data.nlevels = 0;
+        LOOP_HEAVY(
+            m_elec_data.p_nelec[i] = rrhos[j].nElectronicLevels();
+            m_elec_data.nlevels += m_elec_data.p_nelec[i];
+        )
+        
+        m_elec_data.p_levels = new ElecLevel [m_elec_data.nlevels];
+        int ilevel = 0;
+        LOOP_HEAVY(
+            const ParticleRRHO& rrho = rrhos[j];
+            for (int k = 0; k < m_elec_data.p_nelec[i]; ++k, ilevel++) {
+                m_elec_data.p_levels[ilevel].g =
+                    rrho.electronicEnergy(k).first;
+                m_elec_data.p_levels[ilevel].theta = 
+                    rrho.electronicEnergy(k).second;
+            }
+        )        
+        
+        m_elec_data.offset = (m_has_electron ? 1 : 0);
+        m_elec_data.nheavy = m_na + m_nm;
+        
+        if (m_use_tables) {
+            mp_el_bfac_table = new Mutation::Utilities::LookupTable
+                <double, double, ElecBFacsFunctor>(
+                50.0, 50000.0, 3*(m_na+m_nm), m_elec_data, 0.005);
+        }
+        
+        mp_el_bfacs = new double [3*(m_na+m_nm)];
+
 
         mp_part_sst = new double [m_ns];
         hT(Tss, Tss, mp_part_sst, Eq());
@@ -576,11 +616,49 @@ private:
     typedef PlusEquals<double> PlusEq;
     typedef MinusEquals<double> MinusEq;
 
+        class ElecBFacsFunctor
+    {
+    public:
+        typedef ElectronicData DataProvider;
+
+        void operator() (double T, double* p_f, const DataProvider& data) const
+        {
+            (*this)(T, p_f, data, Equals<double>());
+        }
+
+        template <typename OP>
+        void operator () (
+            double T, double* p_f, const DataProvider& data, const OP& op) const
+        {
+            double fac;
+            int ilevel = 0;
+
+            for (unsigned int i = 0; i < data.nheavy; ++i) {
+                p_f[3*i+0] = 0.0;
+                p_f[3*i+1] = 0.0;
+                p_f[3*i+2] = 0.0;
+
+                for (int k = 0; k < data.p_nelec[i]; ++k, ilevel++) {
+                    fac = data.p_levels[ilevel].g *
+                        std::exp(-data.p_levels[ilevel].theta / T);
+                    p_f[3*i+0] += fac;
+                    p_f[3*i+1] += fac * data.p_levels[ilevel].theta;
+                    p_f[3*i+2] += fac * data.p_levels[ilevel].theta *
+                        data.p_levels[ilevel].theta;
+                }
+            }
+        }
+    };
+
+
     int m_ns;
     int m_na;
     int m_nm;
 
 	bool m_has_electron;
+    bool m_use_tables;
+
+    double* mp_lnqtmw;
 
 	double* mp_part_sst;
 	double* mp_hform;
@@ -590,6 +668,11 @@ private:
 
     int*       mp_nvib;
     double*    mp_vib_temps;
+    
+    ElectronicData m_elec_data;
+    Mutation::Utilities::LookupTable<double, double, ElecBFacsFunctor>* mp_el_bfac_table;
+    double* mp_el_bfacs;
+    double m_last_bfacs_T;
 
 	double g0_O2 = 3.0;
 	double g1_O2 = 2.0;
@@ -620,6 +703,19 @@ private:
 	42029.6803, 42042.9885
 	};
 
+        void updateElecBoltzmannFactors(double T)
+    {
+        if (std::abs(1.0 - m_last_bfacs_T / T) < 1.0e-16)
+            return;
+
+        if (m_use_tables)
+            mp_el_bfac_table->lookup(T, mp_el_bfacs);
+        else
+            ElecBFacsFunctor()(T, mp_el_bfacs, m_elec_data);
+
+        m_last_bfacs_T = T;
+    }
+
     /**
      * Computes the translational Cp/Ru for each species.
      */
@@ -648,27 +744,43 @@ private:
         LOOP_MOLECULES(op(cp[j], 0.0));
     }
 
-	    template <typename OP>
+	// template <typename OP>
+    // void cpE(double T, double* const p_cp, const OP& op)
+    // {
+	// 	// double g0_O2 = 3.0;
+	// 	// double g1_O2 = 2.0;
+	// 	// double theta_1_O2 = 11900;
+	// 	// double g0_O = 5.0;
+	// 	// double g1_O = 4.0;
+	// 	// double theta_1_O = 270;
+
+	// 	op(p_cp[0], 0.0);
+
+	// 	for (int i = 0; i < m_ns; i++){
+	// 		if (i == 0){
+	// 			op(p_cp[i],pow((theta_1_O/T),2.0) * (g1_O/g0_O * exp(-theta_1_O / T)) / (pow(1.0+g1_O/g0_O * exp(-theta_1_O / T),2.0))); // Ground state
+	// 		}
+	// 		else {
+	// 			op(p_cp[i],pow((theta_1_O2/T),2.0) * (g1_O2/g0_O2 * exp(-theta_1_O2 / T)) / (pow(1.0+g1_O2/g0_O2 * exp(-theta_1_O2 / T),2.0)));
+	// 		}
+	// 	}
+    // }
+    template <typename OP>
     void cpE(double T, double* const p_cp, const OP& op)
     {
-		// double g0_O2 = 3.0;
-		// double g1_O2 = 2.0;
-		// double theta_1_O2 = 11900;
-		// double g0_O = 5.0;
-		// double g1_O = 4.0;
-		// double theta_1_O = 270;
+        updateElecBoltzmannFactors(T);
+        op(p_cp[0], 0.0);
 
-		op(p_cp[0], 0.0);
-
-		for (int i = 0; i < m_ns; i++){
-			if (i == 0){
-				op(p_cp[i],pow((theta_1_O/T),2.0) * (g1_O/g0_O * exp(-theta_1_O / T)) / (pow(1.0+g1_O/g0_O * exp(-theta_1_O / T),2.0))); // Ground state
-			}
-			else {
-				op(p_cp[i],pow((theta_1_O2/T),2.0) * (g1_O2/g0_O2 * exp(-theta_1_O2 / T)) / (pow(1.0+g1_O2/g0_O2 * exp(-theta_1_O2 / T),2.0)));
-			}
-		}
+        double* facs = mp_el_bfacs;
+        for (unsigned int i = 0; i < m_elec_data.nheavy; ++i, facs += 3) {
+            if (m_elec_data.p_nelec[i] > 1)
+                op(p_cp[i+m_elec_data.offset],
+                    (facs[2]*facs[0]-facs[1]*facs[1])/(T*T*facs[0]*facs[0]));
+            else
+                op(p_cp[i+m_elec_data.offset], 0.0);
+        }
     }
+
 
     /**
      * Computes the translational enthalpy of each species in K.
@@ -705,20 +817,34 @@ private:
      * Computes the electronic enthalpy of each species in K and applies the
      * value to the enthalpy array using the given operation.
      */
-    template <typename OP>
+    // template <typename OP>
+    // void hE(double T, double* const p_h, const OP& op)
+    // {
+
+	// 	op(p_h[0], 0.0);
+
+	// 	for (int i = 0; i < m_ns; i++){
+	// 		if (i == 0){
+	// 			op(p_h[i],((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / T)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / T))); // Ground state
+	// 		}
+	// 		else {
+	// 			op(p_h[i],((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / T)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / T)));
+	// 		}
+	// 	}
+    // }
+        template <typename OP>
     void hE(double T, double* const p_h, const OP& op)
     {
+        updateElecBoltzmannFactors(T);
+        op(p_h[0], 0.0);
 
-		op(p_h[0], 0.0);
-
-		for (int i = 0; i < m_ns; i++){
-			if (i == 0){
-				op(p_h[i],((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / T)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / T))); // Ground state
-			}
-			else {
-				op(p_h[i],((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / T)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / T)));
-			}
-		}
+        double* facs = mp_el_bfacs;
+        for (int i = 0; i < m_elec_data.nheavy; ++i, facs += 3) {
+            if (facs[0] > 0)
+                op(p_h[i+m_elec_data.offset], facs[1]/facs[0]);
+            else
+                op(p_h[i+m_elec_data.offset], 0.0);
+        }
     }
 
 	/**
@@ -733,13 +859,21 @@ private:
     /**
      * Computes the unitless translational entropy of each species.
      */
-    template <typename OP>
+    // template <typename OP>
+    // void sT(double Th, double Te, double P, double* const s, const OP& op) {
+    //     // double fac = 2.5 * (1.0 + std::log(Th)) - std::log(P);
+    //     // if (m_has_electron)
+    //     //     op(s[0], 2.5 * std::log(Te / Th) + fac + mp_lnqtmw[0]);
+    //     for (int i = (m_has_electron ? 1 : 0); i < m_ns; ++i)
+    //         op(s[i], 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5);
+    // }
+        template <typename OP>
     void sT(double Th, double Te, double P, double* const s, const OP& op) {
-        // double fac = 2.5 * (1.0 + std::log(Th)) - std::log(P);
-        // if (m_has_electron)
-        //     op(s[0], 2.5 * std::log(Te / Th) + fac + mp_lnqtmw[0]);
+        double fac = 2.5 * (1.0 + std::log(Th)) - std::log(P);
+        if (m_has_electron)
+            op(s[0], 2.5 * std::log(Te / Th) + fac + mp_lnqtmw[0]);        
         for (int i = (m_has_electron ? 1 : 0); i < m_ns; ++i)
-            op(s[i], 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5);
+            op(s[i], fac + mp_lnqtmw[i]);
     }
 
     /**
@@ -767,17 +901,31 @@ private:
     /**
      * Computes the unitless electronic entropy of each species.
      */
-    template <typename OP>
+    // template <typename OP>
+    // void sE(double T, double* const p_s, const OP& op) {
+	// 	op(p_s[0], 0.0);
+	// 	for (int i = 0; i < m_ns; i++){
+	// 		if (i == 0){
+	// 			op(p_s[i],(log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/T)) + (g1_O/g0_O*theta_1_O/T*exp(-theta_1_O/T))/(1+(g1_O/g0_O)*exp(-theta_1_O/T)))); // Ground state
+	// 		}
+	// 		else {
+	// 			op(p_s[i],(log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/T)) + (g1_O2/g0_O2*theta_1_O2/T*exp(-theta_1_O2/T))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/T))));
+	// 		}
+	// 	}
+    // }
+        template <typename OP>
     void sE(double T, double* const p_s, const OP& op) {
-		op(p_s[0], 0.0);
-		for (int i = 0; i < m_ns; i++){
-			if (i == 0){
-				op(p_s[i],(log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/T)) + (g1_O/g0_O*theta_1_O/T*exp(-theta_1_O/T))/(1+(g1_O/g0_O)*exp(-theta_1_O/T)))); // Ground state
-			}
-			else {
-				op(p_s[i],(log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/T)) + (g1_O2/g0_O2*theta_1_O2/T*exp(-theta_1_O2/T))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/T))));
-			}
-		}
+        updateElecBoltzmannFactors(T);
+        op(p_s[0], 0.0);
+
+        double* facs = mp_el_bfacs;
+        for (int i = 0; i < m_elec_data.nheavy; ++i, facs += 3) {
+            if (facs[0] > 0)
+                op(p_s[i+m_elec_data.offset],
+                    (facs[1]/(facs[0]*T) + std::log(facs[0])));
+            else
+                op(p_s[i+m_elec_data.offset], 0.0);
+        }
     }
 }; // class STSDB
 #undef LOOP
