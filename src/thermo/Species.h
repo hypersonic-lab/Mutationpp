@@ -131,7 +131,7 @@ public:
     /// Default constructor.
     Species()
         : m_name(""), m_ground_state_name(""), m_mw(0.0), m_charge(0),
-          m_phase(GAS), m_type(ATOM), m_level(0)
+          m_phase(GAS), m_type(ATOM), m_e_level(0), m_vib_level(0)
     { }
     
     /**
@@ -270,7 +270,10 @@ public:
      * Returns the excited state level if this is an excited state species.
      */
     std::size_t level() const {
-        return m_level;
+        return m_e_level;
+    }
+    std::size_t vib_level() const {
+        return m_vib_level;
     }
     
     friend void swap(Species&, Species&);
@@ -291,7 +294,8 @@ private:
     int          m_charge;
     PhaseType    m_phase;
     ParticleType m_type;
-    std::size_t  m_level;
+    std::size_t  m_e_level;
+    std::size_t  m_vib_level;
     
     StoichList m_stoichiometry;
     

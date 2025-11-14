@@ -67,6 +67,7 @@ public:
      * specified.
      */
     ParticleRRHO(const ParticleRRHO& p_rrho, const size_t level);
+    ParticleRRHO(const ParticleRRHO& p_rrho, const size_t e_level, const size_t v_level);
     
     /**
      * Returns the formation enthalpy in J/mol.
