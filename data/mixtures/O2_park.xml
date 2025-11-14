@@ -1,5 +1,5 @@
 <!-- Neutral 5 species air mixture -->
-<mixture mechanism="O2">
+<mixture mechanism="O2_O">
 
     <species>
         O O2
