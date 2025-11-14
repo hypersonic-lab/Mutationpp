@@ -1,6 +1,6 @@
 <mixture mechanism="STS_46_RegGrid_expanded" thermo_db="STS">
     <species>
-        Obin O2_ABC(!)
+        Obin O2_V(!)
     </species>
 
     <!-- <element_compositions default="default">

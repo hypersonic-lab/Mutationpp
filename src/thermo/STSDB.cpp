@@ -808,7 +808,7 @@ private:
         if (T < 10.0) {
             LOOP_MOLECULES(op(h[j], 0.0));
         } else {
-            LOOP_MOLECULES(op(h[j], m_energy[i] * cm2J / (KB)))
+            LOOP_MOLECULES(op(h[j], mp_vib_temps[i] * cm2J / (KB)))
             // LOOP_MOLECULES(op(h[j], m_energy[i] * cm2J / (KB)))
         }
     }
