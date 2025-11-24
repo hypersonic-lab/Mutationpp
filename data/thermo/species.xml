@@ -58,7 +58,7 @@
 				<level degeneracy="1" energy="94554.1" />
 				<level degeneracy="3" energy="95400.2" />
 				<level degeneracy="3" energy="104102.5" />
-				<level degeneracy="7" energy="105463.2" />
+				<level degeneracy="7" energy="105463.2" "/">
 				<level degeneracy="5" energy="105617.7" />
 				<level degeneracy="3" energy="106087.7" />
 				<level degeneracy="5" energy="106238.0" />
@@ -2465,7 +2465,7 @@
 				42042.9885			</vibrational_temperatures>
 			<electronic_levels units="1/cm">
 				<level degeneracy="3" energy="0.0" />
-				<level degeneracy="2" energy="11900.0" />
+				<level degeneracy="2" energy="8270.9" />
 				<!-- <level degeneracy="3" energy="0.0" />
 				<level degeneracy="2" energy="7917.5" />
 				<level degeneracy="1" energy="13195.1" />
@@ -2536,7 +2536,7 @@
 			</vibrational_temperatures>
 			<electronic_levels units="1/cm">
 				<level degeneracy="3" energy="0.0" />
-				<level degeneracy="2" energy="11900.0" />
+				<level degeneracy="2" energy="8270.9" />
 				<!-- <level degeneracy="3" energy="0.0" />
 				<level degeneracy="2" energy="7917.5" />
 				<level degeneracy="1" energy="13195.1" />
@@ -3595,7 +3595,7 @@
 		<thermodynamics type="STS">
 			<electronic_levels units="1/cm">
 				<level degeneracy="5" energy="0.0" />
-				<level degeneracy="3" energy="228.0" />
+				<level degeneracy="3" energy="187.7" />
 				<!-- <level degeneracy="9" energy="0.0" />
 				<level degeneracy="5" energy="15889.0" />
 				<level degeneracy="1" energy="33794.0" />
