@@ -2,7 +2,7 @@
 <mixture mechanism="park_O2Ar">
 
     <species>
-        O O2 Ar
+        Ar O O2
     </species>
 
     <element_compositions default="air">
