@@ -1,6 +1,6 @@
 <!-- Oxygen 36 State State-to-State from Daniil, mapped with XESMF -->
 
-<mechanism name="O2_Ar_STS_36_xesmf_skipna_expanded_steric_O2-Ar_BB">
+<mechanism name="O2_Ar_STS_36_xesmf_skipna_expanded_steric_O2-O_BF">
     
  
 	<arrhenius_units A="mol,cm,s,K" E="J,mol,K" />
@@ -9143,7 +9143,7 @@
 		<arrhenius A="  6.365571e+10" n="  2.737713e-01" T="  1.253660e+02" />
 	</reaction>
 
-	<!-- 01-->
+		<!-- 01-->
 	<reaction formula="O2_D(0)+Arbin=Obin+Obin+Arbin">
 		<arrhenius A="  6.672825e+17" n="  -1.040949e+00" T="  8.228356e+04" />
 	</reaction>
@@ -9367,4000 +9367,3998 @@
 
 	<!-- 38-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(1)+Arbin">
-		<arrhenius A="  4.153654e+07" n="  1.232041e+00" T="  1.319170e+04" />
+		<arrhenius A="  1.661462e+08" n="  1.232041e+00" T="  1.319170e+04" />
 	</reaction>
 
 
 	<!-- 39-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(2)+Arbin">
-		<arrhenius A="  5.581903e+16" n="  -8.985290e-01" T="  4.264878e+04" />
+		<arrhenius A="  2.232761e+17" n="  -8.985290e-01" T="  4.264878e+04" />
 	</reaction>
 
 
 	<!-- 40-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(3)+Arbin">
-		<arrhenius A="  3.281521e+20" n="  -1.794866e+00" T="  5.584715e+04" />
+		<arrhenius A="  1.312608e+21" n="  -1.794866e+00" T="  5.584715e+04" />
 	</reaction>
 
 
 	<!-- 41-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(4)+Arbin">
-		<arrhenius A="  3.283229e+21" n="  -2.054778e+00" T="  6.251625e+04" />
+		<arrhenius A="  1.313292e+22" n="  -2.054778e+00" T="  6.251625e+04" />
 	</reaction>
 
 
 	<!-- 42-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(5)+Arbin">
-		<arrhenius A="  3.033852e+21" n="  -2.078119e+00" T="  6.614976e+04" />
+		<arrhenius A="  1.213541e+22" n="  -2.078119e+00" T="  6.614976e+04" />
 	</reaction>
 
 
 	<!-- 43-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(6)+Arbin">
-		<arrhenius A="  1.373131e+21" n="  -2.027476e+00" T="  6.849975e+04" />
+		<arrhenius A="  5.492526e+21" n="  -2.027476e+00" T="  6.849975e+04" />
 	</reaction>
 
 
 	<!-- 44-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(7)+Arbin">
-		<arrhenius A="  7.611183e+20" n="  -1.994964e+00" T="  7.037144e+04" />
+		<arrhenius A="  3.044473e+21" n="  -1.994964e+00" T="  7.037144e+04" />
 	</reaction>
 
 
 	<!-- 45-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(8)+Arbin">
-		<arrhenius A="  3.080154e+20" n="  -1.929527e+00" T="  7.174809e+04" />
+		<arrhenius A="  1.232061e+21" n="  -1.929527e+00" T="  7.174809e+04" />
 	</reaction>
 
 
 	<!-- 46-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(9)+Arbin">
-		<arrhenius A="  2.076171e+20" n="  -1.914267e+00" T="  7.316234e+04" />
+		<arrhenius A="  8.304684e+20" n="  -1.914267e+00" T="  7.316234e+04" />
 	</reaction>
 
 
 	<!-- 47-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(10)+Arbin">
-		<arrhenius A="  1.028820e+20" n="  -1.867928e+00" T="  7.415786e+04" />
+		<arrhenius A="  4.115281e+20" n="  -1.867928e+00" T="  7.415786e+04" />
 	</reaction>
 
 
 	<!-- 48-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(11)+Arbin">
-		<arrhenius A="  6.548628e+19" n="  -1.845171e+00" T="  7.522978e+04" />
+		<arrhenius A="  2.619451e+20" n="  -1.845171e+00" T="  7.522978e+04" />
 	</reaction>
 
 
 	<!-- 49-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(12)+Arbin">
-		<arrhenius A="  5.255014e+19" n="  -1.846257e+00" T="  7.630150e+04" />
+		<arrhenius A="  2.102005e+20" n="  -1.846257e+00" T="  7.630150e+04" />
 	</reaction>
 
 
 	<!-- 50-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(13)+Arbin">
-		<arrhenius A="  3.577704e+19" n="  -1.829440e+00" T="  7.721517e+04" />
+		<arrhenius A="  1.431081e+20" n="  -1.829440e+00" T="  7.721517e+04" />
 	</reaction>
 
 
 	<!-- 51-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(14)+Arbin">
-		<arrhenius A="  3.854161e+19" n="  -1.857305e+00" T="  7.826523e+04" />
+		<arrhenius A="  1.541664e+20" n="  -1.857305e+00" T="  7.826523e+04" />
 	</reaction>
 
 
 	<!-- 52-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(15)+Arbin">
-		<arrhenius A="  2.565126e+19" n="  -1.838304e+00" T="  7.906276e+04" />
+		<arrhenius A="  1.026050e+20" n="  -1.838304e+00" T="  7.906276e+04" />
 	</reaction>
 
 
 	<!-- 53-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  2.674293e+19" n="  -1.860841e+00" T="  8.006972e+04" />
+		<arrhenius A="  1.069717e+20" n="  -1.860841e+00" T="  8.006972e+04" />
 	</reaction>
 
 
 	<!-- 54-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  2.741205e+19" n="  -1.882748e+00" T="  8.098560e+04" />
+		<arrhenius A="  1.096482e+20" n="  -1.882748e+00" T="  8.098560e+04" />
 	</reaction>
 
 
 	<!-- 55-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  2.419276e+19" n="  -1.889491e+00" T="  8.185167e+04" />
+		<arrhenius A="  9.677105e+19" n="  -1.889491e+00" T="  8.185167e+04" />
 	</reaction>
 
 
 	<!-- 56-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  3.291641e+19" n="  -1.938732e+00" T="  8.294027e+04" />
+		<arrhenius A="  1.316656e+20" n="  -1.938732e+00" T="  8.294027e+04" />
 	</reaction>
 
 
 	<!-- 57-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  2.167915e+19" n="  -1.916635e+00" T="  8.360140e+04" />
+		<arrhenius A="  8.671661e+19" n="  -1.916635e+00" T="  8.360140e+04" />
 	</reaction>
 
 
 	<!-- 58-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  3.731045e+19" n="  -1.991382e+00" T="  8.474151e+04" />
+		<arrhenius A="  1.492418e+20" n="  -1.991382e+00" T="  8.474151e+04" />
 	</reaction>
 
 
 	<!-- 59-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  2.784940e+19" n="  -1.980237e+00" T="  8.541904e+04" />
+		<arrhenius A="  1.113976e+20" n="  -1.980237e+00" T="  8.541904e+04" />
 	</reaction>
 
 
 	<!-- 60-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  8.298140e+19" n="  -2.111789e+00" T="  8.700337e+04" />
+		<arrhenius A="  3.319256e+20" n="  -2.111789e+00" T="  8.700337e+04" />
 	</reaction>
 
 
 	<!-- 61-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  7.260008e+19" n="  -2.120136e+00" T="  8.795851e+04" />
+		<arrhenius A="  2.904003e+20" n="  -2.120136e+00" T="  8.795851e+04" />
 	</reaction>
 
 
 	<!-- 62-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  2.174002e+19" n="  -2.023418e+00" T="  8.798067e+04" />
+		<arrhenius A="  8.696009e+19" n="  -2.023418e+00" T="  8.798067e+04" />
 	</reaction>
 
 
 	<!-- 63-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  2.459248e+19" n="  -2.060652e+00" T="  8.896355e+04" />
+		<arrhenius A="  9.836993e+19" n="  -2.060652e+00" T="  8.896355e+04" />
 	</reaction>
 
 
 	<!-- 64-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  1.487247e+20" n="  -2.268409e+00" T="  9.135049e+04" />
+		<arrhenius A="  5.948987e+20" n="  -2.268409e+00" T="  9.135049e+04" />
 	</reaction>
 
 
 	<!-- 65-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  1.410822e+21" n="  -2.523343e+00" T="  9.395687e+04" />
+		<arrhenius A="  5.643288e+21" n="  -2.523343e+00" T="  9.395687e+04" />
 	</reaction>
 
 
 	<!-- 66-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  5.327388e+58" n="  -1.115187e+01" T="  1.568677e+05" />
+		<arrhenius A="  2.130955e+59" n="  -1.115187e+01" T="  1.568677e+05" />
 	</reaction>
 
 
 	<!-- 67-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  5.600930e+56" n="  -1.074624e+01" T="  1.548850e+05" />
+		<arrhenius A="  2.240372e+57" n="  -1.074624e+01" T="  1.548850e+05" />
 	</reaction>
 
 
 	<!-- 68-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  2.153976e+55" n="  -1.047726e+01" T="  1.534526e+05" />
+		<arrhenius A="  8.615902e+55" n="  -1.047726e+01" T="  1.534526e+05" />
 	</reaction>
 
 
 	<!-- 69-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  9.345493e+52" n="  -9.985427e+00" T="  1.519311e+05" />
+		<arrhenius A="  3.738197e+53" n="  -9.985427e+00" T="  1.519311e+05" />
 	</reaction>
 
 
 	<!-- 70-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  6.431261e+50" n="  -9.558754e+00" T="  1.509454e+05" />
+		<arrhenius A="  2.572504e+51" n="  -9.558754e+00" T="  1.509454e+05" />
 	</reaction>
 
 
 	<!-- 71-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  1.366501e+63" n="  -1.229467e+01" T="  1.907123e+05" />
+		<arrhenius A="  5.466003e+63" n="  -1.229467e+01" T="  1.907123e+05" />
 	</reaction>
 
 
 	<!-- 72-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  8.535155e+58" n="  -1.148125e+01" T="  1.848252e+05" />
+		<arrhenius A="  3.414062e+59" n="  -1.148125e+01" T="  1.848252e+05" />
 	</reaction>
 
 
 	<!-- 73-->
 	<reaction formula="O2_D(0)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  5.295012e+49" n="  -9.679031e+00" T="  1.722771e+05" />
+		<arrhenius A="  2.118005e+50" n="  -9.679031e+00" T="  1.722771e+05" />
 	</reaction>
 
 
 	<!-- 74-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(2)+Arbin">
-		<arrhenius A="  4.285032e+08" n="  1.000859e+00" T="  1.145527e+04" />
+		<arrhenius A="  1.714013e+09" n="  1.000859e+00" T="  1.145527e+04" />
 	</reaction>
 
 
 	<!-- 75-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(3)+Arbin">
-		<arrhenius A="  2.240374e+15" n="  -5.869200e-01" T="  3.504630e+04" />
+		<arrhenius A="  8.961498e+15" n="  -5.869200e-01" T="  3.504630e+04" />
 	</reaction>
 
 
 	<!-- 76-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(4)+Arbin">
-		<arrhenius A="  1.667776e+19" n="  -1.508676e+00" T="  4.798507e+04" />
+		<arrhenius A="  6.671103e+19" n="  -1.508676e+00" T="  4.798507e+04" />
 	</reaction>
 
 
 	<!-- 77-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(5)+Arbin">
-		<arrhenius A="  2.034236e+21" n="  -2.012776e+00" T="  5.640396e+04" />
+		<arrhenius A="  8.136945e+21" n="  -2.012776e+00" T="  5.640396e+04" />
 	</reaction>
 
 
 	<!-- 78-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(6)+Arbin">
-		<arrhenius A="  7.710131e+21" n="  -2.171076e+00" T="  6.129204e+04" />
+		<arrhenius A="  3.084052e+22" n="  -2.171076e+00" T="  6.129204e+04" />
 	</reaction>
 
 
 	<!-- 79-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(7)+Arbin">
-		<arrhenius A="  5.192059e+21" n="  -2.158507e+00" T="  6.422155e+04" />
+		<arrhenius A="  2.076824e+22" n="  -2.158507e+00" T="  6.422155e+04" />
 	</reaction>
 
 
 	<!-- 80-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(8)+Arbin">
-		<arrhenius A="  2.433462e+21" n="  -2.108591e+00" T="  6.621230e+04" />
+		<arrhenius A="  9.733847e+21" n="  -2.108591e+00" T="  6.621230e+04" />
 	</reaction>
 
 
 	<!-- 81-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(9)+Arbin">
-		<arrhenius A="  9.483883e+20" n="  -2.039565e+00" T="  6.770952e+04" />
+		<arrhenius A="  3.793553e+21" n="  -2.039565e+00" T="  6.770952e+04" />
 	</reaction>
 
 
 	<!-- 82-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(10)+Arbin">
-		<arrhenius A="  4.462890e+20" n="  -1.988331e+00" T="  6.895814e+04" />
+		<arrhenius A="  1.785156e+21" n="  -1.988331e+00" T="  6.895814e+04" />
 	</reaction>
 
 
 	<!-- 83-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(11)+Arbin">
-		<arrhenius A="  1.970091e+20" n="  -1.929609e+00" T="  7.000365e+04" />
+		<arrhenius A="  7.880363e+20" n="  -1.929609e+00" T="  7.000365e+04" />
 	</reaction>
 
 
 	<!-- 84-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(12)+Arbin">
-		<arrhenius A="  1.091785e+20" n="  -1.893700e+00" T="  7.096020e+04" />
+		<arrhenius A="  4.367139e+20" n="  -1.893700e+00" T="  7.096020e+04" />
 	</reaction>
 
 
 	<!-- 85-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(13)+Arbin">
-		<arrhenius A="  6.490848e+19" n="  -1.864995e+00" T="  7.184405e+04" />
+		<arrhenius A="  2.596339e+20" n="  -1.864995e+00" T="  7.184405e+04" />
 	</reaction>
 
 
 	<!-- 86-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(14)+Arbin">
-		<arrhenius A="  3.968066e+19" n="  -1.837514e+00" T="  7.268471e+04" />
+		<arrhenius A="  1.587226e+20" n="  -1.837514e+00" T="  7.268471e+04" />
 	</reaction>
 
 
 	<!-- 87-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(15)+Arbin">
-		<arrhenius A="  3.023470e+19" n="  -1.833223e+00" T="  7.349627e+04" />
+		<arrhenius A="  1.209388e+20" n="  -1.833223e+00" T="  7.349627e+04" />
 	</reaction>
 
 
 	<!-- 88-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  2.081403e+19" n="  -1.817001e+00" T="  7.428714e+04" />
+		<arrhenius A="  8.325613e+19" n="  -1.817001e+00" T="  7.428714e+04" />
 	</reaction>
 
 
 	<!-- 89-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  1.719327e+19" n="  -1.818524e+00" T="  7.507763e+04" />
+		<arrhenius A="  6.877309e+19" n="  -1.818524e+00" T="  7.507763e+04" />
 	</reaction>
 
 
 	<!-- 90-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  1.436414e+19" n="  -1.822822e+00" T="  7.572244e+04" />
+		<arrhenius A="  5.745656e+19" n="  -1.822822e+00" T="  7.572244e+04" />
 	</reaction>
 
 
 	<!-- 91-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  1.374280e+19" n="  -1.838147e+00" T="  7.657797e+04" />
+		<arrhenius A="  5.497121e+19" n="  -1.838147e+00" T="  7.657797e+04" />
 	</reaction>
 
 
 	<!-- 92-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  1.219024e+19" n="  -1.844185e+00" T="  7.728257e+04" />
+		<arrhenius A="  4.876096e+19" n="  -1.844185e+00" T="  7.728257e+04" />
 	</reaction>
 
 
 	<!-- 93-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  9.835736e+18" n="  -1.845424e+00" T="  7.787087e+04" />
+		<arrhenius A="  3.934294e+19" n="  -1.845424e+00" T="  7.787087e+04" />
 	</reaction>
 
 
 	<!-- 94-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  7.764371e+18" n="  -1.841287e+00" T="  7.856641e+04" />
+		<arrhenius A="  3.105748e+19" n="  -1.841287e+00" T="  7.856641e+04" />
 	</reaction>
 
 
 	<!-- 95-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  1.017754e+19" n="  -1.889472e+00" T="  7.954301e+04" />
+		<arrhenius A="  4.071015e+19" n="  -1.889472e+00" T="  7.954301e+04" />
 	</reaction>
 
 
 	<!-- 96-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  1.159142e+19" n="  -1.922190e+00" T="  8.053278e+04" />
+		<arrhenius A="  4.636569e+19" n="  -1.922190e+00" T="  8.053278e+04" />
 	</reaction>
 
 
 	<!-- 97-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  2.746143e+19" n="  -2.035576e+00" T="  8.183440e+04" />
+		<arrhenius A="  1.098457e+20" n="  -2.035576e+00" T="  8.183440e+04" />
 	</reaction>
 
 
 	<!-- 98-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  1.880738e+19" n="  -2.020974e+00" T="  8.241548e+04" />
+		<arrhenius A="  7.522950e+19" n="  -2.020974e+00" T="  8.241548e+04" />
 	</reaction>
 
 
 	<!-- 99-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  1.615575e+19" n="  -2.032343e+00" T="  8.317456e+04" />
+		<arrhenius A="  6.462301e+19" n="  -2.032343e+00" T="  8.317456e+04" />
 	</reaction>
 
 
 	<!-- 100-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  3.963758e+19" n="  -2.150369e+00" T="  8.482990e+04" />
+		<arrhenius A="  1.585503e+20" n="  -2.150369e+00" T="  8.482990e+04" />
 	</reaction>
 
 
 	<!-- 101-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  2.626846e+19" n="  -2.148972e+00" T="  8.566595e+04" />
+		<arrhenius A="  1.050739e+20" n="  -2.148972e+00" T="  8.566595e+04" />
 	</reaction>
 
 
 	<!-- 102-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  3.104277e+20" n="  -2.434132e+00" T="  8.856806e+04" />
+		<arrhenius A="  1.241711e+21" n="  -2.434132e+00" T="  8.856806e+04" />
 	</reaction>
 
 
 	<!-- 103-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  3.892722e+18" n="  -2.053494e+00" T="  8.666805e+04" />
+		<arrhenius A="  1.557089e+19" n="  -2.053494e+00" T="  8.666805e+04" />
 	</reaction>
 
 
 	<!-- 104-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  1.099942e+59" n="  -1.136103e+01" T="  1.550408e+05" />
+		<arrhenius A="  4.399770e+59" n="  -1.136103e+01" T="  1.550408e+05" />
 	</reaction>
 
 
 	<!-- 105-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  2.647743e+57" n="  -1.105878e+01" T="  1.535384e+05" />
+		<arrhenius A="  1.059097e+58" n="  -1.105878e+01" T="  1.535384e+05" />
 	</reaction>
 
 
 	<!-- 106-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  8.286858e+53" n="  -1.034961e+01" T="  1.505003e+05" />
+		<arrhenius A="  3.314743e+54" n="  -1.034961e+01" T="  1.505003e+05" />
 	</reaction>
 
 
 	<!-- 107-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  3.473823e+67" n="  -1.340558e+01" T="  1.936125e+05" />
+		<arrhenius A="  1.389529e+68" n="  -1.340558e+01" T="  1.936125e+05" />
 	</reaction>
 
 
 	<!-- 108-->
 	<reaction formula="O2_D(1)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  1.797306e+48" n="  -9.520715e+00" T="  1.403477e+05" />
+		<arrhenius A="  7.189223e+48" n="  -9.520715e+00" T="  1.403477e+05" />
 	</reaction>
 
 
 	<!-- 109-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(3)+Arbin">
-		<arrhenius A="  8.937242e+08" n="  9.282327e-01" T="  1.000134e+04" />
+		<arrhenius A="  3.574897e+09" n="  9.282327e-01" T="  1.000134e+04" />
 	</reaction>
 
 
 	<!-- 110-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(4)+Arbin">
-		<arrhenius A="  5.434838e+14" n="  -4.475767e-01" T="  3.095631e+04" />
+		<arrhenius A="  2.173935e+15" n="  -4.475767e-01" T="  3.095631e+04" />
 	</reaction>
 
 
 	<!-- 111-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(5)+Arbin">
-		<arrhenius A="  3.896143e+17" n="  -1.137884e+00" T="  4.174316e+04" />
+		<arrhenius A="  1.558457e+18" n="  -1.137884e+00" T="  4.174316e+04" />
 	</reaction>
 
 
 	<!-- 112-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(6)+Arbin">
-		<arrhenius A="  1.728017e+20" n="  -1.770531e+00" T="  5.084993e+04" />
+		<arrhenius A="  6.912069e+20" n="  -1.770531e+00" T="  5.084993e+04" />
 	</reaction>
 
 
 	<!-- 113-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(7)+Arbin">
-		<arrhenius A="  2.682605e+21" n="  -2.065996e+00" T="  5.667940e+04" />
+		<arrhenius A="  1.073042e+22" n="  -2.065996e+00" T="  5.667940e+04" />
 	</reaction>
 
 
 	<!-- 114-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(8)+Arbin">
-		<arrhenius A="  5.452886e+21" n="  -2.159343e+00" T="  6.039986e+04" />
+		<arrhenius A="  2.181155e+22" n="  -2.159343e+00" T="  6.039986e+04" />
 	</reaction>
 
 
 	<!-- 115-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(9)+Arbin">
-		<arrhenius A="  3.083339e+21" n="  -2.126719e+00" T="  6.274453e+04" />
+		<arrhenius A="  1.233336e+22" n="  -2.126719e+00" T="  6.274453e+04" />
 	</reaction>
 
 
 	<!-- 116-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(10)+Arbin">
-		<arrhenius A="  1.325070e+21" n="  -2.066163e+00" T="  6.438084e+04" />
+		<arrhenius A="  5.300279e+21" n="  -2.066163e+00" T="  6.438084e+04" />
 	</reaction>
 
 
 	<!-- 117-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(11)+Arbin">
-		<arrhenius A="  4.910543e+20" n="  -1.990342e+00" T="  6.558884e+04" />
+		<arrhenius A="  1.964217e+21" n="  -1.990342e+00" T="  6.558884e+04" />
 	</reaction>
 
 
 	<!-- 118-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(12)+Arbin">
-		<arrhenius A="  2.402001e+20" n="  -1.942345e+00" T="  6.665836e+04" />
+		<arrhenius A="  9.608004e+20" n="  -1.942345e+00" T="  6.665836e+04" />
 	</reaction>
 
 
 	<!-- 119-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(13)+Arbin">
-		<arrhenius A="  1.171358e+20" n="  -1.893156e+00" T="  6.758936e+04" />
+		<arrhenius A="  4.685432e+20" n="  -1.893156e+00" T="  6.758936e+04" />
 	</reaction>
 
 
 	<!-- 120-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(14)+Arbin">
-		<arrhenius A="  5.260545e+19" n="  -1.835341e+00" T="  6.830051e+04" />
+		<arrhenius A="  2.104218e+20" n="  -1.835341e+00" T="  6.830051e+04" />
 	</reaction>
 
 
 	<!-- 121-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(15)+Arbin">
-		<arrhenius A="  3.336619e+19" n="  -1.813700e+00" T="  6.911835e+04" />
+		<arrhenius A="  1.334648e+20" n="  -1.813700e+00" T="  6.911835e+04" />
 	</reaction>
 
 
 	<!-- 122-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  1.734864e+19" n="  -1.769714e+00" T="  6.973075e+04" />
+		<arrhenius A="  6.939455e+19" n="  -1.769714e+00" T="  6.973075e+04" />
 	</reaction>
 
 
 	<!-- 123-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  1.337472e+19" n="  -1.765318e+00" T="  7.040721e+04" />
+		<arrhenius A="  5.349889e+19" n="  -1.765318e+00" T="  7.040721e+04" />
 	</reaction>
 
 
 	<!-- 124-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  9.448644e+18" n="  -1.753283e+00" T="  7.113753e+04" />
+		<arrhenius A="  3.779458e+19" n="  -1.753283e+00" T="  7.113753e+04" />
 	</reaction>
 
 
 	<!-- 125-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  6.985382e+18" n="  -1.744527e+00" T="  7.174934e+04" />
+		<arrhenius A="  2.794153e+19" n="  -1.744527e+00" T="  7.174934e+04" />
 	</reaction>
 
 
 	<!-- 126-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  6.335243e+18" n="  -1.754204e+00" T="  7.249558e+04" />
+		<arrhenius A="  2.534097e+19" n="  -1.754204e+00" T="  7.249558e+04" />
 	</reaction>
 
 
 	<!-- 127-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  4.282540e+18" n="  -1.735577e+00" T="  7.297560e+04" />
+		<arrhenius A="  1.713016e+19" n="  -1.735577e+00" T="  7.297560e+04" />
 	</reaction>
 
 
 	<!-- 128-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  3.406752e+18" n="  -1.733024e+00" T="  7.352432e+04" />
+		<arrhenius A="  1.362701e+19" n="  -1.733024e+00" T="  7.352432e+04" />
 	</reaction>
 
 
 	<!-- 129-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  4.046010e+18" n="  -1.771204e+00" T="  7.447873e+04" />
+		<arrhenius A="  1.618404e+19" n="  -1.771204e+00" T="  7.447873e+04" />
 	</reaction>
 
 
 	<!-- 130-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  2.922794e+18" n="  -1.761685e+00" T="  7.501281e+04" />
+		<arrhenius A="  1.169117e+19" n="  -1.761685e+00" T="  7.501281e+04" />
 	</reaction>
 
 
 	<!-- 131-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  2.603262e+18" n="  -1.772657e+00" T="  7.553896e+04" />
+		<arrhenius A="  1.041305e+19" n="  -1.772657e+00" T="  7.553896e+04" />
 	</reaction>
 
 
 	<!-- 132-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  1.450729e+18" n="  -1.737692e+00" T="  7.598185e+04" />
+		<arrhenius A="  5.802917e+18" n="  -1.737692e+00" T="  7.598185e+04" />
 	</reaction>
 
 
 	<!-- 133-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  5.003428e+18" n="  -1.893508e+00" T="  7.751073e+04" />
+		<arrhenius A="  2.001371e+19" n="  -1.893508e+00" T="  7.751073e+04" />
 	</reaction>
 
 
 	<!-- 134-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  8.326504e+18" n="  -1.973582e+00" T="  7.848772e+04" />
+		<arrhenius A="  3.330602e+19" n="  -1.973582e+00" T="  7.848772e+04" />
 	</reaction>
 
 
 	<!-- 135-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  4.710539e+18" n="  -1.953113e+00" T="  7.928233e+04" />
+		<arrhenius A="  1.884216e+19" n="  -1.953113e+00" T="  7.928233e+04" />
 	</reaction>
 
 
 	<!-- 136-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  2.080265e+18" n="  -1.912164e+00" T="  7.974904e+04" />
+		<arrhenius A="  8.321058e+18" n="  -1.912164e+00" T="  7.974904e+04" />
 	</reaction>
 
 
 	<!-- 137-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  5.535905e+17" n="  -1.832099e+00" T="  7.982546e+04" />
+		<arrhenius A="  2.214362e+18" n="  -1.832099e+00" T="  7.982546e+04" />
 	</reaction>
 
 
 	<!-- 138-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  1.737136e+18" n="  -2.003930e+00" T="  8.206389e+04" />
+		<arrhenius A="  6.948546e+18" n="  -2.003930e+00" T="  8.206389e+04" />
 	</reaction>
 
 
 	<!-- 139-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  6.140809e+17" n="  -1.966573e+00" T="  8.299671e+04" />
+		<arrhenius A="  2.456324e+18" n="  -1.966573e+00" T="  8.299671e+04" />
 	</reaction>
 
 
 	<!-- 140-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  3.959188e+59" n="  -1.162053e+01" T="  1.533885e+05" />
+		<arrhenius A="  1.583675e+60" n="  -1.162053e+01" T="  1.533885e+05" />
 	</reaction>
 
 
 	<!-- 141-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  1.177462e+55" n="  -1.071032e+01" T="  1.497094e+05" />
+		<arrhenius A="  4.709848e+55" n="  -1.071032e+01" T="  1.497094e+05" />
 	</reaction>
 
 
 	<!-- 142-->
 	<reaction formula="O2_D(2)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  4.798986e+63" n="  -1.284218e+01" T="  1.859408e+05" />
+		<arrhenius A="  1.919594e+64" n="  -1.284218e+01" T="  1.859408e+05" />
 	</reaction>
 
 
 	<!-- 143-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(4)+Arbin">
-		<arrhenius A="  1.242309e+09" n="  8.951244e-01" T="  8.771060e+03" />
+		<arrhenius A="  4.969235e+09" n="  8.951244e-01" T="  8.771060e+03" />
 	</reaction>
 
 
 	<!-- 144-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(5)+Arbin">
-		<arrhenius A="  2.697795e+14" n="  -3.788170e-01" T="  2.821916e+04" />
+		<arrhenius A="  1.079118e+15" n="  -3.788170e-01" T="  2.821916e+04" />
 	</reaction>
 
 
 	<!-- 145-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(6)+Arbin">
-		<arrhenius A="  2.614136e+16" n="  -8.708095e-01" T="  3.721054e+04" />
+		<arrhenius A="  1.045654e+17" n="  -8.708095e-01" T="  3.721054e+04" />
 	</reaction>
 
 
 	<!-- 146-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(7)+Arbin">
-		<arrhenius A="  8.011747e+18" n="  -1.466512e+00" T="  4.577682e+04" />
+		<arrhenius A="  3.204699e+19" n="  -1.466512e+00" T="  4.577682e+04" />
 	</reaction>
 
 
 	<!-- 147-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(8)+Arbin">
-		<arrhenius A="  4.432926e+20" n="  -1.887972e+00" T="  5.234369e+04" />
+		<arrhenius A="  1.773170e+21" n="  -1.887972e+00" T="  5.234369e+04" />
 	</reaction>
 
 
 	<!-- 148-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(9)+Arbin">
-		<arrhenius A="  1.735881e+21" n="  -2.044659e+00" T="  5.652412e+04" />
+		<arrhenius A="  6.943524e+21" n="  -2.044659e+00" T="  5.652412e+04" />
 	</reaction>
 
 
 	<!-- 149-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(10)+Arbin">
-		<arrhenius A="  2.597155e+21" n="  -2.105991e+00" T="  5.947173e+04" />
+		<arrhenius A="  1.038862e+22" n="  -2.105991e+00" T="  5.947173e+04" />
 	</reaction>
 
 
 	<!-- 150-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(11)+Arbin">
-		<arrhenius A="  1.162989e+21" n="  -2.047702e+00" T="  6.125420e+04" />
+		<arrhenius A="  4.651958e+21" n="  -2.047702e+00" T="  6.125420e+04" />
 	</reaction>
 
 
 	<!-- 151-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(12)+Arbin">
-		<arrhenius A="  4.445374e+20" n="  -1.975049e+00" T="  6.248993e+04" />
+		<arrhenius A="  1.778150e+21" n="  -1.975049e+00" T="  6.248993e+04" />
 	</reaction>
 
 
 	<!-- 152-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(13)+Arbin">
-		<arrhenius A="  2.036860e+20" n="  -1.919558e+00" T="  6.355410e+04" />
+		<arrhenius A="  8.147440e+20" n="  -1.919558e+00" T="  6.355410e+04" />
 	</reaction>
 
 
 	<!-- 153-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(14)+Arbin">
-		<arrhenius A="  9.058423e+19" n="  -1.861185e+00" T="  6.443191e+04" />
+		<arrhenius A="  3.623369e+20" n="  -1.861185e+00" T="  6.443191e+04" />
 	</reaction>
 
 
 	<!-- 154-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(15)+Arbin">
-		<arrhenius A="  4.811794e+19" n="  -1.820833e+00" T="  6.526114e+04" />
+		<arrhenius A="  1.924717e+20" n="  -1.820833e+00" T="  6.526114e+04" />
 	</reaction>
 
 
 	<!-- 155-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  2.390694e+19" n="  -1.772470e+00" T="  6.595624e+04" />
+		<arrhenius A="  9.562774e+19" n="  -1.772470e+00" T="  6.595624e+04" />
 	</reaction>
 
 
 	<!-- 156-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  1.317373e+19" n="  -1.736047e+00" T="  6.651037e+04" />
+		<arrhenius A="  5.269492e+19" n="  -1.736047e+00" T="  6.651037e+04" />
 	</reaction>
 
 
 	<!-- 157-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  7.810998e+18" n="  -1.705919e+00" T="  6.714564e+04" />
+		<arrhenius A="  3.124399e+19" n="  -1.705919e+00" T="  6.714564e+04" />
 	</reaction>
 
 
 	<!-- 158-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  4.918822e+18" n="  -1.681902e+00" T="  6.770408e+04" />
+		<arrhenius A="  1.967529e+19" n="  -1.681902e+00" T="  6.770408e+04" />
 	</reaction>
 
 
 	<!-- 159-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  4.316703e+18" n="  -1.690203e+00" T="  6.838721e+04" />
+		<arrhenius A="  1.726681e+19" n="  -1.690203e+00" T="  6.838721e+04" />
 	</reaction>
 
 
 	<!-- 160-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  2.170494e+18" n="  -1.643173e+00" T="  6.867116e+04" />
+		<arrhenius A="  8.681977e+18" n="  -1.643173e+00" T="  6.867116e+04" />
 	</reaction>
 
 
 	<!-- 161-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  2.240792e+18" n="  -1.666732e+00" T="  6.933702e+04" />
+		<arrhenius A="  8.963168e+18" n="  -1.666732e+00" T="  6.933702e+04" />
 	</reaction>
 
 
 	<!-- 162-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  1.318719e+18" n="  -1.635751e+00" T="  6.981930e+04" />
+		<arrhenius A="  5.274876e+18" n="  -1.635751e+00" T="  6.981930e+04" />
 	</reaction>
 
 
 	<!-- 163-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  1.096579e+18" n="  -1.639565e+00" T="  7.025113e+04" />
+		<arrhenius A="  4.386315e+18" n="  -1.639565e+00" T="  7.025113e+04" />
 	</reaction>
 
 
 	<!-- 164-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  1.030536e+18" n="  -1.654962e+00" T="  7.104499e+04" />
+		<arrhenius A="  4.122144e+18" n="  -1.654962e+00" T="  7.104499e+04" />
 	</reaction>
 
 
 	<!-- 165-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  7.738940e+17" n="  -1.651305e+00" T="  7.143929e+04" />
+		<arrhenius A="  3.095576e+18" n="  -1.651305e+00" T="  7.143929e+04" />
 	</reaction>
 
 
 	<!-- 166-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  5.962096e+17" n="  -1.650931e+00" T="  7.196974e+04" />
+		<arrhenius A="  2.384838e+18" n="  -1.650931e+00" T="  7.196974e+04" />
 	</reaction>
 
 
 	<!-- 167-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  5.332077e+17" n="  -1.670356e+00" T="  7.259064e+04" />
+		<arrhenius A="  2.132831e+18" n="  -1.670356e+00" T="  7.259064e+04" />
 	</reaction>
 
 
 	<!-- 168-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  2.921658e+18" n="  -1.878744e+00" T="  7.426881e+04" />
+		<arrhenius A="  1.168663e+19" n="  -1.878744e+00" T="  7.426881e+04" />
 	</reaction>
 
 
 	<!-- 169-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  1.247499e+18" n="  -1.837359e+00" T="  7.459469e+04" />
+		<arrhenius A="  4.989997e+18" n="  -1.837359e+00" T="  7.459469e+04" />
 	</reaction>
 
 
 	<!-- 170-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  8.071383e+17" n="  -1.838303e+00" T="  7.521646e+04" />
+		<arrhenius A="  3.228553e+18" n="  -1.838303e+00" T="  7.521646e+04" />
 	</reaction>
 
 
 	<!-- 171-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  4.739489e+17" n="  -1.847663e+00" T="  7.619855e+04" />
+		<arrhenius A="  1.895796e+18" n="  -1.847663e+00" T="  7.619855e+04" />
 	</reaction>
 
 
 	<!-- 172-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  2.485374e+16" n="  -1.620827e+00" T="  7.567393e+04" />
+		<arrhenius A="  9.941494e+16" n="  -1.620827e+00" T="  7.567393e+04" />
 	</reaction>
 
 
 	<!-- 173-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  5.029517e+16" n="  -1.772932e+00" T="  7.821542e+04" />
+		<arrhenius A="  2.011807e+17" n="  -1.772932e+00" T="  7.821542e+04" />
 	</reaction>
 
 
 	<!-- 174-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  2.335111e+60" n="  -1.188981e+01" T="  1.528815e+05" />
+		<arrhenius A="  9.340445e+60" n="  -1.188981e+01" T="  1.528815e+05" />
 	</reaction>
 
 
 	<!-- 175-->
 	<reaction formula="O2_D(3)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  1.085666e+54" n="  -1.070805e+01" T="  1.462598e+05" />
+		<arrhenius A="  4.342665e+54" n="  -1.070805e+01" T="  1.462598e+05" />
 	</reaction>
 
 
 	<!-- 176-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(5)+Arbin">
-		<arrhenius A="  2.733228e+09" n="  8.168029e-01" T="  8.301642e+03" />
+		<arrhenius A="  1.093291e+10" n="  8.168029e-01" T="  8.301642e+03" />
 	</reaction>
 
 
 	<!-- 177-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(6)+Arbin">
-		<arrhenius A="  1.605998e+14" n="  -3.274424e-01" T="  2.606557e+04" />
+		<arrhenius A="  6.423991e+14" n="  -3.274424e-01" T="  2.606557e+04" />
 	</reaction>
 
 
 	<!-- 178-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(7)+Arbin">
-		<arrhenius A="  5.809581e+15" n="  -7.218224e-01" T="  3.399339e+04" />
+		<arrhenius A="  2.323832e+16" n="  -7.218224e-01" T="  3.399339e+04" />
 	</reaction>
 
 
 	<!-- 179-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(8)+Arbin">
-		<arrhenius A="  5.901580e+17" n="  -1.207728e+00" T="  4.165428e+04" />
+		<arrhenius A="  2.360632e+18" n="  -1.207728e+00" T="  4.165428e+04" />
 	</reaction>
 
 
 	<!-- 180-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(9)+Arbin">
-		<arrhenius A="  3.796319e+19" n="  -1.643732e+00" T="  4.816121e+04" />
+		<arrhenius A="  1.518528e+20" n="  -1.643732e+00" T="  4.816121e+04" />
 	</reaction>
 
 
 	<!-- 181-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(10)+Arbin">
-		<arrhenius A="  4.923998e+20" n="  -1.918909e+00" T="  5.299317e+04" />
+		<arrhenius A="  1.969599e+21" n="  -1.918909e+00" T="  5.299317e+04" />
 	</reaction>
 
 
 	<!-- 182-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(11)+Arbin">
-		<arrhenius A="  9.680888e+20" n="  -2.006107e+00" T="  5.612681e+04" />
+		<arrhenius A="  3.872355e+21" n="  -2.006107e+00" T="  5.612681e+04" />
 	</reaction>
 
 
 	<!-- 183-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(12)+Arbin">
-		<arrhenius A="  8.294965e+20" n="  -2.011532e+00" T="  5.829331e+04" />
+		<arrhenius A="  3.317986e+21" n="  -2.011532e+00" T="  5.829331e+04" />
 	</reaction>
 
 
 	<!-- 184-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(13)+Arbin">
-		<arrhenius A="  3.691676e+20" n="  -1.951627e+00" T="  5.966809e+04" />
+		<arrhenius A="  1.476670e+21" n="  -1.951627e+00" T="  5.966809e+04" />
 	</reaction>
 
 
 	<!-- 185-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(14)+Arbin">
-		<arrhenius A="  1.455322e+20" n="  -1.880680e+00" T="  6.070723e+04" />
+		<arrhenius A="  5.821289e+20" n="  -1.880680e+00" T="  6.070723e+04" />
 	</reaction>
 
 
 	<!-- 186-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(15)+Arbin">
-		<arrhenius A="  7.164318e+19" n="  -1.832554e+00" T="  6.162694e+04" />
+		<arrhenius A="  2.865727e+20" n="  -1.832554e+00" T="  6.162694e+04" />
 	</reaction>
 
 
 	<!-- 187-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  2.856953e+19" n="  -1.762893e+00" T="  6.225367e+04" />
+		<arrhenius A="  1.142781e+20" n="  -1.762893e+00" T="  6.225367e+04" />
 	</reaction>
 
 
 	<!-- 188-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  1.515453e+19" n="  -1.722061e+00" T="  6.291257e+04" />
+		<arrhenius A="  6.061810e+19" n="  -1.722061e+00" T="  6.291257e+04" />
 	</reaction>
 
 
 	<!-- 189-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  7.005239e+18" n="  -1.667659e+00" T="  6.344366e+04" />
+		<arrhenius A="  2.802096e+19" n="  -1.667659e+00" T="  6.344366e+04" />
 	</reaction>
 
 
 	<!-- 190-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  4.495400e+18" n="  -1.645966e+00" T="  6.402934e+04" />
+		<arrhenius A="  1.798160e+19" n="  -1.645966e+00" T="  6.402934e+04" />
 	</reaction>
 
 
 	<!-- 191-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  2.685752e+18" n="  -1.616062e+00" T="  6.449566e+04" />
+		<arrhenius A="  1.074301e+19" n="  -1.616062e+00" T="  6.449566e+04" />
 	</reaction>
 
 
 	<!-- 192-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  1.419238e+18" n="  -1.574700e+00" T="  6.486827e+04" />
+		<arrhenius A="  5.676952e+18" n="  -1.574700e+00" T="  6.486827e+04" />
 	</reaction>
 
 
 	<!-- 193-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  1.221448e+18" n="  -1.580863e+00" T="  6.544672e+04" />
+		<arrhenius A="  4.885792e+18" n="  -1.580863e+00" T="  6.544672e+04" />
 	</reaction>
 
 
 	<!-- 194-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  8.579498e+17" n="  -1.568115e+00" T="  6.594732e+04" />
+		<arrhenius A="  3.431799e+18" n="  -1.568115e+00" T="  6.594732e+04" />
 	</reaction>
 
 
 	<!-- 195-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  6.394830e+17" n="  -1.560040e+00" T="  6.637097e+04" />
+		<arrhenius A="  2.557932e+18" n="  -1.560040e+00" T="  6.637097e+04" />
 	</reaction>
 
 
 	<!-- 196-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  5.127758e+17" n="  -1.562104e+00" T="  6.693967e+04" />
+		<arrhenius A="  2.051103e+18" n="  -1.562104e+00" T="  6.693967e+04" />
 	</reaction>
 
 
 	<!-- 197-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  4.300604e+17" n="  -1.566846e+00" T="  6.742798e+04" />
+		<arrhenius A="  1.720242e+18" n="  -1.566846e+00" T="  6.742798e+04" />
 	</reaction>
 
 
 	<!-- 198-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  2.757957e+17" n="  -1.549450e+00" T="  6.773149e+04" />
+		<arrhenius A="  1.103183e+18" n="  -1.549450e+00" T="  6.773149e+04" />
 	</reaction>
 
 
 	<!-- 199-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  1.746329e+17" n="  -1.535461e+00" T="  6.800232e+04" />
+		<arrhenius A="  6.985315e+17" n="  -1.535461e+00" T="  6.800232e+04" />
 	</reaction>
 
 
 	<!-- 200-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  1.483047e+17" n="  -1.552309e+00" T="  6.865289e+04" />
+		<arrhenius A="  5.932190e+17" n="  -1.552309e+00" T="  6.865289e+04" />
 	</reaction>
 
 
 	<!-- 201-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  1.290078e+17" n="  -1.579111e+00" T="  6.948534e+04" />
+		<arrhenius A="  5.160313e+17" n="  -1.579111e+00" T="  6.948534e+04" />
 	</reaction>
 
 
 	<!-- 202-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  7.273920e+16" n="  -1.566472e+00" T="  6.988808e+04" />
+		<arrhenius A="  2.909568e+17" n="  -1.566472e+00" T="  6.988808e+04" />
 	</reaction>
 
 
 	<!-- 203-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  2.404598e+17" n="  -1.747966e+00" T="  7.159129e+04" />
+		<arrhenius A="  9.618391e+17" n="  -1.747966e+00" T="  7.159129e+04" />
 	</reaction>
 
 
 	<!-- 204-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  1.393310e+17" n="  -1.757132e+00" T="  7.265435e+04" />
+		<arrhenius A="  5.573239e+17" n="  -1.757132e+00" T="  7.265435e+04" />
 	</reaction>
 
 
 	<!-- 205-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  1.284590e+17" n="  -1.836873e+00" T="  7.492253e+04" />
+		<arrhenius A="  5.138361e+17" n="  -1.836873e+00" T="  7.492253e+04" />
 	</reaction>
 
 
 	<!-- 206-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  1.941016e+16" n="  -1.764821e+00" T="  7.451257e+04" />
+		<arrhenius A="  7.764063e+16" n="  -1.764821e+00" T="  7.451257e+04" />
 	</reaction>
 
 
 	<!-- 207-->
 	<reaction formula="O2_D(4)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  1.236186e+58" n="  -1.159052e+01" T="  1.485912e+05" />
+		<arrhenius A="  4.944745e+58" n="  -1.159052e+01" T="  1.485912e+05" />
 	</reaction>
 
 
 	<!-- 208-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(6)+Arbin">
-		<arrhenius A="  7.466391e+09" n="  7.180448e-01" T="  8.237551e+03" />
+		<arrhenius A="  2.986556e+10" n="  7.180448e-01" T="  8.237551e+03" />
 	</reaction>
 
 
 	<!-- 209-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(7)+Arbin">
-		<arrhenius A="  1.261376e+14" n="  -3.034254e-01" T="  2.442922e+04" />
+		<arrhenius A="  5.045506e+14" n="  -3.034254e-01" T="  2.442922e+04" />
 	</reaction>
 
 
 	<!-- 210-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(8)+Arbin">
-		<arrhenius A="  2.494093e+15" n="  -6.373826e-01" T="  3.167514e+04" />
+		<arrhenius A="  9.976370e+15" n="  -6.373826e-01" T="  3.167514e+04" />
 	</reaction>
 
 
 	<!-- 211-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(9)+Arbin">
-		<arrhenius A="  8.704639e+16" n="  -1.018448e+00" T="  3.825632e+04" />
+		<arrhenius A="  3.481856e+17" n="  -1.018448e+00" T="  3.825632e+04" />
 	</reaction>
 
 
 	<!-- 212-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(10)+Arbin">
-		<arrhenius A="  4.159409e+18" n="  -1.424442e+00" T="  4.446642e+04" />
+		<arrhenius A="  1.663763e+19" n="  -1.424442e+00" T="  4.446642e+04" />
 	</reaction>
 
 
 	<!-- 213-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(11)+Arbin">
-		<arrhenius A="  7.667874e+19" n="  -1.733234e+00" T="  4.947435e+04" />
+		<arrhenius A="  3.067149e+20" n="  -1.733234e+00" T="  4.947435e+04" />
 	</reaction>
 
 
 	<!-- 214-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(12)+Arbin">
-		<arrhenius A="  3.933680e+20" n="  -1.915548e+00" T="  5.313376e+04" />
+		<arrhenius A="  1.573472e+21" n="  -1.915548e+00" T="  5.313376e+04" />
 	</reaction>
 
 
 	<!-- 215-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(13)+Arbin">
-		<arrhenius A="  3.987229e+20" n="  -1.936460e+00" T="  5.538486e+04" />
+		<arrhenius A="  1.594891e+21" n="  -1.936460e+00" T="  5.538486e+04" />
 	</reaction>
 
 
 	<!-- 216-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(14)+Arbin">
-		<arrhenius A="  2.447947e+20" n="  -1.908052e+00" T="  5.692800e+04" />
+		<arrhenius A="  9.791789e+20" n="  -1.908052e+00" T="  5.692800e+04" />
 	</reaction>
 
 
 	<!-- 217-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(15)+Arbin">
-		<arrhenius A="  1.078366e+20" n="  -1.847342e+00" T="  5.801327e+04" />
+		<arrhenius A="  4.313463e+20" n="  -1.847342e+00" T="  5.801327e+04" />
 	</reaction>
 
 
 	<!-- 218-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  4.598434e+19" n="  -1.783716e+00" T="  5.884705e+04" />
+		<arrhenius A="  1.839374e+20" n="  -1.783716e+00" T="  5.884705e+04" />
 	</reaction>
 
 
 	<!-- 219-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  1.826935e+19" n="  -1.714255e+00" T="  5.947053e+04" />
+		<arrhenius A="  7.307742e+19" n="  -1.714255e+00" T="  5.947053e+04" />
 	</reaction>
 
 
 	<!-- 220-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  8.514693e+18" n="  -1.660930e+00" T="  6.009762e+04" />
+		<arrhenius A="  3.405877e+19" n="  -1.660930e+00" T="  6.009762e+04" />
 	</reaction>
 
 
 	<!-- 221-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  4.272973e+18" n="  -1.614853e+00" T="  6.056910e+04" />
+		<arrhenius A="  1.709189e+19" n="  -1.614853e+00" T="  6.056910e+04" />
 	</reaction>
 
 
 	<!-- 222-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  2.537808e+18" n="  -1.584601e+00" T="  6.114006e+04" />
+		<arrhenius A="  1.015123e+19" n="  -1.584601e+00" T="  6.114006e+04" />
 	</reaction>
 
 
 	<!-- 223-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  1.377184e+18" n="  -1.546712e+00" T="  6.147967e+04" />
+		<arrhenius A="  5.508737e+18" n="  -1.546712e+00" T="  6.147967e+04" />
 	</reaction>
 
 
 	<!-- 224-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  9.323200e+17" n="  -1.529916e+00" T="  6.196260e+04" />
+		<arrhenius A="  3.729280e+18" n="  -1.529916e+00" T="  6.196260e+04" />
 	</reaction>
 
 
 	<!-- 225-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  6.607701e+17" n="  -1.517515e+00" T="  6.242252e+04" />
+		<arrhenius A="  2.643081e+18" n="  -1.517515e+00" T="  6.242252e+04" />
 	</reaction>
 
 
 	<!-- 226-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  4.243539e+17" n="  -1.497183e+00" T="  6.281611e+04" />
+		<arrhenius A="  1.697416e+18" n="  -1.497183e+00" T="  6.281611e+04" />
 	</reaction>
 
 
 	<!-- 227-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  3.356262e+17" n="  -1.497772e+00" T="  6.321151e+04" />
+		<arrhenius A="  1.342505e+18" n="  -1.497772e+00" T="  6.321151e+04" />
 	</reaction>
 
 
 	<!-- 228-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  2.516753e+17" n="  -1.492190e+00" T="  6.364876e+04" />
+		<arrhenius A="  1.006701e+18" n="  -1.492190e+00" T="  6.364876e+04" />
 	</reaction>
 
 
 	<!-- 229-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  1.998273e+17" n="  -1.497801e+00" T="  6.409774e+04" />
+		<arrhenius A="  7.993091e+17" n="  -1.497801e+00" T="  6.409774e+04" />
 	</reaction>
 
 
 	<!-- 230-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  1.403821e+17" n="  -1.491858e+00" T="  6.429569e+04" />
+		<arrhenius A="  5.615285e+17" n="  -1.491858e+00" T="  6.429569e+04" />
 	</reaction>
 
 
 	<!-- 231-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  1.482276e+17" n="  -1.526704e+00" T="  6.510334e+04" />
+		<arrhenius A="  5.929103e+17" n="  -1.526704e+00" T="  6.510334e+04" />
 	</reaction>
 
 
 	<!-- 232-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  6.760171e+16" n="  -1.489131e+00" T="  6.511587e+04" />
+		<arrhenius A="  2.704068e+17" n="  -1.489131e+00" T="  6.511587e+04" />
 	</reaction>
 
 
 	<!-- 233-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  5.941440e+16" n="  -1.521867e+00" T="  6.568624e+04" />
+		<arrhenius A="  2.376576e+17" n="  -1.521867e+00" T="  6.568624e+04" />
 	</reaction>
 
 
 	<!-- 234-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  4.264999e+16" n="  -1.544249e+00" T="  6.653513e+04" />
+		<arrhenius A="  1.706000e+17" n="  -1.544249e+00" T="  6.653513e+04" />
 	</reaction>
 
 
 	<!-- 235-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  7.656284e+16" n="  -1.676703e+00" T="  6.809405e+04" />
+		<arrhenius A="  3.062514e+17" n="  -1.676703e+00" T="  6.809405e+04" />
 	</reaction>
 
 
 	<!-- 236-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  5.504653e+16" n="  -1.734685e+00" T="  6.952156e+04" />
+		<arrhenius A="  2.201861e+17" n="  -1.734685e+00" T="  6.952156e+04" />
 	</reaction>
 
 
 	<!-- 237-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  4.605480e+15" n="  -1.602837e+00" T="  7.013274e+04" />
+		<arrhenius A="  1.842192e+16" n="  -1.602837e+00" T="  7.013274e+04" />
 	</reaction>
 
 
 	<!-- 238-->
 	<reaction formula="O2_D(5)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  2.011397e+15" n="  -1.803928e+00" T="  7.360343e+04" />
+		<arrhenius A="  8.045589e+15" n="  -1.803928e+00" T="  7.360343e+04" />
 	</reaction>
 
 
 	<!-- 239-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(7)+Arbin">
-		<arrhenius A="  1.812722e+10" n="  6.305396e-01" T="  8.148065e+03" />
+		<arrhenius A="  7.250888e+10" n="  6.305396e-01" T="  8.148065e+03" />
 	</reaction>
 
 
 	<!-- 240-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(8)+Arbin">
-		<arrhenius A="  1.009507e+14" n="  -2.814503e-01" T="  2.301216e+04" />
+		<arrhenius A="  4.038029e+14" n="  -2.814503e-01" T="  2.301216e+04" />
 	</reaction>
 
 
 	<!-- 241-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(9)+Arbin">
-		<arrhenius A="  1.089934e+15" n="  -5.556364e-01" T="  2.955087e+04" />
+		<arrhenius A="  4.359736e+15" n="  -5.556364e-01" T="  2.955087e+04" />
 	</reaction>
 
 
 	<!-- 242-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(10)+Arbin">
-		<arrhenius A="  2.654057e+16" n="  -9.007491e-01" T="  3.561776e+04" />
+		<arrhenius A="  1.061623e+17" n="  -9.007491e-01" T="  3.561776e+04" />
 	</reaction>
 
 
 	<!-- 243-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(11)+Arbin">
-		<arrhenius A="  7.219247e+17" n="  -1.250729e+00" T="  4.129202e+04" />
+		<arrhenius A="  2.887699e+18" n="  -1.250729e+00" T="  4.129202e+04" />
 	</reaction>
 
 
 	<!-- 244-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(12)+Arbin">
-		<arrhenius A="  1.261595e+19" n="  -1.554425e+00" T="  4.614464e+04" />
+		<arrhenius A="  5.046382e+19" n="  -1.554425e+00" T="  4.614464e+04" />
 	</reaction>
 
 
 	<!-- 245-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(13)+Arbin">
-		<arrhenius A="  7.751119e+19" n="  -1.753456e+00" T="  4.993741e+04" />
+		<arrhenius A="  3.100448e+20" n="  -1.753456e+00" T="  4.993741e+04" />
 	</reaction>
 
 
 	<!-- 246-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(14)+Arbin">
-		<arrhenius A="  1.685516e+20" n="  -1.849468e+00" T="  5.262601e+04" />
+		<arrhenius A="  6.742065e+20" n="  -1.849468e+00" T="  5.262601e+04" />
 	</reaction>
 
 
 	<!-- 247-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(15)+Arbin">
-		<arrhenius A="  1.137339e+20" n="  -1.830229e+00" T="  5.419231e+04" />
+		<arrhenius A="  4.549356e+20" n="  -1.830229e+00" T="  5.419231e+04" />
 	</reaction>
 
 
 	<!-- 248-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  5.954285e+19" n="  -1.785634e+00" T="  5.535611e+04" />
+		<arrhenius A="  2.381714e+20" n="  -1.785634e+00" T="  5.535611e+04" />
 	</reaction>
 
 
 	<!-- 249-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  2.601280e+19" n="  -1.724066e+00" T="  5.615511e+04" />
+		<arrhenius A="  1.040512e+20" n="  -1.724066e+00" T="  5.615511e+04" />
 	</reaction>
 
 
 	<!-- 250-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  1.135018e+19" n="  -1.664271e+00" T="  5.684319e+04" />
+		<arrhenius A="  4.540073e+19" n="  -1.664271e+00" T="  5.684319e+04" />
 	</reaction>
 
 
 	<!-- 251-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  5.628359e+18" n="  -1.616406e+00" T="  5.747459e+04" />
+		<arrhenius A="  2.251344e+19" n="  -1.616406e+00" T="  5.747459e+04" />
 	</reaction>
 
 
 	<!-- 252-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  2.342866e+18" n="  -1.551188e+00" T="  5.784630e+04" />
+		<arrhenius A="  9.371463e+18" n="  -1.551188e+00" T="  5.784630e+04" />
 	</reaction>
 
 
 	<!-- 253-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  1.194156e+18" n="  -1.507004e+00" T="  5.825732e+04" />
+		<arrhenius A="  4.776624e+18" n="  -1.507004e+00" T="  5.825732e+04" />
 	</reaction>
 
 
 	<!-- 254-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  8.780678e+17" n="  -1.499211e+00" T="  5.878857e+04" />
+		<arrhenius A="  3.512271e+18" n="  -1.499211e+00" T="  5.878857e+04" />
 	</reaction>
 
 
 	<!-- 255-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  4.236066e+17" n="  -1.449635e+00" T="  5.903526e+04" />
+		<arrhenius A="  1.694426e+18" n="  -1.449635e+00" T="  5.903526e+04" />
 	</reaction>
 
 
 	<!-- 256-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  2.798019e+17" n="  -1.432308e+00" T="  5.939073e+04" />
+		<arrhenius A="  1.119207e+18" n="  -1.432308e+00" T="  5.939073e+04" />
 	</reaction>
 
 
 	<!-- 257-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  2.677686e+17" n="  -1.450787e+00" T="  5.984627e+04" />
+		<arrhenius A="  1.071074e+18" n="  -1.450787e+00" T="  5.984627e+04" />
 	</reaction>
 
 
 	<!-- 258-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  2.021609e+17" n="  -1.447246e+00" T="  6.027678e+04" />
+		<arrhenius A="  8.086434e+17" n="  -1.447246e+00" T="  6.027678e+04" />
 	</reaction>
 
 
 	<!-- 259-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  1.259860e+17" n="  -1.427750e+00" T="  6.056442e+04" />
+		<arrhenius A="  5.039438e+17" n="  -1.427750e+00" T="  6.056442e+04" />
 	</reaction>
 
 
 	<!-- 260-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  1.317819e+17" n="  -1.461158e+00" T="  6.104677e+04" />
+		<arrhenius A="  5.271278e+17" n="  -1.461158e+00" T="  6.104677e+04" />
 	</reaction>
 
 
 	<!-- 261-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  9.100949e+16" n="  -1.457178e+00" T="  6.139489e+04" />
+		<arrhenius A="  3.640379e+17" n="  -1.457178e+00" T="  6.139489e+04" />
 	</reaction>
 
 
 	<!-- 262-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  5.654957e+16" n="  -1.447109e+00" T="  6.171792e+04" />
+		<arrhenius A="  2.261983e+17" n="  -1.447109e+00" T="  6.171792e+04" />
 	</reaction>
 
 
 	<!-- 263-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  4.870217e+16" n="  -1.476774e+00" T="  6.234247e+04" />
+		<arrhenius A="  1.948087e+17" n="  -1.476774e+00" T="  6.234247e+04" />
 	</reaction>
 
 
 	<!-- 264-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  5.354034e+16" n="  -1.541573e+00" T="  6.305456e+04" />
+		<arrhenius A="  2.141614e+17" n="  -1.541573e+00" T="  6.305456e+04" />
 	</reaction>
 
 
 	<!-- 265-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  1.362127e+16" n="  -1.468702e+00" T="  6.332441e+04" />
+		<arrhenius A="  5.448508e+16" n="  -1.468702e+00" T="  6.332441e+04" />
 	</reaction>
 
 
 	<!-- 266-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  4.255557e+15" n="  -1.447428e+00" T="  6.406184e+04" />
+		<arrhenius A="  1.702223e+16" n="  -1.447428e+00" T="  6.406184e+04" />
 	</reaction>
 
 
 	<!-- 267-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  9.393248e+15" n="  -1.657192e+00" T="  6.648824e+04" />
+		<arrhenius A="  3.757299e+16" n="  -1.657192e+00" T="  6.648824e+04" />
 	</reaction>
 
 
 	<!-- 268-->
 	<reaction formula="O2_D(6)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  5.349336e+15" n="  -1.821853e+00" T="  7.141304e+04" />
+		<arrhenius A="  2.139735e+16" n="  -1.821853e+00" T="  7.141304e+04" />
 	</reaction>
 
 
 	<!-- 269-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(8)+Arbin">
-		<arrhenius A="  3.823069e+10" n="  5.567820e-01" T="  8.034372e+03" />
+		<arrhenius A="  1.529228e+11" n="  5.567820e-01" T="  8.034372e+03" />
 	</reaction>
 
 
 	<!-- 270-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(9)+Arbin">
-		<arrhenius A="  1.081304e+14" n="  -2.888463e-01" T="  2.182793e+04" />
+		<arrhenius A="  4.325215e+14" n="  -2.888463e-01" T="  2.182793e+04" />
 	</reaction>
 
 
 	<!-- 271-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(10)+Arbin">
-		<arrhenius A="  6.618678e+14" n="  -5.064396e-01" T="  2.773829e+04" />
+		<arrhenius A="  2.647471e+15" n="  -5.064396e-01" T="  2.773829e+04" />
 	</reaction>
 
 
 	<!-- 272-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(11)+Arbin">
-		<arrhenius A="  1.197117e+16" n="  -8.213690e-01" T="  3.355328e+04" />
+		<arrhenius A="  4.788466e+16" n="  -8.213690e-01" T="  3.355328e+04" />
 	</reaction>
 
 
 	<!-- 273-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(12)+Arbin">
-		<arrhenius A="  1.761569e+17" n="  -1.111184e+00" T="  3.855770e+04" />
+		<arrhenius A="  7.046275e+17" n="  -1.111184e+00" T="  3.855770e+04" />
 	</reaction>
 
 
 	<!-- 274-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(13)+Arbin">
-		<arrhenius A="  2.625624e+18" n="  -1.398761e+00" T="  4.313945e+04" />
+		<arrhenius A="  1.050250e+19" n="  -1.398761e+00" T="  4.313945e+04" />
 	</reaction>
 
 
 	<!-- 275-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(14)+Arbin">
-		<arrhenius A="  1.756952e+19" n="  -1.605859e+00" T="  4.690385e+04" />
+		<arrhenius A="  7.027806e+19" n="  -1.605859e+00" T="  4.690385e+04" />
 	</reaction>
 
 
 	<!-- 276-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(15)+Arbin">
-		<arrhenius A="  4.105528e+19" n="  -1.709279e+00" T="  4.962174e+04" />
+		<arrhenius A="  1.642211e+20" n="  -1.709279e+00" T="  4.962174e+04" />
 	</reaction>
 
 
 	<!-- 277-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  4.434444e+19" n="  -1.735955e+00" T="  5.148073e+04" />
+		<arrhenius A="  1.773778e+20" n="  -1.735955e+00" T="  5.148073e+04" />
 	</reaction>
 
 
 	<!-- 278-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  2.590104e+19" n="  -1.702136e+00" T="  5.266977e+04" />
+		<arrhenius A="  1.036042e+20" n="  -1.702136e+00" T="  5.266977e+04" />
 	</reaction>
 
 
 	<!-- 279-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  1.317711e+19" n="  -1.655733e+00" T="  5.356564e+04" />
+		<arrhenius A="  5.270845e+19" n="  -1.655733e+00" T="  5.356564e+04" />
 	</reaction>
 
 
 	<!-- 280-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  6.119664e+18" n="  -1.600088e+00" T="  5.424987e+04" />
+		<arrhenius A="  2.447865e+19" n="  -1.600088e+00" T="  5.424987e+04" />
 	</reaction>
 
 
 	<!-- 281-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  2.925306e+18" n="  -1.548647e+00" T="  5.479351e+04" />
+		<arrhenius A="  1.170123e+19" n="  -1.548647e+00" T="  5.479351e+04" />
 	</reaction>
 
 
 	<!-- 282-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  1.397044e+18" n="  -1.497826e+00" T="  5.524705e+04" />
+		<arrhenius A="  5.588176e+18" n="  -1.497826e+00" T="  5.524705e+04" />
 	</reaction>
 
 
 	<!-- 283-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  7.745035e+17" n="  -1.461333e+00" T="  5.567697e+04" />
+		<arrhenius A="  3.098014e+18" n="  -1.461333e+00" T="  5.567697e+04" />
 	</reaction>
 
 
 	<!-- 284-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  3.743734e+17" n="  -1.412898e+00" T="  5.595755e+04" />
+		<arrhenius A="  1.497494e+18" n="  -1.412898e+00" T="  5.595755e+04" />
 	</reaction>
 
 
 	<!-- 285-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  2.530601e+17" n="  -1.398313e+00" T="  5.630420e+04" />
+		<arrhenius A="  1.012240e+18" n="  -1.398313e+00" T="  5.630420e+04" />
 	</reaction>
 
 
 	<!-- 286-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  2.020332e+17" n="  -1.399248e+00" T="  5.673141e+04" />
+		<arrhenius A="  8.081326e+17" n="  -1.399248e+00" T="  5.673141e+04" />
 	</reaction>
 
 
 	<!-- 287-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  1.405105e+17" n="  -1.388714e+00" T="  5.708413e+04" />
+		<arrhenius A="  5.620422e+17" n="  -1.388714e+00" T="  5.708413e+04" />
 	</reaction>
 
 
 	<!-- 288-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  1.004976e+17" n="  -1.382016e+00" T="  5.743169e+04" />
+		<arrhenius A="  4.019903e+17" n="  -1.382016e+00" T="  5.743169e+04" />
 	</reaction>
 
 
 	<!-- 289-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  8.856780e+16" n="  -1.396963e+00" T="  5.770504e+04" />
+		<arrhenius A="  3.542712e+17" n="  -1.396963e+00" T="  5.770504e+04" />
 	</reaction>
 
 
 	<!-- 290-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  6.467367e+16" n="  -1.398218e+00" T="  5.812985e+04" />
+		<arrhenius A="  2.586947e+17" n="  -1.398218e+00" T="  5.812985e+04" />
 	</reaction>
 
 
 	<!-- 291-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  4.352253e+16" n="  -1.396486e+00" T="  5.846448e+04" />
+		<arrhenius A="  1.740901e+17" n="  -1.396486e+00" T="  5.846448e+04" />
 	</reaction>
 
 
 	<!-- 292-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  3.308371e+16" n="  -1.415054e+00" T="  5.881116e+04" />
+		<arrhenius A="  1.323348e+17" n="  -1.415054e+00" T="  5.881116e+04" />
 	</reaction>
 
 
 	<!-- 293-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  3.095996e+16" n="  -1.463048e+00" T="  5.954778e+04" />
+		<arrhenius A="  1.238398e+17" n="  -1.463048e+00" T="  5.954778e+04" />
 	</reaction>
 
 
 	<!-- 294-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  8.107643e+15" n="  -1.394885e+00" T="  5.949116e+04" />
+		<arrhenius A="  3.243057e+16" n="  -1.394885e+00" T="  5.949116e+04" />
 	</reaction>
 
 
 	<!-- 295-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  4.466704e+15" n="  -1.425920e+00" T="  6.021228e+04" />
+		<arrhenius A="  1.786682e+16" n="  -1.425920e+00" T="  6.021228e+04" />
 	</reaction>
 
 
 	<!-- 296-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  1.480280e+15" n="  -1.444651e+00" T="  6.174769e+04" />
+		<arrhenius A="  5.921120e+15" n="  -1.444651e+00" T="  6.174769e+04" />
 	</reaction>
 
 
 	<!-- 297-->
 	<reaction formula="O2_D(7)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  2.356784e+15" n="  -1.727503e+00" T="  6.490309e+04" />
+		<arrhenius A="  9.427138e+15" n="  -1.727503e+00" T="  6.490309e+04" />
 	</reaction>
 
 
 	<!-- 298-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(9)+Arbin">
-		<arrhenius A="  7.357690e+10" n="  4.916913e-01" T="  7.862430e+03" />
+		<arrhenius A="  2.943076e+11" n="  4.916913e-01" T="  7.862430e+03" />
 	</reaction>
 
 
 	<!-- 299-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(10)+Arbin">
-		<arrhenius A="  1.159830e+14" n="  -2.960736e-01" T="  2.079157e+04" />
+		<arrhenius A="  4.639321e+14" n="  -2.960736e-01" T="  2.079157e+04" />
 	</reaction>
 
 
 	<!-- 300-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(11)+Arbin">
-		<arrhenius A="  4.065489e+14" n="  -4.577473e-01" T="  2.613585e+04" />
+		<arrhenius A="  1.626195e+15" n="  -4.577473e-01" T="  2.613585e+04" />
 	</reaction>
 
 
 	<!-- 301-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(12)+Arbin">
-		<arrhenius A="  4.568408e+15" n="  -7.260355e-01" T="  3.145868e+04" />
+		<arrhenius A="  1.827363e+16" n="  -7.260355e-01" T="  3.145868e+04" />
 	</reaction>
 
 
 	<!-- 302-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(13)+Arbin">
-		<arrhenius A="  7.420883e+16" n="  -1.025454e+00" T="  3.636224e+04" />
+		<arrhenius A="  2.968353e+17" n="  -1.025454e+00" T="  3.636224e+04" />
 	</reaction>
 
 
 	<!-- 303-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(14)+Arbin">
-		<arrhenius A="  7.655905e+17" n="  -1.276151e+00" T="  4.063366e+04" />
+		<arrhenius A="  3.062362e+18" n="  -1.276151e+00" T="  4.063366e+04" />
 	</reaction>
 
 
 	<!-- 304-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(15)+Arbin">
-		<arrhenius A="  4.635022e+18" n="  -1.473911e+00" T="  4.414599e+04" />
+		<arrhenius A="  1.854009e+19" n="  -1.473911e+00" T="  4.414599e+04" />
 	</reaction>
 
 
 	<!-- 305-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  1.117722e+19" n="  -1.579930e+00" T="  4.679336e+04" />
+		<arrhenius A="  4.470888e+19" n="  -1.579930e+00" T="  4.679336e+04" />
 	</reaction>
 
 
 	<!-- 306-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  1.409753e+19" n="  -1.622106e+00" T="  4.869899e+04" />
+		<arrhenius A="  5.639012e+19" n="  -1.622106e+00" T="  4.869899e+04" />
 	</reaction>
 
 
 	<!-- 307-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  1.126168e+19" n="  -1.619888e+00" T="  5.007621e+04" />
+		<arrhenius A="  4.504674e+19" n="  -1.619888e+00" T="  5.007621e+04" />
 	</reaction>
 
 
 	<!-- 308-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  6.613986e+18" n="  -1.586847e+00" T="  5.107046e+04" />
+		<arrhenius A="  2.645594e+19" n="  -1.586847e+00" T="  5.107046e+04" />
 	</reaction>
 
 
 	<!-- 309-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  2.845756e+18" n="  -1.523617e+00" T="  5.162809e+04" />
+		<arrhenius A="  1.138302e+19" n="  -1.523617e+00" T="  5.162809e+04" />
 	</reaction>
 
 
 	<!-- 310-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  1.451389e+18" n="  -1.478321e+00" T="  5.223678e+04" />
+		<arrhenius A="  5.805556e+18" n="  -1.478321e+00" T="  5.223678e+04" />
 	</reaction>
 
 
 	<!-- 311-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  6.379580e+17" n="  -1.418293e+00" T="  5.260663e+04" />
+		<arrhenius A="  2.551832e+18" n="  -1.418293e+00" T="  5.260663e+04" />
 	</reaction>
 
 
 	<!-- 312-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  3.746544e+17" n="  -1.389124e+00" T="  5.298603e+04" />
+		<arrhenius A="  1.498618e+18" n="  -1.389124e+00" T="  5.298603e+04" />
 	</reaction>
 
 
 	<!-- 313-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  1.806096e+17" n="  -1.340516e+00" T="  5.321442e+04" />
+		<arrhenius A="  7.224385e+17" n="  -1.340516e+00" T="  5.321442e+04" />
 	</reaction>
 
 
 	<!-- 314-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  1.399029e+17" n="  -1.338732e+00" T="  5.374012e+04" />
+		<arrhenius A="  5.596116e+17" n="  -1.338732e+00" T="  5.374012e+04" />
 	</reaction>
 
 
 	<!-- 315-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  1.240367e+17" n="  -1.351907e+00" T="  5.416968e+04" />
+		<arrhenius A="  4.961468e+17" n="  -1.351907e+00" T="  5.416968e+04" />
 	</reaction>
 
 
 	<!-- 316-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  7.048175e+16" n="  -1.322391e+00" T="  5.439233e+04" />
+		<arrhenius A="  2.819270e+17" n="  -1.322391e+00" T="  5.439233e+04" />
 	</reaction>
 
 
 	<!-- 317-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  6.038342e+16" n="  -1.336251e+00" T="  5.471569e+04" />
+		<arrhenius A="  2.415337e+17" n="  -1.336251e+00" T="  5.471569e+04" />
 	</reaction>
 
 
 	<!-- 318-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  4.440632e+16" n="  -1.337587e+00" T="  5.489602e+04" />
+		<arrhenius A="  1.776253e+17" n="  -1.337587e+00" T="  5.489602e+04" />
 	</reaction>
 
 
 	<!-- 319-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  3.655820e+16" n="  -1.351594e+00" T="  5.528598e+04" />
+		<arrhenius A="  1.462328e+17" n="  -1.351594e+00" T="  5.528598e+04" />
 	</reaction>
 
 
 	<!-- 320-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  2.876539e+16" n="  -1.373793e+00" T="  5.576990e+04" />
+		<arrhenius A="  1.150616e+17" n="  -1.373793e+00" T="  5.576990e+04" />
 	</reaction>
 
 
 	<!-- 321-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  3.308300e+16" n="  -1.439259e+00" T="  5.639859e+04" />
+		<arrhenius A="  1.323320e+17" n="  -1.439259e+00" T="  5.639859e+04" />
 	</reaction>
 
 
 	<!-- 322-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  2.016700e+16" n="  -1.454540e+00" T="  5.690208e+04" />
+		<arrhenius A="  8.066799e+16" n="  -1.454540e+00" T="  5.690208e+04" />
 	</reaction>
 
 
 	<!-- 323-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  4.038915e+15" n="  -1.384347e+00" T="  5.707788e+04" />
+		<arrhenius A="  1.615566e+16" n="  -1.384347e+00" T="  5.707788e+04" />
 	</reaction>
 
 
 	<!-- 324-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  1.314418e+15" n="  -1.398417e+00" T="  5.799654e+04" />
+		<arrhenius A="  5.257673e+15" n="  -1.398417e+00" T="  5.799654e+04" />
 	</reaction>
 
 
 	<!-- 325-->
 	<reaction formula="O2_D(8)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  2.926823e+14" n="  -1.477689e+00" T="  6.038985e+04" />
+		<arrhenius A="  1.170729e+15" n="  -1.477689e+00" T="  6.038985e+04" />
 	</reaction>
 
 
 	<!-- 326-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(10)+Arbin">
-		<arrhenius A="  1.243024e+11" n="  4.393720e-01" T="  7.630314e+03" />
+		<arrhenius A="  4.972096e+11" n="  4.393720e-01" T="  7.630314e+03" />
 	</reaction>
 
 
 	<!-- 327-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(11)+Arbin">
-		<arrhenius A="  1.198829e+14" n="  -2.994251e-01" T="  1.984404e+04" />
+		<arrhenius A="  4.795317e+14" n="  -2.994251e-01" T="  1.984404e+04" />
 	</reaction>
 
 
 	<!-- 328-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(12)+Arbin">
-		<arrhenius A="  3.163080e+14" n="  -4.331681e-01" T="  2.479678e+04" />
+		<arrhenius A="  1.265232e+15" n="  -4.331681e-01" T="  2.479678e+04" />
 	</reaction>
 
 
 	<!-- 329-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(13)+Arbin">
-		<arrhenius A="  2.638889e+15" n="  -6.718787e-01" T="  2.967380e+04" />
+		<arrhenius A="  1.055556e+16" n="  -6.718787e-01" T="  2.967380e+04" />
 	</reaction>
 
 
 	<!-- 330-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(14)+Arbin">
-		<arrhenius A="  2.625341e+16" n="  -9.223690e-01" T="  3.417014e+04" />
+		<arrhenius A="  1.050137e+17" n="  -9.223690e-01" T="  3.417014e+04" />
 	</reaction>
 
 
 	<!-- 331-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(15)+Arbin">
-		<arrhenius A="  2.577558e+17" n="  -1.169266e+00" T="  3.823199e+04" />
+		<arrhenius A="  1.031023e+18" n="  -1.169266e+00" T="  3.823199e+04" />
 	</reaction>
 
 
 	<!-- 332-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  1.635142e+18" n="  -1.370888e+00" T="  4.173140e+04" />
+		<arrhenius A="  6.540568e+18" n="  -1.370888e+00" T="  4.173140e+04" />
 	</reaction>
 
 
 	<!-- 333-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  4.262366e+18" n="  -1.484763e+00" T="  4.433206e+04" />
+		<arrhenius A="  1.704947e+19" n="  -1.484763e+00" T="  4.433206e+04" />
 	</reaction>
 
 
 	<!-- 334-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  4.593488e+18" n="  -1.511925e+00" T="  4.610588e+04" />
+		<arrhenius A="  1.837395e+19" n="  -1.511925e+00" T="  4.610588e+04" />
 	</reaction>
 
 
 	<!-- 335-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  3.657447e+18" n="  -1.508663e+00" T="  4.741352e+04" />
+		<arrhenius A="  1.462979e+19" n="  -1.508663e+00" T="  4.741352e+04" />
 	</reaction>
 
 
 	<!-- 336-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  2.364698e+18" n="  -1.485818e+00" T="  4.842629e+04" />
+		<arrhenius A="  9.458791e+18" n="  -1.485818e+00" T="  4.842629e+04" />
 	</reaction>
 
 
 	<!-- 337-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  1.304040e+18" n="  -1.447569e+00" T="  4.913366e+04" />
+		<arrhenius A="  5.216162e+18" n="  -1.447569e+00" T="  4.913366e+04" />
 	</reaction>
 
 
 	<!-- 338-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  6.293138e+17" n="  -1.395943e+00" T="  4.963551e+04" />
+		<arrhenius A="  2.517255e+18" n="  -1.395943e+00" T="  4.963551e+04" />
 	</reaction>
 
 
 	<!-- 339-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  3.431995e+17" n="  -1.358394e+00" T="  5.008113e+04" />
+		<arrhenius A="  1.372798e+18" n="  -1.358394e+00" T="  5.008113e+04" />
 	</reaction>
 
 
 	<!-- 340-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  2.075209e+17" n="  -1.332130e+00" T="  5.050883e+04" />
+		<arrhenius A="  8.300837e+17" n="  -1.332130e+00" T="  5.050883e+04" />
 	</reaction>
 
 
 	<!-- 341-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  9.576787e+16" n="  -1.279241e+00" T="  5.062115e+04" />
+		<arrhenius A="  3.830715e+17" n="  -1.279241e+00" T="  5.062115e+04" />
 	</reaction>
 
 
 	<!-- 342-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  8.471304e+16" n="  -1.292870e+00" T="  5.116995e+04" />
+		<arrhenius A="  3.388522e+17" n="  -1.292870e+00" T="  5.116995e+04" />
 	</reaction>
 
 
 	<!-- 343-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  5.893061e+16" n="  -1.282910e+00" T="  5.141217e+04" />
+		<arrhenius A="  2.357224e+17" n="  -1.282910e+00" T="  5.141217e+04" />
 	</reaction>
 
 
 	<!-- 344-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  4.926018e+16" n="  -1.294510e+00" T="  5.177855e+04" />
+		<arrhenius A="  1.970407e+17" n="  -1.294510e+00" T="  5.177855e+04" />
 	</reaction>
 
 
 	<!-- 345-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  4.763246e+16" n="  -1.321252e+00" T="  5.214791e+04" />
+		<arrhenius A="  1.905298e+17" n="  -1.321252e+00" T="  5.214791e+04" />
 	</reaction>
 
 
 	<!-- 346-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  3.685210e+16" n="  -1.331601e+00" T="  5.254083e+04" />
+		<arrhenius A="  1.474084e+17" n="  -1.331601e+00" T="  5.254083e+04" />
 	</reaction>
 
 
 	<!-- 347-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  2.631640e+16" n="  -1.341427e+00" T="  5.273749e+04" />
+		<arrhenius A="  1.052656e+17" n="  -1.341427e+00" T="  5.273749e+04" />
 	</reaction>
 
 
 	<!-- 348-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  2.216322e+16" n="  -1.373191e+00" T="  5.312730e+04" />
+		<arrhenius A="  8.865290e+16" n="  -1.373191e+00" T="  5.312730e+04" />
 	</reaction>
 
 
 	<!-- 349-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  2.194547e+16" n="  -1.436002e+00" T="  5.398277e+04" />
+		<arrhenius A="  8.778190e+16" n="  -1.436002e+00" T="  5.398277e+04" />
 	</reaction>
 
 
 	<!-- 350-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  6.261263e+15" n="  -1.402634e+00" T="  5.422321e+04" />
+		<arrhenius A="  2.504505e+16" n="  -1.402634e+00" T="  5.422321e+04" />
 	</reaction>
 
 
 	<!-- 351-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  4.556025e+14" n="  -1.273036e+00" T="  5.429305e+04" />
+		<arrhenius A="  1.822410e+15" n="  -1.273036e+00" T="  5.429305e+04" />
 	</reaction>
 
 
 	<!-- 352-->
 	<reaction formula="O2_D(9)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  9.757795e+13" n="  -1.356941e+00" T="  5.699819e+04" />
+		<arrhenius A="  3.903118e+14" n="  -1.356941e+00" T="  5.699819e+04" />
 	</reaction>
 
 
 	<!-- 353-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(11)+Arbin">
-		<arrhenius A="  1.994818e+11" n="  3.923375e-01" T="  7.414444e+03" />
+		<arrhenius A="  7.979271e+11" n="  3.923375e-01" T="  7.414444e+03" />
 	</reaction>
 
 
 	<!-- 354-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(12)+Arbin">
-		<arrhenius A="  1.295433e+14" n="  -3.078511e-01" T="  1.894602e+04" />
+		<arrhenius A="  5.181732e+14" n="  -3.078511e-01" T="  1.894602e+04" />
 	</reaction>
 
 
 	<!-- 355-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(13)+Arbin">
-		<arrhenius A="  2.477336e+14" n="  -4.092569e-01" T="  2.356177e+04" />
+		<arrhenius A="  9.909345e+14" n="  -4.092569e-01" T="  2.356177e+04" />
 	</reaction>
 
 
 	<!-- 356-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(14)+Arbin">
-		<arrhenius A="  1.742642e+15" n="  -6.305474e-01" T="  2.813673e+04" />
+		<arrhenius A="  6.970569e+15" n="  -6.305474e-01" T="  2.813673e+04" />
 	</reaction>
 
 
 	<!-- 357-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(15)+Arbin">
-		<arrhenius A="  1.260519e+16" n="  -8.498708e-01" T="  3.227462e+04" />
+		<arrhenius A="  5.042077e+16" n="  -8.498708e-01" T="  3.227462e+04" />
 	</reaction>
 
 
 	<!-- 358-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  9.417458e+16" n="  -1.070064e+00" T="  3.600076e+04" />
+		<arrhenius A="  3.766983e+17" n="  -1.070064e+00" T="  3.600076e+04" />
 	</reaction>
 
 
 	<!-- 359-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  4.475471e+17" n="  -1.243437e+00" T="  3.917890e+04" />
+		<arrhenius A="  1.790188e+18" n="  -1.243437e+00" T="  3.917890e+04" />
 	</reaction>
 
 
 	<!-- 360-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  1.260135e+18" n="  -1.365535e+00" T="  4.180393e+04" />
+		<arrhenius A="  5.040541e+18" n="  -1.365535e+00" T="  4.180393e+04" />
 	</reaction>
 
 
 	<!-- 361-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  1.625649e+18" n="  -1.409850e+00" T="  4.361322e+04" />
+		<arrhenius A="  6.502596e+18" n="  -1.409850e+00" T="  4.361322e+04" />
 	</reaction>
 
 
 	<!-- 362-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  1.265432e+18" n="  -1.404487e+00" T="  4.491275e+04" />
+		<arrhenius A="  5.061730e+18" n="  -1.404487e+00" T="  4.491275e+04" />
 	</reaction>
 
 
 	<!-- 363-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  7.875998e+17" n="  -1.377803e+00" T="  4.583544e+04" />
+		<arrhenius A="  3.150399e+18" n="  -1.377803e+00" T="  4.583544e+04" />
 	</reaction>
 
 
 	<!-- 364-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  4.609924e+17" n="  -1.346050e+00" T="  4.651861e+04" />
+		<arrhenius A="  1.843970e+18" n="  -1.346050e+00" T="  4.651861e+04" />
 	</reaction>
 
 
 	<!-- 365-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  2.744631e+17" n="  -1.317530e+00" T="  4.708327e+04" />
+		<arrhenius A="  1.097853e+18" n="  -1.317530e+00" T="  4.708327e+04" />
 	</reaction>
 
 
 	<!-- 366-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  1.588325e+17" n="  -1.286254e+00" T="  4.752727e+04" />
+		<arrhenius A="  6.353299e+17" n="  -1.286254e+00" T="  4.752727e+04" />
 	</reaction>
 
 
 	<!-- 367-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  1.128475e+17" n="  -1.274239e+00" T="  4.803250e+04" />
+		<arrhenius A="  4.513899e+17" n="  -1.274239e+00" T="  4.803250e+04" />
 	</reaction>
 
 
 	<!-- 368-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  7.017492e+16" n="  -1.252208e+00" T="  4.832777e+04" />
+		<arrhenius A="  2.806997e+17" n="  -1.252208e+00" T="  4.832777e+04" />
 	</reaction>
 
 
 	<!-- 369-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  5.859337e+16" n="  -1.260963e+00" T="  4.875569e+04" />
+		<arrhenius A="  2.343735e+17" n="  -1.260963e+00" T="  4.875569e+04" />
 	</reaction>
 
 
 	<!-- 370-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  4.001648e+16" n="  -1.250286e+00" T="  4.895416e+04" />
+		<arrhenius A="  1.600659e+17" n="  -1.250286e+00" T="  4.895416e+04" />
 	</reaction>
 
 
 	<!-- 371-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  3.596694e+16" n="  -1.270572e+00" T="  4.942491e+04" />
+		<arrhenius A="  1.438678e+17" n="  -1.270572e+00" T="  4.942491e+04" />
 	</reaction>
 
 
 	<!-- 372-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  2.820657e+16" n="  -1.281435e+00" T="  4.965925e+04" />
+		<arrhenius A="  1.128263e+17" n="  -1.281435e+00" T="  4.965925e+04" />
 	</reaction>
 
 
 	<!-- 373-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  2.530903e+16" n="  -1.311820e+00" T="  5.002717e+04" />
+		<arrhenius A="  1.012361e+17" n="  -1.311820e+00" T="  5.002717e+04" />
 	</reaction>
 
 
 	<!-- 374-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  2.258353e+16" n="  -1.350694e+00" T="  5.032110e+04" />
+		<arrhenius A="  9.033413e+16" n="  -1.350694e+00" T="  5.032110e+04" />
 	</reaction>
 
 
 	<!-- 375-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  1.563659e+16" n="  -1.377838e+00" T="  5.070004e+04" />
+		<arrhenius A="  6.254636e+16" n="  -1.377838e+00" T="  5.070004e+04" />
 	</reaction>
 
 
 	<!-- 376-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  9.380090e+15" n="  -1.415094e+00" T="  5.125611e+04" />
+		<arrhenius A="  3.752036e+16" n="  -1.415094e+00" T="  5.125611e+04" />
 	</reaction>
 
 
 	<!-- 377-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  5.342418e+14" n="  -1.265700e+00" T="  5.105854e+04" />
+		<arrhenius A="  2.136967e+15" n="  -1.265700e+00" T="  5.105854e+04" />
 	</reaction>
 
 
 	<!-- 378-->
 	<reaction formula="O2_D(10)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  1.204039e+14" n="  -1.362745e+00" T="  5.282321e+04" />
+		<arrhenius A="  4.816154e+14" n="  -1.362745e+00" T="  5.282321e+04" />
 	</reaction>
 
 
 	<!-- 379-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(12)+Arbin">
-		<arrhenius A="  3.223855e+11" n="  3.444467e-01" T="  7.266309e+03" />
+		<arrhenius A="  1.289542e+12" n="  3.444467e-01" T="  7.266309e+03" />
 	</reaction>
 
 
 	<!-- 380-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(13)+Arbin">
-		<arrhenius A="  1.402173e+14" n="  -3.161422e-01" T="  1.810665e+04" />
+		<arrhenius A="  5.608690e+14" n="  -3.161422e-01" T="  1.810665e+04" />
 	</reaction>
 
 
 	<!-- 381-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(14)+Arbin">
-		<arrhenius A="  2.170077e+14" n="  -3.968406e-01" T="  2.236359e+04" />
+		<arrhenius A="  8.680307e+14" n="  -3.968406e-01" T="  2.236359e+04" />
 	</reaction>
 
 
 	<!-- 382-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(15)+Arbin">
-		<arrhenius A="  1.014378e+15" n="  -5.774390e-01" T="  2.655863e+04" />
+		<arrhenius A="  4.057511e+15" n="  -5.774390e-01" T="  2.655863e+04" />
 	</reaction>
 
 
 	<!-- 383-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  7.846252e+15" n="  -8.034719e-01" T="  3.059406e+04" />
+		<arrhenius A="  3.138501e+16" n="  -8.034719e-01" T="  3.059406e+04" />
 	</reaction>
 
 
 	<!-- 384-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  4.939054e+16" n="  -1.006707e+00" T="  3.412067e+04" />
+		<arrhenius A="  1.975622e+17" n="  -1.006707e+00" T="  3.412067e+04" />
 	</reaction>
 
 
 	<!-- 385-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  2.080385e+17" n="  -1.169576e+00" T="  3.699621e+04" />
+		<arrhenius A="  8.321540e+17" n="  -1.169576e+00" T="  3.699621e+04" />
 	</reaction>
 
 
 	<!-- 386-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  4.476475e+17" n="  -1.264488e+00" T="  3.938287e+04" />
+		<arrhenius A="  1.790590e+18" n="  -1.264488e+00" T="  3.938287e+04" />
 	</reaction>
 
 
 	<!-- 387-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  5.634071e+17" n="  -1.306675e+00" T="  4.113772e+04" />
+		<arrhenius A="  2.253628e+18" n="  -1.306675e+00" T="  4.113772e+04" />
 	</reaction>
 
 
 	<!-- 388-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  5.352476e+17" n="  -1.321718e+00" T="  4.251248e+04" />
+		<arrhenius A="  2.140990e+18" n="  -1.321718e+00" T="  4.251248e+04" />
 	</reaction>
 
 
 	<!-- 389-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  3.203987e+17" n="  -1.291105e+00" T="  4.338917e+04" />
+		<arrhenius A="  1.281595e+18" n="  -1.291105e+00" T="  4.338917e+04" />
 	</reaction>
 
 
 	<!-- 390-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  2.182480e+17" n="  -1.275841e+00" T="  4.414562e+04" />
+		<arrhenius A="  8.729920e+17" n="  -1.275841e+00" T="  4.414562e+04" />
 	</reaction>
 
 
 	<!-- 391-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  1.384906e+17" n="  -1.252936e+00" T="  4.471502e+04" />
+		<arrhenius A="  5.539623e+17" n="  -1.252936e+00" T="  4.471502e+04" />
 	</reaction>
 
 
 	<!-- 392-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  8.452875e+16" n="  -1.226593e+00" T="  4.512475e+04" />
+		<arrhenius A="  3.381150e+17" n="  -1.226593e+00" T="  4.512475e+04" />
 	</reaction>
 
 
 	<!-- 393-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  5.175254e+16" n="  -1.202665e+00" T="  4.554715e+04" />
+		<arrhenius A="  2.070102e+17" n="  -1.202665e+00" T="  4.554715e+04" />
 	</reaction>
 
 
 	<!-- 394-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  3.920991e+16" n="  -1.200243e+00" T="  4.590909e+04" />
+		<arrhenius A="  1.568397e+17" n="  -1.200243e+00" T="  4.590909e+04" />
 	</reaction>
 
 
 	<!-- 395-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  2.999101e+16" n="  -1.200798e+00" T="  4.623975e+04" />
+		<arrhenius A="  1.199640e+17" n="  -1.200798e+00" T="  4.623975e+04" />
 	</reaction>
 
 
 	<!-- 396-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  2.210399e+16" n="  -1.200140e+00" T="  4.649988e+04" />
+		<arrhenius A="  8.841595e+16" n="  -1.200140e+00" T="  4.649988e+04" />
 	</reaction>
 
 
 	<!-- 397-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  2.298926e+16" n="  -1.237122e+00" T="  4.698166e+04" />
+		<arrhenius A="  9.195703e+16" n="  -1.237122e+00" T="  4.698166e+04" />
 	</reaction>
 
 
 	<!-- 398-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  1.615336e+16" n="  -1.242859e+00" T="  4.718751e+04" />
+		<arrhenius A="  6.461346e+16" n="  -1.242859e+00" T="  4.718751e+04" />
 	</reaction>
 
 
 	<!-- 399-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  1.636940e+16" n="  -1.290131e+00" T="  4.754035e+04" />
+		<arrhenius A="  6.547758e+16" n="  -1.290131e+00" T="  4.754035e+04" />
 	</reaction>
 
 
 	<!-- 400-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  1.200686e+16" n="  -1.317959e+00" T="  4.784792e+04" />
+		<arrhenius A="  4.802744e+16" n="  -1.317959e+00" T="  4.784792e+04" />
 	</reaction>
 
 
 	<!-- 401-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  9.219546e+15" n="  -1.379078e+00" T="  4.852155e+04" />
+		<arrhenius A="  3.687818e+16" n="  -1.379078e+00" T="  4.852155e+04" />
 	</reaction>
 
 
 	<!-- 402-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  1.143577e+15" n="  -1.304103e+00" T="  4.858715e+04" />
+		<arrhenius A="  4.574307e+15" n="  -1.304103e+00" T="  4.858715e+04" />
 	</reaction>
 
 
 	<!-- 403-->
 	<reaction formula="O2_D(11)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  5.265764e+13" n="  -1.251873e+00" T="  4.921290e+04" />
+		<arrhenius A="  2.106306e+14" n="  -1.251873e+00" T="  4.921290e+04" />
 	</reaction>
 
 
 	<!-- 404-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(13)+Arbin">
-		<arrhenius A="  5.289935e+11" n="  2.953510e-01" T="  7.154479e+03" />
+		<arrhenius A="  2.115974e+12" n="  2.953510e-01" T="  7.154479e+03" />
 	</reaction>
 
 
 	<!-- 405-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(14)+Arbin">
-		<arrhenius A="  1.476869e+14" n="  -3.216680e-01" T="  1.730369e+04" />
+		<arrhenius A="  5.907477e+14" n="  -3.216680e-01" T="  1.730369e+04" />
 	</reaction>
 
 
 	<!-- 406-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(15)+Arbin">
-		<arrhenius A="  2.183624e+14" n="  -3.983608e-01" T="  2.134318e+04" />
+		<arrhenius A="  8.734495e+14" n="  -3.983608e-01" T="  2.134318e+04" />
 	</reaction>
 
 
 	<!-- 407-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  6.855634e+14" n="  -5.388916e-01" T="  2.518381e+04" />
+		<arrhenius A="  2.742254e+15" n="  -5.388916e-01" T="  2.518381e+04" />
 	</reaction>
 
 
 	<!-- 408-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  5.174335e+15" n="  -7.626790e-01" T="  2.904383e+04" />
+		<arrhenius A="  2.069734e+16" n="  -7.626790e-01" T="  2.904383e+04" />
 	</reaction>
 
 
 	<!-- 409-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  2.638171e+16" n="  -9.459539e-01" T="  3.231736e+04" />
+		<arrhenius A="  1.055268e+17" n="  -9.459539e-01" T="  3.231736e+04" />
 	</reaction>
 
 
 	<!-- 410-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  1.088308e+17" n="  -1.106364e+00" T="  3.510174e+04" />
+		<arrhenius A="  4.353231e+17" n="  -1.106364e+00" T="  3.510174e+04" />
 	</reaction>
 
 
 	<!-- 411-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  2.334446e+17" n="  -1.202101e+00" T="  3.732338e+04" />
+		<arrhenius A="  9.337785e+17" n="  -1.202101e+00" T="  3.732338e+04" />
 	</reaction>
 
 
 	<!-- 412-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  2.817289e+17" n="  -1.240696e+00" T="  3.901899e+04" />
+		<arrhenius A="  1.126915e+18" n="  -1.240696e+00" T="  3.901899e+04" />
 	</reaction>
 
 
 	<!-- 413-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  2.541046e+17" n="  -1.250709e+00" T="  4.027000e+04" />
+		<arrhenius A="  1.016418e+18" n="  -1.250709e+00" T="  4.027000e+04" />
 	</reaction>
 
 
 	<!-- 414-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  1.868234e+17" n="  -1.242433e+00" T="  4.121528e+04" />
+		<arrhenius A="  7.472936e+17" n="  -1.242433e+00" T="  4.121528e+04" />
 	</reaction>
 
 
 	<!-- 415-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  1.083949e+17" n="  -1.211077e+00" T="  4.185180e+04" />
+		<arrhenius A="  4.335794e+17" n="  -1.211077e+00" T="  4.185180e+04" />
 	</reaction>
 
 
 	<!-- 416-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  7.002295e+16" n="  -1.190948e+00" T="  4.243390e+04" />
+		<arrhenius A="  2.800918e+17" n="  -1.190948e+00" T="  4.243390e+04" />
 	</reaction>
 
 
 	<!-- 417-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  5.135314e+16" n="  -1.183808e+00" T="  4.291971e+04" />
+		<arrhenius A="  2.054126e+17" n="  -1.183808e+00" T="  4.291971e+04" />
 	</reaction>
 
 
 	<!-- 418-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  3.137083e+16" n="  -1.160492e+00" T="  4.322545e+04" />
+		<arrhenius A="  1.254833e+17" n="  -1.160492e+00" T="  4.322545e+04" />
 	</reaction>
 
 
 	<!-- 419-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  2.775296e+16" n="  -1.175703e+00" T="  4.362756e+04" />
+		<arrhenius A="  1.110118e+17" n="  -1.175703e+00" T="  4.362756e+04" />
 	</reaction>
 
 
 	<!-- 420-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  2.052869e+16" n="  -1.175145e+00" T="  4.389433e+04" />
+		<arrhenius A="  8.211475e+16" n="  -1.175145e+00" T="  4.389433e+04" />
 	</reaction>
 
 
 	<!-- 421-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  1.566853e+16" n="  -1.181414e+00" T="  4.415941e+04" />
+		<arrhenius A="  6.267413e+16" n="  -1.181414e+00" T="  4.415941e+04" />
 	</reaction>
 
 
 	<!-- 422-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  1.400971e+16" n="  -1.207171e+00" T="  4.452502e+04" />
+		<arrhenius A="  5.603884e+16" n="  -1.207171e+00" T="  4.452502e+04" />
 	</reaction>
 
 
 	<!-- 423-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  1.526720e+16" n="  -1.259258e+00" T="  4.491876e+04" />
+		<arrhenius A="  6.106880e+16" n="  -1.259258e+00" T="  4.491876e+04" />
 	</reaction>
 
 
 	<!-- 424-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  1.019949e+16" n="  -1.276963e+00" T="  4.515340e+04" />
+		<arrhenius A="  4.079798e+16" n="  -1.276963e+00" T="  4.515340e+04" />
 	</reaction>
 
 
 	<!-- 425-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  6.465229e+15" n="  -1.313008e+00" T="  4.562164e+04" />
+		<arrhenius A="  2.586092e+16" n="  -1.313008e+00" T="  4.562164e+04" />
 	</reaction>
 
 
 	<!-- 426-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  7.702657e+14" n="  -1.234404e+00" T="  4.552845e+04" />
+		<arrhenius A="  3.081063e+15" n="  -1.234404e+00" T="  4.552845e+04" />
 	</reaction>
 
 
 	<!-- 427-->
 	<reaction formula="O2_D(12)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  6.903745e+13" n="  -1.267484e+00" T="  4.683377e+04" />
+		<arrhenius A="  2.761498e+14" n="  -1.267484e+00" T="  4.683377e+04" />
 	</reaction>
 
 
 	<!-- 428-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(14)+Arbin">
-		<arrhenius A="  8.187646e+11" n="  2.519849e-01" T="  7.036883e+03" />
+		<arrhenius A="  3.275058e+12" n="  2.519849e-01" T="  7.036883e+03" />
 	</reaction>
 
 
 	<!-- 429-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(15)+Arbin">
-		<arrhenius A="  1.549600e+14" n="  -3.272513e-01" T="  1.657195e+04" />
+		<arrhenius A="  6.198399e+14" n="  -3.272513e-01" T="  1.657195e+04" />
 	</reaction>
 
 
 	<!-- 430-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  2.249028e+14" n="  -4.018387e-01" T="  2.042458e+04" />
+		<arrhenius A="  8.996112e+14" n="  -4.018387e-01" T="  2.042458e+04" />
 	</reaction>
 
 
 	<!-- 431-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  5.342726e+14" n="  -5.150583e-01" T="  2.391171e+04" />
+		<arrhenius A="  2.137090e+15" n="  -5.150583e-01" T="  2.391171e+04" />
 	</reaction>
 
 
 	<!-- 432-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  3.008668e+15" n="  -7.102397e-01" T="  2.746155e+04" />
+		<arrhenius A="  1.203467e+16" n="  -7.102397e-01" T="  2.746155e+04" />
 	</reaction>
 
 
 	<!-- 433-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  1.577932e+16" n="  -8.962807e-01" T="  3.059019e+04" />
+		<arrhenius A="  6.311728e+16" n="  -8.962807e-01" T="  3.059019e+04" />
 	</reaction>
 
 
 	<!-- 434-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  5.340649e+16" n="  -1.037456e+00" T="  3.322210e+04" />
+		<arrhenius A="  2.136260e+17" n="  -1.037456e+00" T="  3.322210e+04" />
 	</reaction>
 
 
 	<!-- 435-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  1.072522e+17" n="  -1.127277e+00" T="  3.525981e+04" />
+		<arrhenius A="  4.290086e+17" n="  -1.127277e+00" T="  3.525981e+04" />
 	</reaction>
 
 
 	<!-- 436-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  1.364177e+17" n="  -1.171835e+00" T="  3.690772e+04" />
+		<arrhenius A="  5.456707e+17" n="  -1.171835e+00" T="  3.690772e+04" />
 	</reaction>
 
 
 	<!-- 437-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  1.189308e+17" n="  -1.179834e+00" T="  3.811497e+04" />
+		<arrhenius A="  4.757232e+17" n="  -1.179834e+00" T="  3.811497e+04" />
 	</reaction>
 
 
 	<!-- 438-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  8.926339e+16" n="  -1.173788e+00" T="  3.898969e+04" />
+		<arrhenius A="  3.570536e+17" n="  -1.173788e+00" T="  3.898969e+04" />
 	</reaction>
 
 
 	<!-- 439-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  6.090563e+16" n="  -1.158232e+00" T="  3.966244e+04" />
+		<arrhenius A="  2.436225e+17" n="  -1.158232e+00" T="  3.966244e+04" />
 	</reaction>
 
 
 	<!-- 440-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  3.943687e+16" n="  -1.140339e+00" T="  4.018043e+04" />
+		<arrhenius A="  1.577475e+17" n="  -1.140339e+00" T="  4.018043e+04" />
 	</reaction>
 
 
 	<!-- 441-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  2.666972e+16" n="  -1.126916e+00" T="  4.060596e+04" />
+		<arrhenius A="  1.066789e+17" n="  -1.126916e+00" T="  4.060596e+04" />
 	</reaction>
 
 
 	<!-- 442-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  1.923474e+16" n="  -1.121562e+00" T="  4.092660e+04" />
+		<arrhenius A="  7.693897e+16" n="  -1.121562e+00" T="  4.092660e+04" />
 	</reaction>
 
 
 	<!-- 443-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  1.523430e+16" n="  -1.127673e+00" T="  4.129867e+04" />
+		<arrhenius A="  6.093719e+16" n="  -1.127673e+00" T="  4.129867e+04" />
 	</reaction>
 
 
 	<!-- 444-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  1.278388e+16" n="  -1.142210e+00" T="  4.159789e+04" />
+		<arrhenius A="  5.113551e+16" n="  -1.142210e+00" T="  4.159789e+04" />
 	</reaction>
 
 
 	<!-- 445-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  1.036840e+16" n="  -1.156902e+00" T="  4.183496e+04" />
+		<arrhenius A="  4.147361e+16" n="  -1.156902e+00" T="  4.183496e+04" />
 	</reaction>
 
 
 	<!-- 446-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  8.926114e+15" n="  -1.187756e+00" T="  4.209638e+04" />
+		<arrhenius A="  3.570446e+16" n="  -1.187756e+00" T="  4.209638e+04" />
 	</reaction>
 
 
 	<!-- 447-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  7.985547e+15" n="  -1.229655e+00" T="  4.254308e+04" />
+		<arrhenius A="  3.194219e+16" n="  -1.229655e+00" T="  4.254308e+04" />
 	</reaction>
 
 
 	<!-- 448-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  5.186918e+15" n="  -1.263755e+00" T="  4.297636e+04" />
+		<arrhenius A="  2.074767e+16" n="  -1.263755e+00" T="  4.297636e+04" />
 	</reaction>
 
 
 	<!-- 449-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  1.447812e+15" n="  -1.262468e+00" T="  4.343583e+04" />
+		<arrhenius A="  5.791250e+15" n="  -1.262468e+00" T="  4.343583e+04" />
 	</reaction>
 
 
 	<!-- 450-->
 	<reaction formula="O2_D(13)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  3.952176e+13" n="  -1.192660e+00" T="  4.352504e+04" />
+		<arrhenius A="  1.580870e+14" n="  -1.192660e+00" T="  4.352504e+04" />
 	</reaction>
 
 
 	<!-- 451-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(15)+Arbin">
-		<arrhenius A="  1.272356e+12" n="  2.079011e-01" T="  6.931874e+03" />
+		<arrhenius A="  5.089422e+12" n="  2.079011e-01" T="  6.931874e+03" />
 	</reaction>
 
 
 	<!-- 452-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  1.544773e+14" n="  -3.277170e-01" T="  1.579578e+04" />
+		<arrhenius A="  6.179093e+14" n="  -3.277170e-01" T="  1.579578e+04" />
 	</reaction>
 
 
 	<!-- 453-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  2.238180e+14" n="  -4.023424e-01" T="  1.948506e+04" />
+		<arrhenius A="  8.952719e+14" n="  -4.023424e-01" T="  1.948506e+04" />
 	</reaction>
 
 
 	<!-- 454-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  4.881288e+14" n="  -5.076341e-01" T="  2.273482e+04" />
+		<arrhenius A="  1.952515e+15" n="  -5.076341e-01" T="  2.273482e+04" />
 	</reaction>
 
 
 	<!-- 455-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  2.006806e+15" n="  -6.710139e-01" T="  2.604140e+04" />
+		<arrhenius A="  8.027224e+15" n="  -6.710139e-01" T="  2.604140e+04" />
 	</reaction>
 
 
 	<!-- 456-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  1.003183e+16" n="  -8.527652e-01" T="  2.900462e+04" />
+		<arrhenius A="  4.012732e+16" n="  -8.527652e-01" T="  2.900462e+04" />
 	</reaction>
 
 
 	<!-- 457-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  3.122222e+16" n="  -9.867150e-01" T="  3.144032e+04" />
+		<arrhenius A="  1.248889e+17" n="  -9.867150e-01" T="  3.144032e+04" />
 	</reaction>
 
 
 	<!-- 458-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  5.761795e+16" n="  -1.068164e+00" T="  3.338600e+04" />
+		<arrhenius A="  2.304718e+17" n="  -1.068164e+00" T="  3.338600e+04" />
 	</reaction>
 
 
 	<!-- 459-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  6.908143e+16" n="  -1.108704e+00" T="  3.484168e+04" />
+		<arrhenius A="  2.763257e+17" n="  -1.108704e+00" T="  3.484168e+04" />
 	</reaction>
 
 
 	<!-- 460-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  5.987734e+16" n="  -1.116095e+00" T="  3.597464e+04" />
+		<arrhenius A="  2.395094e+17" n="  -1.116095e+00" T="  3.597464e+04" />
 	</reaction>
 
 
 	<!-- 461-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  4.306587e+16" n="  -1.105391e+00" T="  3.682366e+04" />
+		<arrhenius A="  1.722635e+17" n="  -1.105391e+00" T="  3.682366e+04" />
 	</reaction>
 
 
 	<!-- 462-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  3.010233e+16" n="  -1.094322e+00" T="  3.745847e+04" />
+		<arrhenius A="  1.204093e+17" n="  -1.094322e+00" T="  3.745847e+04" />
 	</reaction>
 
 
 	<!-- 463-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  2.339549e+16" n="  -1.095181e+00" T="  3.811713e+04" />
+		<arrhenius A="  9.358195e+16" n="  -1.095181e+00" T="  3.811713e+04" />
 	</reaction>
 
 
 	<!-- 464-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  1.451651e+16" n="  -1.074347e+00" T="  3.841284e+04" />
+		<arrhenius A="  5.806606e+16" n="  -1.074347e+00" T="  3.841284e+04" />
 	</reaction>
 
 
 	<!-- 465-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  1.050190e+16" n="  -1.071080e+00" T="  3.868155e+04" />
+		<arrhenius A="  4.200761e+16" n="  -1.071080e+00" T="  3.868155e+04" />
 	</reaction>
 
 
 	<!-- 466-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  9.482276e+15" n="  -1.093120e+00" T="  3.908364e+04" />
+		<arrhenius A="  3.792910e+16" n="  -1.093120e+00" T="  3.908364e+04" />
 	</reaction>
 
 
 	<!-- 467-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  7.206604e+15" n="  -1.103793e+00" T="  3.924247e+04" />
+		<arrhenius A="  2.882642e+16" n="  -1.103793e+00" T="  3.924247e+04" />
 	</reaction>
 
 
 	<!-- 468-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  7.510079e+15" n="  -1.146469e+00" T="  3.964928e+04" />
+		<arrhenius A="  3.004032e+16" n="  -1.146469e+00" T="  3.964928e+04" />
 	</reaction>
 
 
 	<!-- 469-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  6.395687e+15" n="  -1.182275e+00" T="  4.000281e+04" />
+		<arrhenius A="  2.558275e+16" n="  -1.182275e+00" T="  4.000281e+04" />
 	</reaction>
 
 
 	<!-- 470-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  3.856067e+15" n="  -1.203289e+00" T="  4.023396e+04" />
+		<arrhenius A="  1.542427e+16" n="  -1.203289e+00" T="  4.023396e+04" />
 	</reaction>
 
 
 	<!-- 471-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  1.038045e+15" n="  -1.190369e+00" T="  4.050298e+04" />
+		<arrhenius A="  4.152179e+15" n="  -1.190369e+00" T="  4.050298e+04" />
 	</reaction>
 
 
 	<!-- 472-->
 	<reaction formula="O2_D(14)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  3.005692e+13" n="  -1.127203e+00" T="  4.059896e+04" />
+		<arrhenius A="  1.202277e+14" n="  -1.127203e+00" T="  4.059896e+04" />
 	</reaction>
 
 
 	<!-- 473-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(16)+Arbin">
-		<arrhenius A="  1.853098e+12" n="  1.706402e-01" T="  6.811009e+03" />
+		<arrhenius A="  7.412392e+12" n="  1.706402e-01" T="  6.811009e+03" />
 	</reaction>
 
 
 	<!-- 474-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  1.554841e+14" n="  -3.296181e-01" T="  1.505904e+04" />
+		<arrhenius A="  6.219366e+14" n="  -3.296181e-01" T="  1.505904e+04" />
 	</reaction>
 
 
 	<!-- 475-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  2.323692e+14" n="  -4.073749e-01" T="  1.859126e+04" />
+		<arrhenius A="  9.294766e+14" n="  -4.073749e-01" T="  1.859126e+04" />
 	</reaction>
 
 
 	<!-- 476-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  4.976042e+14" n="  -5.106842e-01" T="  2.173149e+04" />
+		<arrhenius A="  1.990417e+15" n="  -5.106842e-01" T="  2.173149e+04" />
 	</reaction>
 
 
 	<!-- 477-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  1.268322e+15" n="  -6.272572e-01" T="  2.458224e+04" />
+		<arrhenius A="  5.073289e+15" n="  -6.272572e-01" T="  2.458224e+04" />
 	</reaction>
 
 
 	<!-- 478-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  6.104609e+15" n="  -8.055781e-01" T="  2.744799e+04" />
+		<arrhenius A="  2.441844e+16" n="  -8.055781e-01" T="  2.744799e+04" />
 	</reaction>
 
 
 	<!-- 479-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  1.907363e+16" n="  -9.400659e-01" T="  2.976834e+04" />
+		<arrhenius A="  7.629452e+16" n="  -9.400659e-01" T="  2.976834e+04" />
 	</reaction>
 
 
 	<!-- 480-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  3.244711e+16" n="  -1.015576e+00" T="  3.158649e+04" />
+		<arrhenius A="  1.297885e+17" n="  -1.015576e+00" T="  3.158649e+04" />
 	</reaction>
 
 
 	<!-- 481-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  3.552827e+16" n="  -1.046650e+00" T="  3.295690e+04" />
+		<arrhenius A="  1.421131e+17" n="  -1.046650e+00" T="  3.295690e+04" />
 	</reaction>
 
 
 	<!-- 482-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  2.999471e+16" n="  -1.052702e+00" T="  3.398361e+04" />
+		<arrhenius A="  1.199789e+17" n="  -1.052702e+00" T="  3.398361e+04" />
 	</reaction>
 
 
 	<!-- 483-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  2.255974e+16" n="  -1.048876e+00" T="  3.473473e+04" />
+		<arrhenius A="  9.023896e+16" n="  -1.048876e+00" T="  3.473473e+04" />
 	</reaction>
 
 
 	<!-- 484-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  1.594086e+16" n="  -1.040142e+00" T="  3.535015e+04" />
+		<arrhenius A="  6.376345e+16" n="  -1.040142e+00" T="  3.535015e+04" />
 	</reaction>
 
 
 	<!-- 485-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  1.157159e+16" n="  -1.034887e+00" T="  3.581630e+04" />
+		<arrhenius A="  4.628638e+16" n="  -1.034887e+00" T="  3.581630e+04" />
 	</reaction>
 
 
 	<!-- 486-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  8.722523e+15" n="  -1.035835e+00" T="  3.617509e+04" />
+		<arrhenius A="  3.489009e+16" n="  -1.035835e+00" T="  3.617509e+04" />
 	</reaction>
 
 
 	<!-- 487-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  7.036118e+15" n="  -1.046913e+00" T="  3.652483e+04" />
+		<arrhenius A="  2.814447e+16" n="  -1.046913e+00" T="  3.652483e+04" />
 	</reaction>
 
 
 	<!-- 488-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  5.690398e+15" n="  -1.062158e+00" T="  3.674255e+04" />
+		<arrhenius A="  2.276159e+16" n="  -1.062158e+00" T="  3.674255e+04" />
 	</reaction>
 
 
 	<!-- 489-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  5.126228e+15" n="  -1.092672e+00" T="  3.703673e+04" />
+		<arrhenius A="  2.050491e+16" n="  -1.092672e+00" T="  3.703673e+04" />
 	</reaction>
 
 
 	<!-- 490-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  4.525882e+15" n="  -1.131856e+00" T="  3.741127e+04" />
+		<arrhenius A="  1.810353e+16" n="  -1.131856e+00" T="  3.741127e+04" />
 	</reaction>
 
 
 	<!-- 491-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  3.545437e+15" n="  -1.174750e+00" T="  3.781025e+04" />
+		<arrhenius A="  1.418175e+16" n="  -1.174750e+00" T="  3.781025e+04" />
 	</reaction>
 
 
 	<!-- 492-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  1.475241e+15" n="  -1.194221e+00" T="  3.840625e+04" />
+		<arrhenius A="  5.900963e+15" n="  -1.194221e+00" T="  3.840625e+04" />
 	</reaction>
 
 
 	<!-- 493-->
 	<reaction formula="O2_D(15)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  4.009416e+13" n="  -1.138643e+00" T="  3.865942e+04" />
+		<arrhenius A="  1.603766e+14" n="  -1.138643e+00" T="  3.865942e+04" />
 	</reaction>
 
 
 	<!-- 494-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(17)+Arbin">
-		<arrhenius A="  2.696594e+12" n="  1.329296e-01" T="  6.698649e+03" />
+		<arrhenius A="  1.078637e+13" n="  1.329296e-01" T="  6.698649e+03" />
 	</reaction>
 
 
 	<!-- 495-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  1.605871e+14" n="  -3.341388e-01" T="  1.436761e+04" />
+		<arrhenius A="  6.423483e+14" n="  -3.341388e-01" T="  1.436761e+04" />
 	</reaction>
 
 
 	<!-- 496-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  2.421081e+14" n="  -4.124091e-01" T="  1.777674e+04" />
+		<arrhenius A="  9.684322e+14" n="  -4.124091e-01" T="  1.777674e+04" />
 	</reaction>
 
 
 	<!-- 497-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  4.949718e+14" n="  -5.114390e-01" T="  2.075282e+04" />
+		<arrhenius A="  1.979887e+15" n="  -5.114390e-01" T="  2.075282e+04" />
 	</reaction>
 
 
 	<!-- 498-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  1.031392e+15" n="  -6.092310e-01" T="  2.326511e+04" />
+		<arrhenius A="  4.125567e+15" n="  -6.092310e-01" T="  2.326511e+04" />
 	</reaction>
 
 
 	<!-- 499-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  3.397362e+15" n="  -7.494704e-01" T="  2.584048e+04" />
+		<arrhenius A="  1.358945e+16" n="  -7.494704e-01" T="  2.584048e+04" />
 	</reaction>
 
 
 	<!-- 500-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  1.008107e+16" n="  -8.808655e-01" T="  2.804286e+04" />
+		<arrhenius A="  4.032426e+16" n="  -8.808655e-01" T="  2.804286e+04" />
 	</reaction>
 
 
 	<!-- 501-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  1.623625e+16" n="  -9.507965e-01" T="  2.971036e+04" />
+		<arrhenius A="  6.494501e+16" n="  -9.507965e-01" T="  2.971036e+04" />
 	</reaction>
 
 
 	<!-- 502-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  1.711148e+16" n="  -9.784755e-01" T="  3.103021e+04" />
+		<arrhenius A="  6.844593e+16" n="  -9.784755e-01" T="  3.103021e+04" />
 	</reaction>
 
 
 	<!-- 503-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  1.365077e+16" n="  -9.805705e-01" T="  3.191564e+04" />
+		<arrhenius A="  5.460307e+16" n="  -9.805705e-01" T="  3.191564e+04" />
 	</reaction>
 
 
 	<!-- 504-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  1.040257e+16" n="  -9.792274e-01" T="  3.263418e+04" />
+		<arrhenius A="  4.161028e+16" n="  -9.792274e-01" T="  3.263418e+04" />
 	</reaction>
 
 
 	<!-- 505-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  8.977540e+15" n="  -9.919134e-01" T="  3.325681e+04" />
+		<arrhenius A="  3.591016e+16" n="  -9.919134e-01" T="  3.325681e+04" />
 	</reaction>
 
 
 	<!-- 506-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  6.483477e+15" n="  -9.874042e-01" T="  3.371454e+04" />
+		<arrhenius A="  2.593391e+16" n="  -9.874042e-01" T="  3.371454e+04" />
 	</reaction>
 
 
 	<!-- 507-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  5.053820e+15" n="  -9.943253e-01" T="  3.403299e+04" />
+		<arrhenius A="  2.021528e+16" n="  -9.943253e-01" T="  3.403299e+04" />
 	</reaction>
 
 
 	<!-- 508-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  4.357726e+15" n="  -1.016695e+00" T="  3.438641e+04" />
+		<arrhenius A="  1.743090e+16" n="  -1.016695e+00" T="  3.438641e+04" />
 	</reaction>
 
 
 	<!-- 509-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  4.073540e+15" n="  -1.050528e+00" T="  3.470418e+04" />
+		<arrhenius A="  1.629416e+16" n="  -1.050528e+00" T="  3.470418e+04" />
 	</reaction>
 
 
 	<!-- 510-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  3.623957e+15" n="  -1.089429e+00" T="  3.499608e+04" />
+		<arrhenius A="  1.449583e+16" n="  -1.089429e+00" T="  3.499608e+04" />
 	</reaction>
 
 
 	<!-- 511-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  2.516113e+15" n="  -1.120527e+00" T="  3.527685e+04" />
+		<arrhenius A="  1.006445e+16" n="  -1.120527e+00" T="  3.527685e+04" />
 	</reaction>
 
 
 	<!-- 512-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  9.154779e+14" n="  -1.120542e+00" T="  3.557315e+04" />
+		<arrhenius A="  3.661911e+15" n="  -1.120542e+00" T="  3.557315e+04" />
 	</reaction>
 
 
 	<!-- 513-->
 	<reaction formula="O2_D(16)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  5.182616e+13" n="  -1.129432e+00" T="  3.619036e+04" />
+		<arrhenius A="  2.073046e+14" n="  -1.129432e+00" T="  3.619036e+04" />
 	</reaction>
 
 
 	<!-- 514-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(18)+Arbin">
-		<arrhenius A="  3.723821e+12" n="  1.004430e-01" T="  6.554620e+03" />
+		<arrhenius A="  1.489528e+13" n="  1.004430e-01" T="  6.554620e+03" />
 	</reaction>
 
 
 	<!-- 515-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  1.588877e+14" n="  -3.341597e-01" T="  1.367002e+04" />
+		<arrhenius A="  6.355506e+14" n="  -3.341597e-01" T="  1.367002e+04" />
 	</reaction>
 
 
 	<!-- 516-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  2.383308e+14" n="  -4.118479e-01" T="  1.695963e+04" />
+		<arrhenius A="  9.533232e+14" n="  -4.118479e-01" T="  1.695963e+04" />
 	</reaction>
 
 
 	<!-- 517-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  4.622273e+14" n="  -5.066965e-01" T="  1.969322e+04" />
+		<arrhenius A="  1.848909e+15" n="  -5.066965e-01" T="  1.969322e+04" />
 	</reaction>
 
 
 	<!-- 518-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  1.038596e+15" n="  -6.116211e-01" T="  2.219955e+04" />
+		<arrhenius A="  4.154383e+15" n="  -6.116211e-01" T="  2.219955e+04" />
 	</reaction>
 
 
 	<!-- 519-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  2.144960e+15" n="  -7.079688e-01" T="  2.429742e+04" />
+		<arrhenius A="  8.579841e+15" n="  -7.079688e-01" T="  2.429742e+04" />
 	</reaction>
 
 
 	<!-- 520-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  5.223361e+15" n="  -8.192908e-01" T="  2.632965e+04" />
+		<arrhenius A="  2.089344e+16" n="  -8.192908e-01" T="  2.632965e+04" />
 	</reaction>
 
 
 	<!-- 521-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  8.465993e+15" n="  -8.902196e-01" T="  2.794814e+04" />
+		<arrhenius A="  3.386397e+16" n="  -8.902196e-01" T="  2.794814e+04" />
 	</reaction>
 
 
 	<!-- 522-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  9.201584e+15" n="  -9.232378e-01" T="  2.914996e+04" />
+		<arrhenius A="  3.680634e+16" n="  -9.232378e-01" T="  2.914996e+04" />
 	</reaction>
 
 
 	<!-- 523-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  7.736776e+15" n="  -9.316274e-01" T="  3.001552e+04" />
+		<arrhenius A="  3.094711e+16" n="  -9.316274e-01" T="  3.001552e+04" />
 	</reaction>
 
 
 	<!-- 524-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  5.768660e+15" n="  -9.288733e-01" T="  3.068436e+04" />
+		<arrhenius A="  2.307464e+16" n="  -9.288733e-01" T="  3.068436e+04" />
 	</reaction>
 
 
 	<!-- 525-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  4.410780e+15" n="  -9.309890e-01" T="  3.117369e+04" />
+		<arrhenius A="  1.764312e+16" n="  -9.309890e-01" T="  3.117369e+04" />
 	</reaction>
 
 
 	<!-- 526-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  3.656404e+15" n="  -9.452388e-01" T="  3.158425e+04" />
+		<arrhenius A="  1.462562e+16" n="  -9.452388e-01" T="  3.158425e+04" />
 	</reaction>
 
 
 	<!-- 527-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  3.392640e+15" n="  -9.731989e-01" T="  3.200959e+04" />
+		<arrhenius A="  1.357056e+16" n="  -9.731989e-01" T="  3.200959e+04" />
 	</reaction>
 
 
 	<!-- 528-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  2.935207e+15" n="  -1.000315e+00" T="  3.227409e+04" />
+		<arrhenius A="  1.174083e+16" n="  -1.000315e+00" T="  3.227409e+04" />
 	</reaction>
 
 
 	<!-- 529-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  2.595591e+15" n="  -1.036246e+00" T="  3.258564e+04" />
+		<arrhenius A="  1.038237e+16" n="  -1.036246e+00" T="  3.258564e+04" />
 	</reaction>
 
 
 	<!-- 530-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  1.791080e+15" n="  -1.065898e+00" T="  3.281982e+04" />
+		<arrhenius A="  7.164321e+15" n="  -1.065898e+00" T="  3.281982e+04" />
 	</reaction>
 
 
 	<!-- 531-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  8.690209e+14" n="  -1.091273e+00" T="  3.317647e+04" />
+		<arrhenius A="  3.476083e+15" n="  -1.091273e+00" T="  3.317647e+04" />
 	</reaction>
 
 
 	<!-- 532-->
 	<reaction formula="O2_D(17)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  2.192535e+13" n="  -1.005263e+00" T="  3.321029e+04" />
+		<arrhenius A="  8.770140e+13" n="  -1.005263e+00" T="  3.321029e+04" />
 	</reaction>
 
 
 	<!-- 533-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(19)+Arbin">
-		<arrhenius A="  4.949577e+12" n="  7.192919e-02" T="  6.384802e+03" />
+		<arrhenius A="  1.979831e+13" n="  7.192919e-02" T="  6.384802e+03" />
 	</reaction>
 
 
 	<!-- 534-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  1.565068e+14" n="  -3.340502e-01" T="  1.299646e+04" />
+		<arrhenius A="  6.260270e+14" n="  -3.340502e-01" T="  1.299646e+04" />
 	</reaction>
 
 
 	<!-- 535-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  2.315242e+14" n="  -4.104560e-01" T="  1.610359e+04" />
+		<arrhenius A="  9.260968e+14" n="  -4.104560e-01" T="  1.610359e+04" />
 	</reaction>
 
 
 	<!-- 536-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  4.851943e+14" n="  -5.133103e-01" T="  1.877894e+04" />
+		<arrhenius A="  1.940777e+15" n="  -5.133103e-01" T="  1.877894e+04" />
 	</reaction>
 
 
 	<!-- 537-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  1.001491e+15" n="  -6.119126e-01" T="  2.108430e+04" />
+		<arrhenius A="  4.005965e+15" n="  -6.119126e-01" T="  2.108430e+04" />
 	</reaction>
 
 
 	<!-- 538-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  1.848984e+15" n="  -6.973228e-01" T="  2.299057e+04" />
+		<arrhenius A="  7.395936e+15" n="  -6.973228e-01" T="  2.299057e+04" />
 	</reaction>
 
 
 	<!-- 539-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  2.957739e+15" n="  -7.672539e-01" T="  2.467259e+04" />
+		<arrhenius A="  1.183096e+16" n="  -7.672539e-01" T="  2.467259e+04" />
 	</reaction>
 
 
 	<!-- 540-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  4.214057e+15" n="  -8.273554e-01" T="  2.615241e+04" />
+		<arrhenius A="  1.685623e+16" n="  -8.273554e-01" T="  2.615241e+04" />
 	</reaction>
 
 
 	<!-- 541-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  4.724547e+15" n="  -8.644272e-01" T="  2.729495e+04" />
+		<arrhenius A="  1.889819e+16" n="  -8.644272e-01" T="  2.729495e+04" />
 	</reaction>
 
 
 	<!-- 542-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  3.870928e+15" n="  -8.724278e-01" T="  2.803452e+04" />
+		<arrhenius A="  1.548371e+16" n="  -8.724278e-01" T="  2.803452e+04" />
 	</reaction>
 
 
 	<!-- 543-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  3.428791e+15" n="  -8.886443e-01" T="  2.872211e+04" />
+		<arrhenius A="  1.371516e+16" n="  -8.886443e-01" T="  2.872211e+04" />
 	</reaction>
 
 
 	<!-- 544-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  2.746077e+15" n="  -8.991622e-01" T="  2.917959e+04" />
+		<arrhenius A="  1.098431e+16" n="  -8.991622e-01" T="  2.917959e+04" />
 	</reaction>
 
 
 	<!-- 545-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  2.103427e+15" n="  -9.085191e-01" T="  2.950884e+04" />
+		<arrhenius A="  8.413709e+15" n="  -9.085191e-01" T="  2.950884e+04" />
 	</reaction>
 
 
 	<!-- 546-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  2.036703e+15" n="  -9.463312e-01" T="  2.988684e+04" />
+		<arrhenius A="  8.146814e+15" n="  -9.463312e-01" T="  2.988684e+04" />
 	</reaction>
 
 
 	<!-- 547-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  1.597896e+15" n="  -9.732849e-01" T="  3.010226e+04" />
+		<arrhenius A="  6.391584e+15" n="  -9.732849e-01" T="  3.010226e+04" />
 	</reaction>
 
 
 	<!-- 548-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  1.223543e+15" n="  -1.011771e+00" T="  3.035589e+04" />
+		<arrhenius A="  4.894174e+15" n="  -1.011771e+00" T="  3.035589e+04" />
 	</reaction>
 
 
 	<!-- 549-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  5.724272e+14" n="  -1.030459e+00" T="  3.069926e+04" />
+		<arrhenius A="  2.289709e+15" n="  -1.030459e+00" T="  3.069926e+04" />
 	</reaction>
 
 
 	<!-- 550-->
 	<reaction formula="O2_D(18)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  1.931182e+13" n="  -9.619383e-01" T="  3.143361e+04" />
+		<arrhenius A="  7.724730e+13" n="  -9.619383e-01" T="  3.143361e+04" />
 	</reaction>
 
 
 	<!-- 551-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(20)+Arbin">
-		<arrhenius A="  6.455922e+12" n="  4.471594e-02" T="  6.201002e+03" />
+		<arrhenius A="  2.582369e+13" n="  4.471594e-02" T="  6.201002e+03" />
 	</reaction>
 
 
 	<!-- 552-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  1.587059e+14" n="  -3.370074e-01" T="  1.236548e+04" />
+		<arrhenius A="  6.348236e+14" n="  -3.370074e-01" T="  1.236548e+04" />
 	</reaction>
 
 
 	<!-- 553-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  2.263039e+14" n="  -4.101116e-01" T="  1.527432e+04" />
+		<arrhenius A="  9.052156e+14" n="  -4.101116e-01" T="  1.527432e+04" />
 	</reaction>
 
 
 	<!-- 554-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  5.232258e+14" n="  -5.238753e-01" T="  1.791751e+04" />
+		<arrhenius A="  2.092903e+15" n="  -5.238753e-01" T="  1.791751e+04" />
 	</reaction>
 
 
 	<!-- 555-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  9.214693e+14" n="  -6.069439e-01" T="  1.995034e+04" />
+		<arrhenius A="  3.685877e+15" n="  -6.069439e-01" T="  1.995034e+04" />
 	</reaction>
 
 
 	<!-- 556-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  1.707735e+15" n="  -6.930518e-01" T="  2.182207e+04" />
+		<arrhenius A="  6.830942e+15" n="  -6.930518e-01" T="  2.182207e+04" />
 	</reaction>
 
 
 	<!-- 557-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  2.127781e+15" n="  -7.405471e-01" T="  2.318368e+04" />
+		<arrhenius A="  8.511123e+15" n="  -7.405471e-01" T="  2.318368e+04" />
 	</reaction>
 
 
 	<!-- 558-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  2.273807e+15" n="  -7.730165e-01" T="  2.441659e+04" />
+		<arrhenius A="  9.095227e+15" n="  -7.730165e-01" T="  2.441659e+04" />
 	</reaction>
 
 
 	<!-- 559-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  2.262722e+15" n="  -7.999194e-01" T="  2.545225e+04" />
+		<arrhenius A="  9.050890e+15" n="  -7.999194e-01" T="  2.545225e+04" />
 	</reaction>
 
 
 	<!-- 560-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  2.204654e+15" n="  -8.258045e-01" T="  2.623666e+04" />
+		<arrhenius A="  8.818618e+15" n="  -8.258045e-01" T="  2.623666e+04" />
 	</reaction>
 
 
 	<!-- 561-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  1.939491e+15" n="  -8.450035e-01" T="  2.681548e+04" />
+		<arrhenius A="  7.757962e+15" n="  -8.450035e-01" T="  2.681548e+04" />
 	</reaction>
 
 
 	<!-- 562-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  1.508344e+15" n="  -8.574612e-01" T="  2.718288e+04" />
+		<arrhenius A="  6.033378e+15" n="  -8.574612e-01" T="  2.718288e+04" />
 	</reaction>
 
 
 	<!-- 563-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  1.355747e+15" n="  -8.863116e-01" T="  2.751265e+04" />
+		<arrhenius A="  5.422987e+15" n="  -8.863116e-01" T="  2.751265e+04" />
 	</reaction>
 
 
 	<!-- 564-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  1.182368e+15" n="  -9.216963e-01" T="  2.783001e+04" />
+		<arrhenius A="  4.729470e+15" n="  -9.216963e-01" T="  2.783001e+04" />
 	</reaction>
 
 
 	<!-- 565-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  9.661889e+14" n="  -9.668316e-01" T="  2.809286e+04" />
+		<arrhenius A="  3.864755e+15" n="  -9.668316e-01" T="  2.809286e+04" />
 	</reaction>
 
 
 	<!-- 566-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  4.643641e+14" n="  -9.853492e-01" T="  2.832943e+04" />
+		<arrhenius A="  1.857456e+15" n="  -9.853492e-01" T="  2.832943e+04" />
 	</reaction>
 
 
 	<!-- 567-->
 	<reaction formula="O2_D(19)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  1.993915e+13" n="  -9.267143e-01" T="  2.872766e+04" />
+		<arrhenius A="  7.975658e+13" n="  -9.267143e-01" T="  2.872766e+04" />
 	</reaction>
 
 
 	<!-- 568-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(21)+Arbin">
-		<arrhenius A="  8.206251e+12" n="  2.015685e-02" T="  6.013063e+03" />
+		<arrhenius A="  3.282500e+13" n="  2.015685e-02" T="  6.013063e+03" />
 	</reaction>
 
 
 	<!-- 569-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  1.406199e+14" n="  -3.264736e-01" T="  1.165053e+04" />
+		<arrhenius A="  5.624797e+14" n="  -3.264736e-01" T="  1.165053e+04" />
 	</reaction>
 
 
 	<!-- 570-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  2.329206e+14" n="  -4.157410e-01" T="  1.450309e+04" />
+		<arrhenius A="  9.316825e+14" n="  -4.157410e-01" T="  1.450309e+04" />
 	</reaction>
 
 
 	<!-- 571-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  4.448918e+14" n="  -5.106531e-01" T="  1.689918e+04" />
+		<arrhenius A="  1.779567e+15" n="  -5.106531e-01" T="  1.689918e+04" />
 	</reaction>
 
 
 	<!-- 572-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  8.993036e+14" n="  -6.077191e-01" T="  1.894396e+04" />
+		<arrhenius A="  3.597214e+15" n="  -6.077191e-01" T="  1.894396e+04" />
 	</reaction>
 
 
 	<!-- 573-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  1.355805e+15" n="  -6.751820e-01" T="  2.053191e+04" />
+		<arrhenius A="  5.423220e+15" n="  -6.751820e-01" T="  2.053191e+04" />
 	</reaction>
 
 
 	<!-- 574-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  1.687897e+15" n="  -7.239880e-01" T="  2.185186e+04" />
+		<arrhenius A="  6.751590e+15" n="  -7.239880e-01" T="  2.185186e+04" />
 	</reaction>
 
 
 	<!-- 575-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  1.490679e+15" n="  -7.391305e-01" T="  2.284212e+04" />
+		<arrhenius A="  5.962715e+15" n="  -7.391305e-01" T="  2.284212e+04" />
 	</reaction>
 
 
 	<!-- 576-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  1.213606e+15" n="  -7.475033e-01" T="  2.365224e+04" />
+		<arrhenius A="  4.854422e+15" n="  -7.475033e-01" T="  2.365224e+04" />
 	</reaction>
 
 
 	<!-- 577-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  1.093243e+15" n="  -7.691560e-01" T="  2.432174e+04" />
+		<arrhenius A="  4.372971e+15" n="  -7.691560e-01" T="  2.432174e+04" />
 	</reaction>
 
 
 	<!-- 578-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  1.003006e+15" n="  -7.970494e-01" T="  2.489154e+04" />
+		<arrhenius A="  4.012022e+15" n="  -7.970494e-01" T="  2.489154e+04" />
 	</reaction>
 
 
 	<!-- 579-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  9.578511e+14" n="  -8.321733e-01" T="  2.527912e+04" />
+		<arrhenius A="  3.831404e+15" n="  -8.321733e-01" T="  2.527912e+04" />
 	</reaction>
 
 
 	<!-- 580-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  8.376925e+14" n="  -8.679063e-01" T="  2.552704e+04" />
+		<arrhenius A="  3.350770e+15" n="  -8.679063e-01" T="  2.552704e+04" />
 	</reaction>
 
 
 	<!-- 581-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  7.034541e+14" n="  -9.126445e-01" T="  2.583382e+04" />
+		<arrhenius A="  2.813816e+15" n="  -9.126445e-01" T="  2.583382e+04" />
 	</reaction>
 
 
 	<!-- 582-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  3.528013e+14" n="  -9.393893e-01" T="  2.604431e+04" />
+		<arrhenius A="  1.411205e+15" n="  -9.393893e-01" T="  2.604431e+04" />
 	</reaction>
 
 
 	<!-- 583-->
 	<reaction formula="O2_D(20)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  2.409721e+13" n="  -9.037114e-01" T="  2.653040e+04" />
+		<arrhenius A="  9.638884e+13" n="  -9.037114e-01" T="  2.653040e+04" />
 	</reaction>
 
 
 	<!-- 584-->
 	<reaction formula="O2_D(21)+Arbin=O2_D(22)+Arbin">
-		<arrhenius A="  9.906396e+12" n="  6.894239e-04" T="  5.793749e+03" />
+		<arrhenius A="  3.962558e+13" n="  6.894239e-04" T="  5.793749e+03" />
 	</reaction>
 
 
 	<!-- 585-->
 	<reaction formula="O2_D(21)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  1.308457e+14" n="  -3.216821e-01" T="  1.096001e+04" />
+		<arrhenius A="  5.233826e+14" n="  -3.216821e-01" T="  1.096001e+04" />
 	</reaction>
 
 
 	<!-- 586-->
 	<reaction formula="O2_D(21)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  2.203734e+14" n="  -4.126352e-01" T="  1.370193e+04" />
+		<arrhenius A="  8.814936e+14" n="  -4.126352e-01" T="  1.370193e+04" />
 	</reaction>
 
 
 	<!-- 587-->
 	<reaction formula="O2_D(21)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  4.036042e+14" n="  -5.039695e-01" T="  1.590938e+04" />
+		<arrhenius A="  1.614417e+15" n="  -5.039695e-01" T="  1.590938e+04" />
 	</reaction>
 
 
 	<!-- 588-->
 	<reaction formula="O2_D(21)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  7.818372e+14" n="  -5.984136e-01" T="  1.786144e+04" />
+		<arrhenius A="  3.127349e+15" n="  -5.984136e-01" T="  1.786144e+04" />
 	</reaction>
 
 
 	<!-- 589-->
 	<reaction formula="O2_D(21)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  1.100936e+15" n="  -6.605824e-01" T="  1.929765e+04" />
+		<arrhenius A="  4.403743e+15" n="  -6.605824e-01" T="  1.929765e+04" />
 	</reaction>
 
 
 	<!-- 590-->
 	<reaction formula="O2_D(21)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  1.189999e+15" n="  -6.969455e-01" T="  2.045328e+04" />
+		<arrhenius A="  4.759996e+15" n="  -6.969455e-01" T="  2.045328e+04" />
 	</reaction>
 
 
 	<!-- 591-->
 	<reaction formula="O2_D(21)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  1.123499e+15" n="  -7.199969e-01" T="  2.138667e+04" />
+		<arrhenius A="  4.493997e+15" n="  -7.199969e-01" T="  2.138667e+04" />
 	</reaction>
 
 
 	<!-- 592-->
 	<reaction formula="O2_D(21)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  8.989529e+14" n="  -7.300058e-01" T="  2.205516e+04" />
+		<arrhenius A="  3.595812e+15" n="  -7.300058e-01" T="  2.205516e+04" />
 	</reaction>
 
 
 	<!-- 593-->
 	<reaction formula="O2_D(21)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  6.660993e+14" n="  -7.369910e-01" T="  2.254306e+04" />
+		<arrhenius A="  2.664397e+15" n="  -7.369910e-01" T="  2.254306e+04" />
 	</reaction>
 
 
 	<!-- 594-->
 	<reaction formula="O2_D(21)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  5.657519e+14" n="  -7.605535e-01" T="  2.299044e+04" />
+		<arrhenius A="  2.263007e+15" n="  -7.605535e-01" T="  2.299044e+04" />
 	</reaction>
 
 
 	<!-- 595-->
 	<reaction formula="O2_D(21)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  4.968167e+14" n="  -7.973139e-01" T="  2.331545e+04" />
+		<arrhenius A="  1.987267e+15" n="  -7.973139e-01" T="  2.331545e+04" />
 	</reaction>
 
 
 	<!-- 596-->
 	<reaction formula="O2_D(21)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  4.263871e+14" n="  -8.440229e-01" T="  2.354325e+04" />
+		<arrhenius A="  1.705549e+15" n="  -8.440229e-01" T="  2.354325e+04" />
 	</reaction>
 
 
 	<!-- 597-->
 	<reaction formula="O2_D(21)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  2.316631e+14" n="  -8.768108e-01" T="  2.381494e+04" />
+		<arrhenius A="  9.266523e+14" n="  -8.768108e-01" T="  2.381494e+04" />
 	</reaction>
 
 
 	<!-- 598-->
 	<reaction formula="O2_D(21)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  2.022870e+13" n="  -8.564875e-01" T="  2.424717e+04" />
+		<arrhenius A="  8.091478e+13" n="  -8.564875e-01" T="  2.424717e+04" />
 	</reaction>
 
 
 	<!-- 599-->
 	<reaction formula="O2_D(22)+Arbin=O2_D(23)+Arbin">
-		<arrhenius A="  1.213833e+13" n="  -2.100628e-02" T="  5.586212e+03" />
+		<arrhenius A="  4.855334e+13" n="  -2.100628e-02" T="  5.586212e+03" />
 	</reaction>
 
 
 	<!-- 600-->
 	<reaction formula="O2_D(22)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  1.194727e+14" n="  -3.141788e-01" T="  1.032053e+04" />
+		<arrhenius A="  4.778907e+14" n="  -3.141788e-01" T="  1.032053e+04" />
 	</reaction>
 
 
 	<!-- 601-->
 	<reaction formula="O2_D(22)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  2.001961e+14" n="  -4.050773e-01" T="  1.288960e+04" />
+		<arrhenius A="  8.007845e+14" n="  -4.050773e-01" T="  1.288960e+04" />
 	</reaction>
 
 
 	<!-- 602-->
 	<reaction formula="O2_D(22)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  3.820020e+14" n="  -5.020738e-01" T="  1.502668e+04" />
+		<arrhenius A="  1.528008e+15" n="  -5.020738e-01" T="  1.502668e+04" />
 	</reaction>
 
 
 	<!-- 603-->
 	<reaction formula="O2_D(22)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  5.774531e+14" n="  -5.734921e-01" T="  1.665265e+04" />
+		<arrhenius A="  2.309812e+15" n="  -5.734921e-01" T="  1.665265e+04" />
 	</reaction>
 
 
 	<!-- 604-->
 	<reaction formula="O2_D(22)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  8.250207e+14" n="  -6.384031e-01" T="  1.806266e+04" />
+		<arrhenius A="  3.300083e+15" n="  -6.384031e-01" T="  1.806266e+04" />
 	</reaction>
 
 
 	<!-- 605-->
 	<reaction formula="O2_D(22)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  8.811154e+14" n="  -6.747520e-01" T="  1.912642e+04" />
+		<arrhenius A="  3.524462e+15" n="  -6.747520e-01" T="  1.912642e+04" />
 	</reaction>
 
 
 	<!-- 606-->
 	<reaction formula="O2_D(22)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  7.333775e+14" n="  -6.889364e-01" T="  1.989315e+04" />
+		<arrhenius A="  2.933510e+15" n="  -6.889364e-01" T="  1.989315e+04" />
 	</reaction>
 
 
 	<!-- 607-->
 	<reaction formula="O2_D(22)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  5.820885e+14" n="  -7.016818e-01" T="  2.049212e+04" />
+		<arrhenius A="  2.328354e+15" n="  -7.016818e-01" T="  2.049212e+04" />
 	</reaction>
 
 
 	<!-- 608-->
 	<reaction formula="O2_D(22)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  4.490374e+14" n="  -7.155842e-01" T="  2.087312e+04" />
+		<arrhenius A="  1.796150e+15" n="  -7.155842e-01" T="  2.087312e+04" />
 	</reaction>
 
 
 	<!-- 609-->
 	<reaction formula="O2_D(22)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  3.686357e+14" n="  -7.446710e-01" T="  2.116134e+04" />
+		<arrhenius A="  1.474543e+15" n="  -7.446710e-01" T="  2.116134e+04" />
 	</reaction>
 
 
 	<!-- 610-->
 	<reaction formula="O2_D(22)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  2.901934e+14" n="  -7.842962e-01" T="  2.142297e+04" />
+		<arrhenius A="  1.160774e+15" n="  -7.842962e-01" T="  2.142297e+04" />
 	</reaction>
 
 
 	<!-- 611-->
 	<reaction formula="O2_D(22)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  1.582434e+14" n="  -8.152712e-01" T="  2.157666e+04" />
+		<arrhenius A="  6.329735e+14" n="  -8.152712e-01" T="  2.157666e+04" />
 	</reaction>
 
 
 	<!-- 612-->
 	<reaction formula="O2_D(22)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  1.446263e+13" n="  -7.933901e-01" T="  2.193217e+04" />
+		<arrhenius A="  5.785052e+13" n="  -7.933901e-01" T="  2.193217e+04" />
 	</reaction>
 
 
 	<!-- 613-->
 	<reaction formula="O2_D(23)+Arbin=O2_D(24)+Arbin">
-		<arrhenius A="  1.327915e+13" n="  -3.060908e-02" T="  5.314445e+03" />
+		<arrhenius A="  5.311662e+13" n="  -3.060908e-02" T="  5.314445e+03" />
 	</reaction>
 
 
 	<!-- 614-->
 	<reaction formula="O2_D(23)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  1.063460e+14" n="  -3.037759e-01" T="  9.698669e+03" />
+		<arrhenius A="  4.253840e+14" n="  -3.037759e-01" T="  9.698669e+03" />
 	</reaction>
 
 
 	<!-- 615-->
 	<reaction formula="O2_D(23)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  1.776382e+14" n="  -3.962241e-01" T="  1.207886e+04" />
+		<arrhenius A="  7.105528e+14" n="  -3.962241e-01" T="  1.207886e+04" />
 	</reaction>
 
 
 	<!-- 616-->
 	<reaction formula="O2_D(23)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  3.058314e+14" n="  -4.847617e-01" T="  1.399768e+04" />
+		<arrhenius A="  1.223326e+15" n="  -4.847617e-01" T="  1.399768e+04" />
 	</reaction>
 
 
 	<!-- 617-->
 	<reaction formula="O2_D(23)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  4.662446e+14" n="  -5.585226e-01" T="  1.554771e+04" />
+		<arrhenius A="  1.864978e+15" n="  -5.585226e-01" T="  1.554771e+04" />
 	</reaction>
 
 
 	<!-- 618-->
 	<reaction formula="O2_D(23)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  5.431136e+14" n="  -6.047163e-01" T="  1.672797e+04" />
+		<arrhenius A="  2.172454e+15" n="  -6.047163e-01" T="  1.672797e+04" />
 	</reaction>
 
 
 	<!-- 619-->
 	<reaction formula="O2_D(23)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  5.579665e+14" n="  -6.408174e-01" T="  1.770250e+04" />
+		<arrhenius A="  2.231866e+15" n="  -6.408174e-01" T="  1.770250e+04" />
 	</reaction>
 
 
 	<!-- 620-->
 	<reaction formula="O2_D(23)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  4.861529e+14" n="  -6.630541e-01" T="  1.838219e+04" />
+		<arrhenius A="  1.944611e+15" n="  -6.630541e-01" T="  1.838219e+04" />
 	</reaction>
 
 
 	<!-- 621-->
 	<reaction formula="O2_D(23)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  3.775390e+14" n="  -6.783093e-01" T="  1.885158e+04" />
+		<arrhenius A="  1.510156e+15" n="  -6.783093e-01" T="  1.885158e+04" />
 	</reaction>
 
 
 	<!-- 622-->
 	<reaction formula="O2_D(23)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  2.661342e+14" n="  -6.911730e-01" T="  1.915464e+04" />
+		<arrhenius A="  1.064537e+15" n="  -6.911730e-01" T="  1.915464e+04" />
 	</reaction>
 
 
 	<!-- 623-->
 	<reaction formula="O2_D(23)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  1.875717e+14" n="  -7.213841e-01" T="  1.932675e+04" />
+		<arrhenius A="  7.502869e+14" n="  -7.213841e-01" T="  1.932675e+04" />
 	</reaction>
 
 
 	<!-- 624-->
 	<reaction formula="O2_D(23)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  9.721386e+13" n="  -7.474996e-01" T="  1.941254e+04" />
+		<arrhenius A="  3.888554e+14" n="  -7.474996e-01" T="  1.941254e+04" />
 	</reaction>
 
 
 	<!-- 625-->
 	<reaction formula="O2_D(23)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  1.034019e+13" n="  -7.290101e-01" T="  1.960282e+04" />
+		<arrhenius A="  4.136074e+13" n="  -7.290101e-01" T="  1.960282e+04" />
 	</reaction>
 
 
 	<!-- 626-->
 	<reaction formula="O2_D(24)+Arbin=O2_D(25)+Arbin">
-		<arrhenius A="  1.448554e+13" n="  -4.045382e-02" T="  5.040539e+03" />
+		<arrhenius A="  5.794217e+13" n="  -4.045382e-02" T="  5.040539e+03" />
 	</reaction>
 
 
 	<!-- 627-->
 	<reaction formula="O2_D(24)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  8.969964e+13" n="  -2.900016e-01" T="  8.997231e+03" />
+		<arrhenius A="  3.587986e+14" n="  -2.900016e-01" T="  8.997231e+03" />
 	</reaction>
 
 
 	<!-- 628-->
 	<reaction formula="O2_D(24)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  1.554603e+14" n="  -3.874986e-01" T="  1.123773e+04" />
+		<arrhenius A="  6.218414e+14" n="  -3.874986e-01" T="  1.123773e+04" />
 	</reaction>
 
 
 	<!-- 629-->
 	<reaction formula="O2_D(24)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  2.576943e+14" n="  -4.737515e-01" T="  1.301454e+04" />
+		<arrhenius A="  1.030777e+15" n="  -4.737515e-01" T="  1.301454e+04" />
 	</reaction>
 
 
 	<!-- 630-->
 	<reaction formula="O2_D(24)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  3.491719e+14" n="  -5.369731e-01" T="  1.439797e+04" />
+		<arrhenius A="  1.396688e+15" n="  -5.369731e-01" T="  1.439797e+04" />
 	</reaction>
 
 
 	<!-- 631-->
 	<reaction formula="O2_D(24)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  3.800498e+14" n="  -5.801927e-01" T="  1.544818e+04" />
+		<arrhenius A="  1.520199e+15" n="  -5.801927e-01" T="  1.544818e+04" />
 	</reaction>
 
 
 	<!-- 632-->
 	<reaction formula="O2_D(24)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  3.287716e+14" n="  -6.024200e-01" T="  1.622714e+04" />
+		<arrhenius A="  1.315086e+15" n="  -6.024200e-01" T="  1.622714e+04" />
 	</reaction>
 
 
 	<!-- 633-->
 	<reaction formula="O2_D(24)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  2.866787e+14" n="  -6.295245e-01" T="  1.687292e+04" />
+		<arrhenius A="  1.146715e+15" n="  -6.295245e-01" T="  1.687292e+04" />
 	</reaction>
 
 
 	<!-- 634-->
 	<reaction formula="O2_D(24)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  2.188839e+14" n="  -6.499507e-01" T="  1.722016e+04" />
+		<arrhenius A="  8.755355e+14" n="  -6.499507e-01" T="  1.722016e+04" />
 	</reaction>
 
 
 	<!-- 635-->
 	<reaction formula="O2_D(24)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  1.461835e+14" n="  -6.737608e-01" T="  1.738379e+04" />
+		<arrhenius A="  5.847340e+14" n="  -6.737608e-01" T="  1.738379e+04" />
 	</reaction>
 
 
 	<!-- 636-->
 	<reaction formula="O2_D(24)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  7.056496e+13" n="  -6.918377e-01" T="  1.746824e+04" />
+		<arrhenius A="  2.822598e+14" n="  -6.918377e-01" T="  1.746824e+04" />
 	</reaction>
 
 
 	<!-- 637-->
 	<reaction formula="O2_D(24)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  7.816022e+12" n="  -6.747682e-01" T="  1.757174e+04" />
+		<arrhenius A="  3.126409e+13" n="  -6.747682e-01" T="  1.757174e+04" />
 	</reaction>
 
 
 	<!-- 638-->
 	<reaction formula="O2_D(25)+Arbin=O2_D(26)+Arbin">
-		<arrhenius A="  1.577924e+13" n="  -5.115271e-02" T="  4.753615e+03" />
+		<arrhenius A="  6.311696e+13" n="  -5.115271e-02" T="  4.753615e+03" />
 	</reaction>
 
 
 	<!-- 639-->
 	<reaction formula="O2_D(25)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  7.264295e+13" n="  -2.723631e-01" T="  8.278599e+03" />
+		<arrhenius A="  2.905718e+14" n="  -2.723631e-01" T="  8.278599e+03" />
 	</reaction>
 
 
 	<!-- 640-->
 	<reaction formula="O2_D(25)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  1.336047e+14" n="  -3.769768e-01" T="  1.043915e+04" />
+		<arrhenius A="  5.344187e+14" n="  -3.769768e-01" T="  1.043915e+04" />
 	</reaction>
 
 
 	<!-- 641-->
 	<reaction formula="O2_D(25)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  1.986546e+14" n="  -4.533431e-01" T="  1.202793e+04" />
+		<arrhenius A="  7.946185e+14" n="  -4.533431e-01" T="  1.202793e+04" />
 	</reaction>
 
 
 	<!-- 642-->
 	<reaction formula="O2_D(25)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  2.385924e+14" n="  -5.083890e-01" T="  1.320786e+04" />
+		<arrhenius A="  9.543697e+14" n="  -5.083890e-01" T="  1.320786e+04" />
 	</reaction>
 
 
 	<!-- 643-->
 	<reaction formula="O2_D(25)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  2.355706e+14" n="  -5.453653e-01" T="  1.411932e+04" />
+		<arrhenius A="  9.422824e+14" n="  -5.453653e-01" T="  1.411932e+04" />
 	</reaction>
 
 
 	<!-- 644-->
 	<reaction formula="O2_D(25)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  2.066194e+14" n="  -5.722996e-01" T="  1.480980e+04" />
+		<arrhenius A="  8.264775e+14" n="  -5.722996e-01" T="  1.480980e+04" />
 	</reaction>
 
 
 	<!-- 645-->
 	<reaction formula="O2_D(25)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  1.465524e+14" n="  -5.855880e-01" T="  1.518961e+04" />
+		<arrhenius A="  5.862095e+14" n="  -5.855880e-01" T="  1.518961e+04" />
 	</reaction>
 
 
 	<!-- 646-->
 	<reaction formula="O2_D(25)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  1.034165e+14" n="  -6.142515e-01" T="  1.550197e+04" />
+		<arrhenius A="  4.136662e+14" n="  -6.142515e-01" T="  1.550197e+04" />
 	</reaction>
 
 
 	<!-- 647-->
 	<reaction formula="O2_D(25)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  5.202489e+13" n="  -6.366218e-01" T="  1.557712e+04" />
+		<arrhenius A="  2.080996e+14" n="  -6.366218e-01" T="  1.557712e+04" />
 	</reaction>
 
 
 	<!-- 648-->
 	<reaction formula="O2_D(25)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  5.375279e+12" n="  -6.122263e-01" T="  1.547932e+04" />
+		<arrhenius A="  2.150112e+13" n="  -6.122263e-01" T="  1.547932e+04" />
 	</reaction>
 
 
 	<!-- 649-->
 	<reaction formula="O2_D(26)+Arbin=O2_D(27)+Arbin">
-		<arrhenius A="  1.559863e+13" n="  -5.146118e-02" T="  4.429721e+03" />
+		<arrhenius A="  6.239452e+13" n="  -5.146118e-02" T="  4.429721e+03" />
 	</reaction>
 
 
 	<!-- 650-->
 	<reaction formula="O2_D(26)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  5.342572e+13" n="  -2.448960e-01" T="  7.539819e+03" />
+		<arrhenius A="  2.137029e+14" n="  -2.448960e-01" T="  7.539819e+03" />
 	</reaction>
 
 
 	<!-- 651-->
 	<reaction formula="O2_D(26)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  1.036407e+14" n="  -3.559585e-01" T="  9.605633e+03" />
+		<arrhenius A="  4.145630e+14" n="  -3.559585e-01" T="  9.605633e+03" />
 	</reaction>
 
 
 	<!-- 652-->
 	<reaction formula="O2_D(26)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  1.358489e+14" n="  -4.237369e-01" T="  1.096196e+04" />
+		<arrhenius A="  5.433956e+14" n="  -4.237369e-01" T="  1.096196e+04" />
 	</reaction>
 
 
 	<!-- 653-->
 	<reaction formula="O2_D(26)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  1.541843e+14" n="  -4.763889e-01" T="  1.201218e+04" />
+		<arrhenius A="  6.167373e+14" n="  -4.763889e-01" T="  1.201218e+04" />
 	</reaction>
 
 
 	<!-- 654-->
 	<reaction formula="O2_D(26)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  1.415106e+14" n="  -5.098142e-01" T="  1.277141e+04" />
+		<arrhenius A="  5.660425e+14" n="  -5.098142e-01" T="  1.277141e+04" />
 	</reaction>
 
 
 	<!-- 655-->
 	<reaction formula="O2_D(26)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  1.066089e+14" n="  -5.290435e-01" T="  1.328774e+04" />
+		<arrhenius A="  4.264357e+14" n="  -5.290435e-01" T="  1.328774e+04" />
 	</reaction>
 
 
 	<!-- 656-->
 	<reaction formula="O2_D(26)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  6.775885e+13" n="  -5.467429e-01" T="  1.360779e+04" />
+		<arrhenius A="  2.710354e+14" n="  -5.467429e-01" T="  1.360779e+04" />
 	</reaction>
 
 
 	<!-- 657-->
 	<reaction formula="O2_D(26)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  2.910645e+13" n="  -5.498703e-01" T="  1.358765e+04" />
+		<arrhenius A="  1.164258e+14" n="  -5.498703e-01" T="  1.358765e+04" />
 	</reaction>
 
 
 	<!-- 658-->
 	<reaction formula="O2_D(26)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  3.288495e+12" n="  -5.348289e-01" T="  1.339823e+04" />
+		<arrhenius A="  1.315398e+13" n="  -5.348289e-01" T="  1.339823e+04" />
 	</reaction>
 
 
 	<!-- 659-->
 	<reaction formula="O2_D(27)+Arbin=O2_D(28)+Arbin">
-		<arrhenius A="  1.425938e+13" n="  -4.444143e-02" T="  4.043696e+03" />
+		<arrhenius A="  5.703752e+13" n="  -4.444143e-02" T="  4.043696e+03" />
 	</reaction>
 
 
 	<!-- 660-->
 	<reaction formula="O2_D(27)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  3.732407e+13" n="  -2.124708e-01" T="  6.775433e+03" />
+		<arrhenius A="  1.492963e+14" n="  -2.124708e-01" T="  6.775433e+03" />
 	</reaction>
 
 
 	<!-- 661-->
 	<reaction formula="O2_D(27)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  7.091585e+13" n="  -3.254384e-01" T="  8.654576e+03" />
+		<arrhenius A="  2.836634e+14" n="  -3.254384e-01" T="  8.654576e+03" />
 	</reaction>
 
 
 	<!-- 662-->
 	<reaction formula="O2_D(27)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  9.059956e+13" n="  -3.935953e-01" T="  9.931204e+03" />
+		<arrhenius A="  3.623982e+14" n="  -3.935953e-01" T="  9.931204e+03" />
 	</reaction>
 
 
 	<!-- 663-->
 	<reaction formula="O2_D(27)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  8.883404e+13" n="  -4.356698e-01" T="  1.077390e+04" />
+		<arrhenius A="  3.553361e+14" n="  -4.356698e-01" T="  1.077390e+04" />
 	</reaction>
 
 
 	<!-- 664-->
 	<reaction formula="O2_D(27)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  7.371670e+13" n="  -4.655871e-01" T="  1.142325e+04" />
+		<arrhenius A="  2.948668e+14" n="  -4.655871e-01" T="  1.142325e+04" />
 	</reaction>
 
 
 	<!-- 665-->
 	<reaction formula="O2_D(27)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  4.488898e+13" n="  -4.784729e-01" T="  1.177459e+04" />
+		<arrhenius A="  1.795559e+14" n="  -4.784729e-01" T="  1.177459e+04" />
 	</reaction>
 
 
 	<!-- 666-->
 	<reaction formula="O2_D(27)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  1.961236e+13" n="  -4.864865e-01" T="  1.177926e+04" />
+		<arrhenius A="  7.844943e+13" n="  -4.864865e-01" T="  1.177926e+04" />
 	</reaction>
 
 
 	<!-- 667-->
 	<reaction formula="O2_D(27)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  2.463019e+12" n="  -4.734955e-01" T="  1.160843e+04" />
+		<arrhenius A="  9.852077e+12" n="  -4.734955e-01" T="  1.160843e+04" />
 	</reaction>
 
 
 	<!-- 668-->
 	<reaction formula="O2_D(28)+Arbin=O2_D(29)+Arbin">
-		<arrhenius A="  1.247989e+13" n="  -3.308292e-02" T="  3.632546e+03" />
+		<arrhenius A="  4.991956e+13" n="  -3.308292e-02" T="  3.632546e+03" />
 	</reaction>
 
 
 	<!-- 669-->
 	<reaction formula="O2_D(28)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  2.769036e+13" n="  -1.887069e-01" T="  6.031425e+03" />
+		<arrhenius A="  1.107614e+14" n="  -1.887069e-01" T="  6.031425e+03" />
 	</reaction>
 
 
 	<!-- 670-->
 	<reaction formula="O2_D(28)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  4.691167e+13" n="  -2.931206e-01" T="  7.713751e+03" />
+		<arrhenius A="  1.876467e+14" n="  -2.931206e-01" T="  7.713751e+03" />
 	</reaction>
 
 
 	<!-- 671-->
 	<reaction formula="O2_D(28)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  5.189707e+13" n="  -3.509344e-01" T="  8.789219e+03" />
+		<arrhenius A="  2.075883e+14" n="  -3.509344e-01" T="  8.789219e+03" />
 	</reaction>
 
 
 	<!-- 672-->
 	<reaction formula="O2_D(28)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  4.526512e+13" n="  -3.882408e-01" T="  9.506431e+03" />
+		<arrhenius A="  1.810605e+14" n="  -3.882408e-01" T="  9.506431e+03" />
 	</reaction>
 
 
 	<!-- 673-->
 	<reaction formula="O2_D(28)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  2.760195e+13" n="  -4.020270e-01" T="  9.867187e+03" />
+		<arrhenius A="  1.104078e+14" n="  -4.020270e-01" T="  9.867187e+03" />
 	</reaction>
 
 
 	<!-- 674-->
 	<reaction formula="O2_D(28)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  1.212054e+13" n="  -4.077559e-01" T="  9.954974e+03" />
+		<arrhenius A="  4.848217e+13" n="  -4.077559e-01" T="  9.954974e+03" />
 	</reaction>
 
 
 	<!-- 675-->
 	<reaction formula="O2_D(28)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  1.705449e+12" n="  -4.063722e-01" T="  9.894079e+03" />
+		<arrhenius A="  6.821795e+12" n="  -4.063722e-01" T="  9.894079e+03" />
 	</reaction>
 
 
 	<!-- 676-->
 	<reaction formula="O2_D(29)+Arbin=O2_D(30)+Arbin">
-		<arrhenius A="  1.096403e+13" n="  -2.353483e-02" T="  3.234668e+03" />
+		<arrhenius A="  4.385612e+13" n="  -2.353483e-02" T="  3.234668e+03" />
 	</reaction>
 
 
 	<!-- 677-->
 	<reaction formula="O2_D(29)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  1.970867e+13" n="  -1.611560e-01" T="  5.291008e+03" />
+		<arrhenius A="  7.883467e+13" n="  -1.611560e-01" T="  5.291008e+03" />
 	</reaction>
 
 
 	<!-- 678-->
 	<reaction formula="O2_D(29)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  2.757443e+13" n="  -2.501275e-01" T="  6.731111e+03" />
+		<arrhenius A="  1.102977e+14" n="  -2.501275e-01" T="  6.731111e+03" />
 	</reaction>
 
 
 	<!-- 679-->
 	<reaction formula="O2_D(29)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  2.634072e+13" n="  -2.997954e-01" T="  7.585928e+03" />
+		<arrhenius A="  1.053629e+14" n="  -2.997954e-01" T="  7.585928e+03" />
 	</reaction>
 
 
 	<!-- 680-->
 	<reaction formula="O2_D(29)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  1.713247e+13" n="  -3.212264e-01" T="  8.039955e+03" />
+		<arrhenius A="  6.852988e+13" n="  -3.212264e-01" T="  8.039955e+03" />
 	</reaction>
 
 
 	<!-- 681-->
 	<reaction formula="O2_D(29)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  7.859987e+12" n="  -3.303663e-01" T="  8.217036e+03" />
+		<arrhenius A="  3.143995e+13" n="  -3.303663e-01" T="  8.217036e+03" />
 	</reaction>
 
 
 	<!-- 682-->
 	<reaction formula="O2_D(29)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  1.320675e+12" n="  -3.415318e-01" T="  8.170396e+03" />
+		<arrhenius A="  5.282701e+12" n="  -3.415318e-01" T="  8.170396e+03" />
 	</reaction>
 
 
 	<!-- 683-->
 	<reaction formula="O2_D(30)+Arbin=O2_D(31)+Arbin">
-		<arrhenius A="  8.837336e+12" n="  -5.378081e-03" T="  2.785965e+03" />
+		<arrhenius A="  3.534934e+13" n="  -5.378081e-03" T="  2.785965e+03" />
 	</reaction>
 
 
 	<!-- 684-->
 	<reaction formula="O2_D(30)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  1.373389e+13" n="  -1.326444e-01" T="  4.585864e+03" />
+		<arrhenius A="  5.493555e+13" n="  -1.326444e-01" T="  4.585864e+03" />
 	</reaction>
 
 
 	<!-- 685-->
 	<reaction formula="O2_D(30)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  1.399671e+13" n="  -1.968273e-01" T="  5.648527e+03" />
+		<arrhenius A="  5.598684e+13" n="  -1.968273e-01" T="  5.648527e+03" />
 	</reaction>
 
 
 	<!-- 686-->
 	<reaction formula="O2_D(30)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  1.031134e+13" n="  -2.342552e-01" T="  6.310700e+03" />
+		<arrhenius A="  4.124537e+13" n="  -2.342552e-01" T="  6.310700e+03" />
 	</reaction>
 
 
 	<!-- 687-->
 	<reaction formula="O2_D(30)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  5.039484e+12" n="  -2.505410e-01" T="  6.592995e+03" />
+		<arrhenius A="  2.015793e+13" n="  -2.505410e-01" T="  6.592995e+03" />
 	</reaction>
 
 
 	<!-- 688-->
 	<reaction formula="O2_D(30)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  8.280613e+11" n="  -2.610704e-01" T="  6.540672e+03" />
+		<arrhenius A="  3.312245e+12" n="  -2.610704e-01" T="  6.540672e+03" />
 	</reaction>
 
 
 	<!-- 689-->
 	<reaction formula="O2_D(31)+Arbin=O2_D(32)+Arbin">
-		<arrhenius A="  6.784151e+12" n="  1.651840e-02" T="  2.307080e+03" />
+		<arrhenius A="  2.713660e+13" n="  1.651840e-02" T="  2.307080e+03" />
 	</reaction>
 
 
 	<!-- 690-->
 	<reaction formula="O2_D(31)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  8.328116e+12" n="  -9.418773e-02" T="  3.800134e+03" />
+		<arrhenius A="  3.331246e+13" n="  -9.418773e-02" T="  3.800134e+03" />
 	</reaction>
 
 
 	<!-- 691-->
 	<reaction formula="O2_D(31)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  6.491213e+12" n="  -1.453592e-01" T="  4.601530e+03" />
+		<arrhenius A="  2.596485e+13" n="  -1.453592e-01" T="  4.601530e+03" />
 	</reaction>
 
 
 	<!-- 692-->
 	<reaction formula="O2_D(31)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  3.213520e+12" n="  -1.661036e-01" T="  5.008767e+03" />
+		<arrhenius A="  1.285408e+13" n="  -1.661036e-01" T="  5.008767e+03" />
 	</reaction>
 
 
 	<!-- 693-->
 	<reaction formula="O2_D(31)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  5.551507e+11" n="  -1.776034e-01" T="  5.075041e+03" />
+		<arrhenius A="  2.220603e+12" n="  -1.776034e-01" T="  5.075041e+03" />
 	</reaction>
 
 
 	<!-- 694-->
 	<reaction formula="O2_D(32)+Arbin=O2_D(33)+Arbin">
-		<arrhenius A="  5.072198e+12" n="  3.823395e-02" T="  1.841708e+03" />
+		<arrhenius A="  2.028879e+13" n="  3.823395e-02" T="  1.841708e+03" />
 	</reaction>
 
 
 	<!-- 695-->
 	<reaction formula="O2_D(32)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  4.299843e+12" n="  -4.906761e-02" T="  2.957460e+03" />
+		<arrhenius A="  1.719937e+13" n="  -4.906761e-02" T="  2.957460e+03" />
 	</reaction>
 
 
 	<!-- 696-->
 	<reaction formula="O2_D(32)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  2.339918e+12" n="  -8.597985e-02" T="  3.576245e+03" />
+		<arrhenius A="  9.359672e+12" n="  -8.597985e-02" T="  3.576245e+03" />
 	</reaction>
 
 
 	<!-- 697-->
 	<reaction formula="O2_D(32)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  4.525398e+11" n="  -1.058637e-01" T="  3.807687e+03" />
+		<arrhenius A="  1.810159e+12" n="  -1.058637e-01" T="  3.807687e+03" />
 	</reaction>
 
 
 	<!-- 698-->
 	<reaction formula="O2_D(33)+Arbin=O2_D(34)+Arbin">
-		<arrhenius A="  3.254587e+12" n="  6.927608e-02" T="  1.333410e+03" />
+		<arrhenius A="  1.301835e+13" n="  6.927608e-02" T="  1.333410e+03" />
 	</reaction>
 
 
 	<!-- 699-->
 	<reaction formula="O2_D(33)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  1.878136e+12" n="  -1.464018e-03" T="  2.166383e+03" />
+		<arrhenius A="  7.512544e+12" n="  -1.464018e-03" T="  2.166383e+03" />
 	</reaction>
 
 
 	<!-- 700-->
 	<reaction formula="O2_D(33)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  3.418116e+11" n="  -2.253128e-02" T="  2.477169e+03" />
+		<arrhenius A="  1.367246e+12" n="  -2.253128e-02" T="  2.477169e+03" />
 	</reaction>
 
 
 	<!-- 701-->
 	<reaction formula="O2_D(34)+Arbin=O2_D(35)+Arbin">
-		<arrhenius A="  1.632843e+12" n="  1.153288e-01" T="  8.328250e+02" />
+		<arrhenius A="  6.531373e+12" n="  1.153288e-01" T="  8.328250e+02" />
 	</reaction>
 
 
 	<!-- 702-->
 	<reaction formula="O2_D(34)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  3.487184e+11" n="  5.126827e-02" T="  1.409890e+03" />
+		<arrhenius A="  1.394873e+12" n="  5.126827e-02" T="  1.409890e+03" />
 	</reaction>
 
 
 	<!-- 703-->
 	<reaction formula="O2_D(35)+Arbin=O2_D(36)+Arbin">
-		<arrhenius A="  4.145893e+11" n="  1.681409e-01" T="  4.743203e+02" />
+		<arrhenius A="  1.658357e+12" n="  1.681409e-01" T="  4.743203e+02" />
 	</reaction>
-
-
 
 
     
