@@ -9,7 +9,7 @@
 			<electronic_levels units="1/cm">
 				<level degeneracy="1" energy="0.0" />
 				<level degeneracy="5" energy="93144.1" />
-				<!-- <level degeneracy="3" energy="93751.0" />
+				<level degeneracy="3" energy="93751.0" />
 				<level degeneracy="1" energy="94554.1" />
 				<level degeneracy="3" energy="95400.2" />
 				<level degeneracy="3" energy="104102.5" />
@@ -37,7 +37,7 @@
 				<level degeneracy="7" energy="114822.5" />
 				<level degeneracy="1" energy="114862.2" />
 				<level degeneracy="3" energy="114975.5" />
-				<level degeneracy="3" energy="115367.4" /> -->
+				<level degeneracy="3" energy="115367.4" />
 			</electronic_levels>
 			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
 				0
@@ -2464,15 +2464,15 @@
 				42029.6803
 				42042.9885			</vibrational_temperatures>
 			<electronic_levels units="1/cm">
-				<level degeneracy="3" energy="0.0" />
-				<level degeneracy="2" energy="8270.9" />
 				<!-- <level degeneracy="3" energy="0.0" />
+				<level degeneracy="2" energy="8270.9" /> -->
+				<level degeneracy="3" energy="0.0" />
 				<level degeneracy="2" energy="7917.5" />
 				<level degeneracy="1" energy="13195.1" />
 				<level degeneracy="1" energy="33055.7" />
 				<level degeneracy="6" energy="34690.9" />
 				<level degeneracy="3" energy="35393.1" />
-				<level degeneracy="3" energy="49792.1" /> -->
+				<level degeneracy="3" energy="49792.1" />
 			</electronic_levels>
 			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
 				0.0
@@ -2535,15 +2535,93 @@
 				41764.7920736
 			</vibrational_temperatures>
 			<electronic_levels units="1/cm">
-				<level degeneracy="3" energy="0.0" />
-				<level degeneracy="2" energy="8270.9" />
 				<!-- <level degeneracy="3" energy="0.0" />
+				<level degeneracy="2" energy="8270.9" /> -->
+				<level degeneracy="3" energy="0.0" />
 				<level degeneracy="2" energy="7917.5" />
 				<level degeneracy="1" energy="13195.1" />
 				<level degeneracy="1" energy="33055.7" />
 				<level degeneracy="6" energy="34690.9" />
 				<level degeneracy="3" energy="35393.1" />
-				<level degeneracy="3" energy="49792.1" /> -->
+				<level degeneracy="3" energy="49792.1" />
+			</electronic_levels>
+			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+				0.0
+			</formation_enthalpy>
+		</thermodynamics>
+	</species>
+
+	<!-- Oxygen diatomic CHESS -->
+	<species name="O2_C">
+		<stoichiometry>
+			O: 2
+		</stoichiometry>
+		<thermodynamics type="STS">
+			<linear>
+				yes
+			</linear>
+			<rotational_temperature units="K">
+				2.086
+			</rotational_temperature>
+			<steric_factor>
+				2
+			</steric_factor>
+			<vibrational_temperatures units="1/cm">
+				792.1386157468089
+				2356.924897809917
+				3895.888036168067
+				5409.399579424706
+				6897.84997294904
+				8361.63909951943
+				9801.163330320127
+				11216.803892785823
+				12608.916994243235
+				13977.822189755636
+				15323.792944713712
+				16647.04939217273
+				17947.749334392644
+				19225.983414396214
+				20481.76809278079
+				21715.042136124215
+				22925.661569068317
+				24113.394626402365
+				25277.918241468986
+				26418.81102297594
+				27535.555010793203
+				28627.515923236107
+				29693.94535181168
+				30733.965397994438
+				31746.55111525589
+				32730.519535332936
+				33684.50333127215
+				34606.91131199609
+				35495.90208534755
+				36349.316020953855
+				37164.59623935954
+				37938.692043188545
+				38667.881142692844
+				39347.532623150495
+				39971.69872205137
+				40532.436652486176
+				41018.50931332873
+				41412.68794601647
+				41686.743723462496
+				41828.500193118394
+				41915.0434297604
+				41975.530638166114
+				42011.55520415927
+				42027.66244735555
+				42031.5295903603			</vibrational_temperatures>
+			<electronic_levels units="1/cm">
+				<!-- <level degeneracy="3" energy="0.0" />
+				<level degeneracy="2" energy="8270.9" /> -->
+				<level degeneracy="3" energy="0.0" />
+				<level degeneracy="2" energy="7917.5" />
+				<level degeneracy="1" energy="13195.1" />
+				<level degeneracy="1" energy="33055.7" />
+				<level degeneracy="6" energy="34690.9" />
+				<level degeneracy="3" energy="35393.1" />
+				<level degeneracy="3" energy="49792.1" />
 			</electronic_levels>
 			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
 				0.0

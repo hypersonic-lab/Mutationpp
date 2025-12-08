@@ -1,0 +1,9 @@
+<mixture mechanism="O2_STS_CHESS_expanded" thermo_db="STS">
+    <species>
+        Obin O2_C(!)
+    </species>
+
+    <!-- <element_compositions default="default">
+        <composition name="default"> Obin:1.0 </composition>
+    </element_compositions> -->
+</mixture>
