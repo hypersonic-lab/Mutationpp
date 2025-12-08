@@ -3672,9 +3672,9 @@
 		</stoichiometry>
 		<thermodynamics type="STS">
 			<electronic_levels units="1/cm">
-				<level degeneracy="5" energy="0.0" />
-				<level degeneracy="3" energy="187.7" />
-				<!-- <level degeneracy="9" energy="0.0" />
+				<!-- <level degeneracy="5" energy="0.0" />
+				<level degeneracy="3" energy="187.7" /> -->
+				<level degeneracy="9" energy="0.0" />
 				<level degeneracy="5" energy="15889.0" />
 				<level degeneracy="1" energy="33794.0" />
 				<level degeneracy="5" energy="73768.0" />
@@ -3713,7 +3713,7 @@
 				<level degeneracy="8" energy="108555.0" />
 				<level degeneracy="40" energy="108595.0" />
 				<level degeneracy="3" energy="108829.0" />
-				<level degeneracy="40" energy="108853.0" /> -->
+				<level degeneracy="40" energy="108853.0" />
 			</electronic_levels>
 			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
 				249229
