@@ -2611,7 +2611,8 @@
 				41975.530638166114
 				42011.55520415927
 				42027.66244735555
-				42031.5295903603			</vibrational_temperatures>
+				42031.5295903603
+			</vibrational_temperatures>
 			<electronic_levels units="1/cm">
 				<!-- <level degeneracy="3" energy="0.0" />
 				<level degeneracy="2" energy="8270.9" /> -->
