@@ -173,7 +173,7 @@ public:
             cpT(cp, Eq());
             cpR(cp, PlusEq());
             cpV(Tv, cp, PlusEq());
-            // cpE(Tel, cp, PlusEq());
+            cpE(Tel, cp, PlusEq());
             return;
         }
         
@@ -210,14 +210,14 @@ public:
         }
         
         // Electronic
-        // if (cpel == NULL) {
-        //     if (cp != NULL)
-        //         cpE(Tel, cp, PlusEq());
-        // } else {
-        //     cpE(Tel, cpel, Eq());
-        //     if (cp != NULL)
-        //         LOOP_HEAVY(cp[j] += cpel[j]);
-        // }
+        if (cpel == NULL) {
+            if (cp != NULL)
+                cpE(Tel, cp, PlusEq());
+        } else {
+            cpE(Tel, cpel, Eq());
+            if (cp != NULL)
+                LOOP_HEAVY(cp[j] += cpel[j]);
+        }
     }
 
     /**
@@ -255,7 +255,7 @@ public:
             hT(Th, Te, h, Eq());
             hR(Tr, h, PlusEq());
             hV(Tv, h, PlusEq());
-            // hE(Tel, h, PlusEq());
+            hE(Tel, h, PlusEq());
             hF(h, PlusEq());
             LOOP(h[i] /= Th);
             return;
@@ -296,15 +296,15 @@ public:
         }
             
         // Electronic enthalpy
-        // if (hel == NULL) {
-        //     if (h != NULL)
-        //         hE(Tel, h, PlusEqDiv(Th));
-        // } else {
-        //     LOOP(hel[i] = 0.0);
-        //     hE(Tel, hel, EqDiv(Th));
-        //     if (h != NULL)
-        //         LOOP(h[i] += hel[i]);
-        // }
+        if (hel == NULL) {
+            if (h != NULL)
+                hE(Tel, h, PlusEqDiv(Th));
+        } else {
+            LOOP(hel[i] = 0.0);
+            hE(Tel, hel, EqDiv(Th));
+            if (h != NULL)
+                LOOP(h[i] += hel[i]);
+        }
         
         // Formation enthalpy
         if (hf == NULL) {
@@ -342,7 +342,7 @@ public:
             sT(Th, Te, P, s, Eq());
             sR(Tr, s, PlusEq());
             sV(Tv, s, PlusEq());
-            // sE(Tel, s, PlusEq());
+            sE(Tel, s, PlusEq());
             
             // Include spin contribution for free electron entropy
             if (m_has_electron)
@@ -379,13 +379,13 @@ public:
         }
         
         // Electronic entropy
-        // if (sel == NULL)
-        //     sE(Tel, s, PlusEq());
-        // else {
-        //     LOOP(sel[i] = 0.0);
-        //     sE(Tel, sel, Eq());
-        //     LOOP(s[i] += sel[i]);
-        // }
+        if (sel == NULL)
+            sE(Tel, s, PlusEq());
+        else {
+            LOOP(sel[i] = 0.0);
+            sE(Tel, sel, Eq());
+            LOOP(s[i] += sel[i]);
+        }
         
         // Include spin contribution for free electron entropy
         if (m_has_electron)
@@ -412,7 +412,7 @@ public:
         sT(Th, Te, P, g, MinusEq());
         sR(Tr, g, MinusEq());
         sV(Tv, g, MinusEq());
-        // sE(Tel, g, MinusEq());
+        sE(Tel, g, MinusEq());
 
         // Account for spin of free electrons
         if (m_has_electron)
@@ -606,7 +606,7 @@ protected:
         hT(Tss, Tss, mp_part_sst, Eq());
         hR(Tss, mp_part_sst, PlusEq());
         hV(Tss, mp_part_sst, PlusEq());
-        // hE(Tss, mp_part_sst, PlusEq());
+        hE(Tss, mp_part_sst, PlusEq());
     }
 
 private:
