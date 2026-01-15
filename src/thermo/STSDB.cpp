@@ -731,7 +731,7 @@ private:
     void cpR(double* const cp, const OP& op) {
         op(cp[0], 0.0);
         LOOP_ATOMS(op(cp[j], 0.0));
-        LOOP_MOLECULES(op(cp[j], 1.0));
+        LOOP_MOLECULES(op(cp[j], mp_rot_data[i].linearity));
     }
 
     /**
