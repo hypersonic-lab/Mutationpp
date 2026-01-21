@@ -185,6 +185,10 @@
         <species name="Obin"    value="0.80"   ref="Wright2007"/>
         <species name="O2_0"    value="1.58"   ref="Wright2007"/>
         <species name="O2_1"    value="1.58"   ref="Wright2007"/>
+        <species name="O2_D"    value="1.58"   ref="Wright2007"/>
+        <species name="O2_V"    value="1.58"   ref="Wright2007"/>
+        <species name="O2_CHESS"    value="1.58"   ref="Wright2007"/>
+        <species name="O2_FHO"    value="1.58"   ref="Wright2007"/>
     </dipole-polarizabilities>
 
     <!-- Effective electrons participating in polarization -->
@@ -251,6 +255,10 @@
         <species name="Obin" value="4.7" />
         <species name="O2_0" value="9.33" />
         <species name="O2_1" value="9.33" />
+        <species name="O2_D" value="9.33" />
+        <species name="O2_V" value="9.33" />
+        <species name="O2_CHESS" value="9.33" />
+        <species name="O2_FHO" value="9.33" />
     </effective-electrons>
 
     <!-- Explicitly defined collision pairs -->
