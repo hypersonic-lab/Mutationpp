@@ -800,6 +800,66 @@
              1.16  1.10  1.04  1.03  1.01  0.99  0.98  0.98  0.98 </Cst>
     </pair>
 
+    <pair s1="e-" s2="O2_D">
+        <Q11 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             1.31  1.72  1.99  2.04  2.06  2.06  2.05  1.99  1.96 </Q11>
+        <Q22 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             1.30  1.73  2.10  2.18  2.23  2.29  2.31  2.32  2.31 </Q22>
+        <Bst type="table" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             0.68  0.86  0.99  1.02  1.04  1.07  1.07  1.03  1.00 </Bst>
+        <Cst type="table" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             1.16  1.10  1.04  1.03  1.01  0.99  0.98  0.98  0.98 </Cst>
+    </pair>
+
+    <pair s1="e-" s2="O2_V">
+        <Q11 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             1.31  1.72  1.99  2.04  2.06  2.06  2.05  1.99  1.96 </Q11>
+        <Q22 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             1.30  1.73  2.10  2.18  2.23  2.29  2.31  2.32  2.31 </Q22>
+        <Bst type="table" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             0.68  0.86  0.99  1.02  1.04  1.07  1.07  1.03  1.00 </Bst>
+        <Cst type="table" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             1.16  1.10  1.04  1.03  1.01  0.99  0.98  0.98  0.98 </Cst>
+    </pair>
+
+    <pair s1="e-" s2="O2_CHESS">
+        <Q11 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             1.31  1.72  1.99  2.04  2.06  2.06  2.05  1.99  1.96 </Q11>
+        <Q22 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             1.30  1.73  2.10  2.18  2.23  2.29  2.31  2.32  2.31 </Q22>
+        <Bst type="table" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             0.68  0.86  0.99  1.02  1.04  1.07  1.07  1.03  1.00 </Bst>
+        <Cst type="table" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             1.16  1.10  1.04  1.03  1.01  0.99  0.98  0.98  0.98 </Cst>
+    </pair>
+
+    <pair s1="e-" s2="O2_FHO">
+        <Q11 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             1.31  1.72  1.99  2.04  2.06  2.06  2.05  1.99  1.96 </Q11>
+        <Q22 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             1.30  1.73  2.10  2.18  2.23  2.29  2.31  2.32  2.31 </Q22>
+        <Bst type="table" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             0.68  0.86  0.99  1.02  1.04  1.07  1.07  1.03  1.00 </Bst>
+        <Cst type="table" ref="Wright2005" accuracy="20">
+             1000  2000  4000  5000  6000  8000 10000 15000 20000,
+             1.16  1.10  1.04  1.03  1.01  0.99  0.98  0.98  0.98 </Cst>
+    </pair>
+
     <!-- Ar -->
     <pair s1="Ar" s2="Ar">
         <Q11 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="5">
@@ -902,6 +962,50 @@
     </pair>
 
     <pair s1="Ar" s2="O2">
+        <Q11 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500  1000  2000  4000  5000  6000  8000 10000 15000,
+            11.30  9.86  8.52  7.42  6.39  6.08  5.83  5.44  5.16  4.67 </Q11>
+        <Q22 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500  1000  2000  4000  5000  6000  8000 10000 15000,
+            12.33 10.82  9.57  8.54  7.48  7.14  6.87  6.44  6.12  5.54 </Q22>
+        <Bst type="constant" value="1.15" ref="Wright2005"/>
+        <Cst type="constant" value="0.92" ref="Wright2005"/>
+    </pair>
+
+    <pair s1="Ar" s2="O2_D">
+        <Q11 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500  1000  2000  4000  5000  6000  8000 10000 15000,
+            11.30  9.86  8.52  7.42  6.39  6.08  5.83  5.44  5.16  4.67 </Q11>
+        <Q22 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500  1000  2000  4000  5000  6000  8000 10000 15000,
+            12.33 10.82  9.57  8.54  7.48  7.14  6.87  6.44  6.12  5.54 </Q22>
+        <Bst type="constant" value="1.15" ref="Wright2005"/>
+        <Cst type="constant" value="0.92" ref="Wright2005"/>
+    </pair>
+
+    <pair s1="Ar" s2="O2_V">
+        <Q11 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500  1000  2000  4000  5000  6000  8000 10000 15000,
+            11.30  9.86  8.52  7.42  6.39  6.08  5.83  5.44  5.16  4.67 </Q11>
+        <Q22 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500  1000  2000  4000  5000  6000  8000 10000 15000,
+            12.33 10.82  9.57  8.54  7.48  7.14  6.87  6.44  6.12  5.54 </Q22>
+        <Bst type="constant" value="1.15" ref="Wright2005"/>
+        <Cst type="constant" value="0.92" ref="Wright2005"/>
+    </pair>
+
+    <pair s1="Ar" s2="O2_CHESS">
+        <Q11 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500  1000  2000  4000  5000  6000  8000 10000 15000,
+            11.30  9.86  8.52  7.42  6.39  6.08  5.83  5.44  5.16  4.67 </Q11>
+        <Q22 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500  1000  2000  4000  5000  6000  8000 10000 15000,
+            12.33 10.82  9.57  8.54  7.48  7.14  6.87  6.44  6.12  5.54 </Q22>
+        <Bst type="constant" value="1.15" ref="Wright2005"/>
+        <Cst type="constant" value="0.92" ref="Wright2005"/>
+    </pair>
+
+    <pair s1="Ar" s2="O2_FHO">
         <Q11 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
               300   500  1000  2000  4000  5000  6000  8000 10000 15000,
             11.30  9.86  8.52  7.42  6.39  6.08  5.83  5.44  5.16  4.67 </Q11>
@@ -2940,6 +3044,50 @@
 
     <!-- O2 -->
     <pair s1="O2" s2="O2">
+        <Q11 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500   600  1000  2000  4000  5000  6000  8000 10000 15000,
+            11.12  9.88  9.53  8.69  7.60  6.52  6.22  5.99  5.64  5.39  4.94 </Q11>
+        <Q22 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500   600  1000  2000  4000  5000  6000  8000 10000 15000,
+            12.62 11.06 10.65  9.72  8.70  7.70  7.38  7.12  6.73  6.42  5.89 </Q22>
+        <Bst type="constant" value="1.15" ref="Wright2005"/>
+        <Cst type="constant" value="0.92" ref="Wright2005"/>
+    </pair>
+
+    <pair s1="O2_D" s2="O2_D">
+        <Q11 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500   600  1000  2000  4000  5000  6000  8000 10000 15000,
+            11.12  9.88  9.53  8.69  7.60  6.52  6.22  5.99  5.64  5.39  4.94 </Q11>
+        <Q22 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500   600  1000  2000  4000  5000  6000  8000 10000 15000,
+            12.62 11.06 10.65  9.72  8.70  7.70  7.38  7.12  6.73  6.42  5.89 </Q22>
+        <Bst type="constant" value="1.15" ref="Wright2005"/>
+        <Cst type="constant" value="0.92" ref="Wright2005"/>
+    </pair>
+
+    <pair s1="O2_V" s2="O2_V">
+        <Q11 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500   600  1000  2000  4000  5000  6000  8000 10000 15000,
+            11.12  9.88  9.53  8.69  7.60  6.52  6.22  5.99  5.64  5.39  4.94 </Q11>
+        <Q22 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500   600  1000  2000  4000  5000  6000  8000 10000 15000,
+            12.62 11.06 10.65  9.72  8.70  7.70  7.38  7.12  6.73  6.42  5.89 </Q22>
+        <Bst type="constant" value="1.15" ref="Wright2005"/>
+        <Cst type="constant" value="0.92" ref="Wright2005"/>
+    </pair>
+
+    <pair s1="O2_CHESS" s2="O2_CHESS">
+        <Q11 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500   600  1000  2000  4000  5000  6000  8000 10000 15000,
+            11.12  9.88  9.53  8.69  7.60  6.52  6.22  5.99  5.64  5.39  4.94 </Q11>
+        <Q22 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
+              300   500   600  1000  2000  4000  5000  6000  8000 10000 15000,
+            12.62 11.06 10.65  9.72  8.70  7.70  7.38  7.12  6.73  6.42  5.89 </Q22>
+        <Bst type="constant" value="1.15" ref="Wright2005"/>
+        <Cst type="constant" value="0.92" ref="Wright2005"/>
+    </pair>
+
+    <pair s1="O2_FHO" s2="O2_FHO">
         <Q11 type="table" units="K,Å-Å" multpi="yes" ref="Wright2005" accuracy="20">
               300   500   600  1000  2000  4000  5000  6000  8000 10000 15000,
             11.12  9.88  9.53  8.69  7.60  6.52  6.22  5.99  5.64  5.39  4.94 </Q11>
