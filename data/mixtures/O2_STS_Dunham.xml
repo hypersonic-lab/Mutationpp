@@ -1,5 +1,5 @@
 <!-- O2 STS XESMF Mapped on Dunham -->
-<mixture mechanism="O2_Ar_STS_Dunham" thermo_db="STS">
+<mixture mechanism="O2_Dunham_STS" thermo_db="STS">
    
     <species>
         Arbin Obin O2_D(!)

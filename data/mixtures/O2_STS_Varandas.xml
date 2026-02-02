@@ -1,5 +1,5 @@
 <!-- O2 STS on Varandas -->
-<mixture mechanism="O2_STS_Varandas" thermo_db="STS">
+<mixture mechanism="O2_Varandas_STS" thermo_db="STS">
     
     <species>
         Obin O2_V(!)
