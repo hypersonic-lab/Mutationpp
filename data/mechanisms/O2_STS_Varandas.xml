@@ -1,5 +1,5 @@
 <!-- Oxygen STS Andrienko model reaction mechanism, 46 excited states -->
-<mechanism name="O2_STS_46_expanded">
+<mechanism name="O2_STS_Varandas">
  
 	<arrhenius_units A="mol,cm,s,K" E="J,mol,K" />
 

@@ -1,5 +1,5 @@
 <!-- Oxygen STS Andrienko model mapped with XESMF reaction mechanism, 36 excited states -->
-<mechanism name="O2_Ar_STS_Dunham">
+<mechanism name="O2_STS_Dunham">
  
 	<arrhenius_units A="mol,cm,s,K" E="J,mol,K" />
 

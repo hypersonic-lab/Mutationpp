@@ -1,5 +1,5 @@
 <!-- Oxygen STS FHO model reaction mechanism, 40 excited states -->
-<mechanism name="O2_Ar_FHO_STS">
+<mechanism name="O2_FHO_STS">
 
 	<arrhenius_units A="mol,cm,s,K" E="J,mol,K" />
 
