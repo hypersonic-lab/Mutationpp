@@ -62,7 +62,7 @@ public:
      */
     void setState(
         const double* const p_mass, const double* const p_energy,
-        const int vars = 0, bool NEWTON = true)
+        const int vars = 0, bool ROBUST = true)
     {
         const int ns = m_thermo.nSpecies();
 

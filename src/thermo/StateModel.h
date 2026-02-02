@@ -124,7 +124,7 @@ public:
      */
     virtual void setState(
         const double* const p_mass, const double* const p_energy,
-        const int vars = 0, bool NEWTON = true) = 0;
+        const int vars = 0, bool ROBUST = false) = 0;
     
     /**
      * Sets the current magnitude of the magnetic field in teslas.

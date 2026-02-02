@@ -78,7 +78,7 @@ public:
      */
     void setState(
         const double* const p_mass, const double* const p_energy,
-        const int vars = 0, bool NEWTON = true)
+        const int vars = 0, bool ROBUST = false)
     {
         const int ns = m_thermo.nSpecies();
 
@@ -101,7 +101,7 @@ public:
         switch (vars) {
         case 0: {
 
-            solveEnergies(p_mass, p_energy, NEWTON);
+            solveEnergies(p_mass, p_energy, ROBUST);
 
             break;
         }
@@ -254,11 +254,11 @@ public:
   * @param p_rhoe - total and internal mass energy
   */
 
-    void solveEnergies(const double* const p_rhoi, const double* const p_rhoe, bool NEWTON = true, const double Tv_old = 0, const double T_old = 0)
+    void solveEnergies(const double* const p_rhoi, const double* const p_rhoe, bool ROBUST = true, const double Tv_old = 0, const double T_old = 0)
 {
     const double atol = 1.0e-10;
     const double rtol = 1.0e-10;
-    const double dh = 1e-3;        // finite-diff perturbation
+    const double dh = 1e-6;        // finite-diff perturbation
     const double min_temp = 10.0;  // lower clamp for temperatures
 
     Map<const VectorXd> rhoi(p_rhoi, m_thermo.nSpecies());
@@ -277,7 +277,7 @@ public:
     Vector2d f, f_new;
     Matrix2d J;
 
-    if (NEWTON){
+    if (!ROBUST){
         const int imax = 100;
         static Matrix<double, Dynamic, Dynamic, RowMajor> ci;
         ci.resize(2, m_thermo.nSpecies());
