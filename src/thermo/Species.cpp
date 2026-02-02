@@ -88,22 +88,42 @@ Species::Species(const Species& to_copy)
       m_charge(to_copy.m_charge),
       m_phase(to_copy.m_phase),
       m_type(to_copy.m_type),
-      m_level(to_copy.m_level),
+      m_e_level(to_copy.m_e_level),
+      m_vib_level(to_copy.m_vib_level),
       m_stoichiometry(to_copy.m_stoichiometry)
 { }
 
 //==============================================================================
 
-Species::Species(const Species& to_copy, const size_t level) :
+Species::Species(const Species& to_copy, const size_t e_level) :
     m_name(to_copy.m_name),
     m_ground_state_name(to_copy.m_name),
     m_mw(to_copy.m_mw),
     m_charge(to_copy.m_charge),
     m_phase(to_copy.m_phase),
     m_type(to_copy.m_type),
-    m_level(level),
+    m_e_level(e_level),
+    m_vib_level(to_copy.m_vib_level),
     m_stoichiometry(to_copy.m_stoichiometry)
 { 
+    stringstream ss;
+    ss << "(" << m_e_level << ")";
+    m_name += ss.str();
+}
+
+Species::Species(const Species& to_copy, const size_t e_level, const size_t v_level) :
+    m_name(to_copy.m_name),
+    m_ground_state_name(to_copy.m_name),
+    m_mw(to_copy.m_mw),
+    m_charge(to_copy.m_charge),
+    m_phase(to_copy.m_phase),
+    m_type(to_copy.m_type),
+    // m_level(level),
+    m_e_level(to_copy.m_e_level),
+    m_vib_level(v_level),
+    m_stoichiometry(to_copy.m_stoichiometry)
+{ 
+    double m_level = v_level;
     stringstream ss;
     ss << "(" << m_level << ")";
     m_name += ss.str();
@@ -119,7 +139,8 @@ Species::Species(
     m_charge(0),
     m_phase(phase),
     m_type(ATOM),
-    m_level(0)
+    m_e_level(0),
+    m_vib_level(0)
 {
     // Parse the stoichiometry from the name
     SpeciesNameFSM sm;
@@ -147,7 +168,8 @@ Species::Species(
     m_charge(0),
     m_phase(phase),
     m_type(ATOM),
-    m_level(0),
+    m_e_level(0),
+    m_vib_level(0),
     m_stoichiometry(stoichiometry)
 {
     initDataFromStoichiometry();
@@ -159,7 +181,8 @@ Species::Species(const Mutation::Utilities::IO::XmlElement& xml_element) :
     m_mw(0.0),
     m_charge(0),
     m_type(ATOM),
-    m_level(0)
+    m_e_level(0),
+    m_vib_level(0)
 {
     // Species name
     xml_element.getAttribute("name", m_name,
@@ -247,7 +270,7 @@ void swap(Species& s1, Species& s2)
     std::swap(s1.m_charge, s2.m_charge);
     std::swap(s1.m_phase, s2.m_phase);
     std::swap(s1.m_type, s2.m_type);
-    std::swap(s1.m_level, s2.m_level);
+    std::swap(s1.m_e_level, s2.m_e_level);
     std::swap(s1.m_stoichiometry, s2.m_stoichiometry);
 }
 

@@ -85,7 +85,6 @@ ParticleRRHO::ParticleRRHO(const IO::XmlElement& xml_element)
                 if (level_iter->tag() == "level") {
                     level_iter->getAttribute("degeneracy",  degeneracy);
                     level_iter->getAttribute("energy", temperature);
-                    
                     // convert from 1/cm to K
                     m_electronic_energies.push_back(
                         std::make_pair(degeneracy, temperature * 1.4387));
@@ -107,6 +106,33 @@ ParticleRRHO::ParticleRRHO(const ParticleRRHO& rrho, const size_t level)
 {
     // Make sure the level used is actually present in the given RRHO parameters
     assert(level < rrho.nElectronicLevels());
+}
+
+ParticleRRHO::ParticleRRHO(const ParticleRRHO& rrho, const size_t e_level, const size_t v_level)
+    : m_steric(rrho.m_steric),
+      m_linearity(rrho.m_linearity),
+      m_rotational_t(rrho.m_rotational_t)
+{
+    double cm2K = 1.4387;
+    if (v_level < rrho.m_vibrational_energies.size())
+    {
+        m_vibrational_energies = { rrho.vibrationalEnergy(v_level) };
+        m_hform = rrho.m_hform + RU*rrho.vibrationalEnergy(v_level) * cm2K;
+        for (int ilevel = 0; ilevel < rrho.m_electronic_energies.size(); ++ilevel)
+        {
+            m_electronic_energies.push_back(
+                        std::make_pair(rrho.electronicEnergy(ilevel).first, rrho.electronicEnergy(ilevel).second));
+        }
+    } 
+    else 
+    {
+        m_vibrational_energies = rrho.m_vibrational_energies; // or default value
+        m_hform = rrho.m_hform + RU*rrho.electronicEnergy(e_level).second;
+        m_electronic_energies = {std::make_pair(rrho.electronicEnergy(e_level).first, 0.0) };
+    }
+
+    // Make sure the level used is actually present in the given RRHO parameters
+    assert((e_level < rrho.nElectronicLevels()) || (v_level < rrho.nVibrationalLevels()));
 }
 
 //==============================================================================
