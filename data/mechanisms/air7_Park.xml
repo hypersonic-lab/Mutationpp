@@ -14,6 +14,11 @@ Rates taken from:
     </reaction>
 
     <!-- Park, 2001 -->
+    <reaction formula="N2+e-=2N+e-">
+        <arrhenius A="3.0E+24" n="-1.6" T="113200." />
+    </reaction>
+
+    <!-- Park, 2001 -->
     <reaction formula="O2+M=2O+M">
         <arrhenius A="2.0E+21" n="-1.5" T="59360.0" />
         <M>O:5.0, N:5.0</M>
