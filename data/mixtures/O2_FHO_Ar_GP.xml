@@ -2,7 +2,7 @@
 <mixture mechanism="O2_STS_FHO_GP" thermo_db="STS">
 
     <species>
-        Arbin Obin O2_FHO_36(!)
+        Arbin Obin O2_FHO(!)
     </species>
 
     <element_compositions default="default">

@@ -2630,83 +2630,8 @@
 		</thermodynamics>
 	</species>
 
-		<!-- Oxygen diatomic CHESS -->
+		<!-- Oxygen diatomic FHO -->
 	<species name="O2_FHO">
-		<stoichiometry>
-			O: 2
-		</stoichiometry>
-		<thermodynamics type="STS">
-			<linear>
-				yes
-			</linear>
-			<rotational_temperature units="K">
-				2.086
-			</rotational_temperature>
-			<steric_factor>
-				2
-			</steric_factor>
-			<vibrational_temperatures units="1/cm">
-				787.124596467
-				2343.2658774029996
-				3875.263275675
-				5383.116791283
-				6866.826424226999
-				8326.392174506998
-				9761.814042123
-				11173.092027075
-				12560.226129362996
-				13923.216348986998
-				15262.062685946998
-				16576.765140243
-				17867.323711874997
-				19133.738400842998
-				20376.009207146995
-				21594.136130787
-				22788.119171763
-				23957.958330075002
-				25103.653605722997
-				26225.204998706995
-				27322.612509027
-				28395.876136682997
-				29444.995881674993
-				30469.971744003
-				31470.803723667
-				32447.491820666997
-				33400.036035002995
-				34328.43636667499
-				35232.692815682996
-				36112.80538202699
-				36968.774065706995
-				37800.59886672299
-				38608.279785075
-				39391.816820763
-				40151.209973786994
-				40886.45924414699
-				41597.564631842986
-				42284.526136875
-				42947.343759243
-				43586.017498946996
-				44200.547355986986
-			</vibrational_temperatures>
-			<electronic_levels units="1/cm">
-				<!-- <level degeneracy="3" energy="0.0" />
-				<level degeneracy="2" energy="8270.9" /> -->
-				<level degeneracy="3" energy="0.0" />
-				<!-- <level degeneracy="2" energy="7917.5" />
-				<level degeneracy="1" energy="13195.1" />
-				<level degeneracy="1" energy="33055.7" />
-				<level degeneracy="6" energy="34690.9" />
-				<level degeneracy="3" energy="35393.1" />
-				<level degeneracy="3" energy="49792.1" /> -->
-			</electronic_levels>
-			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
-				0.0
-			</formation_enthalpy>
-		</thermodynamics>
-	</species>
-
-		<!-- Oxygen diatomic CHESS -->
-	<species name="O2_FHO_36">
 		<stoichiometry>
 			O: 2
 		</stoichiometry>
