@@ -2464,15 +2464,7 @@
 				42029.6803
 				42042.9885			</vibrational_temperatures>
 			<electronic_levels units="1/cm">
-				<!-- <level degeneracy="3" energy="0.0" />
-				<level degeneracy="2" energy="8270.9" /> -->
 				<level degeneracy="3" energy="0.0" />
-				<level degeneracy="2" energy="7917.5" />
-				<level degeneracy="1" energy="13195.1" />
-				<level degeneracy="1" energy="33055.7" />
-				<level degeneracy="6" energy="34690.9" />
-				<level degeneracy="3" energy="35393.1" />
-				<level degeneracy="3" energy="49792.1" />
 			</electronic_levels>
 			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
 				0.0
@@ -2535,15 +2527,7 @@
 				41764.7920736
 			</vibrational_temperatures>
 			<electronic_levels units="1/cm">
-				<!-- <level degeneracy="3" energy="0.0" />
-				<level degeneracy="2" energy="8270.9" /> -->
 				<level degeneracy="3" energy="0.0" />
-				<level degeneracy="2" energy="7917.5" />
-				<level degeneracy="1" energy="13195.1" />
-				<level degeneracy="1" energy="33055.7" />
-				<level degeneracy="6" energy="34690.9" />
-				<level degeneracy="3" energy="35393.1" />
-				<level degeneracy="3" energy="49792.1" />
 			</electronic_levels>
 			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
 				0.0
@@ -2614,15 +2598,7 @@
 				42031.5295903603
 			</vibrational_temperatures>
 			<electronic_levels units="1/cm">
-				<!-- <level degeneracy="3" energy="0.0" />
-				<level degeneracy="2" energy="8270.9" /> -->
 				<level degeneracy="3" energy="0.0" />
-				<level degeneracy="2" energy="7917.5" />
-				<level degeneracy="1" energy="13195.1" />
-				<level degeneracy="1" energy="33055.7" />
-				<level degeneracy="6" energy="34690.9" />
-				<level degeneracy="3" energy="35393.1" />
-				<level degeneracy="3" energy="49792.1" />
 			</electronic_levels>
 			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
 				0.0
@@ -2630,7 +2606,7 @@
 		</thermodynamics>
 	</species>
 
-		<!-- Oxygen diatomic CHESS -->
+		<!-- Oxygen diatomic FHO -->
 	<species name="O2_FHO">
 		<stoichiometry>
 			O: 2
@@ -2683,21 +2659,9 @@
 				40151.209973786994
 				40886.45924414699
 				41597.564631842986
-				42284.526136875
-				42947.343759243
-				43586.017498946996
-				44200.547355986986
 			</vibrational_temperatures>
 			<electronic_levels units="1/cm">
-				<!-- <level degeneracy="3" energy="0.0" />
-				<level degeneracy="2" energy="8270.9" /> -->
 				<level degeneracy="3" energy="0.0" />
-				<level degeneracy="2" energy="7917.5" />
-				<level degeneracy="1" energy="13195.1" />
-				<level degeneracy="1" energy="33055.7" />
-				<level degeneracy="6" energy="34690.9" />
-				<level degeneracy="3" energy="35393.1" />
-				<level degeneracy="3" energy="49792.1" />
 			</electronic_levels>
 			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
 				0.0
