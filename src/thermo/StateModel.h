@@ -356,12 +356,45 @@ namespace Mutation
 
         double f, fp, dT;
 
+        // For Damped-Newton
+        double lambda = 1.0;
+        double T_new = T;
+        double f_new, fp_new;
+
+        // For Bisection
+        double T_min = 50.0;
+        double T_max = 80000;
+        double f_min, f_max;
+        bool in_range_newton = true;
+        bool improve_newton = true;
+        double damped_converged;
+
+        // For Secant Method
+        bool T1 = true;
+        double T_prev;
+        double eps = 1e-5;
+        double f, f_prev;
+
         // Compute initial value of f
         h(T, p_work);
         f = alpha;
         for (int i = 0; i < ns; ++i)
             f += mp_X[i]*p_work[i];
         f = T*f - rhoe_over_Ru;
+
+        // Compute initial value of f
+        h(T_min, p_work);
+        f_min = alpha;
+        for (int i = 0; i < ns; ++i)
+            f_min += mp_X[i]*p_work[i];
+        f_min = T*f_min - rhoe_over_Ru;
+
+        // Compute initial value of f
+        h(T_max, p_work);
+        f_max = alpha;
+        for (int i = 0; i < ns; ++i)
+            f_max += mp_X[i]*p_work[i];
+        f_max = T*f_max - rhoe_over_Ru;
 
         int iter = 0;
         //cout << iter << " " << f << " " << T << endl;
@@ -370,6 +403,8 @@ namespace Mutation
             if (iter++ == max_iters) {
                 std::cerr << "Exceeded max iterations when computing temperature!\n";
                 std::cerr << "res = " << f / rhoe_over_Ru << ", T = " << T << std::endl;
+                // std::cerr << "Trying bisection method.\n";
+                // break;
                 return false;
             }
 
@@ -387,15 +422,138 @@ namespace Mutation
                 return false;
             }
             while (T - dT < 50.0) dT *= 0.5; // prevent non-positive T
-            T -= dT;
-
+            
             // Recompute f
+            // Newton-Raphson
+            T -= dT;
             h(T, p_work);
             f = alpha;
             for (int i = 0; i < ns; ++i)
                 f += mp_X[i]*p_work[i];
             f = T*f - rhoe_over_Ru;
             //cout << iter << " " << f << " " << T << endl;
+
+            // Damped Newton
+            T_new = T - dT;
+            h(T_new, p_work);
+            f_new = alpha;
+            for (int i = 0; i < ns; ++i)
+                f_new += mp_X[i]*p_work[i];
+            f_new = T_new*f_new - rhoe_over_Ru;
+            while ((abs(f_new) >= abs(f)) or (T_new < T_min) or (T_new > T_max)){
+                lambda = 0.5 * lambda;
+                if (lambda < 1e-6) {
+                    break;
+                }
+                T_new = T - lambda * f/fp;
+                h(T_new, p_work);
+                f_new = alpha;
+                for (int i = 0; i < ns; ++i)
+                    f_new += mp_X[i]*p_work[i];
+                f_new = T_new*f_new - rhoe_over_Ru;
+            }
+            f = f_new;
+            T = T_new;
+
+            // Hybrid Newton-Bisection
+            T_new = T - dT;
+            f_new = alpha;
+            for (int i = 0; i < ns; ++i)
+                f_new += mp_X[i]*p_work[i];
+            f_new = T_new*f_new - rhoe_over_Ru;
+
+            in_range_newton = (T_new >= T_min) && (T_new <= T_max);
+            improve_newton = abs(f_new) < abs(f);
+
+            if ((!in_range_newton) or (!improve_newton)){ // Resulting from Newton's Method
+                h(T_new, p_work);
+            f_new = alpha;
+            for (int i = 0; i < ns; ++i)
+                f_new += mp_X[i]*p_work[i];
+            f_new = T_new*f_new - rhoe_over_Ru;
+            while ((abs(f_new) >= abs(f)) or (T_new < T_min) or (T_new > T_max)){
+                lambda = 0.5 * lambda;
+                if (lambda < 1e-6) {
+                    damped_converged = false;
+                    break;
+                }
+                T_new = T - lambda * f/fp;
+                h(T_new, p_work);
+                f_new = alpha;
+                for (int i = 0; i < ns; ++i)
+                    f_new += mp_X[i]*p_work[i];
+                f_new = T_new*f_new - rhoe_over_Ru;
+                damped_converged = true;
+            }
+            }
+
+            if (!damped_converged){ // Resulting from Damped Newton's Method
+                T_new = (T_max + T_min) / 2;
+            }
+
+            T = T_new;
+            h(T, p_work);
+            f = alpha;
+            for (int i = 0; i < ns; ++i)
+                f += mp_X[i]*p_work[i];
+            f = T*f - rhoe_over_Ru;
+
+            if ((f_min * f) < 0){
+                    T_max = T;
+                    f_max = f;
+                }
+            else {
+                    T_min = T;
+                    f_min = f;
+            }
+            
+
+            // // Secant version 1
+            // if (T1){
+            //     T_prev = T;
+            //     T = T + eps;
+            //     f_prev = f;
+            //     T1 = false;
+            // }
+            // h(T, p_work);
+            // f = alpha;
+            // for (int i = 0; i < ns; ++i)
+            //     f += mp_X[i]*p_work[i];
+            // f = T*f - rhoe_over_Ru;
+
+            // T = T - (f * (T - T_prev)) / (f - f_prev);
+
+            // h(T, p_work);
+            // f = alpha;
+            // for (int i = 0; i < ns; ++i)
+            //     f += mp_X[i]*p_work[i];
+            // f = T*f - rhoe_over_Ru;
+
+            // T_prev = T;
+            // f_prev = f;     
+
+            // // Secant version 2
+            // if (T1){
+            //     T_prev = T;
+            //     T = T - f/fp;
+            //     T1 = false;
+            // }
+            // h(T, p_work);
+            // f = alpha;
+            // for (int i = 0; i < ns; ++i)
+            //     f += mp_X[i]*p_work[i];
+            // f = T*f - rhoe_over_Ru;
+
+            // T = T - (f * (T - T_prev)) / (f - f_prev);
+
+            // h(T, p_work);
+            // f = alpha;
+            // for (int i = 0; i < ns; ++i)
+            //     f += mp_X[i]*p_work[i];
+            // f = T*f - rhoe_over_Ru;
+
+            // T_prev = T;
+            // f_prev = f;            
         }
 
         // Let the user know if we converged or not
