@@ -361,7 +361,7 @@ namespace Mutation
         double T_new = T;
         double f_new, fp_new;
 
-        // For Bisection
+        // For Bisection-Hybrid
         double T_min = 50.0;
         double T_max = 80000;
         double f_min, f_max;
@@ -374,6 +374,13 @@ namespace Mutation
         double T_prev;
         double eps = 1e-5;
         double f, f_prev;
+
+        // For perturbation finite-difference
+        double eps = std::numeric_limits<double>::epsilon();
+        double h = std::cbrt(eps) * std::max(std::abs(T), 1.0); // Central Difference
+        // double h = std::sqrt(eps) * std::max(std::abs(T), 1.0); // Forward Difference
+        double f_upper, f_lower, T_upper, T_lower;
+        
 
         // Compute initial value of f
         h(T, p_work);
@@ -414,6 +421,33 @@ namespace Mutation
             for (int i = 0; i < ns; ++i)
                 fp += mp_X[i]*p_work[i];
 
+            // // Central Finite-Difference
+            // T_upper = T + eps;
+            // T_lower = T - eps;
+            // 
+            // h(T_upper, p_work);
+            // f_upper = alpha;
+            // for (int i = 0; i < ns; ++i)
+            //     f_upper += mp_X[i]*p_work[i];
+            // 
+            // h(T_lower, p_work);
+            // f_lower = alpha;
+            // for (int i = 0; i < ns; ++i)
+            //     f_lower += mp_X[i]*p_work[i];
+            // 
+            // f_upper = T_upper*f_upper - rhoe_over_Ru;
+            // f_lower = T_lower*f_lower - rhoe_over_Ru;
+            // fp = (f_upper - f_lower) / (2 * eps);
+
+            // // Forward Finite-Difference
+            // T_upper = T + eps;
+            // h(T_upper, p_work);
+            // f_upper = alpha;
+            // for (int i = 0; i < ns; ++i)
+            //     f_upper += mp_X[i]*p_work[i];
+            // f_upper = T_upper*f_upper - rhoe_over_Ru;
+            // fp = (f_upper - f) / (eps);
+
             // Update T
             dT = f/fp;
             if (std::abs(T - 50.0) < 1.0e-10 && dT > 0) {
@@ -440,7 +474,7 @@ namespace Mutation
             // for (int i = 0; i < ns; ++i)
             //     f_new += mp_X[i]*p_work[i];
             // f_new = T_new*f_new - rhoe_over_Ru;
-            // while ((abs(f_new) >= abs(f)) or (T_new < T_min) or (T_new > T_max)){
+            // while ((std::abs(f_new) >= std::abs(f)) or (T_new < T_min) or (T_new > T_max)){
             //     lambda = 0.5 * lambda;
             //     if (lambda < 1e-6) {
             //         break;
@@ -463,7 +497,7 @@ namespace Mutation
             // f_new = T_new*f_new - rhoe_over_Ru;
 
             // in_range_newton = (T_new >= T_min) && (T_new <= T_max);
-            // improve_newton = abs(f_new) < abs(f);
+            // improve_newton = std::abs(f_new) < std::abs(f);
 
             // if ((!in_range_newton) or (!improve_newton)){ // Resulting from Newton's Method
             //     h(T_new, p_work);
@@ -471,7 +505,7 @@ namespace Mutation
             // for (int i = 0; i < ns; ++i)
             //     f_new += mp_X[i]*p_work[i];
             // f_new = T_new*f_new - rhoe_over_Ru;
-            // while ((abs(f_new) >= abs(f)) or (T_new < T_min) or (T_new > T_max)){
+            // while ((std::abs(f_new) >= std::abs(f)) or (T_new < T_min) or (T_new > T_max)){
             //     lambda = 0.5 * lambda;
             //     if (lambda < 1e-6) {
             //         damped_converged = false;
