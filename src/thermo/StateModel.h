@@ -389,19 +389,19 @@ namespace Mutation
             f += mp_X[i]*p_work[i];
         f = T*f - rhoe_over_Ru;
 
-        // Compute initial value of f
-        h(T_min, p_work);
-        f_min = alpha;
-        for (int i = 0; i < ns; ++i)
-            f_min += mp_X[i]*p_work[i];
-        f_min = T*f_min - rhoe_over_Ru;
+        // // Compute initial value of f
+        // h(T_min, p_work);
+        // f_min = alpha;
+        // for (int i = 0; i < ns; ++i)
+        //     f_min += mp_X[i]*p_work[i];
+        // f_min = T*f_min - rhoe_over_Ru;
 
-        // Compute initial value of f
-        h(T_max, p_work);
-        f_max = alpha;
-        for (int i = 0; i < ns; ++i)
-            f_max += mp_X[i]*p_work[i];
-        f_max = T*f_max - rhoe_over_Ru;
+        // // Compute initial value of f
+        // h(T_max, p_work);
+        // f_max = alpha;
+        // for (int i = 0; i < ns; ++i)
+        //     f_max += mp_X[i]*p_work[i];
+        // f_max = T*f_max - rhoe_over_Ru;
 
         int iter = 0;
         //cout << iter << " " << f << " " << T << endl;
