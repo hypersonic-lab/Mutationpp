@@ -467,39 +467,8 @@ namespace Mutation
             //cout << iter << " " << f << " " << T << endl;
 
             // // Damped Newton
-            T_new = T - dT;
-            h(T_new, p_work);
-            f_new = alpha;
-            for (int i = 0; i < ns; ++i)
-                f_new += mp_X[i]*p_work[i];
-            f_new = T_new*f_new - rhoe_over_Ru;
-            while ((std::abs(f_new) >= std::abs(f)) or (T_new < T_min) or (T_new > T_max)){
-                lambda = 0.5 * lambda;
-                if (lambda < 1e-6) {
-                    break;
-                }
-                T_new = T - lambda * f/fp;
-                h(T_new, p_work);
-                f_new = alpha;
-                for (int i = 0; i < ns; ++i)
-                    f_new += mp_X[i]*p_work[i];
-                f_new = T_new*f_new - rhoe_over_Ru;
-            }
-            f = f_new;
-            T = T_new;
-
-            // // Hybrid Newton-Bisection
             // T_new = T - dT;
-            // f_new = alpha;
-            // for (int i = 0; i < ns; ++i)
-            //     f_new += mp_X[i]*p_work[i];
-            // f_new = T_new*f_new - rhoe_over_Ru;
-
-            // in_range_newton = (T_new >= T_min) && (T_new <= T_max);
-            // improve_newton = std::abs(f_new) < std::abs(f);
-
-            // if ((!in_range_newton) or (!improve_newton)){ // Resulting from Newton's Method
-            //     h(T_new, p_work);
+            // h(T_new, p_work);
             // f_new = alpha;
             // for (int i = 0; i < ns; ++i)
             //     f_new += mp_X[i]*p_work[i];
@@ -507,7 +476,6 @@ namespace Mutation
             // while ((std::abs(f_new) >= std::abs(f)) or (T_new < T_min) or (T_new > T_max)){
             //     lambda = 0.5 * lambda;
             //     if (lambda < 1e-6) {
-            //         damped_converged = false;
             //         break;
             //     }
             //     T_new = T - lambda * f/fp;
@@ -516,29 +484,61 @@ namespace Mutation
             //     for (int i = 0; i < ns; ++i)
             //         f_new += mp_X[i]*p_work[i];
             //     f_new = T_new*f_new - rhoe_over_Ru;
-            //     damped_converged = true;
             // }
-            // }
-
-            // if (!damped_converged){ // Resulting from Damped Newton's Method
-            //     T_new = (T_max + T_min) / 2;
-            // }
-
+            // f = f_new;
             // T = T_new;
-            // h(T, p_work);
-            // f = alpha;
-            // for (int i = 0; i < ns; ++i)
-            //     f += mp_X[i]*p_work[i];
-            // f = T*f - rhoe_over_Ru;
 
-            // if ((f_min * f) < 0){
-            //         T_max = T;
-            //         f_max = f;
-            //     }
-            // else {
-            //         T_min = T;
-            //         f_min = f;
-            // }
+            // // Hybrid Newton-Bisection
+            T_new = T - dT;
+            f_new = alpha;
+            for (int i = 0; i < ns; ++i)
+                f_new += mp_X[i]*p_work[i];
+            f_new = T_new*f_new - rhoe_over_Ru;
+
+            in_range_newton = (T_new >= T_min) && (T_new <= T_max);
+            improve_newton = std::abs(f_new) < std::abs(f);
+
+            if ((!in_range_newton) or (!improve_newton)){ // Resulting from Newton's Method
+                h(T_new, p_work);
+            f_new = alpha;
+            for (int i = 0; i < ns; ++i)
+                f_new += mp_X[i]*p_work[i];
+            f_new = T_new*f_new - rhoe_over_Ru;
+            while ((std::abs(f_new) >= std::abs(f)) or (T_new < T_min) or (T_new > T_max)){
+                lambda = 0.5 * lambda;
+                if (lambda < 1e-6) {
+                    damped_converged = false;
+                    break;
+                }
+                T_new = T - lambda * f/fp;
+                h(T_new, p_work);
+                f_new = alpha;
+                for (int i = 0; i < ns; ++i)
+                    f_new += mp_X[i]*p_work[i];
+                f_new = T_new*f_new - rhoe_over_Ru;
+                damped_converged = true;
+            }
+            }
+
+            if (!damped_converged){ // Resulting from Damped Newton's Method
+                T_new = (T_max + T_min) / 2;
+            }
+
+            T = T_new;
+            h(T, p_work);
+            f = alpha;
+            for (int i = 0; i < ns; ++i)
+                f += mp_X[i]*p_work[i];
+            f = T*f - rhoe_over_Ru;
+
+            if ((f_min * f) < 0){
+                    T_max = T;
+                    f_max = f;
+                }
+            else {
+                    T_min = T;
+                    f_min = f;
+            }
             
 
             // // Secant version 1
