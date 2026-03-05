@@ -565,29 +565,29 @@ namespace Mutation
             // T_prev = T;
             // f_prev = f;     
 
-        //     // Secant version 2
-        //     if (T1){
-        //         T_prev = T;
-        //         T = T - f/fp;
-        //         T1 = false;
-        //     }
-        //     h(T, p_work);
-        //     f = alpha;
-        //     for (int i = 0; i < ns; ++i)
-        //         f += mp_X[i]*p_work[i];
-        //     f = T*f - rhoe_over_Ru;
+            // // Secant version 2
+            // if (T1){
+            //     T_prev = T;
+            //     T = T - f/fp;
+            //     T1 = false;
+            // }
+            // h(T, p_work);
+            // f = alpha;
+            // for (int i = 0; i < ns; ++i)
+            //     f += mp_X[i]*p_work[i];
+            // f = T*f - rhoe_over_Ru;
 
-        //     T = T - (f * (T - T_prev)) / (f - f_prev);
+            // T = T - (f * (T - T_prev)) / (f - f_prev);
 
-        //     h(T, p_work);
-        //     f = alpha;
-        //     for (int i = 0; i < ns; ++i)
-        //         f += mp_X[i]*p_work[i];
-        //     f = T*f - rhoe_over_Ru;
+            // h(T, p_work);
+            // f = alpha;
+            // for (int i = 0; i < ns; ++i)
+            //     f += mp_X[i]*p_work[i];
+            // f = T*f - rhoe_over_Ru;
 
-        //     T_prev = T;
-        //     f_prev = f;            
-        // }
+            // T_prev = T;
+            // f_prev = f;            
+        }
 
         // Let the user know if we converged or not
         return true;
