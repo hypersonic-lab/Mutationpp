@@ -458,35 +458,35 @@ namespace Mutation
             
             // Recompute f
             // Newton-Raphson
-            T -= dT;
-            h(T, p_work);
-            f = alpha;
-            for (int i = 0; i < ns; ++i)
-                f += mp_X[i]*p_work[i];
-            f = T*f - rhoe_over_Ru;
+            // T -= dT;
+            // h(T, p_work);
+            // f = alpha;
+            // for (int i = 0; i < ns; ++i)
+            //     f += mp_X[i]*p_work[i];
+            // f = T*f - rhoe_over_Ru;
             //cout << iter << " " << f << " " << T << endl;
 
             // // Damped Newton
-            // T_new = T - dT;
-            // h(T_new, p_work);
-            // f_new = alpha;
-            // for (int i = 0; i < ns; ++i)
-            //     f_new += mp_X[i]*p_work[i];
-            // f_new = T_new*f_new - rhoe_over_Ru;
-            // while ((std::abs(f_new) >= std::abs(f)) or (T_new < T_min) or (T_new > T_max)){
-            //     lambda = 0.5 * lambda;
-            //     if (lambda < 1e-6) {
-            //         break;
-            //     }
-            //     T_new = T - lambda * f/fp;
-            //     h(T_new, p_work);
-            //     f_new = alpha;
-            //     for (int i = 0; i < ns; ++i)
-            //         f_new += mp_X[i]*p_work[i];
-            //     f_new = T_new*f_new - rhoe_over_Ru;
-            // }
-            // f = f_new;
-            // T = T_new;
+            T_new = T - dT;
+            h(T_new, p_work);
+            f_new = alpha;
+            for (int i = 0; i < ns; ++i)
+                f_new += mp_X[i]*p_work[i];
+            f_new = T_new*f_new - rhoe_over_Ru;
+            while ((std::abs(f_new) >= std::abs(f)) or (T_new < T_min) or (T_new > T_max)){
+                lambda = 0.5 * lambda;
+                if (lambda < 1e-6) {
+                    break;
+                }
+                T_new = T - lambda * f/fp;
+                h(T_new, p_work);
+                f_new = alpha;
+                for (int i = 0; i < ns; ++i)
+                    f_new += mp_X[i]*p_work[i];
+                f_new = T_new*f_new - rhoe_over_Ru;
+            }
+            f = f_new;
+            T = T_new;
 
             // // Hybrid Newton-Bisection
             // T_new = T - dT;
