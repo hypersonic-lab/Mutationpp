@@ -372,16 +372,15 @@ namespace Mutation
         // For Secant Method
         bool T1 = true;
         double T_prev;
-        double eps = 1e-5;
-        double f, f_prev;
+        // double eps = 1e-5;
+        double f_prev;
 
         // For perturbation finite-difference
-        double eps = std::numeric_limits<double>::epsilon();
-        double h = std::cbrt(eps) * std::max(std::abs(T), 1.0); // Central Difference
-        // double h = std::sqrt(eps) * std::max(std::abs(T), 1.0); // Forward Difference
+        double mach_eps = std::numeric_limits<double>::epsilon();
+        double eps = std::cbrt(mach_eps) * std::max(std::abs(T), 1.0); // Central Difference
+        // double h = std::sqrt(mach_eps) * std::max(std::abs(T), 1.0); // Forward Difference
         double f_upper, f_lower, T_upper, T_lower;
         
-
         // Compute initial value of f
         h(T, p_work);
         f = alpha;
