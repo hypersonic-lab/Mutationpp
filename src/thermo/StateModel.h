@@ -415,28 +415,28 @@ namespace Mutation
             }
 
             // Compute df/dT
-            cp(T, p_work);
-            fp = alpha;
-            for (int i = 0; i < ns; ++i)
-                fp += mp_X[i]*p_work[i];
+            // cp(T, p_work);
+            // fp = alpha;
+            // for (int i = 0; i < ns; ++i)
+            //     fp += mp_X[i]*p_work[i];
 
-            // // Central Finite-Difference
-            // T_upper = T + eps;
-            // T_lower = T - eps;
-            // 
-            // h(T_upper, p_work);
-            // f_upper = alpha;
-            // for (int i = 0; i < ns; ++i)
-            //     f_upper += mp_X[i]*p_work[i];
-            // 
-            // h(T_lower, p_work);
-            // f_lower = alpha;
-            // for (int i = 0; i < ns; ++i)
-            //     f_lower += mp_X[i]*p_work[i];
-            // 
-            // f_upper = T_upper*f_upper - rhoe_over_Ru;
-            // f_lower = T_lower*f_lower - rhoe_over_Ru;
-            // fp = (f_upper - f_lower) / (2 * eps);
+            // Central Finite-Difference
+            T_upper = T + eps;
+            T_lower = T - eps;
+            
+            h(T_upper, p_work);
+            f_upper = alpha;
+            for (int i = 0; i < ns; ++i)
+                f_upper += mp_X[i]*p_work[i];
+            
+            h(T_lower, p_work);
+            f_lower = alpha;
+            for (int i = 0; i < ns; ++i)
+                f_lower += mp_X[i]*p_work[i];
+            
+            f_upper = T_upper*f_upper - rhoe_over_Ru;
+            f_lower = T_lower*f_lower - rhoe_over_Ru;
+            fp = (f_upper - f_lower) / (2 * eps);
 
             // // Forward Finite-Difference
             // T_upper = T + eps;
@@ -458,12 +458,12 @@ namespace Mutation
             
             // Recompute f
             // Newton-Raphson
-            // T -= dT;
-            // h(T, p_work);
-            // f = alpha;
-            // for (int i = 0; i < ns; ++i)
-            //     f += mp_X[i]*p_work[i];
-            // f = T*f - rhoe_over_Ru;
+            T -= dT;
+            h(T, p_work);
+            f = alpha;
+            for (int i = 0; i < ns; ++i)
+                f += mp_X[i]*p_work[i];
+            f = T*f - rhoe_over_Ru;
             //cout << iter << " " << f << " " << T << endl;
 
             // // Damped Newton
@@ -565,29 +565,29 @@ namespace Mutation
             // T_prev = T;
             // f_prev = f;     
 
-            // Secant version 2
-            if (T1){
-                T_prev = T;
-                T = T - f/fp;
-                T1 = false;
-            }
-            h(T, p_work);
-            f = alpha;
-            for (int i = 0; i < ns; ++i)
-                f += mp_X[i]*p_work[i];
-            f = T*f - rhoe_over_Ru;
+        //     // Secant version 2
+        //     if (T1){
+        //         T_prev = T;
+        //         T = T - f/fp;
+        //         T1 = false;
+        //     }
+        //     h(T, p_work);
+        //     f = alpha;
+        //     for (int i = 0; i < ns; ++i)
+        //         f += mp_X[i]*p_work[i];
+        //     f = T*f - rhoe_over_Ru;
 
-            T = T - (f * (T - T_prev)) / (f - f_prev);
+        //     T = T - (f * (T - T_prev)) / (f - f_prev);
 
-            h(T, p_work);
-            f = alpha;
-            for (int i = 0; i < ns; ++i)
-                f += mp_X[i]*p_work[i];
-            f = T*f - rhoe_over_Ru;
+        //     h(T, p_work);
+        //     f = alpha;
+        //     for (int i = 0; i < ns; ++i)
+        //         f += mp_X[i]*p_work[i];
+        //     f = T*f - rhoe_over_Ru;
 
-            T_prev = T;
-            f_prev = f;            
-        }
+        //     T_prev = T;
+        //     f_prev = f;            
+        // }
 
         // Let the user know if we converged or not
         return true;
