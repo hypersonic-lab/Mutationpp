@@ -121,9 +121,9 @@ public:
 		// static int i_transfer_model = (dynamic_cast<const MMT*>(mixture().reactions()[1].rateLaw()) != NULL);
 		switch (i_transfer_model){
 		   case 0:
-			  return compute_source_preferential();
-		   case 1:
 			  return compute_source_non_preferential();
+		   case 1:
+              return compute_source_preferential();
 		  break;
 		   default:
 			  std::cerr << "The selected vibration-translation energy relaxation model is not implemented yet";
