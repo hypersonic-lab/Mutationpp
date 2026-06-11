@@ -278,6 +278,12 @@ inline double const OmegaVT::compute_tau_VT_mj_preferential(int const i_vibrator
       double P = mixture().P();
       double T = mixture().T();
 
+    //   std::cout << "ml: " << m_mw[i_vibrator][i_partner].ml() << " nl: " << m_mw[i_vibrator][i_partner].nl() << " mh: " << m_mw[i_vibrator][i_partner].mh() << " nh: " << m_mw[i_vibrator][i_partner].nh() << std::endl;
+    //   std::cout << "P: " << (exp( m_mw[i_vibrator][i_partner].ml()* pow(T,-1.0/3.0) + m_mw[i_vibrator][i_partner].nl()) + exp( m_mw[i_vibrator][i_partner].mh()* pow(T,-1.0/3.0) + m_mw[i_vibrator][i_partner].nh()) )* ONEATM / P  << std::endl;
+    //   std::cout << "a: " << m_mw[i_vibrator][i_partner].a() << " b: " << m_mw[i_vibrator][i_partner].b() << std::endl;
+    //   std::cout << "NP: " << exp( m_mw[i_vibrator][i_partner].a() * (pow(T,-1.0/3.0) - m_mw[i_vibrator][i_partner].b()) -18.421) * ONEATM / P  << std::endl;
+      
+
       return( (exp( m_mw[i_vibrator][i_partner].ml()* pow(T,-1.0/3.0) + m_mw[i_vibrator][i_partner].nl()) + exp( m_mw[i_vibrator][i_partner].mh()* pow(T,-1.0/3.0) + m_mw[i_vibrator][i_partner].nh()) )* ONEATM / P );
 }
 
@@ -477,7 +483,7 @@ double OmegaVT::compute_source_preferential()
         // if (vibrator.energy(Tv) > 1) // molecule
         if (mixture().species()[species_ind].type() == Thermodynamics::MOLECULE)
         {
-            const auto tau = compute_tau_VT_m(iv-inv,mixture());
+            const auto tau = compute_tau_VT_m_preferential(iv-inv,mixture());
             // const auto tau = vibrator.relaxationTime(mixture());
             double energyT = T * RU * (hv_T[species_ind] + hel_T[species_ind]); // J/mol
             double energyTv = T * RU * (hv_Tv[species_ind] + hel_Tv[species_ind]); // J/mol
