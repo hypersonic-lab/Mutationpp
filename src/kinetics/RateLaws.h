@@ -135,8 +135,8 @@ public:
         double lnQTv = std::log((1.0 - std::exp(-1.0 * m_temp * m_invTv)) / (1.0 - std::exp(-1.0 * m_theta_v * m_invTv)));
         double lnQU =  std::log((1.0 - std::exp(m_temp / U)) / (1.0 - std::exp(m_theta_v / U)));
 //        lnZ = lnQTr + lnQTF - lnQTv - lnQU
-        return (m_lnA + m_n * lnTtr - m_temp * invTtr + lnQTr + lnQTF - lnQTv - lnQU);
-        // return (ln_f_k_NB + m_lnA + m_n * lnTtr - m_temp * invTtr + lnQTr + lnQTF - lnQTv - lnQU);
+        // return (m_lnA + m_n * lnTtr - m_temp * invTtr + lnQTr + lnQTF - lnQTv - lnQU);
+        return (ln_f_k_NB + m_lnA + m_n * lnTtr - m_temp * invTtr + lnQTr + lnQTF - lnQTv - lnQU);
     }
     
     // Can I change function arguments?
