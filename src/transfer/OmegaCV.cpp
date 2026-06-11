@@ -73,10 +73,11 @@ public:
 		: TransferModel(mix)
 	{
 		m_ns = mixture().nSpecies();
+		m_nr = mixture().nReactions();
 		mp_wrk1 = new double [m_ns];
 		mp_wrk2 = new double [m_ns];
-		mp_wrk3 = new double [m_ns];
-		mp_wrk4 = new double [m_ns];
+		mp_wrk3 = new double [m_nr];
+		mp_wrk4 = new double [m_nr];
 	};
 
 	~OmegaCV()
@@ -117,6 +118,7 @@ public:
 
 private:
 	int m_ns;
+	int m_nr;
 	double* mp_wrk1;
 	double* mp_wrk2;
 	double* mp_wrk3;
