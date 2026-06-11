@@ -43,42 +43,42 @@ namespace Mutation {
  * Combines vibrator energy model with relaxation time model to form a 
  * vibration-translation energy relaxation model for a single vibrator.
  */
-class Vibrator
-{
-public:
-    Vibrator(const Thermodynamics::HarmonicOscillator&, const MillikanWhiteModel&);
+// class Vibrator
+// {
+// public:
+//     Vibrator(const Thermodynamics::HarmonicOscillator&, const MillikanWhiteModel&);
 
-    /// Index of species in mixture.
-    size_t speciesIndex() const { 
-        return m_relaxation_model.speciesIndex(); 
-    }
+//     /// Index of species in mixture.
+//     size_t speciesIndex() const { 
+//         return m_relaxation_model.speciesIndex(); 
+//     }
 
-    /// Molecular weight of the vibrator in kg/mol
-    double molecularWeight() const { 
-        return m_relaxation_model.molecularWeight(); 
-    }
+//     /// Molecular weight of the vibrator in kg/mol
+//     double molecularWeight() const { 
+//         return m_relaxation_model.molecularWeight(); 
+//     }
     
-    /// Energy in K of the vibrator at the given temperature.
-    double energy(double T) const { 
-        return m_energy_model.energy(T); 
-    }
+//     /// Energy in K of the vibrator at the given temperature.
+//     double energy(double T) const { 
+//         return m_energy_model.energy(T); 
+//     }
 
-    /// Relaxation time of the vibrator.
-    /// @todo Find better solution to limit dependency to just thermodynamic
-    /// state information, not whole mixture.
-    double relaxationTime(const class Thermodynamics::Thermodynamics& thermo) const { 
-        return m_relaxation_model.relaxationTime(thermo);
-    }
+//     /// Relaxation time of the vibrator.
+//     /// @todo Find better solution to limit dependency to just thermodynamic
+//     /// state information, not whole mixture.
+//     double relaxationTime(const class Thermodynamics::Thermodynamics& thermo) const { 
+//         return m_relaxation_model.relaxationTime(thermo);
+//     }
 
-private:
-    Thermodynamics::HarmonicOscillator m_energy_model;
-    MillikanWhiteModel m_relaxation_model;
-};
+// private:
+//     Thermodynamics::HarmonicOscillator m_energy_model;
+//     MillikanWhiteModel m_relaxation_model;
+// };
 
 
-Vibrator::Vibrator(
-    const Thermodynamics::HarmonicOscillator& ho, const MillikanWhiteModel& mw
-) : m_energy_model(ho), m_relaxation_model(mw) { }
+// Vibrator::Vibrator(
+//     const Thermodynamics::HarmonicOscillator& ho, const MillikanWhiteModel& mw
+// ) : m_energy_model(ho), m_relaxation_model(mw) { }
 
 
 /**
@@ -90,22 +90,40 @@ Vibrator::Vibrator(
 class OmegaVT : public TransferModel
 {
 public:
-    OmegaVT(Mixture&);
-    // OmegaVT(Mixture&) : TransferModel(mix)
-    // {
-    //     m_ns = mixture().nSpecies();
-    //     hv_T = new double [m_ns];
-    //     hv_Tv = new double [m_ns];
-    //     hel_T = new double [m_ns];
-    //     hel_Tv = new double [m_ns];
-    // };
-    // virtual ~OmegaVT() = default;
+    // OmegaVT(Mixture&);
+            // OmegaVT(Mixture&) : TransferModel(mix)
+            // {
+            //     m_ns = mixture().nSpecies();
+            //     hv_T = new double [m_ns];
+            //     hv_Tv = new double [m_ns];
+            //     hel_T = new double [m_ns];
+            //     hel_Tv = new double [m_ns];
+            // };
+            // virtual ~OmegaVT() = default;
+    OmegaVT(Mixture& mix)
+        : TransferModel(mix), m_mw(mix)
+    {
+        m_const_Park_correction = std::sqrt(PI*KB/(8.E0*NA));
+        m_ns              = mixture().nSpecies();
+        m_transfer_offset = mixture().hasElectrons() ? 1 : 0;
+
+        mp_Mw = new double [m_ns];
+        for(int i = 0; i < m_ns; ++i)
+            mp_Mw[i] = mixture().speciesMw(i);
+        mp_hv = new double [m_ns];
+        mp_hveq = new double [m_ns];
+    }
+
+
     ~OmegaVT()
 	{
 		delete [] hv_T;
 		delete [] hv_Tv;
 		delete [] hel_T;
 		delete [] hel_Tv;
+        delete [] mp_Mw;
+        delete [] mp_hv;
+        delete [] mp_hveq;
 	};
     // virtual double source() override;
     double source()
@@ -131,8 +149,8 @@ public:
 		}
 	}
 private:
-    std::vector<Vibrator> m_vibrators;
-    int m_ns;
+    // std::vector<Vibrator> m_vibrators;
+    // int m_ns;
 	double* hv_T;
 	double* hv_Tv;
 	double* hel_T;
@@ -140,42 +158,150 @@ private:
 
     double compute_source_non_preferential();
 	double compute_source_preferential();
+
+    MillikanWhite m_mw;
+
+   /**
+    * @brief This function computes the Millikan and White relaxation time
+    * for each diatomic collision
+    *
+    * @param vibrator index
+    * @param partner index
+    *
+    * @return Millikan and White relaxation time \tau_{m,j}^{MW}
+    */
+
+   inline double const compute_tau_VT_mj(int const, int const);
+
+    /**
+     * @brief Computes the frequency average over heavy particles.
+     * @param vibrator index
+     *
+     * @return
+     */
+    double compute_tau_VT_m(int const, const Mutation::Thermodynamics::Thermodynamics&);
+
+    /**
+     * @brief This function computes the Park correction
+     * for vibrational-translational energy transfer
+     * for each collision pair.
+     *
+     * @param vibrator index
+     * @param partner index
+     *
+     * @return Park correction \tau_{m,j}^P
+     */
+
+    inline double const compute_Park_correction_VT(int const,int const,const Mutation::Thermodynamics::Thermodynamics&);
+
+    /**
+     * Necessary variables
+     */
+    int m_ns;
+    int m_transfer_offset;
+    double* mp_Mw;
+    double* mp_hv;
+    double* mp_hveq;
+
+    double m_const_Park_correction;
 };
+      
+// Implementation of the Vibrational-Translational Energy Transfer.
+      
+// inline double const OmegaVT::compute_Park_correction_VT(int const i_vibrator, int const i_partner)
+inline double const OmegaVT::compute_Park_correction_VT(int const i_vibrator, int const i_partner, const Mutation::Thermodynamics::Thermodynamics& thermo)
+{
+    // double sigma;
+    // double T = mixture().T();
+    // if (T > 20000.0) {
+    //   sigma = m_mw[i_vibrator].omega() * 6.25 ; // 6.25 = (50000/20000)^2
+    // } else {
+    //   sigma = m_mw[i_vibrator].omega() *(2.5E9/(T*T));
+    // }
+
+    // const double ni = thermo.numberDensity() * thermo.X()[m_mw[i_vibrator].index()];
+    // const double ci = std::sqrt(8*RU*thermo.T()/(PI*m_mw[i_vibrator][i_partner].mw()));
+    // const double tau_park = 1.0/(ni * ci * sigma);
+    // return tau_park;
+
+
+    // Limiting cross section for Park's Correction
+    double P = mixture().P();
+    double T = mixture().T();
+
+    double sigma;
+    if (T > 20000.0) {
+      sigma = m_mw[i_vibrator].omega() * 6.25 ; // 6.25 = (50000/20000)^2
+    } else {
+      sigma = m_mw[i_vibrator].omega() *(2.5E9/(T*T));
+    }
+    
+    return(m_const_Park_correction * sqrt(m_mw[i_vibrator][i_partner].mu()*T)/(sigma*P));
+}
+
+ 
+inline double const OmegaVT::compute_tau_VT_mj(int const i_vibrator, int const i_partner)
+{
+//    Enable in the future for multiple vibrational temperatures
+      double P = mixture().P();
+      double T = mixture().T();
+
+      return( exp( m_mw[i_vibrator][i_partner].a() * (pow(T,-1.0/3.0) - m_mw[i_vibrator][i_partner].b()) -18.421) * ONEATM / P );
+}
+      
+double OmegaVT::compute_tau_VT_m(int const i_vibrator,const Mutation::Thermodynamics::Thermodynamics& thermo)
+{
+    const double * p_Y = mixture().Y();
+    
+    double sum1 = 0.0;
+    double sum2 = 0.0;
+    
+    // Partner offset
+    for (int i_partner = m_transfer_offset; i_partner < m_ns; ++i_partner){
+        double tau_j = compute_tau_VT_mj(i_vibrator, i_partner-m_transfer_offset) + compute_Park_correction_VT(i_vibrator,i_partner-m_transfer_offset,thermo);
+        sum1 += p_Y[i_partner]/(mp_Mw[i_partner]);
+        sum2 += p_Y[i_partner]/(mp_Mw[i_partner]*tau_j);
+    }
+  
+    return(sum1/sum2);
+}
+
+
 
 
 // Register the transfer model
 Utilities::Config::ObjectProvider<OmegaVT, TransferModel> omegaVT("OmegaVT");
 
 
-OmegaVT::OmegaVT(Mixture& mix) : 
-    TransferModel(mix)
-{
+// OmegaVT::OmegaVT(Mixture& mix) : 
+//     TransferModel(mix)
+// {
     
 
-    Thermodynamics::HarmonicOscillatorDB hodb;
-    MillikanWhiteModelDB mwdb(mix);
+//     Thermodynamics::HarmonicOscillatorDB hodb;
+//     MillikanWhiteModelDB mwdb(mix);
 
-    for (const auto& species: mix.species())
-    {
-        if (species.type() == Thermodynamics::MOLECULE)
-        {
-            // std::cout << "Species: " << species.name() << std::endl;
-            auto ho = hodb.create(species.name());
-            // std::cout << "Temperatures: " << ho.characteristicTemperatures()[0] << std::endl;
-            auto mw = mwdb.create(species.name(), ho.characteristicTemperatures()[0]);
-            m_vibrators.emplace_back(ho, mw);
-        }   
-        else
-        {
-            // std::cout << "Species: " << species.name() << std::endl;
-            auto ho = hodb.create(species.name());
-            // std::cout << "Temperatures: " << 0 << std::endl;
-            auto mw = mwdb.create(species.name(), 0);
-            m_vibrators.emplace_back(ho, mw);
-        }   
-    }
+//     for (const auto& species: mix.species())
+//     {
+//         if (species.type() == Thermodynamics::MOLECULE)
+//         {
+//             // std::cout << "Species: " << species.name() << std::endl;
+//             auto ho = hodb.create(species.name());
+//             // std::cout << "Temperatures: " << ho.characteristicTemperatures()[0] << std::endl;
+//             auto mw = mwdb.create(species.name(), ho.characteristicTemperatures()[0]);
+//             m_vibrators.emplace_back(ho, mw);
+//         }   
+//         else
+//         {
+//             // std::cout << "Species: " << species.name() << std::endl;
+//             auto ho = hodb.create(species.name());
+//             // std::cout << "Temperatures: " << 0 << std::endl;
+//             auto mw = mwdb.create(species.name(), 0);
+//             m_vibrators.emplace_back(ho, mw);
+//         }   
+//     }
     
-}
+// }
 
 
 // double OmegaVT::source()
@@ -248,21 +374,24 @@ OmegaVT::OmegaVT(Mixture& mix) :
 
 double OmegaVT::compute_source_non_preferential()
 {
-    auto Y = mixture().Y();
-    auto T = mixture().T();
-    auto Tv = mixture().Tv();
+        const double * p_Y = mixture().Y();
+        double rho = mixture().density();
+        double T = mixture().T();
+        double Tv = mixture().Tv();
 
-    double src = 0.0;
+        mixture().speciesHOverRT(T, T, T, T, T, NULL, NULL, NULL, mp_hveq, NULL, NULL);
+        mixture().speciesHOverRT(T, Tv, T, Tv, Tv, NULL, NULL, NULL, mp_hv, NULL, NULL);
 
-    for (auto& vibrator: m_vibrators)
-    {
-        const auto iv = vibrator.speciesIndex();
-        const auto tau = vibrator.relaxationTime(mixture());
-        const auto mw = vibrator.molecularWeight();
-        src += Y[iv]*(vibrator.energy(T) - vibrator.energy(Tv))/(mw*tau);
-    }
-
-    return src * mixture().density() * RU;
+        int inv = 0;
+        double src = 0.0;
+        for (int iv = 0; iv-inv < m_mw.nVibrators(); ++iv){
+            if(mixture().species(iv).type() != Mutation::Thermodynamics::MOLECULE){
+                inv++;
+            } else {
+                src += p_Y[iv]*rho*RU*T/mp_Mw[iv]*(mp_hveq[iv] - mp_hv[iv])/compute_tau_VT_m(iv-inv,mixture());
+            }
+        }
+        return src;
 }
 
 
@@ -301,11 +430,15 @@ double OmegaVT::compute_source_preferential()
     double tau_sum = 0.0;
     double X_sum = 0.0;
     double ET, ETv;
+    int inv = 0; // Partner Offset
 
-    for (auto& vibrator: m_vibrators)
+    for (int iv = 0; iv-inv < m_mw.nVibrators(); ++iv)
     {
-        const auto iv = vibrator.speciesIndex();
-        const auto mw = vibrator.molecularWeight();
+        const auto species_ind = iv;
+        const auto mw = mp_Mw[species_ind];
+        // std::cout << "Index: " << iv << " Parter offset: " << inv << std::endl;
+        // const auto iv = vibrator.speciesIndex();
+        // const auto mw = vibrator.molecularWeight();
 
         // ET = T * RU * (hv_T[iv] + hel_T[iv]); // J/mol
         // ETv = T * RU * (hv_Tv[iv] + hel_Tv[iv]); // J/mol
@@ -313,20 +446,24 @@ double OmegaVT::compute_source_preferential()
         // std::cout << "T: " << ET << " Tv: " << ETv << std::endl;
         // src += Y[iv] * (ET - ETv) / (mw);
         // if (vibrator.energy(Tv) > 1) // molecule
-        if (mixture().species()[iv].type() == Thermodynamics::MOLECULE)
+        if (mixture().species()[species_ind].type() == Thermodynamics::MOLECULE)
         {
-            const auto tau = vibrator.relaxationTime(mixture());
-            src += Y[iv]*(vibrator.energy(T) - vibrator.energy(Tv))/(mw) * RU;
+            const auto tau = compute_tau_VT_m(iv-inv,mixture());
+            // const auto tau = vibrator.relaxationTime(mixture());
+            double energyT = m_mw[iv-inv].thetaV() / (std::exp(m_mw[iv-inv].thetaV()/T) - 1.0);
+            double energyTv = m_mw[iv-inv].thetaV() / (std::exp(m_mw[iv-inv].thetaV()/Tv) - 1.0);
+            src += Y[species_ind]*(energyT - energyTv)/(mw) * RU;
             // std::cout << "tau= " << tau << " X= " << X[iv] << std::endl;
-            tau_sum += X[iv] / tau;
-            X_sum += X[iv];
+            tau_sum += X[species_ind] / tau;
+            X_sum += X[species_ind];
             // std::cout << "tau_sum: " << tau_sum << " X_sum: " << X_sum << std::endl;
         }
         else {
             // std::cout << "T: " << hv_T[iv] << " Tv: " << hv_Tv[iv] << std::endl;
-            ET = T * RU * (hv_T[iv] + hel_T[iv]); // J/mol
-            ETv = T * RU * (hv_Tv[iv] + hel_Tv[iv]); // J/mol
-            src += Y[iv] * (ET - ETv) / (mw);
+            ET = T * RU * (hv_T[species_ind] + hel_T[species_ind]); // J/mol
+            ETv = T * RU * (hv_Tv[species_ind] + hel_Tv[species_ind]); // J/mol
+            src += Y[species_ind] * (ET - ETv) / (mw);
+            inv += 1; 
         }
     }
     double tau_denom = X_sum / tau_sum;
