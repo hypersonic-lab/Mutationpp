@@ -112,6 +112,10 @@ public:
             mp_Mw[i] = mixture().speciesMw(i);
         mp_hv = new double [m_ns];
         mp_hveq = new double [m_ns];
+        hv_T = new double [m_ns];
+        hv_Tv = new double [m_ns];
+        hel_T = new double [m_ns];
+        hel_Tv = new double [m_ns];
     }
 
 
@@ -172,6 +176,7 @@ private:
     */
 
    inline double const compute_tau_VT_mj(int const, int const);
+   inline double const compute_tau_VT_mj_preferential(int const, int const);
 
     /**
      * @brief Computes the frequency average over heavy particles.
@@ -180,6 +185,7 @@ private:
      * @return
      */
     double compute_tau_VT_m(int const, const Mutation::Thermodynamics::Thermodynamics&);
+    double compute_tau_VT_m_preferential(int const, const Mutation::Thermodynamics::Thermodynamics&);
 
     /**
      * @brief This function computes the Park correction
@@ -259,6 +265,32 @@ double OmegaVT::compute_tau_VT_m(int const i_vibrator,const Mutation::Thermodyna
     // Partner offset
     for (int i_partner = m_transfer_offset; i_partner < m_ns; ++i_partner){
         double tau_j = compute_tau_VT_mj(i_vibrator, i_partner-m_transfer_offset) + compute_Park_correction_VT(i_vibrator,i_partner-m_transfer_offset,thermo);
+        sum1 += p_Y[i_partner]/(mp_Mw[i_partner]);
+        sum2 += p_Y[i_partner]/(mp_Mw[i_partner]*tau_j);
+    }
+  
+    return(sum1/sum2);
+}
+
+inline double const OmegaVT::compute_tau_VT_mj_preferential(int const i_vibrator, int const i_partner)
+{
+//    Enable in the future for multiple vibrational temperatures
+      double P = mixture().P();
+      double T = mixture().T();
+
+      return( (exp( m_mw[i_vibrator][i_partner].ml()* pow(T,-1.0/3.0) + m_mw[i_vibrator][i_partner].nl()) + exp( m_mw[i_vibrator][i_partner].mh()* pow(T,-1.0/3.0) + m_mw[i_vibrator][i_partner].nh()) )* ONEATM / P );
+}
+
+double OmegaVT::compute_tau_VT_m_preferential(int const i_vibrator,const Mutation::Thermodynamics::Thermodynamics& thermo)
+{
+    const double * p_Y = mixture().Y();
+    
+    double sum1 = 0.0;
+    double sum2 = 0.0;
+    
+    // Partner offset
+    for (int i_partner = m_transfer_offset; i_partner < m_ns; ++i_partner){
+        double tau_j = compute_tau_VT_mj_preferential(i_vibrator, i_partner-m_transfer_offset);
         sum1 += p_Y[i_partner]/(mp_Mw[i_partner]);
         sum2 += p_Y[i_partner]/(mp_Mw[i_partner]*tau_j);
     }
@@ -403,11 +435,8 @@ double OmegaVT::compute_source_preferential()
     auto T = mixture().T();
     auto Tv = mixture().Tv();
     m_ns = mixture().nSpecies();
-    hv_T = new double[m_ns](); 
-    hv_Tv = new double[m_ns](); 
-    hel_T = new double[m_ns](); 
-    hel_Tv = new double[m_ns](); 
-
+    
+    
     // double src = 0.0;
 
     // for (auto& vibrator: m_vibrators)
@@ -434,7 +463,7 @@ double OmegaVT::compute_source_preferential()
 
     for (int iv = 0; iv-inv < m_mw.nVibrators(); ++iv)
     {
-        const auto species_ind = iv;
+        int species_ind = iv; // vibrator index
         const auto mw = mp_Mw[species_ind];
         // std::cout << "Index: " << iv << " Parter offset: " << inv << std::endl;
         // const auto iv = vibrator.speciesIndex();
@@ -450,9 +479,12 @@ double OmegaVT::compute_source_preferential()
         {
             const auto tau = compute_tau_VT_m(iv-inv,mixture());
             // const auto tau = vibrator.relaxationTime(mixture());
-            double energyT = m_mw[iv-inv].thetaV() / (std::exp(m_mw[iv-inv].thetaV()/T) - 1.0);
-            double energyTv = m_mw[iv-inv].thetaV() / (std::exp(m_mw[iv-inv].thetaV()/Tv) - 1.0);
-            src += Y[species_ind]*(energyT - energyTv)/(mw) * RU;
+            double energyT = T * RU * (hv_T[species_ind] + hel_T[species_ind]); // J/mol
+            double energyTv = T * RU * (hv_Tv[species_ind] + hel_Tv[species_ind]); // J/mol
+
+            // double energyT = m_mw[iv-inv].thetaV() / (std::exp(m_mw[iv-inv].thetaV()/T) - 1.0);
+            // double energyTv = m_mw[iv-inv].thetaV() / (std::exp(m_mw[iv-inv].thetaV()/Tv) - 1.0);
+            src += (Y[species_ind] / mw) * (energyT - energyTv); // prep for rho_s
             // std::cout << "tau= " << tau << " X= " << X[iv] << std::endl;
             tau_sum += X[species_ind] / tau;
             X_sum += X[species_ind];
@@ -460,9 +492,10 @@ double OmegaVT::compute_source_preferential()
         }
         else {
             // std::cout << "T: " << hv_T[iv] << " Tv: " << hv_Tv[iv] << std::endl;
+            species_ind += inv;
             ET = T * RU * (hv_T[species_ind] + hel_T[species_ind]); // J/mol
             ETv = T * RU * (hv_Tv[species_ind] + hel_Tv[species_ind]); // J/mol
-            src += Y[species_ind] * (ET - ETv) / (mw);
+            src += ( Y[species_ind] / (mw) ) * (ET - ETv) ; // prep for rho_s * (et-ev)
             inv += 1; 
         }
     }

@@ -19,18 +19,24 @@ Data References:
     
         <!-- N2 data -->
         <vibrator species="N2" omegav="3.0E-21">
-            <partner species="N" a="180.0" b ="0.0262" /><!-- Ref. [1] -->
+            <partner species="N" a="180.0" b ="0.0262"
+                    ml="239.4" nl="-28.52" mh="32.34" nh="-18.39"/> <!-- Ref. [1] -->
             <partner species="N+" a="180.0" b ="0.0262" /><!-- Ref. [1] -->
-            <partner species="O" a="72.4" b="0.015" /> <!-- Ref. [1] -->
+            <partner species="O" a="72.4" b="0.015"
+                    ml="149.5" nl="-23.10" mh="-1.201" nh="-17.00"/> <!-- Ref. [1] -->
             <partner species="O+" a="72.4" b="0.015" /> <!-- Ref. [1] -->
-            <partner species="N2" a="221" b="0.0290" /> <!-- Ref. [1] -->
+            <partner species="N2" a="221" b="0.0290"
+                    ml="221.0" nl="-24.83" mh="33.30" nh="-17.31"/> <!-- Ref. [1] -->
             <partner species="N2+" a="221" b="0.0290" /> <!-- Ref. [1] -->
-            <partner species="O2" a="229" b="0.0295" /> <!-- Ref. [1] -->
+            <partner species="O2" a="229" b="0.0295"
+                    ml="115.0" nl="-20.25" mh="-51.42" nh="-15.26"/> <!-- Ref. [1] -->
             <partner species="O2+" a="229" b="0.0295" /> <!-- Ref. [1] -->
-            <partner species="NO" a="225" b="0.0293" /> <!-- Ref. [1] -->
+            <partner species="NO" a="225" b="0.0293"
+                    ml="221.0" nl="-24.83" mh="33.30" nh="-17.31"/> <!-- Ref. [1] -->
             <partner species="NO+" a="225" b="0.0293" /> <!-- Ref. [1] -->
             <partner species="C" a="72.4" b="0.015" /> <!-- Ref. [2] -->
         </vibrator>
+
 
         <!-- N2+ data precomputed default values -->
         <vibrator species="N2+" omegav="3.0E-21">
@@ -48,15 +54,20 @@ Data References:
         
         <!-- O2 data from Ref. [1] -->
         <vibrator species="O2" omegav="3.0E-21">
-            <partner species="N" a="72.4" b="0.015" />
+            <partner species="N" a="72.4" b="0.015"
+                    ml="81.22" nl="-21.16" mh="9.111" nh="-17.61"/> <!-- Ref. [1] -->
             <partner species="N+" a="72.4" b="0.015" />
-            <partner species="O" a="47.7" b="0.059" />
+            <partner species="O" a="47.7" b="0.059"
+                    ml="3.018" nl="-17.74" mh="-121.6" nh="-15.82"/> <!-- Ref. [1] -->
             <partner species="O+" a="47.7" b="0.059" />
-            <partner species="N2" a="134" b="0.0295" />  
+            <partner species="N2" a="134" b="0.0295"
+                    ml="134.0" nl="-22.37" mh="-0.7123" nh="-16.95"/>  
             <partner species="N2+" a="134" b="0.0295" />  
-            <partner species="O2" a="138" b="0.0300" />  
+            <partner species="O2" a="138" b="0.0300"
+                    ml="129.0" nl="-22.29" mh="-4.384" nh="-16.70"/>  
             <partner species="O2+" a="138" b="0.0300" />  
-            <partner species="NO" a="136" b="0.0298" />  
+            <partner species="NO" a="136" b="0.0298"
+                    ml="129.0" nl="-22.29" mh="-4.384" nh="-16.70"/>  
             <partner species="NO+" a="136" b="0.0298" />  
         </vibrator>
 
@@ -76,17 +87,23 @@ Data References:
         
         <!-- NO data from Ref. [1] -->
         <vibrator species="NO" omegav="3.0E-21">
-            <partner species="N"  a="49.5" b="0.042" />
-            <partner species="N+"  a="49.5" b="0.042" />
-            <partner species="O"  a="49.5" b="0.042" />
-            <partner species="O+"  a="49.5" b="0.042" />
-            <partner species="N2" a="49.5" b="0.042" />
+            <partner species="N" a="49.5" b="0.042"
+                    ml="64.31" nl="-19.08" mh="-62.33" nh="-15.82"/> <!-- Ref. [1] -->
+            <partner species="N+" a="49.5" b="0.042" />
+            <partner species="O" a="49.5" b="0.042"
+                    ml="-24.76" nl="-15.37" mh="-113.0" nh="-18.91"/> <!-- Ref. [1] -->
+            <partner species="O+" a="49.5" b="0.042" />
+            <partner species="N2" a="49.5" b="0.042"
+                    ml="127.2" nl="-23.20" mh="-27.61" nh="-16.55"/> <!-- Ref. [1] -->
             <partner species="N2+" a="49.5" b="0.042" />
-            <partner species="O2" a="49.5" b="0.042" />
+            <partner species="O2" a="49.5" b="0.042"
+                    ml="127.2" nl="-23.20" mh="-27.61" nh="-16.55"/> <!-- Ref. [1] -->
             <partner species="O2+" a="49.5" b="0.042" />
-            <partner species="NO" a="49.5" b="0.042" />
+            <partner species="NO" a="49.5" b="0.042"
+                    ml="127.2" nl="-23.20" mh="-27.61" nh="-16.55"/> <!-- Ref. [1] -->
             <partner species="NO+" a="49.5" b="0.042" />
         </vibrator>
+
         
         <!-- NO+ data precomputed default values -->
         <vibrator species="NO+" omegav="3.0E-21">
