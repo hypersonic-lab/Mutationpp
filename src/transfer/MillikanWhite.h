@@ -65,8 +65,8 @@ public:
     double b()  const {return m_b; }
     double ml()  const {return m_ml; }
     double nl()  const {return m_nl; }
-    double mh()  const {return m_nh; }
-    double nh()  const {return m_ml; }
+    double mh()  const {return m_mh; }
+    double nh()  const {return m_nh; }
     double mu() const {return m_mu;}
     double mw() const {return m_mw;}
 
