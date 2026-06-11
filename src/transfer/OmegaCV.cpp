@@ -171,8 +171,8 @@ double const OmegaCV::compute_source_Candler()
 	const int nr = mixture().nReactions();
 
     // Torres2025 "Parameterization and benchmarking of the Modified Marrone-Treanor Model for five-species air∗"
-	// const double f_e_NB = 0.85; // Non-Boltzmann Factor
-	const double f_e_NB = 1.0; // Non-Boltzmann Factor
+	const double f_e_NB = 0.85; // Non-Boltzmann Factor
+	// const double f_e_NB = 1.0; // Non-Boltzmann Factor
 
 	 // Getting Vibrational Energy
 	 mixture().speciesHOverRT(NULL, NULL, NULL, mp_wrk1, NULL, NULL);
