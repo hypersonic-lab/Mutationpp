@@ -1,6 +1,6 @@
 <!-- Oxygen STS FHO extrapolation mapped model reaction mechanism, 47 states -->
 
-<mechanism name="O2_STS_FHO_GP">
+<mechanism name="O2_STS_FHO">
 
 	<arrhenius_units A="mol,cm,s,K" E="J,mol,K" />
 

@@ -2084,14 +2084,14 @@
 			</vibrational_temperatures>
 			<electronic_levels units="1/cm">
 				<level degeneracy="1" energy="0.0" />
-				<!--<level degeneracy="3" energy="50203.5" />
+				<level degeneracy="3" energy="50203.5" />
 				<level degeneracy="6" energy="59619.2" />
 				<level degeneracy="6" energy="59808.0" />
 				<level degeneracy="3" energy="66272.5" />
 				<level degeneracy="1" energy="68152.7" />
 				<level degeneracy="2" energy="69283.0" />
 				<level degeneracy="2" energy="72097.6" />
-				 removed to match old mutation library
+				 <!--removed to match old mutation library
 				<level degeneracy="5" energy="77600.0" />
 				<level degeneracy="1" energy="85200.0" />
 				<level degeneracy="6" energy="86800.0" />
@@ -2480,6 +2480,41 @@
 		</thermodynamics>
 	</species>
 
+		<!-- Oxygen diatomic -->
+	<species name="O2_V0">
+		<stoichiometry>
+			O: 2
+		</stoichiometry>
+		<thermodynamics type="STS">
+			<linear>
+				yes
+			</linear>
+			<rotational_temperature units="K">
+				2.086
+			</rotational_temperature>
+			<steric_factor>
+				2
+			</steric_factor>
+			<vibrational_temperatures units="1/cm">
+				786.0234
+			</vibrational_temperatures>
+			<electronic_levels units="1/cm">
+				<!-- <level degeneracy="3" energy="0.0" />
+				<level degeneracy="2" energy="8270.9" /> -->
+				<level degeneracy="3" energy="0.0" />
+				<!-- <level degeneracy="2" energy="7917.5" />
+				<level degeneracy="1" energy="13195.1" />
+				<level degeneracy="1" energy="33055.7" />
+				<level degeneracy="6" energy="34690.9" />
+				<level degeneracy="3" energy="35393.1" />
+				<level degeneracy="3" energy="49792.1" /> -->
+			</electronic_levels>
+			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+				0.0
+			</formation_enthalpy>
+		</thermodynamics>
+	</species>
+
 	<!-- Oxygen diatomic -->
 	<species name="O2_D">
 		<stoichiometry>
@@ -2533,6 +2568,40 @@
 				40402.6225636
 				41100.2596261
 				41764.7920736
+			</vibrational_temperatures>
+			<electronic_levels units="1/cm">
+				<!-- <level degeneracy="3" energy="0.0" />
+				<level degeneracy="2" energy="8270.9" /> -->
+				<level degeneracy="3" energy="0.0" />
+				<!-- <level degeneracy="2" energy="7917.5" />
+				<level degeneracy="1" energy="13195.1" />
+				<level degeneracy="1" energy="33055.7" />
+				<level degeneracy="6" energy="34690.9" />
+				<level degeneracy="3" energy="35393.1" />
+				<level degeneracy="3" energy="49792.1" /> -->
+			</electronic_levels>
+			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+				0.0
+			</formation_enthalpy>
+		</thermodynamics>
+	</species>
+
+		<species name="O2_D0">
+		<stoichiometry>
+			O: 2
+		</stoichiometry>
+		<thermodynamics type="STS">
+			<linear>
+				yes
+			</linear>
+			<rotational_temperature units="K">
+				2.086
+			</rotational_temperature>
+			<steric_factor>
+				2
+			</steric_factor>
+			<vibrational_temperatures units="1/cm">
+				787.380953594
 			</vibrational_temperatures>
 			<electronic_levels units="1/cm">
 				<!-- <level degeneracy="3" energy="0.0" />

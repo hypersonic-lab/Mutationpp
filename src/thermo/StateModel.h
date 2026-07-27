@@ -347,15 +347,15 @@ namespace Mutation
                 const double alpha = 0.0,
                 const double atol = 1.0e-10,
                 const double rtol = 1.0e-10,
-                const int max_iters = 500)
+                const int max_iters = 10000)
     {
         using std::cerr;
         const int ns = m_thermo.nSpecies();
         const double rhoe_over_Ru = rhoe/RU;
         const double tol = rtol*std::abs(rhoe_over_Ru) + atol;
-        std::cout << "rhoe: " << rhoe << " alpha: " << alpha << std::endl;
-
-        double f, fp, dT;
+        // std::cout << "rhoe: " << rhoe << " T: " << T << " alpha: " << alpha << std::endl;
+        // std::cout << "T= " << T << " rhoE = " << rhoe << std::endl;
+        double f, fp, dT, f_h, f_cp;
 
         // For Damped-Newton
         double lambda = 1.0;
@@ -385,8 +385,12 @@ namespace Mutation
         // Compute initial value of f
         h(T, p_work);
         f = alpha;
+        f_h = 0.0;
         for (int i = 0; i < ns; ++i)
+        {
             f += mp_X[i]*p_work[i];
+            f_h += mp_X[i]*p_work[i];
+        }
         f = T*f - rhoe_over_Ru;
 
         // // Compute initial value of f
@@ -418,8 +422,14 @@ namespace Mutation
             // Compute df/dT
             cp(T, p_work);
             fp = alpha;
+            f_cp = 0.0;
+            
             for (int i = 0; i < ns; ++i)
+            {
+                // fp = 0.0;;
                 fp += mp_X[i]*p_work[i];
+                f_cp += mp_X[i]*p_work[i];
+            }
 
             // // Central Finite-Difference
             // T_upper = T + eps;
@@ -450,10 +460,13 @@ namespace Mutation
 
             // Update T
             dT = f/fp;
-            // std::cout << "dT: " << dT << std::endl;
+            // dT = f / (alpha + f_h + T * f_cp);
+            // std::cout << "T= " << T << " H = " << f_h << ", cp_mix = " << f_cp << ", f' = " << alpha + f_h + T * f_cp << std::endl;
+            // std::cout << "T= " << T <<  " dT: " << dT << " rhoE: " << rhoe << " alpha: " << alpha << std::endl;
             if (std::abs(T - 50.0) < 1.0e-10 && dT > 0) {
-                // std::cerr << "Clamping T at 50 K, energy is too low for the "
-                //      << "given species densities..." << std::endl;
+                std::cerr << "Clamping T at 50 K, energy is too low for the "
+                     << "given species densities..." << std::endl;
+                std::cerr << "res = " << f << ", T = " << T << std::endl;
                 return false;
             }
             while (T - dT < 50.0) dT *= 0.5; // prevent non-positive T
@@ -501,6 +514,7 @@ namespace Mutation
             // // std::cout << "Newton: " << T_new << std::endl;
             // in_range_newton = (T_new >= T_min) && (T_new <= T_max);
             // improve_newton = std::abs(f_new) < std::abs(f);
+            // lambda = 1.0;
 
             // if ((!in_range_newton) or (!improve_newton)){ // Resulting from Newton's Method
             //     h(T_new, p_work);
@@ -520,7 +534,7 @@ namespace Mutation
             //     for (int i = 0; i < ns; ++i)
             //         f_new += mp_X[i]*p_work[i];
             //     f_new = T_new*f_new - rhoe_over_Ru;
-            //     std::cout << "DN f: " << f_new << " lambda: " << lambda << std::endl;
+            //     // std::cout << "DN f: " << f_new << " lambda: " << lambda << std::endl;
             //     damped_converged = true;
             // }
             // }
@@ -596,7 +610,7 @@ namespace Mutation
         }
 
         // Let the user know if we converged or not
-        std::cerr << "We converged!" << std::endl;
+        // std::cerr << "We converged!" << std::endl;
         return true;
             }
 
