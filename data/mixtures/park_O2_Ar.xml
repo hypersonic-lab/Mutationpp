@@ -5,8 +5,8 @@
         Ar O O2
     </species>
 
-    <element_compositions default="air">
+    <!-- <element_compositions default="air">
         <composition name="air"> N:0.79, O: 0.21 </composition>
-    </element_compositions>
+    </element_compositions> -->
 
 </mixture>
