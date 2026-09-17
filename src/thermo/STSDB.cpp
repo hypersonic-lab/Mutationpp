@@ -98,9 +98,14 @@ typedef struct {
 
 /**
  * A thermodynamic database that uses the Rigid-Rotator Harmonic-Oscillator
- * model for computing species thermodynamic properties and adapted to STS.
- * See the individual thermodynamic functions for specific descriptions of the model.
+ * model for computing species thermodynamic properties.  See the individual
+ * thermodynamic functions for specific descriptions of the model.
  */
+    
+/**** TODO: Figure out what states exist
+         Establish array in that form
+         Read in energy constants from file
+*/
 class STSDB : public ThermoDB
 {
 public:
@@ -172,9 +177,11 @@ public:
             return;
         }
         
+        // Otherwise we have to compute each component directly.
         // Translation
         if (cpt == NULL) {
             if (cp != NULL)
+                //cpT(cp, PlusEq());
                 cpT(cp, Eq());
         } else {
             cpT(cpt, Eq());
@@ -257,6 +264,7 @@ public:
         // Otherwise selectively choose what we want
         // Translational enthalpy
         if (ht == NULL) {
+            //hT(Th, Te, h, Eq());
             if (h != NULL)
                 hT(Th, Te, h, EqDiv(Th));
         } else {
@@ -411,7 +419,7 @@ public:
             g[0] -= std::log(2.0);
     }
 
-        /**
+    /**
      * Computes the derivative of unitless Gibbs free energy of each species i, 
      * \f$\frac{\partial{G_i / R_u T_h}{\partial T_h}\f$ where \f$G_i\f$ is 
      * non-dimensionalized by the heavy particle translational temperature.
@@ -438,8 +446,8 @@ public:
         hR(Tr, dg, MinusEqDiv(Th2));
         hV(Tv, dg, MinusEqDiv(Th2));
         hE(Tel, dg, MinusEqDiv(Th2));
-    }
 
+    }
     
 protected:
     /**
@@ -480,6 +488,15 @@ protected:
             }
             
         }
+
+        // // @todo: 1/18/2023
+        // // Find the species in the species.xml database. Not needed.
+
+        // // @debug
+        // for (const auto& sp : species) {
+        //     std::cout << "Species name = " << sp.name() << std::endl;
+        // }
+        // double in; std::cin >> in;
     }
 
     /**
@@ -630,7 +647,6 @@ private:
     typedef MinusEquals<double> MinusEq;
     typedef MinusEqualsYDivAlpha<double> MinusEqDiv;
 
-
         class ElecBFacsFunctor
     {
     public:
@@ -689,11 +705,36 @@ private:
     double* mp_el_bfacs;
     double m_last_bfacs_T;
 
+	double g0_O2 = 3.0;
+	double g1_O2 = 2.0;
+	double theta_1_O2 = 11900;
+	double g0_O = 5.0;
+	double g1_O = 4.0;
+	double theta_1_O = 270;
 	double cm2J = 1.98630e-23;
     double Tss = standardTemperature();
+    double ThetaR = 2.08; //char temp rot O2
 
+	std::array<double, 47> m_energy = { // Varandas energy ladder cm-1
+    786.0234, 2343.573, 3881.3038,
+	5398.5964, 6894.8782, 8369.5118,
+	9822.0457, 11251.754, 12658.072,
+	14040.4352, 15398.3596, 16731.2,
+	18038.3111, 19319.2091, 20573.1679,
+	21799.7037, 22998.2518, 24168.0058,
+	25308.4816, 26419.0341, 27498.9373,
+	28547.546, 29564.2148, 30548.1374,
+	31498.6683, 32414.9205, 33296.168,
+	34141.6041, 34950.3419, 35721.3326,
+    36453.8504, 37146.6854, 37798.8698,
+	38409.2744, 38976.5281, 39499.5822,
+	39976.9044, 40407.0429, 40788.6264,
+	41119.9613, 41399.6763, 41626.4003,
+	41799.6494, 41920.3914, 41993.5464,
+	42029.6803, 42042.9885
+	};
 
-    void updateElecBoltzmannFactors(double T)
+        void updateElecBoltzmannFactors(double T)
     {
         if (std::abs(1.0 - m_last_bfacs_T / T) < 1.0e-16)
             return;
@@ -734,6 +775,27 @@ private:
         LOOP_MOLECULES(op(cp[j], 0.0));
     }
 
+	// template <typename OP>
+    // void cpE(double T, double* const p_cp, const OP& op)
+    // {
+	// 	// double g0_O2 = 3.0;
+	// 	// double g1_O2 = 2.0;
+	// 	// double theta_1_O2 = 11900;
+	// 	// double g0_O = 5.0;
+	// 	// double g1_O = 4.0;
+	// 	// double theta_1_O = 270;
+
+	// 	op(p_cp[0], 0.0);
+
+	// 	for (int i = 0; i < m_ns; i++){
+	// 		if (i == 0){
+	// 			op(p_cp[i],pow((theta_1_O/T),2.0) * (g1_O/g0_O * exp(-theta_1_O / T)) / (pow(1.0+g1_O/g0_O * exp(-theta_1_O / T),2.0))); // Ground state
+	// 		}
+	// 		else {
+	// 			op(p_cp[i],pow((theta_1_O2/T),2.0) * (g1_O2/g0_O2 * exp(-theta_1_O2 / T)) / (pow(1.0+g1_O2/g0_O2 * exp(-theta_1_O2 / T),2.0)));
+	// 		}
+	// 	}
+    // }
     template <typename OP>
     void cpE(double T, double* const p_cp, const OP& op)
     {
@@ -778,6 +840,7 @@ private:
             LOOP_MOLECULES(op(h[j], 0.0));
         } else {
             LOOP_MOLECULES(op(h[j], mp_vib_temps[i] * cm2J / (KB)))
+            // LOOP_MOLECULES(op(h[j], m_energy[i] * cm2J / (KB)))
         }
     }
 
@@ -785,7 +848,22 @@ private:
      * Computes the electronic enthalpy of each species in K and applies the
      * value to the enthalpy array using the given operation.
      */
-    template <typename OP>
+    // template <typename OP>
+    // void hE(double T, double* const p_h, const OP& op)
+    // {
+
+	// 	op(p_h[0], 0.0);
+
+	// 	for (int i = 0; i < m_ns; i++){
+	// 		if (i == 0){
+	// 			op(p_h[i],((theta_1_O) * g1_O/g0_O * exp(-theta_1_O / T)) / (1.0 + g1_O/g0_O * exp(-theta_1_O / T))); // Ground state
+	// 		}
+	// 		else {
+	// 			op(p_h[i],((theta_1_O2) * g1_O2/g0_O2 * exp(-theta_1_O2 / T)) / (1.0 + g1_O2/g0_O2 * exp(-theta_1_O2 / T)));
+	// 		}
+	// 	}
+    // }
+        template <typename OP>
     void hE(double T, double* const p_h, const OP& op)
     {
         updateElecBoltzmannFactors(T);
@@ -812,7 +890,15 @@ private:
     /**
      * Computes the unitless translational entropy of each species.
      */
-    template <typename OP>
+    // template <typename OP>
+    // void sT(double Th, double Te, double P, double* const s, const OP& op) {
+    //     // double fac = 2.5 * (1.0 + std::log(Th)) - std::log(P);
+    //     // if (m_has_electron)
+    //     //     op(s[0], 2.5 * std::log(Te / Th) + fac + mp_lnqtmw[0]);
+    //     for (int i = (m_has_electron ? 1 : 0); i < m_ns; ++i)
+    //         op(s[i], 2.5 * log(Th) - log(P) + log(pow((2*PI*0.0159994 / NA / pow(HP,2.0)),1.5) * pow(KB,2.5)) + 2.5);
+    // }
+        template <typename OP>
     void sT(double Th, double Te, double P, double* const s, const OP& op) {
         double fac = 2.5 * (1.0 + std::log(Th)) - std::log(P);
         if (m_has_electron)
@@ -826,10 +912,8 @@ private:
      */
     template <typename OP>
     void sR(double T, double* const s, const OP& op) {
-        const double onelnT = 1.0 + std::log(T);
         LOOP_MOLECULES(
-            op(s[j], mp_rot_data[i].linearity * (onelnT -
-                mp_rot_data[i].ln_omega_t));
+            op(s[j], (log(T / (2 * ThetaR)) + 1.0));
         )
     }
 
@@ -848,7 +932,19 @@ private:
     /**
      * Computes the unitless electronic entropy of each species.
      */
-    template <typename OP>
+    // template <typename OP>
+    // void sE(double T, double* const p_s, const OP& op) {
+	// 	op(p_s[0], 0.0);
+	// 	for (int i = 0; i < m_ns; i++){
+	// 		if (i == 0){
+	// 			op(p_s[i],(log(g0_O) + log(1.0+g1_O/g0_O*exp(-theta_1_O/T)) + (g1_O/g0_O*theta_1_O/T*exp(-theta_1_O/T))/(1+(g1_O/g0_O)*exp(-theta_1_O/T)))); // Ground state
+	// 		}
+	// 		else {
+	// 			op(p_s[i],(log(g0_O2) + log(1.0+g1_O2/g0_O2*exp(-theta_1_O2/T)) + (g1_O2/g0_O2*theta_1_O2/T*exp(-theta_1_O2/T))/(1+(g1_O2/g0_O2)*exp(-theta_1_O2/T))));
+	// 		}
+	// 	}
+    // }
+        template <typename OP>
     void sE(double T, double* const p_s, const OP& op) {
         updateElecBoltzmannFactors(T);
         op(p_s[0], 0.0);
@@ -863,7 +959,7 @@ private:
         }
     }
 
-    /**
+        /**
      * Computes the temperature derivative of unitless translational entropy of each species.
      */
     template <typename OP>
@@ -891,8 +987,16 @@ private:
      */
     template <typename OP>
     void dsV(double T, double* const ds, const OP& op) {
+        int ilevel = 0;
+        double fac1, fac2, sum;
         LOOP_MOLECULES(
-            op(ds[j], (0.0));
+            sum = 0.0;
+            for (int k = 0; k < mp_nvib[i]; ++k, ilevel++) {
+                fac1 = std::exp(mp_vib_temps[ilevel] / T);
+                fac2 = (fac1-1.)*(fac1-1.);
+                sum += mp_vib_temps[ilevel]*mp_vib_temps[ilevel]*fac1/fac2;
+            }
+            op(ds[j], (sum / (T*T*T)));
         )
     }
     
