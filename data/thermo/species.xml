@@ -44,6 +44,51 @@
 			</formation_enthalpy>
 		</thermodynamics>
 	</species>
+
+		<species name="Arbin">
+		<stoichiometry>
+			Ar: 1
+		</stoichiometry>
+		<thermodynamics type="STS">
+			<electronic_levels units="1/cm">
+				<level degeneracy="1" energy="0.0" />
+				<level degeneracy="5" energy="93144.1" />
+				<level degeneracy="3" energy="93751.0" />
+				<level degeneracy="1" energy="94554.1" />
+				<level degeneracy="3" energy="95400.2" />
+				<level degeneracy="3" energy="104102.5" />
+				<level degeneracy="7" energy="105463.2" />
+				<level degeneracy="5" energy="105617.7" />
+				<level degeneracy="3" energy="106087.7" />
+				<level degeneracy="5" energy="106238.0" />
+				<level degeneracy="1" energy="107054.8" />
+				<level degeneracy="3" energy="107132.2" />
+				<level degeneracy="5" energy="107290.2" />
+				<level degeneracy="3" energy="107496.9" />
+				<level degeneracy="1" energy="108723.1" />
+				<level degeneracy="1" energy="111668.3" />
+				<level degeneracy="3" energy="111818.5" />
+				<level degeneracy="5" energy="112139.4" />
+				<level degeneracy="9" energy="112750.7" />
+				<level degeneracy="7" energy="113020.9" />
+				<level degeneracy="5" energy="113426.5" />
+				<level degeneracy="5" energy="113469.0" />
+				<level degeneracy="3" energy="113643.8" />
+				<level degeneracy="7" energy="113717.1" />
+				<level degeneracy="3" energy="114148.2" />
+				<level degeneracy="5" energy="114641.5" />
+				<level degeneracy="5" energy="114805.6" />
+				<level degeneracy="7" energy="114822.5" />
+				<level degeneracy="1" energy="114862.2" />
+				<level degeneracy="3" energy="114975.5" />
+				<level degeneracy="3" energy="115367.4" />
+			</electronic_levels>
+			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+				0
+			</formation_enthalpy>
+		</thermodynamics>
+	</species>
+
  
 	<!-- Argon cation -->
 	<species name="Ar+">
@@ -2284,6 +2329,62 @@
 			</formation_enthalpy>
 		</thermodynamics>
 	</species>
+
+		<species name="Obin">
+		<stoichiometry>
+			O: 1
+		</stoichiometry>
+		<thermodynamics type="STS">
+			<electronic_levels units="1/cm">
+				<!-- <level degeneracy="5" energy="0.0" />
+				<level degeneracy="3" energy="187.7" /> -->
+				<level degeneracy="9" energy="0.0" />
+				<level degeneracy="5" energy="15889.0" />
+				<level degeneracy="1" energy="33794.0" />
+				<level degeneracy="5" energy="73768.0" />
+				<level degeneracy="3" energy="76792.0" />
+				<level degeneracy="15" energy="86624.0" />
+				<level degeneracy="9" energy="88641.0" />
+				<level degeneracy="5" energy="95480.0" />
+				<level degeneracy="3" energy="96222.0" />
+				<level degeneracy="25" energy="97513.0" />
+				<level degeneracy="15" energy="97593.0" />
+				<level degeneracy="15" energy="99207.0" />
+				<level degeneracy="9" energy="99771.0" />
+				<level degeneracy="15" energy="101223.0" />
+				<level degeneracy="5" energy="102191.0" />
+				<level degeneracy="3" energy="102513.0" />
+				<level degeneracy="5" energy="102755.0" />
+				<level degeneracy="25" energy="102917.0" />
+				<level degeneracy="15" energy="102997.0" />
+				<level degeneracy="56" energy="103078.0" />
+				<level degeneracy="15" energy="103723.0" />
+				<level degeneracy="9" energy="103965.0" />
+				<level degeneracy="5" energy="105094.0" />
+				<level degeneracy="3" energy="105256.0" />
+				<level degeneracy="40" energy="105498.0" />
+				<level degeneracy="56" energy="105554.0" />
+				<level degeneracy="15" energy="105901.0" />
+				<level degeneracy="9" energy="105982.0" />
+				<level degeneracy="5" energy="106627.0" />
+				<level degeneracy="3" energy="106708.0" />
+				<level degeneracy="168" energy="106869.0" />
+				<level degeneracy="5" energy="107514.0" />
+				<level degeneracy="3" energy="107595.0" />
+				<level degeneracy="96" energy="107700.0" />
+				<level degeneracy="8" energy="108175.0" />
+				<level degeneracy="40" energy="108224.0" />
+				<level degeneracy="8" energy="108555.0" />
+				<level degeneracy="40" energy="108595.0" />
+				<level degeneracy="3" energy="108829.0" />
+				<level degeneracy="40" energy="108853.0" />
+			</electronic_levels>
+			<formation_enthalpy T="298 K" P="1 atm" units="J/mol">
+				249229
+			</formation_enthalpy>
+		</thermodynamics>
+	</species>
+
  
 	<!-- Oxygen cation -->
 	<species name="O+">
