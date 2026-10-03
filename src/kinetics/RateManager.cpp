@@ -62,6 +62,22 @@ TEMPERATURE_SELECTOR(ParkSelector, std::sqrt(state->T()*state->Tv()))
 
 #undef TEMPERATURE_SELECTOR
 
+/// Temperature selector which returns T^a * Tv^b for user given a and b
+class TaTvSelector
+{
+public:
+    TaTvSelector(const double a, const double b) : m_a(a), m_b(b) { }
+    inline double getT(const Thermodynamics::StateModel* const state) const {
+        return std::pow(state->T(), m_a) * std::pow(state->Tv(), m_b);
+    }
+    inline const char* getName(const Thermodynamics::StateModel* const state) const {
+        return "TaTvSelector";
+    }
+private:
+    double m_a;
+    double m_b;
+};
+
 /// Arrhenius group evaluated at T
 typedef RateLawGroup1T<Arrhenius, TSelector> ArrheniusT;
 
@@ -70,6 +86,9 @@ typedef RateLawGroup1T<Arrhenius, TeSelector> ArrheniusTe;
 
 /// Arrhenius group evaluated at sqrt(T*Tv)
 typedef RateLawGroup1T<Arrhenius, ParkSelector> ArrheniusPark; 
+
+/// Arrhenius group evaluated at T^a * Tv^b
+typedef RateLawGroup1T<Arrhenius, TaTvSelector> ArrheniusTaTv;
 
 //==============================================================================
 
@@ -204,13 +223,20 @@ struct is_same<T,T> {
 
 template <typename ForwardGroup, typename ReverseGroup>
 void RateManager::addRate(const size_t rxn, const Reaction& reaction)
-{    
-    m_rate_groups.addRateCoefficient<ForwardGroup>(rxn, reaction.rateLaw());
+{
+    // Forward rate is evaluated at T^a * Tv^b if given in the mechanism,
+    // otherwise at the default temperature for this reaction type
+    const bool tatv = reaction.hasTaTv();
+    if (tatv)
+        m_rate_groups.addRateCoefficient<ArrheniusTaTv>(
+            rxn, reaction.rateLaw(), reaction.tatvA(), reaction.tatvB());
+    else
+        m_rate_groups.addRateCoefficient<ForwardGroup>(rxn, reaction.rateLaw());
     
     if (reaction.isReversible()) {
         
         // Make use of forward computation when possible
-        if (is_same<ForwardGroup, ReverseGroup>::value)
+        if (!tatv && is_same<ForwardGroup, ReverseGroup>::value)
             m_to_copy.push_back(rxn);
         else
             // Evaluate at the reverse temperature

@@ -50,6 +50,9 @@ void swap(Reaction& left, Reaction& right) {
     swap(left.m_thirdbodies, right.m_thirdbodies);
     swap(left.m_type,        right.m_type);
     swap(left.mp_rate,       right.mp_rate);
+    swap(left.m_has_tatv,    right.m_has_tatv);
+    swap(left.m_tatv_a,      right.m_tatv_a);
+    swap(left.m_tatv_b,      right.m_tatv_b);
 }
 
 //==============================================================================
@@ -59,7 +62,10 @@ Reaction::Reaction(const IO::XmlElement& node, const class Thermodynamics& therm
       m_reversible(true),
       m_thirdbody(false),
       m_conserves(true),
-      mp_rate(NULL)
+      mp_rate(NULL),
+      m_has_tatv(false),
+      m_tatv_a(0.0),
+      m_tatv_b(0.0)
 {
     // Make sure this is a reaction type XML element
     assert( node.tag() == "reaction" );
@@ -78,6 +84,18 @@ Reaction::Reaction(const IO::XmlElement& node, const class Thermodynamics& therm
     for ( ; iter != node.end(); ++iter) {
         if (iter->tag() == "arrhenius") {
             mp_rate = new Arrhenius(*iter, order());
+
+            // Optional override of the forward rate temperature with T^a*Tv^b
+            const bool has_a = iter->hasAttribute("a");
+            const bool has_b = iter->hasAttribute("b");
+            if (has_a != has_b)
+                iter->parseError(
+                    "Both 'a' and 'b' must be given to use T^a * Tv^b!");
+            if (has_a) {
+                m_has_tatv = true;
+                iter->getAttribute("a", m_tatv_a);
+                iter->getAttribute("b", m_tatv_b);
+            }
         } else if (iter->tag() == "M") {
             if (m_thirdbody) {
                 std::vector<std::string> tokens;

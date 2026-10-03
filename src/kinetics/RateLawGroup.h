@@ -152,6 +152,16 @@ class RateLawGroup1T : public RateLawGroup
 {
 public:
 
+    typedef TSelectorType Selector;
+
+    /**
+     * Constructor.  Selectors which carry parameters (ie: TaTvSelector) are
+     * passed in, otherwise the default constructed selector is used.
+     */
+    explicit RateLawGroup1T(const TSelectorType& selector = TSelectorType())
+        : m_selector(selector)
+    { }
+
     /**
      * Adds a new rate to evaluate with this group.
      */
@@ -170,7 +180,7 @@ public:
         const Thermodynamics::StateModel* const p_state, double* const p_lnk)
     {
         // Determine the reaction temperature for this group
-        m_t = TSelectorType().getT(p_state);
+        m_t = m_selector.getT(p_state);
 
         // Update only if the temperature has changed
         //if (std::abs(m_t - m_last_t) > 1.0e-10) {
@@ -194,7 +204,7 @@ public:
         const Thermodynamics::StateModel* const p_state, double* const p_dkdT)
     {
         // Determine the reaction temperature for this group
-        m_t = TSelectorType().getT(p_state);
+        m_t = m_selector.getT(p_state);
 
         // Update only if the temperature has changed
         //if (std::abs(m_t - m_last_t) > 1.0e-10) {
@@ -211,6 +221,9 @@ public:
     }
 
 private:
+
+    /// Selects the temperature at which the rates in this group are evaluated
+    TSelectorType m_selector;
 
     /// vector of rates to evaluate
     std::vector< std::pair<size_t, RateLawType> > m_rates;
@@ -239,27 +252,27 @@ public:
     typedef std::map<const std::type_info*, RateLawGroup*, CompareTypeInfo>
         GroupMap;
 
+    /// Groups evaluated at T^a * Tv^b, keyed by (a, b)
+    typedef std::map<std::pair<double, double>, RateLawGroup*> TaTvGroupMap;
+
     /**
      * Destructor.
      */
     ~RateLawGroupCollection()
     {
-        GroupMap::iterator iter = m_group_map.begin();
-        for ( ; iter != m_group_map.end(); ++iter) {
-            delete iter->second;
-            iter->second = NULL;
-        }
+        for (size_t i = 0; i < m_groups.size(); ++i)
+            delete m_groups[i];
     }
     
     /**
      * Returns the number of different rate law groups in this collection.
      */
-    size_t nGroups() const { return m_group_map.size(); }
+    size_t nGroups() const { return m_groups.size(); }
     
     /**
-     * Returns the GroupMap managed by this RateLawGroupCollection object.
+     * Returns all of the RateLawGroup objects in this collection.
      */
-    const GroupMap& groups() const { return m_group_map; }
+    const std::vector<RateLawGroup*>& groups() const { return m_groups; }
 
     /**
      * Adds a new rate law to be managed by this collection of rate law groups.
@@ -267,9 +280,25 @@ public:
     template <typename GroupType>
     void addRateCoefficient(const size_t rxn, const RateLaw* const p_rate)
     {
-        if (m_group_map[&typeid(GroupType)] == NULL)
-            m_group_map[&typeid(GroupType)] = new GroupType();
-        m_group_map[&typeid(GroupType)]->addRateCoefficient(rxn, p_rate);
+        getGroup<GroupType>()->addRateCoefficient(rxn, p_rate);
+    }
+
+    /**
+     * Adds a new rate law to be evaluated at T^a * Tv^b.  One group is created
+     * for each unique (a, b) pair.  GroupType::Selector must be constructible
+     * from (a, b).
+     */
+    template <typename GroupType>
+    void addRateCoefficient(
+        const size_t rxn, const RateLaw* const p_rate,
+        const double a, const double b)
+    {
+        RateLawGroup*& p_group = m_tatv_map[std::make_pair(a, b)];
+        if (p_group == NULL) {
+            p_group = new GroupType(typename GroupType::Selector(a, b));
+            m_groups.push_back(p_group);
+        }
+        p_group->addRateCoefficient(rxn, p_rate);
     }
     
     /**
@@ -279,9 +308,7 @@ public:
     template <typename GroupType>
     void addReaction(const size_t rxn, const Reaction& reaction)
     {
-        if (m_group_map[&typeid(GroupType)] == NULL)
-            m_group_map[&typeid(GroupType)] = new GroupType();
-        m_group_map[&typeid(GroupType)]->addReaction(rxn, reaction);
+        getGroup<GroupType>()->addReaction(rxn, reaction);
     }
 
     /**
@@ -292,9 +319,8 @@ public:
         const Thermodynamics::StateModel* const p_state, double* const p_lnk)
     {
         // Compute the forward rate constants
-        GroupMap::iterator iter = m_group_map.begin();
-        for ( ; iter != m_group_map.end(); ++iter)
-            iter->second->lnk(p_state, p_lnk);
+        for (size_t i = 0; i < m_groups.size(); ++i)
+            m_groups[i]->lnk(p_state, p_lnk);
     }
     
     /**
@@ -307,9 +333,8 @@ public:
         const Thermodynamics::StateModel* const p_state, double* const p_dkdT)
     {
         // Compute the forward rate constants
-        GroupMap::iterator iter = m_group_map.begin();
-        for ( ; iter != m_group_map.end(); ++iter)
-            iter->second->invkdkdT(p_state, p_dkdT);
+        for (size_t i = 0; i < m_groups.size(); ++i)
+            m_groups[i]->invkdkdT(p_state, p_dkdT);
     }
 
     /**
@@ -320,9 +345,8 @@ public:
         double* const p_lnk)
     {
         const size_t ns = thermo.nSpecies();
-        GroupMap::iterator iter = m_group_map.begin();
-        for ( ; iter != m_group_map.end(); ++iter) {
-            const RateLawGroup* p_group = iter->second;
+        for (size_t i = 0; i < m_groups.size(); ++i) {
+            const RateLawGroup* p_group = m_groups[i];
             thermo.speciesSTGOverRT(p_group->getT(), p_g);
             p_group->subtractLnKeq(ns, p_g, p_lnk);
         }
@@ -336,9 +360,8 @@ public:
         const Thermodynamics::Thermodynamics& thermo, double* const p_dKeqdT, double* const p_dkdT)
     {
         const size_t ns = thermo.nSpecies();
-        GroupMap::iterator iter = m_group_map.begin();
-        for ( ; iter != m_group_map.end(); ++iter) {
-            const RateLawGroup* p_group = iter->second;
+        for (size_t g = 0; g < m_groups.size(); ++g) {
+            const RateLawGroup* p_group = m_groups[g];
             thermo.speciesSTdGOverRT(p_group->getT(), p_dKeqdT);
 	    for(size_t i = 0; i < ns; ++i)
                 p_dKeqdT[i] += 1./p_group->getT();
@@ -347,9 +370,29 @@ public:
     }
   
 private:
+
+    /**
+     * Returns the group of the given type, creating it if necessary.
+     */
+    template <typename GroupType>
+    RateLawGroup* getGroup()
+    {
+        RateLawGroup*& p_group = m_group_map[&typeid(GroupType)];
+        if (p_group == NULL) {
+            p_group = new GroupType();
+            m_groups.push_back(p_group);
+        }
+        return p_group;
+    }
     
-    /// Collection of RateLawGroup objects
+    /// Lookup of RateLawGroup objects with compile-time temperature selectors
     GroupMap m_group_map;
+
+    /// Lookup of RateLawGroup objects evaluated at T^a * Tv^b
+    TaTvGroupMap m_tatv_map;
+
+    /// All RateLawGroup objects in this collection (owns the pointers)
+    std::vector<RateLawGroup*> m_groups;
 };
 
     } // namespace Kinetics

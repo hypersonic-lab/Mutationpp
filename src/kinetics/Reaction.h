@@ -66,7 +66,10 @@ public:
           m_conserves(reaction.m_conserves),
           m_thirdbodies(reaction.m_thirdbodies),
           m_type(reaction.m_type),
-          mp_rate(reaction.mp_rate ? reaction.mp_rate->clone() : NULL)
+          mp_rate(reaction.mp_rate ? reaction.mp_rate->clone() : NULL),
+          m_has_tatv(reaction.m_has_tatv),
+          m_tatv_a(reaction.m_tatv_a),
+          m_tatv_b(reaction.m_tatv_b)
     { }
     
     /**
@@ -161,6 +164,28 @@ public:
      */
     const RateLaw* rateLaw() const { 
         return mp_rate; 
+    }
+
+    /**
+     * Returns true if the forward rate of this reaction should be evaluated at
+     * T^a * Tv^b instead of the default temperature for its reaction type.
+     */
+    bool hasTaTv() const {
+        return m_has_tatv;
+    }
+
+    /**
+     * Exponent on T in the T^a * Tv^b forward rate temperature.
+     */
+    double tatvA() const {
+        return m_tatv_a;
+    }
+
+    /**
+     * Exponent on Tv in the T^a * Tv^b forward rate temperature.
+     */
+    double tatvB() const {
+        return m_tatv_b;
     }
     
     /**
@@ -268,6 +293,10 @@ private:
     
     ReactionType m_type;
     RateLaw* mp_rate;
+
+    bool m_has_tatv;
+    double m_tatv_a;
+    double m_tatv_b;
 
 }; // class Reaction
 
