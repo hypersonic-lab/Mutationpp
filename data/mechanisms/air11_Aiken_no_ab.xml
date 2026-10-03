@@ -1,0 +1,169 @@
+<!--
+Park air11 reaction mechanism
+Rates taken from:
+    1) Park et al., JTHT 15(1):76-90, 2001
+    2) Park, JTHT 7(3):385-398
+    3) Aiken, 10.1088/1361-6595
+-->
+<mechanism name="air_11_Aiken">
+
+    <arrhenius_units A="mol,cm,s,K" E="kcal,mol,K"/>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="N2+M=2N+M">
+        <arrhenius A="7.0E+21" n="-1.6" T="113200.0"/>
+        <M>O:2.314285714, N:2.314285714, N+:2.314285714, O+:2.314285714</M>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="N2+e-=2N+e-">
+        <arrhenius A="3.0E+24" n="-1.6" T="113200."/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O2+N2=2O+N2">
+        <arrhenius A="1.83E+15" n="-0.02" T="59380.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O2+N2+=2O+N2+">
+        <arrhenius A="1.83E+15" n="-0.02" T="59380.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O2+O2=2O+O2">
+        <arrhenius A="2.0e21" n="-1.5" T="59500.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O2+NO=2O+NO">
+        <arrhenius A="2.0e21" n="-1.5" T="59500.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O2+NO+=2O+NO+">
+        <arrhenius A="2.0e21" n="-1.5" T="59500.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O2+O2+=2O+O2+">
+        <arrhenius A="2.0e21" n="-1.5" T="59500.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O2+O=2O+O">
+        <arrhenius A="9.0e19" n="-1.0" T="59500.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O2+N=2O+N">
+        <arrhenius A="9.0e19" n="-1.0" T="59500.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O2+N+=2O+N+">
+        <arrhenius A="9.0e19" n="-1.0" T="59500.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O2+O+=2O+O+">
+        <arrhenius A="9.0e19" n="-1.0" T="59500.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="NO+M=N+O+M">
+        <arrhenius A="2.0E15" n="0.0" T="74570.0"/>
+        <M>NO:22.0, N:22.0, O:22.0, N+:22.0, O+:22.0, NO+:22.0</M>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="N2+O=NO+N">
+        <arrhenius A="2.97e10" n="0.98" T="37888.0" />
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O2+N=NO+O">
+        <arrhenius A="2.49e9" n="1.18" T="4005.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="N+O=NO++e-">
+        <arrhenius A="1.09e12" n="0.15" T="34586.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O+O=O2++e-">
+        <arrhenius A="1.82e10" n="0.68" T="80684.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="N+N=N2++e-">
+        <arrhenius A="3.49e11" n="0.51" T="71211.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="NO++O=N++O2">
+        <arrhenius A="1.34E13" n="0.31" T="77270.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="N++N2=N2++N">
+        <arrhenius A="3.3e7" n="1.43" T="12200.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O2++N=N++O2">
+        <arrhenius A="5.81e14" n="0.03" T="28600.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O++NO=N++O2">
+        <arrhenius A="1.04e12" n="0.33" T="26600.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O2++N2=N2++O2">
+        <arrhenius A="2.01e10" n="0.98" T="40700.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O2++O=O++O2">
+        <arrhenius A="3.26e11" n="0.31" T="18000.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="NO++N=O++N2">
+        <arrhenius A="2.54e12" n="-0.17" T="12800.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="NO++O2=O2++NO">
+        <arrhenius A="3.73e15" n="-0.06" T="32600.0"/>
+    </reaction>
+
+    <!-- Park, 1993 -->
+    <reaction formula="NO++O=O2++N">
+        <arrhenius A="7.2E12" n="0.29" T="48600.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O++N2=N2++O">
+        <arrhenius A="3.46e12" n="0.11" T="22800.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="NO++N=N2++O">
+        <arrhenius A="7.2E13" n="0.0" T="35500.0"/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="O+e-=O++e-+e-">
+        <arrhenius A="3.9E33" n="-3.78" T="158500."/>
+    </reaction>
+
+    <!-- Aiken, 2025 -->
+    <reaction formula="N+e-=N++e-+e-">
+        <arrhenius A="2.5E34" n="-3.82" T="168200."/>
+    </reaction>
+
+</mechanism>
