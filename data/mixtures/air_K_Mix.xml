@@ -1,0 +1,26 @@
+<!-- Ionized 13 species air-potassium reactions without wake mechanisms (O2-,O-) -->
+<mixture mechanism="air11_K8">
+
+    <species>
+        e- N+ O+ NO+ N2+ O2+ K+ N O NO N2 O2 K
+    </species>
+
+    <element_compositions default="air">
+        <composition name="air"> N:0.76699896, O: 0.23299968, K: 0.00000136 </composition>
+
+        <!-- Potassium Molar Fraction of 0
+        <composition name="air"> N:0.767, O: 0.233 </composition>
+
+        Potassium Molar Fraction of 1e-4
+        <composition name="air"> N:0.76689620, O: 0.23296830, K: 0.00013550 </composition>
+
+        Potassium Molar Fraction of 1e-5
+        <composition name="air"> N:0.76698962, O: 0.23299683, K: 0.00001355 </composition>
+
+        Potassium Molar Fraction of 1e-6
+        <composition name="air"> N:0.76699896, O: 0.23299968, K: 0.00000136 </composition>
+        -->
+
+    </element_compositions>
+
+</mixture>

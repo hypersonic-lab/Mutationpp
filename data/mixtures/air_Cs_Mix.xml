@@ -1,0 +1,27 @@
+<!-- Ionized 13 species air mixture without wake species (O-,O2-) -->
+<mixture mechanism="air11_Cs9">
+
+    <species>
+        e- N+ O+ NO+ N2+ O2+ Cs+ N O NO N2 O2 Cs
+
+    </species>
+
+    <element_compositions default="air">
+        <composition name="air"> N:0.767079, O: 0.232916, Cs: 0.00000461 </composition>
+
+        <!-- Cesium Molar Fraction of 0
+        <composition name="air"> N:0.767, O: 0.233 </composition>
+
+        Cesium Molar Fraction of 1e-4
+        <composition name="air"> N:0.766760, O: 0.232779, Cs: 0.00046051 </composition>
+
+        Cesium Molar Fraction of 1e-5
+        <composition name="air"> N:0.767050, O: 0.232904, Cs: 0.00004607 </composition>
+
+        Cesium Molar Fraction of 1e-6
+        <composition name="air"> N:0.767079, O: 0.232916, Cs: 0.00000461 </composition>
+        -->
+
+    </element_compositions>
+
+</mixture>

@@ -1,0 +1,29 @@
+<!-- Ionized 13 species air-sodium mixture without wake mixture (O-,O2-) -->
+<mixture mechanism="air11_Na9">
+
+    <species>
+        e- N+ O+ NO+ N2+ O2+ Na+ N O NO N2 O2 Na
+    </species>
+
+    <element_compositions default="air">
+        <composition name="air"> N:0.76638862, O: 0.23281428, Na: 0.00079710 </composition>
+
+        <!-- Sodium Molar Fraction of 0
+        <composition name="air"> N:0.767, O: 0.233 </composition>
+
+        Sodium Molar Fraction of 1e-3
+        <composition name="air"> N:0.76638862, O: 0.23281428, Na: 0.00079710 </composition>
+
+        Sodium Molar Fraction of 1e-4
+        <composition name="air"> N:0.76693883, O: 0.23298146, Na: 0.00007971 </composition>
+
+        Sodium Molar Fraction of 1e-5
+        <composition name="air"> N:0.76699388, O: 0.23299815, Na: 0.00000797 </composition>
+
+        Sodium Molar Fraction of 1e-6
+        <composition name="air"> N:0.76699939, O: 0.23299981, Na: 0.00000080 </composition>
+        -->
+
+    </element_compositions>
+
+</mixture>
