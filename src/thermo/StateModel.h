@@ -127,6 +127,26 @@ public:
         const int vars = 0, bool ROBUST = false) = 0;
     
     /**
+     * Sets the mixture state using previous temperature estimates to
+     * initialize the solver. The default implementation ignores these
+     * estimates and calls the existing setState method.
+     *
+     * @param p_mass - The "mass" vector (depends on concrete class)
+     * @param p_energy - The "energy" vector (depends on concrete class)
+     * @param vars - Index representing which variable set is given
+     * @param ROBUST - Flag controlling the solution method
+     * @param T_old - Previous translational temperature estimate [K]
+     * @param Tve_old - Previous vibrational-electronic temperature estimate [K]
+     */
+    virtual void setState(
+        const double* const p_mass, const double* const p_energy,
+        const int vars, bool ROBUST, const double T_old,
+        const double Tve_old)
+    {
+        setState(p_mass, p_energy, vars, ROBUST);
+    }
+
+    /**
      * Sets the current magnitude of the magnetic field in teslas.
      */
     void setBField(const double B) {
