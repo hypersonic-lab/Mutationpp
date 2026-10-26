@@ -306,7 +306,17 @@ public:
      * used.
      */
     void setState(
-        const double* const p_v1, const double* const p_v2, const int vars = 0, bool NEWTON = true);
+        const double* const p_v1, const double* const p_v2, const int vars = 0, bool ROBUST = true);
+
+    /**
+     * Sets the state of the mixture using the StateModel belonging to the
+     * mixture. The previous temperature estimates are provided as initial
+     * input guesses for the solver, depending on the type of StateModel
+     * being used.
+     */
+    void setState(
+        const double* const p_v1, const double* const p_v2, const int vars, bool ROBUST,
+        const double T_old, const double Tve_old);
         
     /**
      * Computes the equilibrium composition of the mixture at the given fixed

@@ -144,6 +144,82 @@ public:
     }
 
     /**
+     * Sets the current state of the mixture using previous temperature
+     * estimates as initial guesses for the solver. Variable sets can be the
+     * following:
+     *   0: {species densities}, {total energy density, vib. energy density}
+     *   1: {species densities} and {T, Tv}
+     *   2: {species mass fractions} and {P, T, Tv} array
+     */
+    void setState(const double* const p_mass, const double* const p_energy,
+        const int vars, bool ROBUST, const double T_old, const double Tve_old)
+    {
+        const int ns = m_thermo.nSpecies();
+
+        // Compute the species concentrations which are used through out this
+        // method regardless of variable set. Note that in the case where
+        // the p_mass vector is mass fractions, this is just dividing by the
+        // molecular weights as the first step in converting to mole fractions.
+        double conc = 0.0;
+        for (int i = 0; i < ns; ++i) {
+            // Check that species densities are at least positive
+            assert(p_mass[i] >= 0.0 && "Species is negative!");
+            mp_X[i] = std::max(p_mass[i] / m_thermo.speciesMw(i), 0.0);
+            conc += mp_X[i];
+        }
+
+        double elec = 0.0;
+        if (m_thermo.hasElectrons())
+            elec = mp_X[0];
+
+        // Compute the temperatures and make sure the variable set is implemented
+        switch (vars) {
+        case 0: {
+
+            // Use previous SU2 temperatures as the initial guess
+            solveEnergies(p_mass, p_energy, ROBUST, Tve_old, T_old);
+
+            break;
+        }
+        case 1:
+            // Check that temperature is at least positive
+            assert(p_energy[0] > 0.0 && "T is negative!");
+            assert(p_energy[1] > 0.0 && "Tv is negative!");
+            m_T = p_energy[0];
+            m_Tv = p_energy[1];
+            break;
+        case 2:
+            // Check temperature and pressure are positive
+            assert(p_energy[0] > 0.0 && "P is negative!");
+            assert(p_energy[1] > 0.0 && "T is negative!");
+            assert(p_energy[2] > 0.0 && "Tv is negative!");
+            m_P = p_energy[0];
+            m_T = p_energy[1];
+            m_Tv = p_energy[2];
+            break;
+        default:
+            throw InvalidInputError("variable set", vars)
+                << "This variable-set is not implemented in ChemNonEqTTv"
+                << ". Possible variable-sets are:\n"
+                << "  0: (species densities, static energy density)\n"
+                << "  1: (species densities, T and Tv)\n"
+                << "  2: (species mass fractions, P, T and Tv)";
+        }
+
+        // Set Tr, Tel, and Te
+        m_Tr = m_T;
+        m_Tel = m_Te = m_Tv;
+
+        // Compute the species mole fractions
+        for (int i = 0; i < ns; ++i)
+            mp_X[i] /= conc;
+
+        // Compute the pressure from T and rho_i
+        if (vars != 2)
+            m_P = conc * RU * (m_T + (m_Tv - m_T) * elec / conc);
+    }
+
+    /**
      *  Initialize transfer models
      */
     void initializeTransferModel(Mutation::Mixture& mix)
@@ -256,9 +332,9 @@ public:
 
     void solveEnergies(const double* const p_rhoi, const double* const p_rhoe, bool ROBUST = true, const double Tv_old = 0, const double T_old = 0)
 {
-    const double atol = 1.0e-10;
-    const double rtol = 1.0e-10;
-    const double dh = 1e-6;        // finite-diff perturbation
+    const double atol = 1.0e-14;
+    const double rtol = 1.0e-13;
+    const double dh = 1e-3;        // finite-diff perturbation
     const double min_temp = 10.0;  // lower clamp for temperatures
 
     Map<const VectorXd> rhoi(p_rhoi, m_thermo.nSpecies());
@@ -288,7 +364,13 @@ public:
         f = e - emix;
 
         int i;
-        for (i = 0; (f.norm() > rtol*emix.norm() + atol) && (i < imax); ++i) {
+
+        auto done = [&]() {
+            Vector2d escale = ei.cwiseAbs() * yi;   // sum_s y_s |e_s| per component
+            return ((f.array().abs()) <= rtol*escale.array() + atol).all();
+        };
+
+        for (i = 0; !done() && (i < imax); ++i) {
             // Update temperatures
             getCvsMass(ci.data());
             cv = ci*yi;
