@@ -137,15 +137,15 @@ public:
     double molecularWeight() const { return m_data.molecularWeight(); }
 
     /// Relaxation time of the vibrator.
-    double relaxationTime(const Mutation::Thermodynamics::Thermodynamics&) const;
+    double relaxationRate(const Mutation::Thermodynamics::Thermodynamics&) const;
 
     /// Derivatives of the relaxation time with respect to the species densities.
-    void relaxationTimeJacobianRho(const Mutation::Thermodynamics::Thermodynamics&,
-                                   double* const p_dtau_drho) const;
+    void relaxationRateJacobianRho(const Mutation::Thermodynamics::Thermodynamics&,
+                                   double* const p_drate_drho) const;
 
     /// Derivatives of the relaxation time with respect to T and Tv.
-    void relaxationTimeJacobianTTv(const Mutation::Thermodynamics::Thermodynamics&,
-                                   double* const p_dtau_dTTv) const;
+    void relaxationRateJacobianTTv(const Mutation::Thermodynamics::Thermodynamics&,
+                                   double* const p_drate_dTTv) const;
 
     const MillikanWhiteModelData& data() const { return m_data; }
 
