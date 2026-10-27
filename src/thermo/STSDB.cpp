@@ -34,6 +34,7 @@
 #include "LookupTable.h"
 #include "Utilities.h"
 
+#include <array>
 #include <iostream>
 #include <cstdlib>
 #include <cmath>

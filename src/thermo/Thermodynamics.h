@@ -28,6 +28,7 @@
 #ifndef THERMO_THERMODYNAMICS_H
 #define THERMO_THERMODYNAMICS_H
 
+#include <cassert>
 #include <map>
 #include <numeric>
 #include <string>
