@@ -133,7 +133,7 @@ m_data(data)
 { }
 
 
-double MillikanWhiteModel::relaxationTime(
+double MillikanWhiteModel::relaxationRate(
     const Mutation::Thermodynamics::Thermodynamics& thermo) const
 {
     // Millikan-White model for average relaxation time
@@ -148,14 +148,14 @@ double MillikanWhiteModel::relaxationTime(
     // Park correction
     const double ni = thermo.numberDensity() * thermo.X()[m_data.speciesIndex()];
     const double ci = std::sqrt(8*RU*thermo.T()/(PI*m_data.molecularWeight()));
-    const double tau_park = 1.0/(ni * ci * m_data.limitingCrossSection(thermo.T()));
+    const double rate_park = ni * ci * m_data.limitingCrossSection(thermo.T()); // = 1/tau_park
 
-    return tau_mw + tau_park;
+    return rate_park/(1. + rate_park * tau_mw);
 }
 
-void MillikanWhiteModel::relaxationTimeJacobianRho(
+void MillikanWhiteModel::relaxationRateJacobianRho(
     const Mutation::Thermodynamics::Thermodynamics& thermo,
-    double* const p_dtau_drho) const
+    double* const p_drate_drho) const
 {
     const int ns = thermo.nSpecies();
     const int nh = thermo.nHeavy();
@@ -177,28 +177,33 @@ void MillikanWhiteModel::relaxationTimeJacobianRho(
     const double sum_c  = conc_h.sum();
     const double tau_mw = (ONEATM / P) * (sum_cE / sum_c);
 
-    Eigen::Map<Eigen::ArrayXd> dtau_drho(p_dtau_drho, ns);
+    Eigen::Map<Eigen::ArrayXd> drate_drho(p_drate_drho, ns);
 
     // Derivative of pressure term
-    dtau_drho = -(tau_mw*RU*T) / (P*mw);
-    if (k) dtau_drho(0) = -(tau_mw*RU*Te) / (P*mw(0));
+    drate_drho = -(tau_mw*RU*T) / (P*mw);
+    if (k) drate_drho(0) = -(tau_mw*RU*Te) / (P*mw(0));
 
     // Derivative of mixing term (electrons excluded)
-    dtau_drho.tail(nh) += tau_mw*(E/sum_cE - 1.0/sum_c) / mw.tail(nh);
+    drate_drho.tail(nh) += tau_mw*(E/sum_cE - 1.0/sum_c) / mw.tail(nh);
 
-    // Park correction term and its derivative
+    // Park correction term and its derivative: rate_park = 1/tau_park
     const auto iv = m_data.speciesIndex();
-    if (conc(iv) > 0.0) {
-        const double ci = std::sqrt(8*RU*T/(PI*m_data.molecularWeight()));
-        const double tau_park =
-            1.0/(NA*conc(iv) * ci * m_data.limitingCrossSection(T));
-        dtau_drho(iv) -= tau_park / (conc(iv)*mw(iv));
-    }
+    const double ci = std::sqrt(8*RU*T/(PI*m_data.molecularWeight()));
+    const double sigma = m_data.limitingCrossSection(T);
+    const double rate_park = NA * conc(iv) * ci * sigma;
+    const double g = 1.0/(1.0 + rate_park*tau_mw);
+    const double rate = rate_park*g;
+
+    // d(rate)/drho_j = g*g*d(rate_park)/drho_j - rate*rate*dtau_mw/drho_j
+    // where d(rate_park)/drho_j is nonzero only for j = iv
+    drate_drho *= -rate*rate;
+    drate_drho(iv) += g*g*NA*ci*sigma/mw(iv);
+
 }
 
-void MillikanWhiteModel::relaxationTimeJacobianTTv(
+void MillikanWhiteModel::relaxationRateJacobianTTv(
     const Mutation::Thermodynamics::Thermodynamics& thermo,
-    double* const p_dtau_dTTv) const
+    double* const p_drate_dTTv) const
 {
     const int ns = thermo.nSpecies();
     const int nh = thermo.nHeavy();
@@ -219,17 +224,22 @@ void MillikanWhiteModel::relaxationTimeJacobianTTv(
     const double tau_mw = (ONEATM / P) * (sum_cE / sum_c);
     const double dsum_cE_dT = (conc_h*E*m_data.a()).sum()*(-1.0/3.0)*T_fac/T;
 
-    // Derivative of pressure and mixing terms
-    p_dtau_dTTv[0] = tau_mw*(dsum_cE_dT/sum_cE - RU*sum_c/P);
-    p_dtau_dTTv[1] = (k ? -tau_mw*RU*conc(0)/P : 0.0);
+    // Derivative of pressure and mixing terms (d(dtau_mw)/dT and d(tau_mw)/dTv)
+    p_drate_dTTv[0] = tau_mw*(dsum_cE_dT/sum_cE - RU*sum_c/P);
+    p_drate_dTTv[1] = (k ? -tau_mw*RU*conc(0)/P : 0.0);
 
-    // Park correction term and its derivative
+    // Park correction term and its derivative: rate_park = 1/tau_park
     const auto iv = m_data.speciesIndex();
-    if (conc(iv) > 0.0) {
-        const double ci = std::sqrt(8*RU*T/(PI*m_data.molecularWeight()));
-        const double tau_park = 1.0/(NA*conc(iv) * ci * m_data.limitingCrossSection(T));
-        p_dtau_dTTv[0] += (3.0/2.0)*tau_park/T;
-    }
+    const double ci = std::sqrt(8*RU*T/(PI*m_data.molecularWeight()));
+    const double sigma = m_data.limitingCrossSection(T);
+    const double rate_park = NA * conc(iv) * ci * sigma;
+    const double g = 1.0/(1.0 + rate_park*tau_mw);
+    const double rate = rate_park*g;
+
+    // d(rate)/dT = g*g*d(rate_park)/dT - rate*rate*dtau_mw/dT
+    // where d(rate_park)/dT = -1.5*rate_park/T and d(rate_park)/dTv = 0.0
+    p_drate_dTTv[0] = -rate*rate*p_drate_dTTv[0] - 1.5*g*g*rate_park/T;
+    p_drate_dTTv[1] = -rate*rate*p_drate_dTTv[1];
 }
 
 struct MillikanWhiteModelDB::Data

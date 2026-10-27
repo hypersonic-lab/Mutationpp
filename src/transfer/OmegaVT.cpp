@@ -70,20 +70,20 @@ public:
     /// Relaxation time of the vibrator.
     /// @todo Find better solution to limit dependency to just thermodynamic
     /// state information, not whole mixture.
-    double relaxationTime(const class Thermodynamics::Thermodynamics& thermo) const {
-        return m_relaxation_model.relaxationTime(thermo);
+    double relaxationRate(const class Thermodynamics::Thermodynamics& thermo) const {
+        return m_relaxation_model.relaxationRate(thermo);
     }
 
     /// Derivatives of relaxation time with respect to species densities.
-    void relaxationTimeJacobianRho(const class Thermodynamics::Thermodynamics& thermo,
-                                   double* const p_dtau_drho) const {
-        m_relaxation_model.relaxationTimeJacobianRho(thermo, p_dtau_drho);
+    void relaxationRateJacobianRho(const class Thermodynamics::Thermodynamics& thermo,
+                                   double* const p_drate_drho) const {
+        m_relaxation_model.relaxationRateJacobianRho(thermo, p_drate_drho);
     }
 
     /// Derivatives of relaxation time with respect to T and Tv.
-    void relaxationTimeJacobianTTv(const class Thermodynamics::Thermodynamics& thermo,
-                                   double* const p_dtau_dTTv) const {
-        m_relaxation_model.relaxationTimeJacobianTTv(thermo, p_dtau_dTTv);
+    void relaxationRateJacobianTTv(const class Thermodynamics::Thermodynamics& thermo,
+                                   double* const p_drate_dTTv) const {
+        m_relaxation_model.relaxationRateJacobianTTv(thermo, p_drate_dTTv);
     }
 
 private:
@@ -113,7 +113,7 @@ public:
     virtual void jacobianTTv(double* const p_jacTTv) override;
 private:
     std::vector<Vibrator> m_vibrators;
-    std::vector<double> m_dtau_drho;
+    std::vector<double> m_drate_drho;
 };
 
 
@@ -136,7 +136,7 @@ OmegaVT::OmegaVT(Mixture& mix) :
             m_vibrators.emplace_back(ho, mw);
         }
     }
-    m_dtau_drho.resize(mix.nSpecies());
+    m_drate_drho.resize(mix.nSpecies());
 }
 
 
@@ -151,10 +151,9 @@ double OmegaVT::source()
     for (auto& vibrator: m_vibrators)
     {
         const auto iv = vibrator.speciesIndex();
-        if (!(Y[iv] > 0.0)) continue;
-        const auto tau = vibrator.relaxationTime(mixture());
+        const auto rate = vibrator.relaxationRate(mixture());
         const auto mw = vibrator.molecularWeight();
-        src += Y[iv]*(vibrator.energy(T) - vibrator.energy(Tv))/(mw*tau);
+        src += Y[iv]*(vibrator.energy(T) - vibrator.energy(Tv))*rate/mw;
     }
 
     return src * mixture().density() * RU;
@@ -172,15 +171,14 @@ void OmegaVT::jacobianRho(double* const p_jacRho)
     for (auto& vibrator: m_vibrators)
     {
         const auto iv = vibrator.speciesIndex();
-        if (!(Y[iv] > 0.0)) continue;
-        const auto tau = vibrator.relaxationTime(mixture());
+        const auto rate = vibrator.relaxationRate(mixture());
         const auto mw = vibrator.molecularWeight();
-        vibrator.relaxationTimeJacobianRho(mixture(), m_dtau_drho.data());
+        vibrator.relaxationRateJacobianRho(mixture(), m_drate_drho.data());
         const auto deltaE = vibrator.energy(T) - vibrator.energy(Tv);
-        p_jacRho[iv] += RU*deltaE/(mw*tau);
-        const double factor = mixture().density()*Y[iv]*RU*deltaE/(mw*tau*tau);
+        p_jacRho[iv] += RU*deltaE*rate/mw;
+        const double factor = mixture().density()*Y[iv]*RU*deltaE/mw;
         for (size_t j = 0; j < ns; ++j)
-            p_jacRho[j] -= factor*m_dtau_drho[j];
+            p_jacRho[j] += factor*m_drate_drho[j];
     }
 
 }
@@ -194,20 +192,19 @@ void OmegaVT::jacobianTTv(double* const p_jacTTv)
     auto T = mixture().T();
     auto Tv = mixture().Tv();
 
-    double dtau_dTTv[2];
+    double drate_dTTv[2];
     double auxT = 0.0;
     double auxTv = 0.0;
 
     for (auto& vibrator: m_vibrators)
     {
         const auto iv = vibrator.speciesIndex();
-        if (!(Y[iv] > 0.0)) continue;
-        const auto tau = vibrator.relaxationTime(mixture());
+        const auto rate = vibrator.relaxationRate(mixture());
         const auto mw = vibrator.molecularWeight();
-        vibrator.relaxationTimeJacobianTTv(mixture(), dtau_dTTv);
+        vibrator.relaxationRateJacobianTTv(mixture(), drate_dTTv);
         const auto deltaE = vibrator.energy(T) - vibrator.energy(Tv);
-        auxT += Y[iv]*(vibrator.energyTderivative(T)/tau - deltaE*dtau_dTTv[0]/(tau*tau))/mw;
-        auxTv += -Y[iv]*(vibrator.energyTderivative(Tv)/tau + deltaE*dtau_dTTv[1]/(tau*tau))/mw;
+        auxT += Y[iv]*(vibrator.energyTderivative(T)*rate + deltaE*drate_dTTv[0])/mw;
+        auxTv += Y[iv]*(-vibrator.energyTderivative(Tv)*rate + deltaE*drate_dTTv[1])/mw;
     }
 
     p_jacTTv[0] = auxT * mixture().density() * RU;
